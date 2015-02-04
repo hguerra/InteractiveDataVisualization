@@ -7,5 +7,15 @@
 	<classpathentry kind="lib" path="C:/processing-2.2.1/core/library/jogl-all.jar"/>
 	<classpathentry kind="lib" path="C:/processing-2.2.1/core/library/core.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heitor/Documents/Processing/libraries/SimpleOpenNI/library/SimpleOpenNI.jar"/>
+	<classpathentry kind="lib" path="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind/worldwind.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind/worldwindx.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
