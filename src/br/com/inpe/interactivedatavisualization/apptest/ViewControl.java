@@ -1,5 +1,4 @@
 package br.com.inpe.interactivedatavisualization.apptest;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 
@@ -8,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-import br.com.inpe.interactivedatavisualization.kinect.KinectFrameControl;
 import br.com.inpe.interactivedatavisualization.worldwind.NasaFrameControl;
 
 public class ViewControl extends JFrame {

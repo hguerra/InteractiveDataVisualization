@@ -1,9 +1,8 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package br.com.inpe.interactivedatavisualization.apptest;
 
 import processing.core.PApplet;
 import processing.core.PVector;
 import SimpleOpenNI.*;
-
 import java.awt.AWTException;
 import java.awt.Point;
 import java.awt.Robot;
@@ -22,7 +21,6 @@ public class KinectController extends PApplet {
 	private int stageScale = 5 / 3;
 
 	private int button_pressed = 1;
-	private int zoom = 0;
 	private int turn_motion_pressed = 1;
 	private boolean turn_motion = false;
 	private boolean turn_zoom = false;
