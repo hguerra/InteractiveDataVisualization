@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package br.com.inpe.interactivedatavisualization.test.failure;
 
 /**
  * This class create the movement control.
@@ -10,7 +10,7 @@ package br.com.inpe.interactivedatavisualization.kinect;
  */
 public class MotionControl {
 	KinectEvents kinect = new KinectEvents();
-	KeyControl key = new KeyControl();
+	//KeyControl key = new KeyControl();
 	
 	public MotionControl(){
 		
@@ -42,7 +42,7 @@ public class MotionControl {
 					&& kinect.getLeftHandX() < kinect.getCenterMassX() + 20
 					&& kinect.getLeftHandX() > kinect.getCenterMassX() - 20
 					&& kinect.getRightElbowX() > kinect.getRightShoulderX() && kinect.getRightHandX() > kinect.getRightElbowX()) {
-				key.keysControl(0);
+				//key.keysControl(0);
 			}
 
 			// Up
@@ -50,7 +50,7 @@ public class MotionControl {
 					&& kinect.getLeftHandX() < kinect.getCenterMassX() + 20
 					&& kinect.getLeftHandX() > kinect.getCenterMassX() - 20 && kinect.getRightHandY() < kinect.getHeadY()
 					&& kinect.getRightHandY() < kinect.getRightElbowY()) {
-				key.keysControl(1);
+				//key.keysControl(1);
 
 			}
 			// Down
@@ -58,7 +58,7 @@ public class MotionControl {
 					&& kinect.getLeftHandX() < kinect.getCenterMassX() + 20
 					&& kinect.getLeftHandX() > kinect.getCenterMassX() - 20 && kinect.getRightHandY() > kinect.getCenterMassY()
 					&& kinect.getRightHandY() > kinect.getRightElbowY()) {
-				key.keysControl(2);
+				//key.keysControl(2);
 
 			}
 			// ---------------
@@ -67,14 +67,14 @@ public class MotionControl {
 					&& kinect.getRightHandX() < kinect.getCenterMassX() + 20
 					&& kinect.getRightHandX() > kinect.getCenterMassX() - 20
 					&& kinect.getLeftElbowX() < kinect.getLeftShoulderX() && kinect.getLeftHandX() < kinect.getLeftElbowX()) {
-				key.keysControl(3);
+				//key.keysControl(3);
 			}
 			// Zoom+
 			if (kinect.getRightHandY() < kinect.getCenterMassY() + 20 && kinect.getRightHandY() > kinect.getCenterMassY() - 20
 					&& kinect.getRightHandX() < kinect.getCenterMassX() + 20
 					&& kinect.getRightHandX() > kinect.getCenterMassX() - 20 && kinect.getLeftHandY() < kinect.getHeadY()
 					&& kinect.getLeftHandY() < kinect.getLeftElbowY()) {
-				key.keysControl(4);
+				//key.keysControl(4);
 			}
 
 			// Zoom-
@@ -82,7 +82,7 @@ public class MotionControl {
 					&& kinect.getRightHandX() < kinect.getCenterMassX() + 20
 					&& kinect.getRightHandX() > kinect.getCenterMassX() - 20 && kinect.getLeftHandY() > kinect.getCenterMassY()
 					&& kinect.getLeftHandY() > kinect.getLeftElbowY()) {
-				key.keysControl(5);
+				//key.keysControl(5);
 			}
 		}
 	}

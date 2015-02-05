@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package br.com.inpe.interactivedatavisualization.test.failure;
 
 /**
  * This class changes the control of the movement and virtual buttons.

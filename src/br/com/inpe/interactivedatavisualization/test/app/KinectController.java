@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.apptest;
+package br.com.inpe.interactivedatavisualization.test.app;
 
 import processing.core.PApplet;
 import processing.core.PVector;

@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.apptest;
+package br.com.inpe.interactivedatavisualization.test.app;
 
 import javax.swing.JInternalFrame;
 

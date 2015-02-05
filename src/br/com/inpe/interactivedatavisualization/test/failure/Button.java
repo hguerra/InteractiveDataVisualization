@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package br.com.inpe.interactivedatavisualization.test.failure;
 
 import processing.core.PApplet;
 

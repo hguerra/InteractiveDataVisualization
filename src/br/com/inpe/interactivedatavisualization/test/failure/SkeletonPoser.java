@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package br.com.inpe.interactivedatavisualization.test.failure;
 
 /**
  * This class save and compare body position.

@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package br.com.inpe.interactivedatavisualization.test.failure;
 
 /**
  * This class create complex virtual buttons.
@@ -102,7 +102,7 @@ public class AdvancedButton extends Button{
 		if (side == "LEFT")
 			width = (int) (kinect.getHeadX() - 2 * getDistance());
 		else
-			width = (int) (kinect.getHeadX() * getDistance());
+			width = (int) (kinect.getHeadX() + 2* getDistance());
 
 		switch (option) {
 		case 0:

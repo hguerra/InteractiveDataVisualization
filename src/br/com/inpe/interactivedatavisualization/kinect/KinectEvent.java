@@ -1,18 +1,17 @@
 package br.com.inpe.interactivedatavisualization.kinect;
 
-import SimpleOpenNI.SimpleOpenNI;
-import processing.core.PApplet;
 import processing.core.PVector;
+import SimpleOpenNI.SimpleOpenNI;
 
 /**
- * This class management the SimpleOpenNi events.
+ * This class create all SimpleOpenNi and Processing Events.
  * 
  * @author Heitor Guerra Carneiro.
  * @version 1.0
  * @since February 2015.
  * 
  */
-public class KinectEvents extends PApplet {
+public class KinectEvent extends VisualObjects {
 
 	// Joints variable
 	private double headY;
@@ -37,46 +36,32 @@ public class KinectEvents extends PApplet {
 	private double leftShoulderY;
 
 	private SimpleOpenNI kinect;
-	
-	KeyControl key = new KeyControl();
-	MotionControl motion = new MotionControl();
-	Button button = new Button();
-	AdvancedButton advancedButton = new AdvancedButton();
-	ChangeControl changeControl = new ChangeControl();
-	
-	public KinectEvents(){
-		
-	}
-	public void setup() {
 
+	public KinectEvent() {
+
+	}
+
+	public void simpleOpenNiSetup() {
 		kinect = new SimpleOpenNI(this);
 		if (kinect.isInit() == false) {
 			println("Sorry! The system cannot initialize SimpleOpenNi, check if the kinect is connected or your drivers were installed!");
 			exit();
 		}
-
 		// enable depthMap generation
 		kinect.enableDepth();
-
 		// enable skeleton generation for all joints
 		kinect.enableUser();
-
 		// Size automatic
 		size(kinect.depthWidth(), kinect.depthHeight());
-
-		textFont(createFont("Arial", 36));
-		/**
-		 * Corrigir erro initRobot
-		 */
-		key.initRobot();
 	}
 
-	public void draw() {
+	public void simpleOpenNiDraw() {
 		// black background
 		background(0);
 		// update the cam
 		kinect.update();
-
+		// static objects
+		staticObjects();
 		int[] userList = kinect.getUsers();
 		for (int i = 0; i < userList.length; i++) {
 			if (kinect.isTrackingSkeleton(userList[i])) {
@@ -84,19 +69,13 @@ public class KinectEvents extends PApplet {
 				// Color of skeleton stroke
 				strokeWeight(2);
 				stroke(0, 255, 255);
-				// SkeletonJoints (userList[i])
 				drawSkeleton(userList[i]);
 				drawHands(userList[i]);
 				drawHead(userList[i]);
 				drawCenterMass(userList[i]);
 				drawElbow(userList[i]);
 				drawShoulder(userList[i]);
-				//------------------------
-				changeControl.changeControl(50);
-				motion.motionControl(changeControl.getTurnMotion());
-				key.optionButton((int) headY + 50, 40, "LEFT", changeControl.getTurnMotion());
-				key.zoomNext((int) rightShoulderY + 40, 30, "RIGHT",key.getTurnZoom());
-				key.joystickControl("RIGHT", (int) rightShoulderY, 30,key.getTurnJoystick());
+				updateObjects((float) (centerMassX - getDistance()), 200, 50, 0);
 			}
 		}
 	}
@@ -104,33 +83,28 @@ public class KinectEvents extends PApplet {
 	// draw the skeleton with the selected joints
 	public void drawSkeleton(int userId) {
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_HEAD, SimpleOpenNI.SKEL_NECK);
-
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_NECK,
 				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
 				SimpleOpenNI.SKEL_LEFT_ELBOW);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_ELBOW,
 				SimpleOpenNI.SKEL_LEFT_HAND);
-
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_NECK,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_SHOULDER,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_ELBOW,
 				SimpleOpenNI.SKEL_RIGHT_HAND);
-
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER,
 				SimpleOpenNI.SKEL_TORSO);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_SHOULDER,
 				SimpleOpenNI.SKEL_TORSO);
-
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_TORSO,
 				SimpleOpenNI.SKEL_LEFT_HIP);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_HIP,
 				SimpleOpenNI.SKEL_LEFT_KNEE);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_LEFT_KNEE,
 				SimpleOpenNI.SKEL_LEFT_FOOT);
-
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_TORSO,
 				SimpleOpenNI.SKEL_RIGHT_HIP);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_HIP,
@@ -189,73 +163,65 @@ public class KinectEvents extends PApplet {
 		PVector projectiveCenterMass = new PVector();
 		kinect.convertRealWorldToProjective(realCenterMass,
 				projectiveCenterMass);
-		//fill(255, 0, 0);
-		//ellipse(projectiveCenterMass.x, projectiveCenterMass.y, 20, 20);
 		centerMassX = projectiveCenterMass.x;
 		centerMassY = projectiveCenterMass.y;
 	}
 
 	public void drawElbow(int userId) {
-
 		PVector realRightElbow = new PVector();
-
 		kinect.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_RIGHT_ELBOW,
 				realRightElbow);
 		PVector projectiveRightElbow = new PVector();
-
 		kinect.convertRealWorldToProjective(realRightElbow,
 				projectiveRightElbow);
 		fill(255, 0, 0);
 		ellipse(projectiveRightElbow.x, projectiveRightElbow.y, 10, 10);
-
 		rightElbowX = projectiveRightElbow.x;
 		rightElbowY = projectiveRightElbow.y;
-
 		PVector realLeftElbow = new PVector();
-
 		kinect.getJointPositionSkeleton(userId, SimpleOpenNI.SKEL_LEFT_ELBOW,
 				realLeftElbow);
-
 		PVector projectiveLeftElbow = new PVector();
-
 		kinect.convertRealWorldToProjective(realLeftElbow, projectiveLeftElbow);
 		fill(255, 0, 0);
 		ellipse(projectiveLeftElbow.x, projectiveLeftElbow.y, 10, 10);
-
 		leftElbowX = projectiveLeftElbow.x;
 		leftElbowY = projectiveLeftElbow.y;
 	}
 
 	public void drawShoulder(int userId) {
 		PVector realRightShoulder = new PVector();
-
 		kinect.getJointPositionSkeleton(userId,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER, realRightShoulder);
-
 		PVector projectiveRightShoulder = new PVector();
-
 		kinect.convertRealWorldToProjective(realRightShoulder,
 				projectiveRightShoulder);
 		fill(255, 0, 0);
 		ellipse(projectiveRightShoulder.x, projectiveRightShoulder.y, 10, 10);
-
 		rightShoulderX = projectiveRightShoulder.x;
 		rightShoulderY = projectiveRightShoulder.y;
-
 		PVector realLeftShoulder = new PVector();
-
 		kinect.getJointPositionSkeleton(userId,
 				SimpleOpenNI.SKEL_LEFT_SHOULDER, realLeftShoulder);
-
 		PVector projectiveLeftShoulder = new PVector();
-
 		kinect.convertRealWorldToProjective(realLeftShoulder,
 				projectiveLeftShoulder);
 		fill(255, 0, 0);
 		ellipse(projectiveLeftShoulder.x, projectiveLeftShoulder.y, 10, 10);
-
 		leftShoulderX = projectiveLeftShoulder.x;
 		leftShoulderY = projectiveLeftShoulder.y;
+	}
+
+	public double getPointDistance(double x1, double y1, double x2, double y2) {
+		double d = (Math.pow((x2 - x1), 2)) + (Math.pow((y2 - y1), 2));
+		return Math.sqrt(d);
+	}
+
+	// Gets and Sets
+	public double getDistance() {
+		double distance = getPointDistance(leftShoulderX, leftShoulderY,
+				rightShoulderX, rightShoulderY);
+		return 2 * distance;
 	}
 
 	// SimpleOpenNI events
@@ -263,7 +229,6 @@ public class KinectEvents extends PApplet {
 	public void onNewUser(SimpleOpenNI curContext, int userId) {
 		println("onNewUser - userId: " + userId);
 		println("\tstart tracking skeleton");
-
 		kinect.startTrackingSkeleton(userId);
 	}
 
@@ -271,12 +236,7 @@ public class KinectEvents extends PApplet {
 		println("onLostUser - userId: " + userId);
 	}
 
-	public void onVisibleUser(SimpleOpenNI curContext, int userId) {
-		// println("onVisibleUser - userId: " + userId);
-	}
-	
-	//Gets and sets
-
+	// Gets and sets
 	public double getHeadY() {
 		return headY;
 	}
@@ -404,4 +364,5 @@ public class KinectEvents extends PApplet {
 	public void setLeftShoulderY(double leftShoulderY) {
 		this.leftShoulderY = leftShoulderY;
 	}
+
 }

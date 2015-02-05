@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package br.com.inpe.interactivedatavisualization.test.failure;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
@@ -16,33 +16,24 @@ import java.awt.event.KeyEvent;
  * 
  */
 public class KeyControl {
-	KinectEvents kinect = new KinectEvents();
-	AdvancedButton advancedButton = new AdvancedButton();
-	MotionControl motion = new MotionControl();
-
-	private Integer buttonPressed = 1;
-	private Boolean turnJoystick;
-	private Boolean turnZoom;
-
+	
 	// Mouse
-	private Robot robot;
 	private int xx = 0, yy = 0;
 	private int stageWidth;
 	private int stageHeight;
 	private int prW, prH;
 	private int stageScale = 5 / 3;
+		
+	private Integer buttonPressed = 1;
+	private Boolean turnJoystick;
+	private Boolean turnZoom;
+
+	KinectEvents kinect = new KinectEvents();
+	AdvancedButton advancedButton = new AdvancedButton();
+	MotionControl motion = new MotionControl();
 
 	public KeyControl() {
-
-	}
-
-	public void initRobot() {
-		try {
-			robot = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	public void screenSize() {
@@ -59,35 +50,35 @@ public class KeyControl {
 		case 0:
 			// right
 			for (int cont = 0; cont < 200; cont++)
-				robot.keyPress(KeyEvent.VK_RIGHT);
-			robot.keyRelease(KeyEvent.VK_RIGHT);
+				kinect.getRobot().keyPress(KeyEvent.VK_RIGHT);
+			kinect.getRobot().keyRelease(KeyEvent.VK_RIGHT);
 			break;
 		case 1:
 			// up
 			for (int cont = 0; cont < 200; cont++)
-				robot.keyPress(KeyEvent.VK_UP);
-			robot.keyRelease(KeyEvent.VK_UP);
+				kinect.getRobot().keyPress(KeyEvent.VK_UP);
+			kinect.getRobot().keyRelease(KeyEvent.VK_UP);
 			break;
 		case 2:
 			// down
 			for (int cont = 0; cont < 200; cont++)
-				robot.keyPress(KeyEvent.VK_DOWN);
-			robot.keyRelease(KeyEvent.VK_DOWN);
+				kinect.getRobot().keyPress(KeyEvent.VK_DOWN);
+			kinect.getRobot().keyRelease(KeyEvent.VK_DOWN);
 			break;
 		case 3:
 			// left
 			for (int cont = 0; cont < 200; cont++)
-				robot.keyPress(KeyEvent.VK_LEFT);
-			robot.keyRelease(KeyEvent.VK_LEFT);
+				kinect.getRobot().keyPress(KeyEvent.VK_LEFT);
+			kinect.getRobot().keyRelease(KeyEvent.VK_LEFT);
 			break;
 		case 4:
-			robot.mouseWheel(1);
+			kinect.getRobot().mouseWheel(1);
 			break;
 		case 5:
-			robot.mouseWheel(-1);
+			kinect.getRobot().mouseWheel(-1);
 			break;
 		case 6:
-			robot.mouseWheel(0);
+			kinect.getRobot().mouseWheel(0);
 		}
 	}
 
@@ -117,12 +108,12 @@ public class KeyControl {
 		switch (option) {
 		case 0:
 			advancedButton.createNextButton(0, height, size, side);
-			robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+			kinect.getRobot().mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 			break;
 		case 1:
 			advancedButton.buttonEllipse(width, height, size, 1);
-			robot.mouseMove(xx, yy);
-			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+			kinect.getRobot().mouseMove(xx, yy);
+			kinect.getRobot().mousePress(InputEvent.BUTTON1_DOWN_MASK);
 			break;
 		}
 	}
@@ -150,8 +141,8 @@ public class KeyControl {
 			break;
 		case 1:
 			advancedButton.buttonRectangle(width, height, size, 1);
-			robot.mouseMove(xx, yy);
-			robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+			kinect.getRobot().mouseMove(xx, yy);
+			kinect.getRobot().mousePress(InputEvent.BUTTON1_DOWN_MASK);
 			break;
 		}
 	}
