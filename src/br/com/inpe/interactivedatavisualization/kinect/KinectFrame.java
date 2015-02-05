@@ -1,6 +1,8 @@
-package br.com.inpe.interactivedatavisualization.test.failure;
+package br.com.inpe.interactivedatavisualization.kinect;
 
 import javax.swing.JInternalFrame;
+
+import br.com.inpe.interactivedatavisualization.test.failure.KinectEvents;
 
 /**
  * This class convert the PApplet to JInternalFrame.
@@ -11,10 +13,10 @@ import javax.swing.JInternalFrame;
  * 
  */
 public class KinectFrame extends JInternalFrame{
-	private KinectEvents kinect;
+	private KinectEvent kinect;
 	
 	public KinectFrame(){
-		kinect = new KinectEvents();
+		kinect = new KinectEvent();
 		getContentPane().add(kinect);
 		kinect.init();
 		setVisible(true);
