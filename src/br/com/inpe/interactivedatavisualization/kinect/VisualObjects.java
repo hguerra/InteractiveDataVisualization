@@ -3,7 +3,7 @@ package br.com.inpe.interactivedatavisualization.kinect;
 import processing.core.PApplet;
 
 /**
- * This class create the all objects on screen.
+ * This class create all objects on screen.
  * 
  * @author Heitor Guerra Carneiro.
  * @version 1.0
