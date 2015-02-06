@@ -2,8 +2,6 @@ package br.com.inpe.interactivedatavisualization.kinect;
 
 import javax.swing.JInternalFrame;
 
-import br.com.inpe.interactivedatavisualization.test.failure.KinectEvents;
-
 /**
  * This class convert the PApplet to JInternalFrame.
  * 

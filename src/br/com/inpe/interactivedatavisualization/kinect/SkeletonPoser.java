@@ -14,8 +14,8 @@ import SimpleOpenNI.SimpleOpenNI;
  */
 public class SkeletonPoser extends VisualObjects {
 	
-	private SimpleOpenNI context;
-	private ArrayList<PoseRule> rules;
+	SimpleOpenNI context;
+	ArrayList<PoseRule> rules;
 
 	public SkeletonPoser(SimpleOpenNI context) {
 		this.context = context;
