@@ -254,10 +254,72 @@ public class KinectEvent extends VisualObjects {
 				SimpleOpenNI.SKEL_LEFT_KNEE);
 	}
 
+	public void addwave(String side) {
+		if (side.equals("RIGHT")) {
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+					SimpleOpenNI.SKEL_RIGHT_ELBOW);
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+					SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		}
+		else{
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+					SimpleOpenNI.SKEL_LEFT_ELBOW);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.RIGHT_OF,
+					SimpleOpenNI.SKEL_LEFT_ELBOW);
+		}
+	}
+	public void addswipe(String side){
+		if (side.equals("RIGHT")) {
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+					SimpleOpenNI.SKEL_LEFT_SHOULDER);
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+					SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		}
+		else{
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+					SimpleOpenNI.SKEL_LEFT_SHOULDER);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.RIGHT_OF,
+					SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		}
+	}
+	
+	public void addHold(String side){
+		if (side.equals("RIGHT")) {
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+					SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			
+			pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+					SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		}
+		else{
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+					SimpleOpenNI.SKEL_LEFT_SHOULDER);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+					SimpleOpenNI.SKEL_HEAD);
+			pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.RIGHT_OF,
+					SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		}
+	}
 	public void poseCheck(int userId) {
 		// check to see if the user
 		// is in the pose
-		if (pose.check(userId)){
+		if (pose.check(userId)) {
 			// if they are, set the color white
 			stroke(255);
 			System.out.println("Skeleton Poser OK!");
@@ -283,7 +345,7 @@ public class KinectEvent extends VisualObjects {
 				&& compareHandPosition(widthRight, height, "RIGHT"))
 			turnMotionPressed += 1;
 
-		if (turnMotionPressed % 2 == 0)
+		if (turnMotionPressed % 10 == 0)
 			option = 1;
 		else
 			option = 0;
