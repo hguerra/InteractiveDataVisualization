@@ -3,17 +3,16 @@ package br.com.inpe.interactivedatavisualization.test.failure;
 public class Timer {
 	private final Integer CONSTANT = 1000000000;
 	private final Integer VARIATION = 20;
-	private Boolean check = false;
+	private Long initialTime;
 	
 	public Timer(){
-		
-		
+		startCounter();
 	}
 	
 	// Begin
-	public long startCounter() {
+	public void startCounter() {
 		long t1 = System.nanoTime();
-		return t1;
+		setInitialTime(t1);
 	}
 
 	// End
@@ -29,8 +28,7 @@ public class Timer {
 		long elapsedTimeInSeconds = (t2 - startCounter) / CONSTANT;
 		if (elapsedTimeInSeconds > seconds)
 			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	public Boolean waitForCounter(int seconds, float handX, float handY, float width, float height){
@@ -52,15 +50,11 @@ public class Timer {
 		return false;
 	}
 
-	public Boolean getCheck() {
-		return check;
+	public Long getInitialTime() {
+		return initialTime;
 	}
 
-	public void setCheck(Boolean check) {
-		this.check = check;
+	public void setInitialTime(Long initialTime) {
+		this.initialTime = initialTime;
 	}
-
-	
-	
-
 }
