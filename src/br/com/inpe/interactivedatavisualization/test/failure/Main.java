@@ -98,6 +98,8 @@ public class Main extends PApplet {
 				//============================================
 				Double distanceFinger = getPointDistance(projLHand.x, projLHand.y, projFinger.x, projFinger.y);
 				System.out.println(distanceFinger);
+				
+				
 			}
 
 		}
