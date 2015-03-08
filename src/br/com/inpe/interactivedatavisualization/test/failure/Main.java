@@ -14,8 +14,12 @@ public class Main extends PApplet {
 	/**
 	 * Create a new SimpleOpenNi, for communicate with the Kinect device.
 	 */
+	private Long temp1 = (long) 0;
+	private Long temp2 = (long) 0;
+	private Integer counter = 1;
 	SimpleOpenNI kinect;
-
+	Timer t = new Timer();
+	
 	public void setup() {
 		// Size of window application
 		size(640, 480);
@@ -32,6 +36,8 @@ public class Main extends PApplet {
 		// Flips the sensor's data horizontally
 		// Enable mirroring
 		kinect.setMirror(true);
+		
+		t.startCounter();
 	}
 
 	public void draw() {
@@ -43,7 +49,8 @@ public class Main extends PApplet {
 		int[] users = kinect.getUsers();
 
 		ellipseMode(CENTER);
-
+		buttonEllipse(50, 200, 50,0);
+		
 		// iterate through users
 		for (int i = 0; i < users.length; i++) {
 			int uid = users[i];
@@ -85,24 +92,31 @@ public class Main extends PApplet {
 						SimpleOpenNI.SKEL_LEFT_HAND, realLHand);
 				PVector projLHand = new PVector();
 				kinect.convertRealWorldToProjective(realLHand, projLHand);
-				//fill(255, 255, 0);
-				//ellipse(projLHand.x, projLHand.y, 30, 30);
-				//============================================
-				// Finger
-				PVector realFinger = new PVector();
-				kinect.getJointPositionSkeleton(uid,
-						SimpleOpenNI.SKEL_LEFT_FINGERTIP, realFinger);
-				PVector projFinger = new PVector();
-				kinect.convertRealWorldToProjective(realFinger, projFinger);
+				fill(255, 255, 0); 
+				ellipse(projLHand.x, projLHand.y, 30, 30);
 				
-				//============================================
-				Double distanceFinger = getPointDistance(projLHand.x, projLHand.y, projFinger.x, projFinger.y);
-				System.out.println(distanceFinger);
+				if(compareHandPosition(projLHand.x, projLHand.y, 50, 200)){
+					
+					System.out.println("Tempo 1: " + getTime());
+					System.out.println("Tempo 2: " + getTime2());	
+					System.out.println("Tempo 3: " + getTime3());	
+					
+				}
+				
 				
 				
 			}
 
 		}
+	}
+	public Long getTime(){
+		return t.endCounter();
+	}
+	public Long getTime2(){
+		return t.endCounter();
+	}
+	public Long getTime3(){
+		return t.endCounter();
 	}
 
 	// draw the skeleton with the selected joints
@@ -146,6 +160,38 @@ public class Main extends PApplet {
 	public double getPointDistance(double x1, double y1, double x2, double y2) {
 		double d = (Math.pow((x2 - x1), 2)) + (Math.pow((y2 - y1), 2));
 		return Math.sqrt(d);
+	}
+	
+	public boolean compareHandPosition(float handX, float handY, float width, float height) {
+		final Integer VARIATION = 20;
+		if (handX < width + VARIATION && handX > width - VARIATION
+				&& handY < height + VARIATION
+				&& handY > height - VARIATION){
+			return true;
+		}
+		return false;
+	}
+	
+	public void buttonEllipse(float w, float h, int size, int option) {
+		switch (option) {
+		case 0:
+			// Normal
+			noStroke();
+			fill(255, 0, 0);
+			ellipse(w, h, size, size);
+			stroke(255, 255, 0, 80);
+			noFill();
+			ellipse(w, h, size + 10, size + 10);
+			break;
+		case 1:
+			// Shiny
+			noStroke();
+			fill(255, 255, 0);
+			ellipse(w, h, size, size);
+			stroke(255, 255, 0);
+			noFill();
+			ellipse(w, h, size + 10, size + 10);
+		}
 	}
 
 	// is called everytime a new user appears, SimpleOpenNI events.
