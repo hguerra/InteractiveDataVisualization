@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.test.failure;
+package br.com.inpe.interactivedatavisualization.test.success;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;

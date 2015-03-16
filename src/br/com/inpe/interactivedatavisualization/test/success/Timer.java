@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.test.failure;
+package br.com.inpe.interactivedatavisualization.test.success;
 
 import java.util.concurrent.TimeUnit;
 
