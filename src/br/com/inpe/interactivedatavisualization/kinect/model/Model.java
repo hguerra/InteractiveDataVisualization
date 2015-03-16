@@ -1,8 +1,10 @@
-package br.com.inpe.interactivedatavisualization.test.failure;
-
-import br.com.inpe.interactivedatavisualization.kinect.SkeletonPoser;
+package br.com.inpe.interactivedatavisualization.kinect.model;
 import SimpleOpenNI.SimpleOpenNI;
-
+/**
+ * @author Heitor Guerra Carneiro.
+ * @version 1.0
+ * @since March 2015.
+ */
 public class Model {
 	private SimpleOpenNI context;
 	private SkeletonPoser pose;
@@ -14,6 +16,10 @@ public class Model {
 	}
 
 	public void addPose() {
+		seventiesPose();
+	}
+
+	public void seventiesPose() {
 		// rules for the right arm
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
@@ -47,13 +53,13 @@ public class Model {
 		pose.addRule(SimpleOpenNI.SKEL_LEFT_FOOT, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_LEFT_KNEE);
 	}
-	
+
 	public void poseCheck(int userId) {
 		// check to see if the user
 		// is in the pose
 		if (pose.check(userId)) {
 			// if they are, set the color white
-			//stroke(255);
+			// stroke(255);
 			System.out.println("Skeleton Poser OK!");
 		}
 	}

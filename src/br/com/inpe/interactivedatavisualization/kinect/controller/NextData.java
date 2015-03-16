@@ -1,4 +1,5 @@
-package br.com.inpe.interactivedatavisualization.test.failure;
+package br.com.inpe.interactivedatavisualization.kinect.controller;
+
 
 public class NextData implements Controller{
 

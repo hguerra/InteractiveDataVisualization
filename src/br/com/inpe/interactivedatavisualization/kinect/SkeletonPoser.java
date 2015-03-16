@@ -3,14 +3,10 @@ package br.com.inpe.interactivedatavisualization.kinect;
 import java.util.ArrayList;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
-
 /**
- * This class save and compare body position.
- * 
  * @author Heitor Guerra Carneiro.
  * @version 1.0
- * @since February 2015.
- * 
+ * @since March 2015.
  */
 public class SkeletonPoser extends VisualObjects {
 	

@@ -1,9 +1,14 @@
-package br.com.inpe.interactivedatavisualization.test.failure;
+package br.com.inpe.interactivedatavisualization.kinect.view;
 
+import br.com.inpe.interactivedatavisualization.kinect.model.Model;
 import processing.core.PImage;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
-
+/**
+ * @author Heitor Guerra Carneiro.
+ * @version 1.0
+ * @since March 2015.
+ */
 public class SimpleOpenNIEvents extends Processing {
 
 	private SimpleOpenNI kinect;
@@ -25,6 +30,8 @@ public class SimpleOpenNIEvents extends Processing {
 		// Flips the sensor's data horizontally
 		// Enable mirroring
 		kinect.setMirror(true);
+		
+		model = new Model(kinect);
 
 	}
 
@@ -45,6 +52,8 @@ public class SimpleOpenNIEvents extends Processing {
 				stroke(0, 255, 255);
 				// Skeleton
 				drawSkeleton(userList[i]);
+				//SkeletonPoser method
+				model.poseCheck(userList[i]);
 			}
 		}
 	}
