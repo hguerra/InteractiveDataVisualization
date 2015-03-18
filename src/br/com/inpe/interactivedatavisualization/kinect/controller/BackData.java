@@ -1,12 +1,17 @@
 package br.com.inpe.interactivedatavisualization.kinect.controller;
 
-
-public class BackData implements Controller{
+/**
+ * @author Heitor Guerra Carneiro.
+ * @version 1.0
+ * @since March 2015.
+ */
+public class BackData implements Data{
 
 	@Override
-	public void setAction() {
+	public void setData() {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

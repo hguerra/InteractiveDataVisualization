@@ -5,11 +5,11 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 1.0
  * @since March 2015.
  */
-public class Model {
+public class Movements {
 	private SimpleOpenNI context;
 	private SkeletonPoser pose;
-
-	public Model(SimpleOpenNI context) {
+	
+	public Movements(SimpleOpenNI context) {
 		pose = new SkeletonPoser(context);
 		this.context = context;
 		addPose();

@@ -1,10 +1,14 @@
 package br.com.inpe.interactivedatavisualization.kinect.controller;
 
-
-public class BackTime implements Controller{
+/**
+ * @author Heitor Guerra Carneiro.
+ * @version 1.0
+ * @since March 2015.
+ */
+public class BackTime implements Time{
 
 	@Override
-	public void setAction() {
+	public void setTime() {
 		// TODO Auto-generated method stub
 		
 	}
