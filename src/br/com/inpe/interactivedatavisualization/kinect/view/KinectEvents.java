@@ -143,4 +143,11 @@ public class KinectEvents extends Processing implements Observer {
 	public void onVisibleUser(SimpleOpenNI curContext, int userId) {
 		// println("onVisibleUser - userId: " + userId);
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }// END Class

@@ -1,15 +1,21 @@
 package br.com.inpe.interactivedatavisualization.kinect.model;
+import java.util.LinkedList;
+import java.util.List;
+
+import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
  * @since March 2015.
  */
-public class Movements {
+public class Movements implements Subject{
 	private SimpleOpenNI context;
 	private SkeletonPoser pose;
+	private List<Observer> listObservers;
 	
 	public Movements(SimpleOpenNI context) {
+		listObservers = new LinkedList<Observer>();
 		pose = new SkeletonPoser(context);
 		this.context = context;
 		addPose();
@@ -60,8 +66,22 @@ public class Movements {
 		if (pose.check(userId)) {
 			// if they are, set the color white
 			// stroke(255);
-			System.out.println("Skeleton Poser OK!");
+			System.out.println("Recognize a movement!");
 		}
+	}
+
+	@Override
+	public void registerObserver(Observer observer) {
+		listObservers.add(observer);
+	}
+
+	@Override
+	public void notifyObserversPoseCheck() {
+		for(Observer i: listObservers)
+			/*
+			 * Passar um parametro para o update, informando a posição realizada
+			 */
+			i.update();
 	}
 
 }
