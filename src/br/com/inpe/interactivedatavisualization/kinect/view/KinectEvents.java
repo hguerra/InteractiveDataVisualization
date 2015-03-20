@@ -145,7 +145,7 @@ public class KinectEvents extends Processing implements Observer {
 	}
 
 	@Override
-	public void update() {
+	public void update(Integer movement) {
 		// TODO Auto-generated method stub
 		
 	}
