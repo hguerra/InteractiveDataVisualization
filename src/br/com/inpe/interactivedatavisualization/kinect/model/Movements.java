@@ -30,24 +30,21 @@ public class Movements implements Subject {
 
 	@Override
 	public void notifyObserversPoseCheck() {
-		/*
-		 * Passar um parametro para o update, informando a posição realizada
-		 */
 		for (Observer i : listObservers)
 			i.update(movement);
 	}
 
 	public void poseCheck(int userId) {
-		if(seventies.verify(userId))
+		if(seventies.verify(userId)){
+			System.out.println("Inside Movement Class");
 			setMovement(GestureName.SEVENTIES.getValue());
+		}
+			
 	}
-
-	public Integer getMovement() {
-		return movement;
-	}
-
+	
 	public void setMovement(Integer type) {
 		this.movement = type;
+		notifyObserversPoseCheck();
 	}
 
 }

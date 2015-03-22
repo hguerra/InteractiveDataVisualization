@@ -2,6 +2,8 @@ package br.com.inpe.interactivedatavisualization.kinect.view;
 
 import br.com.inpe.interactivedatavisualization.kinect.controller.Bridge;
 import br.com.inpe.interactivedatavisualization.kinect.controller.StartTracking;
+import br.com.inpe.interactivedatavisualization.kinect.controller.Zoom;
+import br.com.inpe.interactivedatavisualization.kinect.controller.ZoomIn;
 import processing.core.PImage;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
@@ -14,6 +16,7 @@ import SimpleOpenNI.SimpleOpenNI;
 public class KinectEvents extends Processing implements Observer {
 	private SimpleOpenNI kinect;
 	private Bridge bridge;
+	private Zoom zoomIn;
 
 	public void setup() {
 		// Size of window application
@@ -31,8 +34,16 @@ public class KinectEvents extends Processing implements Observer {
 		// Flips the sensor's data horizontally
 		// Enable mirroring
 		kinect.setMirror(true);
-		// load the model methods
+		
+		/*
+		 * load the model methods
+		 */
 		bridge = new StartTracking(kinect);
+		
+		/*
+		 * setZoom
+		 */
+		zoomIn = new ZoomIn();
 
 	}
 
@@ -146,8 +157,29 @@ public class KinectEvents extends Processing implements Observer {
 
 	@Override
 	public void update(Integer movement) {
-		// TODO Auto-generated method stub
-		
+		switch (movement) {
+		case 1: {
+			break;
+		}
+		case 2: {
+			break;
+		}
+		case 4: {
+			break;
+		}
+		case 5: {
+			break;
+		}
+		case 6: {
+			break;
+		}
+		case 70: {
+			zoomIn.setZoom();
+			break;
+		}
+		default:
+			break;
+		}
 	}
-	
+
 }// END Class
