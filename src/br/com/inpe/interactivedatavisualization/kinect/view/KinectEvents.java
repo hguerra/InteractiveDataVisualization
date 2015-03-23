@@ -14,6 +14,7 @@ import SimpleOpenNI.SimpleOpenNI;
  * @since March 2015.
  */
 public class KinectEvents extends Processing implements Observer {
+	private Integer temp;
 	private SimpleOpenNI kinect;
 	private Bridge bridge;
 	private Zoom zoomIn;
@@ -34,14 +35,34 @@ public class KinectEvents extends Processing implements Observer {
 		// Flips the sensor's data horizontally
 		// Enable mirroring
 		kinect.setMirror(true);
-		
+
 		/*
+		 * The Processing applications has two required methods: setup() and draw ()
+		 * 
 		 * load the model methods
+		 * 
+		 * Associacao view -> model
+		 * 
+		 * 
+		 * 	(controller -> model)
+		 * 	(view -> controller)
 		 */
 		bridge = new StartTracking(kinect);
 		
 		/*
+		 * registerObserver
+		 * 
+		 * Associacao model -> view
+		 * 
+		 * (controller -> view)
+		 * (model -> controller)
+		 */
+		bridge.initRegisterObserver(this);
+
+		/*
 		 * setZoom
+		 * 
+		 * Associacao view -> Controller
 		 */
 		zoomIn = new ZoomIn();
 
@@ -64,8 +85,16 @@ public class KinectEvents extends Processing implements Observer {
 				stroke(0, 255, 255);
 				// Skeleton
 				drawSkeleton(userList[i]);
-				// Analysis of body position, model method
+
+				/*
+				 * Analysis of body position, model method
+				 */
 				bridge.initPoseCheck(userList[i]);
+
+				/*
+				 * Analysis Update method
+				 */
+				updateCheck();
 			}
 		}
 	}
@@ -155,9 +184,16 @@ public class KinectEvents extends Processing implements Observer {
 		// println("onVisibleUser - userId: " + userId);
 	}
 
+	public void updateCheck() {
+		if (temp != null)
+			System.out.println(temp.toString());
+	}
+
 	@Override
 	public void update(Integer movement) {
-		switch (movement) {
+		setTemp(movement);
+
+		switch (getTemp()) {
 		case 1: {
 			break;
 		}
@@ -175,11 +211,19 @@ public class KinectEvents extends Processing implements Observer {
 		}
 		case 70: {
 			zoomIn.setZoom();
+			setTemp(null);
 			break;
 		}
-		default:
-			break;
-		}
+
+		}//End Switch case
+	}
+
+	public Integer getTemp() {
+		return temp;
+	}
+
+	public void setTemp(Integer temp) {
+		this.temp = temp;
 	}
 
 }// END Class

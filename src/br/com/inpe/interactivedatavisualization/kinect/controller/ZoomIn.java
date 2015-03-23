@@ -9,8 +9,7 @@ public class ZoomIn implements Zoom{
 
 	@Override
 	public void setZoom() {
-		System.out.println("Inside ZoomIn Class!");
-		
+		System.out.println("ZOOM IN!");
 	}
 
 

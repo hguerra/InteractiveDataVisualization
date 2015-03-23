@@ -1,6 +1,7 @@
 package br.com.inpe.interactivedatavisualization.kinect.model;
 
 import SimpleOpenNI.SimpleOpenNI;
+
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
@@ -57,13 +58,10 @@ public class seventiesPose implements NewPose {
 				SimpleOpenNI.SKEL_LEFT_KNEE);
 
 	}
+
 	@Override
 	public boolean verify(int userId) {
-		if(pose.check(userId)){
-			System.out.println("Inside seventiesPose Class");
-			return true;
-		}	
-		return false;
+		return pose.check(userId);
 	}
-		
-}//END CLASS
+
+}// END CLASS

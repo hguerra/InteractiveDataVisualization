@@ -5,11 +5,11 @@ package br.com.inpe.interactivedatavisualization.kinect.controller;
  * @version 1.0
  * @since March 2015.
  */
-public class BackTime implements Time{
+public class TimeDown implements Time{
 
 	@Override
 	public void setTime() {
-		// TODO Auto-generated method stub
+		System.out.println("TIME DOWN!");
 		
 	}
 

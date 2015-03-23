@@ -9,7 +9,7 @@ public class ZoomOut implements Zoom{
 
 	@Override
 	public void setZoom() {
-		// TODO Auto-generated method stub
+		System.out.println("ZOOM OUT!");
 		
 	}
 }

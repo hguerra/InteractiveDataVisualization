@@ -5,10 +5,11 @@ package br.com.inpe.interactivedatavisualization.kinect.controller;
  * @version 1.0
  * @since March 2015.
  */
-public class NextData implements Data{
+public class TimeUp implements Time{
+
 	@Override
-	public void setData() {
-		// TODO Auto-generated method stub
+	public void setTime() {
+		System.out.println("TIME UP!");
 		
 	}
 

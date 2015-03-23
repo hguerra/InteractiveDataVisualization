@@ -6,7 +6,11 @@ import br.com.inpe.interactivedatavisualization.kinect.view.Processing;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
 
-
+/**
+ * @author Heitor Guerra Carneiro.
+ * @version 1.0
+ * @since March 2015.
+ */
 public class SkeletonPoser extends Processing{
 	private SimpleOpenNI context;
 	private ArrayList<PoseRule> rules;

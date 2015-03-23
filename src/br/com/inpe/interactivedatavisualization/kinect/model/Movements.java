@@ -35,13 +35,10 @@ public class Movements implements Subject {
 	}
 
 	public void poseCheck(int userId) {
-		if(seventies.verify(userId)){
-			System.out.println("Inside Movement Class");
+		if (seventies.verify(userId))
 			setMovement(GestureName.SEVENTIES.getValue());
-		}
-			
 	}
-	
+
 	public void setMovement(Integer type) {
 		this.movement = type;
 		notifyObserversPoseCheck();

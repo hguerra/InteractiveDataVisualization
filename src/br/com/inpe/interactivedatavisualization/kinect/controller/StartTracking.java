@@ -1,6 +1,7 @@
 package br.com.inpe.interactivedatavisualization.kinect.controller;
 
 import br.com.inpe.interactivedatavisualization.kinect.model.Movements;
+import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
@@ -26,5 +27,10 @@ public class StartTracking implements Bridge {
 	public void initPoseCheck(int userId) {
 		movement.poseCheck(userId);
 
+	}
+
+	@Override
+	public void initRegisterObserver(Observer kinect){
+		movement.registerObserver(kinect);
 	}
 }
