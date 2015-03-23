@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package badimplementation;
 
 import javax.swing.JInternalFrame;
 

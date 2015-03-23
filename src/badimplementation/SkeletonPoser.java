@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package badimplementation;
 
 import java.util.ArrayList;
 import processing.core.PVector;

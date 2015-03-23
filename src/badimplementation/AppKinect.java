@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package badimplementation;
 
 /**
  * RUN this class like Java Applet.

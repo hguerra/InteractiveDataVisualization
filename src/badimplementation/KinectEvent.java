@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect;
+package badimplementation;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
