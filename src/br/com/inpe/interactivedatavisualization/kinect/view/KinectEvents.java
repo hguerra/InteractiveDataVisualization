@@ -1,9 +1,16 @@
 package br.com.inpe.interactivedatavisualization.kinect.view;
 
 import br.com.inpe.interactivedatavisualization.kinect.controller.Bridge;
+import br.com.inpe.interactivedatavisualization.kinect.controller.Data;
+import br.com.inpe.interactivedatavisualization.kinect.controller.DataDown;
+import br.com.inpe.interactivedatavisualization.kinect.controller.DataUp;
 import br.com.inpe.interactivedatavisualization.kinect.controller.StartTracking;
+import br.com.inpe.interactivedatavisualization.kinect.controller.Time;
+import br.com.inpe.interactivedatavisualization.kinect.controller.TimeDown;
+import br.com.inpe.interactivedatavisualization.kinect.controller.TimeUp;
 import br.com.inpe.interactivedatavisualization.kinect.controller.Zoom;
 import br.com.inpe.interactivedatavisualization.kinect.controller.ZoomIn;
+import br.com.inpe.interactivedatavisualization.kinect.controller.ZoomOut;
 import processing.core.PImage;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
@@ -18,6 +25,11 @@ public class KinectEvents extends Processing implements Observer {
 	private SimpleOpenNI kinect;
 	private Bridge bridge;
 	private Zoom zoomIn;
+	private Zoom zoomOut;
+	private Data dataUp;
+	private Data dataDown;
+	private Time timeUp;
+	private Time timeDown;
 
 	public void setup() {
 		// Size of window application
@@ -37,25 +49,24 @@ public class KinectEvents extends Processing implements Observer {
 		kinect.setMirror(true);
 
 		/*
-		 * The Processing applications has two required methods: setup() and draw ()
+		 * The Processing applications has two required methods: setup() and
+		 * draw ()
 		 * 
 		 * load the model methods
 		 * 
 		 * Associacao view -> model
 		 * 
 		 * 
-		 * 	(controller -> model)
-		 * 	(view -> controller)
+		 * (controller -> model) (view -> controller)
 		 */
 		bridge = new StartTracking(kinect);
-		
+
 		/*
 		 * registerObserver
 		 * 
 		 * Associacao model -> view
 		 * 
-		 * (controller -> view)
-		 * (model -> controller)
+		 * (controller -> view) (model -> controller)
 		 */
 		bridge.initRegisterObserver(this);
 
@@ -65,6 +76,11 @@ public class KinectEvents extends Processing implements Observer {
 		 * Associacao view -> Controller
 		 */
 		zoomIn = new ZoomIn();
+		zoomOut = new ZoomOut();
+		dataUp = new DataUp();
+		dataDown = new DataDown();
+		timeUp = new TimeUp();
+		timeDown = new TimeDown();
 
 	}
 
@@ -77,6 +93,7 @@ public class KinectEvents extends Processing implements Observer {
 			image(depth, 0, 0);
 		}
 		int[] userList = kinect.getUsers();
+		// i++ for i+=10
 		for (int i = 0; i < userList.length; i++) {
 			if (kinect.isTrackingSkeleton(userList[i])) {
 				// ----------------------------
@@ -195,27 +212,36 @@ public class KinectEvents extends Processing implements Observer {
 
 		switch (getTemp()) {
 		case 1: {
-			break;
-		}
-		case 2: {
-			break;
-		}
-		case 4: {
-			break;
-		}
-		case 5: {
-			break;
-		}
-		case 6: {
-			break;
-		}
-		case 70: {
 			zoomIn.setZoom();
 			setTemp(null);
 			break;
 		}
-
-		}//End Switch case
+		case 2: {
+			zoomOut.setZoom();
+			setTemp(null);
+			break;
+		}
+		case 3:{
+			timeUp.setTime();
+			setTemp(null);
+			break;
+		}
+		case 4: {
+			timeDown.setTime();
+			setTemp(null);
+			break;
+		}
+		case 5: {
+			dataUp.setData();
+			setTemp(null);
+			break;
+		}
+		case 6: {
+			dataDown.setData();
+			setTemp(null);
+			break;
+		}
+		}// End Switch case
 	}
 
 	public Integer getTemp() {

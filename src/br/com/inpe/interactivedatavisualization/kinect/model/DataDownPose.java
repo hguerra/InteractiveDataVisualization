@@ -7,11 +7,11 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 1.0
  * @since March 2015.
  */
-public class seventiesPose implements NewPose {
+public class DataDownPose implements NewPose {
 	private SimpleOpenNI context;
 	private SkeletonPoser pose;
 
-	public seventiesPose(SimpleOpenNI context) {
+	public DataDownPose(SimpleOpenNI context) {
 		constructorMethod(context);
 	}
 
@@ -20,27 +20,28 @@ public class seventiesPose implements NewPose {
 		this.context = context;
 		pose = new SkeletonPoser(context);
 		addPose();
+
 	}
 
 	@Override
 	public void addPose() {
 		// rules for the right arm
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
 		// rules for the left arm
-		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_LEFT_ELBOW);
-		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_LEFT_ELBOW);
 		// rules for the right leg
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_KNEE, PoseRule.BELOW,
@@ -48,11 +49,11 @@ public class seventiesPose implements NewPose {
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_KNEE, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_HIP);
 		// rules for the left leg
-		pose.addRule(SimpleOpenNI.SKEL_LEFT_KNEE, PoseRule.BELOW,
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_KNEE, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_LEFT_HIP);
 		pose.addRule(SimpleOpenNI.SKEL_LEFT_KNEE, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_LEFT_HIP);
-		pose.addRule(SimpleOpenNI.SKEL_LEFT_FOOT, PoseRule.BELOW,
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_FOOT, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_LEFT_KNEE);
 		pose.addRule(SimpleOpenNI.SKEL_LEFT_FOOT, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_LEFT_KNEE);
@@ -64,4 +65,4 @@ public class seventiesPose implements NewPose {
 		return pose.check(userId);
 	}
 
-}// END CLASS
+}
