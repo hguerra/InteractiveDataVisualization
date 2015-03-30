@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect.model;
+package br.com.inpe.interactivedatavisualization.kinect.model.posecheck;
 
 /**
  * @author Heitor Guerra Carneiro.

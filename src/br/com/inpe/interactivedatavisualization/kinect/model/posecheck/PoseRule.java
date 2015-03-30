@@ -1,8 +1,5 @@
-package br.com.inpe.interactivedatavisualization.kinect.model;
+package br.com.inpe.interactivedatavisualization.kinect.model.posecheck;
 
-import java.util.ArrayList;
-
-import br.com.inpe.interactivedatavisualization.kinect.view.Processing;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
 
@@ -11,42 +8,19 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 1.0
  * @since March 2015.
  */
-public class SkeletonPoser extends Processing{
-	private SimpleOpenNI context;
-	private ArrayList<PoseRule> rules;
-
-	public SkeletonPoser(SimpleOpenNI context) {
-		this.context = context;
-		rules = new ArrayList<PoseRule>();
-	}
-
-	public void addRule(int fromJoint, int jointRelation, int toJoint) {
-		PoseRule rule = new PoseRule(context, fromJoint, jointRelation, toJoint);
-		rules.add(rule);
-	}
-
-	public boolean check(int userID) {
-		boolean result = true;
-		for (int i = 0; i < rules.size(); i++) {
-			PoseRule rule = (PoseRule) rules.get(i);
-			result = result && rule.check(userID);
-		}
-		return result;
-	}
-}
-
-class PoseRule {
+public class PoseRule {
 	int fromJoint;
 	int toJoint;
 	private PVector fromJointVector;
 	private PVector toJointVector;
 	private SimpleOpenNI context;
 
-	protected int jointRelation; // one of:
-	protected static final int ABOVE = 1;
-	protected static final int BELOW = 2;
-	protected static final int LEFT_OF = 3;
-	protected static final int RIGHT_OF = 4;
+	private int jointRelation; // one of:
+	//Constant
+	public static final int ABOVE = 1;
+	public static final int BELOW = 2;
+	public static final int LEFT_OF = 3;
+	public static final int RIGHT_OF = 4;
 
 	public PoseRule(SimpleOpenNI context, int fromJoint, int jointRelation,
 			int toJoint) {

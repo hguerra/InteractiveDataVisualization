@@ -2,6 +2,15 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import br.com.inpe.interactivedatavisualization.kinect.model.pose.DataDownPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.pose.DataUpPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.pose.NewPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.pose.TimeDownPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.pose.TimeUpPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.pose.ZoomInPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.pose.ZoomOutPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.posecheck.GestureName;
 import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
 

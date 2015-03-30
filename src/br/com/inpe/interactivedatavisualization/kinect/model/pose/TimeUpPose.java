@@ -1,5 +1,7 @@
-package br.com.inpe.interactivedatavisualization.kinect.model;
+package br.com.inpe.interactivedatavisualization.kinect.model.pose;
 
+import br.com.inpe.interactivedatavisualization.kinect.model.posecheck.PoseRule;
+import br.com.inpe.interactivedatavisualization.kinect.model.posecheck.SkeletonPoser;
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
@@ -7,11 +9,11 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 1.0
  * @since March 2015.
  */
-public class TimeDownPose implements NewPose {
+public class TimeUpPose implements NewPose {
 	private SimpleOpenNI context;
 	private SkeletonPoser pose;
 
-	public TimeDownPose(SimpleOpenNI context) {
+	public TimeUpPose(SimpleOpenNI context) {
 		constructorMethod(context);
 	}
 
@@ -26,21 +28,23 @@ public class TimeDownPose implements NewPose {
 	@Override
 	public void addPose() {
 		// 1
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
-				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 
 		// 2
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
 
 		// 3
@@ -57,22 +61,19 @@ public class TimeDownPose implements NewPose {
 		// 4
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		// 5
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-
-		// 5
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
-				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
-				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
-				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
-				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 
 	}
 

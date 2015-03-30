@@ -1,5 +1,7 @@
-package br.com.inpe.interactivedatavisualization.kinect.model;
+package br.com.inpe.interactivedatavisualization.kinect.model.pose;
 
+import br.com.inpe.interactivedatavisualization.kinect.model.posecheck.PoseRule;
+import br.com.inpe.interactivedatavisualization.kinect.model.posecheck.SkeletonPoser;
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
