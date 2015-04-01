@@ -1,9 +1,8 @@
 package br.com.inpe.interactivedatavisualization.kinect.model.posecheck;
-
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import br.com.inpe.interactivedatavisualization.kinect.view.Processing;
-import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
@@ -13,11 +12,11 @@ import SimpleOpenNI.SimpleOpenNI;
  */
 public class SkeletonPoser extends Processing {
 	private SimpleOpenNI context;
-	private ArrayList<PoseRule> rules;
+	private List<PoseRule> rules;
 
 	public SkeletonPoser(SimpleOpenNI context) {
 		this.context = context;
-		rules = new ArrayList<PoseRule>();
+		rules = new LinkedList<PoseRule>();
 	}
 
 	public void addRule(int fromJoint, int jointRelation, int toJoint) {

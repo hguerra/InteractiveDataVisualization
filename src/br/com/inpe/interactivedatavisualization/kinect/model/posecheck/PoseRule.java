@@ -16,11 +16,15 @@ public class PoseRule {
 	private SimpleOpenNI context;
 
 	private int jointRelation; // one of:
-	//Constant
+	// Constant
+	// X AND Y
 	public static final int ABOVE = 1;
 	public static final int BELOW = 2;
 	public static final int LEFT_OF = 3;
 	public static final int RIGHT_OF = 4;
+	// Z
+	public static final int CLOSER_OF = 5;
+	public static final int FARTHER_OF = 6;
 
 	public PoseRule(SimpleOpenNI context, int fromJoint, int jointRelation,
 			int toJoint) {
@@ -53,6 +57,12 @@ public class PoseRule {
 			break;
 		case RIGHT_OF:
 			result = (fromJointVector.x > toJointVector.x);
+			break;
+		case CLOSER_OF:
+			result = (fromJointVector.z < toJointVector.z);
+			break;
+		case FARTHER_OF:
+			result = (fromJointVector.z > toJointVector.z);
 			break;
 		}
 

@@ -27,55 +27,1000 @@ public class ZoomInPose implements NewPose {
 
 	@Override
 	public void addPose() {
-		// 1
-		// hand above elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		// hand right of elbow
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-
-		// 2
-		// hand above elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		// hand left of elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-
-		// 1
-
-		// hand above elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		// hand right of elbow
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-
-		// 2
-		// hand above elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		// hand left of elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-
-		// 1
-
-		// hand above elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		// hand right of elbow
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-
-		// 2
-		// hand above elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.ABOVE,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		// hand left of elbow
-		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.LEFT_OF,
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
 				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_HEAD, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_ELBOW, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_SHOULDER, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_ELBOW, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_HAND);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.FARTHER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.RIGHT_OF,
+				SimpleOpenNI.SKEL_HEAD);
+		pose.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRule.CLOSER_OF,
+				SimpleOpenNI.SKEL_HEAD);
 
 	}
 
