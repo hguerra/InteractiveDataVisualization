@@ -93,7 +93,7 @@ public class KinectEvents extends Processing implements Observer {
 			image(depth, 0, 0);
 		}
 		int[] userList = kinect.getUsers();
-		// i++ for i+=10
+		// i++ 
 		for (int i = 0; i < userList.length; i++) {
 			if (kinect.isTrackingSkeleton(userList[i])) {
 				// ----------------------------

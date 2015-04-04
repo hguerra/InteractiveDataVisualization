@@ -1,16 +1,11 @@
-package br.com.inpe.interactivedatavisualization.kinect.model.posecheck;
+package br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck;
 
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
 
-/**
- * @author Heitor Guerra Carneiro.
- * @version 1.0
- * @since March 2015.
- */
-public class PoseRule {
-	int fromJoint;
-	int toJoint;
+public class PoseRecognize extends BaseGesture {
+	private int fromJoint;
+	private int toJoint;
 	private PVector fromJointVector;
 	private PVector toJointVector;
 	private SimpleOpenNI context;
@@ -26,8 +21,8 @@ public class PoseRule {
 	public static final int CLOSER_OF = 5;
 	public static final int FARTHER_OF = 6;
 
-	public PoseRule(SimpleOpenNI context, int fromJoint, int jointRelation,
-			int toJoint) {
+	public PoseRecognize(SimpleOpenNI context, int fromJoint,
+			int jointRelation, int toJoint) {
 		this.context = context;
 		this.fromJoint = fromJoint;
 		this.toJoint = toJoint;
@@ -37,11 +32,11 @@ public class PoseRule {
 		toJointVector = new PVector();
 	}
 
-	public boolean check(int userID) {
+	public boolean check(int userId) {
 
 		// populate the joint vectors for the user we're checking
-		context.getJointPositionSkeleton(userID, fromJoint, fromJointVector);
-		context.getJointPositionSkeleton(userID, toJoint, toJointVector);
+		context.getJointPositionSkeleton(userId, fromJoint, fromJointVector);
+		context.getJointPositionSkeleton(userId, toJoint, toJointVector);
 
 		boolean result = false;
 

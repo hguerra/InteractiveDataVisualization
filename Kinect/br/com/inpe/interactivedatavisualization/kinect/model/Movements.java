@@ -3,14 +3,16 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import br.com.inpe.interactivedatavisualization.kinect.model.gesture.WaveGesture;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.BaseGesture;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.GestureName;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.NewPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.pose.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.pose.DataUpPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.pose.NewPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.pose.TimeDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.pose.TimeUpPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.pose.ZoomInPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.pose.ZoomOutPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.posecheck.GestureName;
 import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
 
@@ -29,6 +31,7 @@ public class Movements implements Subject {
 	private NewPose zoomOut;
 	private NewPose timeUp;
 	private NewPose timeDown;
+	private NewPose wave;
 
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -39,6 +42,7 @@ public class Movements implements Subject {
 		zoomOut = new ZoomOutPose(context);
 		timeUp = new TimeUpPose(context);
 		timeDown = new TimeDownPose(context);
+		wave = new WaveGesture(context);
 	}
 
 	@Override
@@ -53,18 +57,23 @@ public class Movements implements Subject {
 	}
 
 	public void poseCheck(int userId) {
-		if (dataUp.verify(userId))
+		/*
+		if (dataUp.recognize(userId))
 			setMovement(GestureName.DATAUP.getValue());
-		if (dataDown.verify(userId))
+		if (dataDown.recognize(userId))
 			setMovement(GestureName.DATADOWN.getValue());
-		if(zoomIn.verify(userId))
+		if (zoomIn.recognize(userId))
 			setMovement(GestureName.ZOOMIN.getValue());
-		if(zoomOut.verify(userId))
+		if (zoomOut.recognize(userId))
 			setMovement(GestureName.ZOOMOUT.getValue());
-		if(timeUp.verify(userId))
+		if (timeUp.recognize(userId))
 			setMovement(GestureName.TIMEUP.getValue());
-		if(timeDown.verify(userId))
+		if (timeDown.recognize(userId))
 			setMovement(GestureName.TIMEDOWN.getValue());
+*/
+		// teste
+		if (wave.recognize(userId))
+			setMovement(GestureName.TIMEUP.getValue());
 	}
 
 	public void setMovement(Integer type) {
