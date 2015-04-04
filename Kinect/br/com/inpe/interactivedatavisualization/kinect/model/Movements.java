@@ -57,21 +57,22 @@ public class Movements implements Subject {
 	}
 
 	public void poseCheck(int userId) {
-		/*
+		
 		if (dataUp.recognize(userId))
 			setMovement(GestureName.DATAUP.getValue());
 		if (dataDown.recognize(userId))
 			setMovement(GestureName.DATADOWN.getValue());
+		
 		if (zoomIn.recognize(userId))
 			setMovement(GestureName.ZOOMIN.getValue());
 		if (zoomOut.recognize(userId))
 			setMovement(GestureName.ZOOMOUT.getValue());
+		
 		if (timeUp.recognize(userId))
 			setMovement(GestureName.TIMEUP.getValue());
 		if (timeDown.recognize(userId))
 			setMovement(GestureName.TIMEDOWN.getValue());
-*/
-		// teste
+
 		if (wave.recognize(userId))
 			setMovement(GestureName.TIMEUP.getValue());
 	}

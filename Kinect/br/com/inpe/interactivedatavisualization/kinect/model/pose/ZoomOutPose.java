@@ -11,7 +11,7 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 1.0
  * @since March 2015.
  */
-public class ZoomOutPose extends BaseGesture implements NewPose{
+public class ZoomOutPose extends BaseGesture implements NewPose {
 	private SimpleOpenNI context;
 	private GestureRecognize poseOne;
 	private GestureRecognize poseTwo;
@@ -30,25 +30,72 @@ public class ZoomOutPose extends BaseGesture implements NewPose{
 
 	}
 
-
 	@Override
 	public boolean segmentOne(int userId) {
-		// 1
-		
+		// HANDS CLOSER OF SHOUDERS
+		poseOne.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+
+		// RIGHT HAND ABOVE HEAD
+		poseOne.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.ABOVE,
+				SimpleOpenNI.SKEL_HEAD);
+		poseOne.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.RIGHT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+
+		// LEFT HANDS BELOW HIP
+		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
+				SimpleOpenNI.SKEL_LEFT_HIP);
+
+		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_HIP);
+
 		return segmentCheck(userId, poseOne);
 	}
 
 	@Override
 	public boolean segmentTwo(int userId) {
-		// 2
-	
+		// HANDS CLOSER OF SHOUDERS
+		poseTwo.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.CLOSER_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.CLOSER_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+
+		// RIGHT HAND ABOVE NECK
+		poseTwo.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.ABOVE,
+				SimpleOpenNI.SKEL_NECK);
+
+		// LEFT HANDS ABOVE HIP
+		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
+				SimpleOpenNI.SKEL_NECK);
+		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HIP);
+
 		return segmentCheck(userId, poseTwo);
 
 	}
 
 	@Override
 	public boolean segmentThree(int userId) {
-		
+		// HANDS BETWEEN SHOULDERS
+		poseThree.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
+		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+
+		// HANDS ABOVE HIP
+		poseThree.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.ABOVE,
+				SimpleOpenNI.SKEL_RIGHT_HIP);
+		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.ABOVE,
+				SimpleOpenNI.SKEL_LEFT_HIP);
+
+		// HANDS BELOW NECK
+		poseThree.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.BELOW,
+				SimpleOpenNI.SKEL_NECK);
+		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
+				SimpleOpenNI.SKEL_NECK);
+
 		return segmentCheck(userId, poseThree);
 	}
 
@@ -56,17 +103,17 @@ public class ZoomOutPose extends BaseGesture implements NewPose{
 	public boolean segmentCheck(int userId, GestureRecognize pose) {
 		return pose.check(userId);
 	}
-	
+
 	@Override
 	protected boolean checkStartCondition(int userId) {
-		if(segmentOne(userId))
+		if (segmentOne(userId))
 			return true;
 		return false;
 	}
 
 	@Override
 	protected boolean stillValidPosition(int userId) {
-		if(segmentTwo(userId)){
+		if (segmentTwo(userId)) {
 			return true;
 		}
 		return false;
@@ -74,7 +121,7 @@ public class ZoomOutPose extends BaseGesture implements NewPose{
 
 	@Override
 	protected boolean validateFinalPosition(int userId) {
-		if(segmentThree(userId))
+		if (segmentThree(userId))
 			return true;
 		return false;
 	}
