@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect.model.pose;
+package br.com.inpe.interactivedatavisualization.kinect.model.gesture;
 
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.BaseGesture;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.GestureRecognize;

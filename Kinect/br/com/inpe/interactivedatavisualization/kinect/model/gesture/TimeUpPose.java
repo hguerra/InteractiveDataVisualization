@@ -1,4 +1,4 @@
-package br.com.inpe.interactivedatavisualization.kinect.model.pose;
+package br.com.inpe.interactivedatavisualization.kinect.model.gesture;
 
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.BaseGesture;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.GestureRecognize;
@@ -11,13 +11,13 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 1.0
  * @since March 2015.
  */
-public class ZoomInPose extends BaseGesture implements NewPose {
+public class TimeUpPose extends BaseGesture implements NewPose {
 	private SimpleOpenNI context;
 	private GestureRecognize poseOne;
 	private GestureRecognize poseTwo;
 	private GestureRecognize poseThree;
 
-	public ZoomInPose(SimpleOpenNI context) {
+	public TimeUpPose(SimpleOpenNI context) {
 		constructorMethod(context);
 	}
 
@@ -31,69 +31,58 @@ public class ZoomInPose extends BaseGesture implements NewPose {
 
 	@Override
 	public boolean segmentOne(int userId) {
-		// HANDS BETWEEN SHOULDERS
-		poseOne.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.LEFT_OF,
-				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.RIGHT_OF,
+		// LEFT_HAND
+		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
 				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 
-		// HANDS ABOVE HIP
-		poseOne.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.ABOVE,
-				SimpleOpenNI.SKEL_RIGHT_HIP);
-		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.ABOVE,
-				SimpleOpenNI.SKEL_LEFT_HIP);
-
-		// HANDS BELOW NECK
+		//HEAD
 		poseOne.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.BELOW,
-				SimpleOpenNI.SKEL_NECK);
-		poseOne.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
-				SimpleOpenNI.SKEL_NECK);
+				SimpleOpenNI.SKEL_HEAD);
+		
+		// RIGHT_HAND
+		poseOne.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 
 		return segmentCheck(userId, poseOne);
 	}
 
 	@Override
 	public boolean segmentTwo(int userId) {
-		// HANDS CLOSER OF SHOUDERS
-		poseTwo.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.CLOSER_OF,
-				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.CLOSER_OF,
+		// LEFT_HAND
+		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
 				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 
-		// RIGHT HAND ABOVE NECK
-		poseTwo.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.ABOVE,
-				SimpleOpenNI.SKEL_NECK);
-
-		// LEFT HANDS ABOVE HIP
-		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
-				SimpleOpenNI.SKEL_NECK);
-		poseTwo.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.ABOVE,
-				SimpleOpenNI.SKEL_LEFT_HIP);
-
+		//HEAD
+		poseTwo.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.BELOW,
+				SimpleOpenNI.SKEL_HEAD);
+		// RIGHT_HAND
+		poseTwo.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.RIGHT_OF,
+				SimpleOpenNI.SKEL_LEFT_SHOULDER);
+		poseTwo.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.LEFT_OF,
+				SimpleOpenNI.SKEL_RIGHT_ELBOW);
 		return segmentCheck(userId, poseTwo);
 
 	}
 
 	@Override
 	public boolean segmentThree(int userId) {
-		// HANDS CLOSER OF SHOUDERS
-		poseThree.addRule(SimpleOpenNI.SKEL_RIGHT_HAND,
-				PoseRecognize.CLOSER_OF, SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.CLOSER_OF,
+		// LEFT_HAND
+		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.LEFT_OF,
+				SimpleOpenNI.SKEL_LEFT_ELBOW);
+		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
 				SimpleOpenNI.SKEL_LEFT_SHOULDER);
 
-		// RIGHT HAND ABOVE HEAD
-		poseThree.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.ABOVE,
+		//HEAD
+		poseThree.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.BELOW,
 				SimpleOpenNI.SKEL_HEAD);
+		// RIGHT_HAND
 		poseThree.addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.RIGHT_OF,
-				SimpleOpenNI.SKEL_RIGHT_ELBOW);
+				SimpleOpenNI.SKEL_RIGHT_SHOULDER);
 
-		// LEFT HANDS BELOW HIP
-		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.BELOW,
-				SimpleOpenNI.SKEL_LEFT_HIP);
-		
-		poseThree.addRule(SimpleOpenNI.SKEL_LEFT_HAND, PoseRecognize.LEFT_OF,
-				SimpleOpenNI.SKEL_LEFT_HIP);
 		return segmentCheck(userId, poseThree);
 	}
 

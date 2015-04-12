@@ -3,16 +3,16 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesture.TimeDownPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesture.TimeUpPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.WaveGesture;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesture.ZoomInPose;
+import br.com.inpe.interactivedatavisualization.kinect.model.gesture.ZoomOutPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.BaseGesture;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.GestureName;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.NewPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.pose.DataDownPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.pose.DataUpPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.pose.TimeDownPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.pose.TimeUpPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.pose.ZoomInPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.pose.ZoomOutPose;
 import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
 
@@ -32,7 +32,7 @@ public class Movements implements Subject {
 	private NewPose timeUp;
 	private NewPose timeDown;
 	private NewPose wave;
-
+	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
 		listObservers = new LinkedList<Observer>();

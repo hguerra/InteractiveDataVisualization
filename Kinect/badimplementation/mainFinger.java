@@ -42,6 +42,7 @@ public class mainFinger extends PApplet{
 		  
 		  
 		  int[] depthMap = kinect.depthMap();
+		  
 		  fingers.update(depthMap);
 
 		
@@ -58,21 +59,10 @@ public class mainFinger extends PApplet{
 		  for (int i = 0; i < fingers.getNumFingers(); i++) {
 		    PVector position = fingers.getFinger(i);
 		    ellipse(position.x - 5, position.y -5, 10, 10);
-		    //System.out.println("x: " + position.x + "y: " + position.y);
-		    Float x = position.x;
-		    Float y = position.y;
-		    if(x == null)
-		    	System.out.println("x nulo");
-		    if(y == null)
-		    	System.out.println("y nulo");
 		  }
-		  
-		  
 		  fill(255,0,0);
 		  text(threshold, 10, 20);
 		}
-
-		
 		public void keyPressed(){
 		  if(key == '-'){
 		    threshold -= 10;
