@@ -3,6 +3,7 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import badimplementation.WaveGestureTESTE;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.TimeDownPose;
@@ -32,6 +33,10 @@ public class Movements implements Subject {
 	private NewPose timeUp;
 	private NewPose timeDown;
 	private NewPose wave;
+	/*
+	 * teste
+	 */
+	private WaveGestureTESTE waveTESTE;
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -43,6 +48,10 @@ public class Movements implements Subject {
 		timeUp = new TimeUpPose(context);
 		timeDown = new TimeDownPose(context);
 		wave = new WaveGesture(context);
+		/*
+		 * teste
+		 */
+		waveTESTE = new WaveGestureTESTE(context);
 	}
 
 	@Override
@@ -57,7 +66,7 @@ public class Movements implements Subject {
 	}
 
 	public void poseCheck(int userId) {
-		
+		/*
 		if (dataUp.recognize(userId))
 			setMovement(GestureName.DATAUP.getValue());
 		if (dataDown.recognize(userId))
@@ -75,6 +84,13 @@ public class Movements implements Subject {
 
 		if (wave.recognize(userId))
 			setMovement(GestureName.TIMEUP.getValue());
+			*/
+		/*
+		 * teste
+		 */
+		if(waveTESTE.recognize(userId)){
+			System.out.println("OK");
+		}
 	}
 
 	public void setMovement(Integer type) {
