@@ -20,8 +20,8 @@ public class WaveRightSegment1 implements IGestureSegment{
 		/*
 		 * Possible bug segment.ABOVE or JointID
 		 */
-		if(segment.check(JointID.RIGHT_HAND, segment.ABOVE, JointID.RIGHT_ELBOW,userId)){
-			if(segment.check(JointID.RIGHT_HAND, segment.RIGHT_OF, JointID.RIGHT_ELBOW, userId)){
+		if(segment.check(JointID.RIGHT_HAND, segment.BELOW, JointID.RIGHT_ELBOW,userId)){
+			if(segment.check(JointID.RIGHT_HAND, segment.BELOW, JointID.RIGHT_ELBOW, userId)){
 				return EGestureResult.SUCCEED;
 			}
 			return EGestureResult.PAUSING;

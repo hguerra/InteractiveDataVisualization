@@ -7,4 +7,5 @@ package testeGestureDetector;
  */
 public class GestureControler {
 	
+	
 }
