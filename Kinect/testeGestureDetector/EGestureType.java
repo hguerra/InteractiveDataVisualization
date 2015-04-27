@@ -4,7 +4,7 @@ package testeGestureDetector;
  * @version 1.0
  * @since April 2015.
  */
-public enum EnumGestureType {
+public enum EGestureType {
 	WAVERIGHT, WAVELEFT, MENU, LEFTSWIPE, RIGHTSWIPE;
 	
 	public int getValue(){

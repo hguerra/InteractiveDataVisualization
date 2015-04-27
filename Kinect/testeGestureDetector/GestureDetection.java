@@ -1,15 +1,14 @@
 package testeGestureDetector;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import br.com.inpe.interactivedatavisualization.kinect.model.Subject;
-import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
  * @since April 2015.
  */
-public class GestureDetection implements Subject {
+public class GestureDetection {
 	/**
 	 * The current gesture part that we are matching against
 	 */
@@ -29,15 +28,15 @@ public class GestureDetection implements Subject {
 	/**
 	 * The type of gesture that this is
 	 */
-	private EnumGestureType type;
+	private EGestureType type;
 	/**
 	 * The parts that make up this gesture
 	 */
 	private IGestureSegment[] gestureParts;
 	/**
-	 * List of Observers
+	 * List of Gesture Recognized
 	 */
-	private List<Observer> listObservers;
+	private List<EGestureType> gestureRecognised;
 
 	/**
 	 * Initializes a new instance of the
@@ -45,9 +44,10 @@ public class GestureDetection implements Subject {
 	 * @param gestureParts
 	 * @param type
 	 */
-	public GestureDetection(IGestureSegment[] gestureParts, EnumGestureType type) {
+	public GestureDetection(IGestureSegment[] gestureParts, EGestureType type) {
 		this.gestureParts = gestureParts;
 		this.type = type;
+		gestureRecognised = new LinkedList<EGestureType>();
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class GestureDetection implements Subject {
 	 * 
 	 * @param data
 	 */
-	public void updateGesture(SkeletonData data) {
+	public void updateGesture(int userId) {
 		if (this.paused) {
 			if (this.frameCount == this.pausedFrameCount) {
 				this.paused = false;
@@ -64,23 +64,23 @@ public class GestureDetection implements Subject {
 			this.frameCount++;
 		}
 
-		EnumGestureResult result = this.gestureParts[this.currentGesturePart]
-				.checkGesture(data);
+		EGestureResult result = this.gestureParts[this.currentGesturePart]
+				.checkGesture(userId);
 
-		if (result == EnumGestureResult.SUCCEED) {
+		if (result == EGestureResult.SUCCEED) {
 			if (this.currentGesturePart + 1 < this.gestureParts.length) {
 				this.currentGesturePart++;
 				this.frameCount = 0;
 				this.pausedFrameCount = 10;
 				this.paused = true;
 			} else {
-				// TO DO
+				if (!this.gestureRecognised.isEmpty()) {
+					this.gestureRecognised.add(this.type);
+					this.reset();
+				}
 			}
-		} else if (result == EnumGestureResult.FAIL || this.frameCount == 50) {
-			this.currentGesturePart = 0;
-			this.frameCount = 0;
-			this.pausedFrameCount = 5;
-			this.paused = true;
+		} else if (result == EGestureResult.FAIL || this.frameCount == 50) {
+			this.reset();
 		} else {
 			this.frameCount++;
 			this.pausedFrameCount = 5;
@@ -96,21 +96,7 @@ public class GestureDetection implements Subject {
 		this.frameCount = 0;
 		this.pausedFrameCount = 5;
 		this.paused = true;
+		System.gc();
 	}
 
-	@Override
-	public void registerObserver(Observer observer) {
-		listObservers.add(observer);
-	}
-
-	@Override
-	public void notifyObserversPoseCheck() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void notifyObserversGestureRecognised(int movement) {
-		for (Observer i : listObservers)
-			i.update(movement);
-	}
 }

@@ -98,11 +98,4 @@ public class Movements implements Subject {
 		this.movement = type;
 		notifyObserversPoseCheck();
 	}
-
-	@Override
-	public void notifyObserversGestureRecognised(int movement) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

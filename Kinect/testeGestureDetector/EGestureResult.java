@@ -4,7 +4,7 @@ package testeGestureDetector;
  * @version 1.0
  * @since April 2015.
  */
-public enum EnumGestureResult {
+public enum EGestureResult {
 	FAIL, SUCCEED, PAUSING;
 	
 	public int getValue(){

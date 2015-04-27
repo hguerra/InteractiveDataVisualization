@@ -3,7 +3,7 @@ package br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
 
-public class PoseRecognize extends BaseGesture {
+public class PoseRecognize {
 	private int fromJoint;
 	private int toJoint;
 	private PVector fromJointVector;

@@ -2,6 +2,7 @@ package testeGestureDetector;
 
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
+
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
@@ -17,19 +18,21 @@ public class SegmentCheck {
 	// Z
 	public static final int CLOSER_OF = 5;
 	public static final int FARTHER_OF = 6;
-	
+
 	private PVector fromJointVector;
 	private PVector toJointVector;
 	private SimpleOpenNI context;
 
 	public SegmentCheck(SimpleOpenNI context) {
 		this.context = context;
-	}
 
-	public boolean check(int userId, int fromJoint, int jointRelation,
-			int toJoint) {
 		fromJointVector = new PVector();
 		toJointVector = new PVector();
+	}
+
+	public boolean check(int fromJoint, int jointRelation,
+			int toJoint, int userId) {
+
 		// populate the joint vectors for the user we're checking
 		context.getJointPositionSkeleton(userId, fromJoint, fromJointVector);
 		context.getJointPositionSkeleton(userId, toJoint, toJointVector);
