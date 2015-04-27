@@ -9,4 +9,8 @@ import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 public interface Subject {
 	public void registerObserver(Observer observer);
 	public void notifyObserversPoseCheck();
+	/**
+	 * teste
+	 */
+	public void notifyObserversGestureRecognised(int movement);
 }

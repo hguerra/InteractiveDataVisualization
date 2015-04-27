@@ -81,21 +81,28 @@ public class Movements implements Subject {
 			setMovement(GestureName.TIMEUP.getValue());
 		if (timeDown.recognize(userId))
 			setMovement(GestureName.TIMEDOWN.getValue());
-
+*/
 		if (wave.recognize(userId))
 			setMovement(GestureName.TIMEUP.getValue());
-			*/
+			
 		/*
 		 * teste
 		 */
+		/*
 		if(waveTESTE.recognize(userId)){
 			System.out.println("OK");
-		}
+		}*/
 	}
 
 	public void setMovement(Integer type) {
 		this.movement = type;
 		notifyObserversPoseCheck();
+	}
+
+	@Override
+	public void notifyObserversGestureRecognised(int movement) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

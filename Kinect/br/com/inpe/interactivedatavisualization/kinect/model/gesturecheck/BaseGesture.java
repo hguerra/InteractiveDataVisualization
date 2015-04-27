@@ -1,5 +1,9 @@
 package br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck;
-
+/**
+ * @author Heitor Guerra Carneiro.
+ * @version 1.0
+ * @since April 2015.
+ */
 public abstract class BaseGesture {
 	private boolean tracking = false;
 	private int currentFrame = 0;
