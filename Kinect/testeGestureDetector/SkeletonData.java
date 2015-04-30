@@ -1,4 +1,5 @@
 package testeGestureDetector;
+
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
@@ -15,11 +16,9 @@ public class SkeletonData {
 		this.fromJoint = fromJoint;
 		this.toJoint = toJoint;
 		this.jointRelation = jointRelation;
-
 	}
 
 	// gets and sets
-
 	public int getUserId() {
 		return userId;
 	}
