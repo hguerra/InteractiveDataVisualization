@@ -89,7 +89,7 @@ public class GestureDetection {
 	}
 
 	/**
-	 * Resets this instance
+	 * Reset this instance
 	 */
 	public void reset() {
 		this.currentGesturePart = 0;
