@@ -3,21 +3,21 @@
 	<classpathentry kind="src" path="Kinect"/>
 	<classpathentry kind="src" path="Nasa"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/worldwind/gdal.jar"/>
-	<classpathentry kind="lib" path="C:/processing-2.2.1/core/library/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="C:/processing-2.2.1/core/library/jogl-all.jar"/>
-	<classpathentry kind="lib" path="C:/processing-2.2.1/core/library/core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heitor/Documents/Processing/libraries/SimpleOpenNI/library/SimpleOpenNI.jar"/>
-	<classpathentry kind="lib" path="C:/worldwind/worldwind.jar">
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/worldwind/gdal.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/processing/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/processing/jogl-all.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/processing/core.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/simpleopenni/SimpleOpenNI/library/SimpleOpenNI.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/worldwind/worldwind.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/worldwind/worldwindx.jar">
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/worldwind/worldwindx.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/DB4O/db4o-8.0.249.16098-all-java5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/db4o/db4o-8.0.249.16098-all-java5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

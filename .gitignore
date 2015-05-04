@@ -5,7 +5,8 @@
 .gradle
 bin/
 tmp/
-World Wind/
+# library/
+images/
 *.tmp
 *.bak
 *.swp
