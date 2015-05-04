@@ -1,5 +1,6 @@
 package br.com.inpe.interactivedatavisualization.kinect.model;
 
+import testeGestureDetector.EGestureType;
 import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 /**
  * @author Heitor Guerra Carneiro.
@@ -9,4 +10,5 @@ import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 public interface Subject {
 	public void registerObserver(Observer observer);
 	public void notifyObserversPoseCheck();
+	public void notifyObserversTeste(EGestureType type);
 }

@@ -5,7 +5,7 @@
 .gradle
 bin/
 tmp/
-# library/
+library/
 images/
 *.tmp
 *.bak

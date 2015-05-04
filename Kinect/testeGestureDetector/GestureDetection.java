@@ -3,12 +3,15 @@ package testeGestureDetector;
 import java.util.LinkedList;
 import java.util.List;
 
+import br.com.inpe.interactivedatavisualization.kinect.model.Subject;
+import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
+
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
  * @since April 2015.
  */
-public class GestureDetection {
+public class GestureDetection implements Subject {
 	/**
 	 * The current gesture part that we are matching against
 	 */
@@ -37,23 +40,23 @@ public class GestureDetection {
 	 * List of Gesture Recognized
 	 */
 	private List<EGestureType> gestureRecognised;
+	/**
+	 * Register Observer
+	 */
+	private List<Observer> observers;
 
 	/**
 	 * Initializes a new instance of the
-	 * 
-	 * @param gestureParts
-	 * @param type
 	 */
 	public GestureDetection(IGestureSegment[] gestureParts, EGestureType type) {
 		this.gestureParts = gestureParts;
 		this.type = type;
 		gestureRecognised = new LinkedList<EGestureType>();
+		observers = new LinkedList<Observer>();
 	}
 
 	/**
 	 * Updates the gesture
-	 * 
-	 * @param data
 	 */
 	public void updateGesture(int userId) {
 		if (this.paused) {
@@ -69,22 +72,19 @@ public class GestureDetection {
 
 		if (result == EGestureResult.SUCCEED) {
 			if (this.currentGesturePart + 1 < this.gestureParts.length) {
-				this.currentGesturePart++;
-				this.frameCount = 0;
-				this.pausedFrameCount = 10;
-				this.paused = true;
+				stillMoving();
 			} else {
-				if (!this.gestureRecognised.isEmpty()) {
-					this.gestureRecognised.add(this.type);
-					this.reset();
-				}
+				/*
+				 * if (!this.gestureRecognised.isEmpty()) {
+				 * this.gestureRecognised.add(this.type); this.reset(); }
+				 */
+				notifyObserversTeste(this.type);
+				this.reset();
 			}
 		} else if (result == EGestureResult.FAIL || this.frameCount == 50) {
 			this.reset();
 		} else {
-			this.frameCount++;
-			this.pausedFrameCount = 5;
-			this.paused = true;
+			limit();
 		}
 	}
 
@@ -97,6 +97,38 @@ public class GestureDetection {
 		this.pausedFrameCount = 5;
 		this.paused = true;
 		System.gc();
+	}
+
+	public void stillMoving() {
+		this.currentGesturePart++;
+		this.frameCount = 0;
+		this.pausedFrameCount = 10;
+		this.paused = true;
+	}
+
+	public void limit() {
+		this.frameCount++;
+		this.pausedFrameCount = 5;
+		this.paused = true;
+	}
+
+	@Override
+	public void registerObserver(Observer observer) {
+		observers.add(observer);
+
+	}
+
+	@Override
+	public void notifyObserversTeste(EGestureType type) {
+		for (Observer ob : observers) {
+			ob.updateTeste(type.getValue());
+		}
+	}
+
+	@Override
+	public void notifyObserversPoseCheck() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

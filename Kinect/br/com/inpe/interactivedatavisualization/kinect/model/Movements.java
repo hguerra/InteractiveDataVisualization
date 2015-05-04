@@ -3,6 +3,7 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import testeGestureDetector.EGestureType;
 import badimplementation.WaveGestureTESTE;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
@@ -52,6 +53,7 @@ public class Movements implements Subject {
 		 * teste
 		 */
 		waveTESTE = new WaveGestureTESTE(context);
+		
 	}
 
 	@Override
@@ -81,9 +83,9 @@ public class Movements implements Subject {
 			setMovement(GestureName.TIMEUP.getValue());
 		if (timeDown.recognize(userId))
 			setMovement(GestureName.TIMEDOWN.getValue());
-*/
+
 		if (wave.recognize(userId))
-			setMovement(GestureName.TIMEUP.getValue());
+			setMovement(GestureName.TIMEUP.getValue());*/
 			
 		/*
 		 * teste
@@ -97,5 +99,13 @@ public class Movements implements Subject {
 	public void setMovement(Integer type) {
 		this.movement = type;
 		notifyObserversPoseCheck();
+	}
+/**
+ * TESTE
+ */
+	@Override
+	public void notifyObserversTeste(EGestureType type) {
+		// TODO Auto-generated method stub
+		
 	}
 }

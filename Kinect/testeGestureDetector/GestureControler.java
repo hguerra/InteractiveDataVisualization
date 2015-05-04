@@ -35,4 +35,5 @@ public class GestureControler {
 			g.reset();
 		}
 	}
+	
 }
