@@ -4,6 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import testeGestureDetector.EGestureType;
+import testeGestureDetector.GestureDetector;
+import testeGestureDetector.IGestureSegment;
+import testeGestureDetector.WaveRightSegment1;
+import testeGestureDetector.WaveRightSegment2;
 import badimplementation.WaveGestureTESTE;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
@@ -38,6 +42,10 @@ public class Movements implements Subject {
 	 * teste
 	 */
 	private WaveGestureTESTE waveTESTE;
+	private GestureDetector testeGestureDetector;
+	private WaveRightSegment1 a;
+	private WaveRightSegment2 b;
+	private IGestureSegment[] testeVector = {a,b};
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -53,6 +61,10 @@ public class Movements implements Subject {
 		 * teste
 		 */
 		waveTESTE = new WaveGestureTESTE(context);
+		testeGestureDetector = new GestureDetector();
+		a = new WaveRightSegment1(context);
+		b = new WaveRightSegment2(context);
+		testeGestureDetector.addGesture(EGestureType.WAVERIGHT, testeVector);
 		
 	}
 
@@ -94,18 +106,11 @@ public class Movements implements Subject {
 		if(waveTESTE.recognize(userId)){
 			System.out.println("OK");
 		}*/
+		testeGestureDetector.updateAllGestures(userId);
 	}
 
 	public void setMovement(Integer type) {
 		this.movement = type;
 		notifyObserversPoseCheck();
-	}
-/**
- * TESTE
- */
-	@Override
-	public void notifyObserversTeste(EGestureType type) {
-		// TODO Auto-generated method stub
-		
 	}
 }

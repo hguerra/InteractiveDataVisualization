@@ -11,7 +11,7 @@ import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
  * @version 1.0
  * @since April 2015.
  */
-public class GestureDetection implements Subject {
+public class Gesture {
 	/**
 	 * The current gesture part that we are matching against
 	 */
@@ -36,23 +36,14 @@ public class GestureDetection implements Subject {
 	 * The parts that make up this gesture
 	 */
 	private IGestureSegment[] gestureParts;
-	/**
-	 * List of Gesture Recognized
-	 */
-	private List<EGestureType> gestureRecognised;
-	/**
-	 * Register Observer
-	 */
-	private List<Observer> observers;
-
+	
+	private EGestureType resultType;
 	/**
 	 * Initializes a new instance of the
 	 */
-	public GestureDetection(IGestureSegment[] gestureParts, EGestureType type) {
+	public Gesture(IGestureSegment[] gestureParts, EGestureType type) {
 		this.gestureParts = gestureParts;
 		this.type = type;
-		gestureRecognised = new LinkedList<EGestureType>();
-		observers = new LinkedList<Observer>();
 	}
 
 	/**
@@ -74,11 +65,7 @@ public class GestureDetection implements Subject {
 			if (this.currentGesturePart + 1 < this.gestureParts.length) {
 				stillMoving();
 			} else {
-				/*
-				 * if (!this.gestureRecognised.isEmpty()) {
-				 * this.gestureRecognised.add(this.type); this.reset(); }
-				 */
-				notifyObserversTeste(this.type);
+				notifyType(this.type);
 				this.reset();
 			}
 		} else if (result == EGestureResult.FAIL || this.frameCount == 50) {
@@ -111,24 +98,17 @@ public class GestureDetection implements Subject {
 		this.pausedFrameCount = 5;
 		this.paused = true;
 	}
-
-	@Override
-	public void registerObserver(Observer observer) {
-		observers.add(observer);
-
+	
+	public void notifyType(EGestureType type){
+		setResultType(type);
+		System.out.println(type);
 	}
 
-	@Override
-	public void notifyObserversTeste(EGestureType type) {
-		for (Observer ob : observers) {
-			ob.updateTeste(type.getValue());
-		}
+	public EGestureType getResultType() {
+		return resultType;
 	}
 
-	@Override
-	public void notifyObserversPoseCheck() {
-		// TODO Auto-generated method stub
-		
+	public void setResultType(EGestureType resultType) {
+		this.resultType = resultType;
 	}
-
 }

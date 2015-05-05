@@ -251,14 +251,5 @@ public class KinectEvents extends Processing implements Observer {
 	public void setTemp(Integer temp) {
 		this.temp = temp;
 	}
-/**
- * Teste
- */
-	@Override
-	public void updateTeste(int type) {
-		if(type == 1){
-			System.out.println("WaveRight ok!");
-		}
-	}
 
 }// END Class
