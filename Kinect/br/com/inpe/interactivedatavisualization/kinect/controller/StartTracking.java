@@ -1,6 +1,5 @@
 package br.com.inpe.interactivedatavisualization.kinect.controller;
 
-import testeGestureDetector.GestureControlerTest;
 import br.com.inpe.interactivedatavisualization.kinect.model.Movements;
 import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
