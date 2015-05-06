@@ -20,6 +20,7 @@ public abstract class BaseGesture {
 			if (currentFrame == getNumberOfFrames()) {
 				tracking = false;
 				if (validateFinalPosition(userId)) {
+					System.gc();
 					return true;
 				}
 			}
@@ -28,6 +29,7 @@ public abstract class BaseGesture {
 
 			// check if position is still valid
 			if (!stillValidPosition(userId)) {
+				System.gc();
 				tracking = false;
 			}
 		}

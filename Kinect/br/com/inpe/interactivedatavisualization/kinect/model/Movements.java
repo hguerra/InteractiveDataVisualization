@@ -3,11 +3,6 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import testeGestureDetector.EGestureType;
-import testeGestureDetector.GestureDetector;
-import testeGestureDetector.IGestureSegment;
-import testeGestureDetector.WaveRightSegment1;
-import testeGestureDetector.WaveRightSegment2;
 import badimplementation.WaveGestureTESTE;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
@@ -16,11 +11,12 @@ import br.com.inpe.interactivedatavisualization.kinect.model.gesture.TimeUpPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.WaveGesture;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.ZoomInPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.ZoomOutPose;
-import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.BaseGesture;
-import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.GestureName;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.NewPose;
 import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
+import TEST.Check;
+import TEST.Timer;
+import TEST.WaveTimer;
 
 /**
  * @author Heitor Guerra Carneiro.
@@ -42,10 +38,9 @@ public class Movements implements Subject {
 	 * teste
 	 */
 	private WaveGestureTESTE waveTESTE;
-	private GestureDetector testeGestureDetector;
-	private WaveRightSegment1 a;
-	private WaveRightSegment2 b;
-	private IGestureSegment[] testeVector = {a,b};
+	private WaveTimer test;
+	private Timer t;
+	
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -61,11 +56,8 @@ public class Movements implements Subject {
 		 * teste
 		 */
 		waveTESTE = new WaveGestureTESTE(context);
-		testeGestureDetector = new GestureDetector();
-		a = new WaveRightSegment1(context);
-		b = new WaveRightSegment2(context);
-		testeGestureDetector.addGesture(EGestureType.WAVERIGHT, testeVector);
-		
+		test = new WaveTimer(context);
+		t = new Timer();
 	}
 
 	@Override
@@ -97,8 +89,8 @@ public class Movements implements Subject {
 			setMovement(GestureName.TIMEDOWN.getValue());
 
 		if (wave.recognize(userId))
-			setMovement(GestureName.TIMEUP.getValue());*/
-			
+			setMovement(GestureName.TIMEUP.getValue());
+			*/
 		/*
 		 * teste
 		 */
@@ -106,7 +98,26 @@ public class Movements implements Subject {
 		if(waveTESTE.recognize(userId)){
 			System.out.println("OK");
 		}*/
-		testeGestureDetector.updateAllGestures(userId);
+		//Wave
+		if(test.segmentOne(userId)){
+			t.startCounter();
+		}
+		if(test.segmentTwo(userId) && t.getInitialTime() != null){
+			if(t.endCounterMillis()>=30 && t.endCounterMillis() <= 40){
+				System.out.println("Wave");
+				t.setInitialTime(null);
+			}
+		}
+		/*
+		if(test.segmentTwo(userId)){
+			if(t.endCounterMillis()>=30 && t.endCounterMillis() <= 40){
+				System.out.println("Wave");
+				
+			}
+		}
+		*/
+		System.gc();
+		//End Wave
 	}
 
 	public void setMovement(Integer type) {

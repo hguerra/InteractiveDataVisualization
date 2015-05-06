@@ -1,10 +1,5 @@
 package testeGestureDetector;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import br.com.inpe.interactivedatavisualization.kinect.model.Subject;
-import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 
 /**
  * @author Heitor Guerra Carneiro.

@@ -41,11 +41,14 @@ public class WaveGestureTESTE extends BaseGesture {
 			return true;
 		return false;
 	}
-
 	public boolean recognize(int userId) {
 		return gestureRecognized(userId);
 	}
 	
+	/*
+	 public boolean recognize(int userId) {
+		return gestureRecognized(userId);
+	}
 	public void addRule (int fromJoint, int jointRelation, int toJoint, List<PoseRecognize> rules){
 		PoseRecognize rule = new PoseRecognize(context, fromJoint,
 				jointRelation, toJoint);
@@ -60,6 +63,7 @@ public class WaveGestureTESTE extends BaseGesture {
 		}
 		return result;
 	}
+	
 	public boolean segmentOne(int userId) {
 		// 1
 		addRule(SimpleOpenNI.SKEL_RIGHT_HAND, PoseRecognize.ABOVE,
@@ -98,8 +102,9 @@ public class WaveGestureTESTE extends BaseGesture {
 				SimpleOpenNI.SKEL_RIGHT_ELBOW, poseThree);
 		return segmentCheck(userId, poseThree);
 	}
+	*/
 
-/*
+
 	public boolean segmentCheck(int fromJoint, int jointRelation, int toJoint,
 			int userId) {
 		PoseRecognize rule = new PoseRecognize(context, fromJoint,
@@ -159,5 +164,5 @@ public class WaveGestureTESTE extends BaseGesture {
 		return false;
 
 	}
-*/
+
 }
