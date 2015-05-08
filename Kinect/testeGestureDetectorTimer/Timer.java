@@ -1,4 +1,4 @@
-package TEST;
+package testeGestureDetectorTimer;
 
 import java.util.concurrent.TimeUnit;
 

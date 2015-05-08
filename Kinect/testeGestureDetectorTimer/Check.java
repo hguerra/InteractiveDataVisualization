@@ -1,4 +1,4 @@
-package TEST;
+package testeGestureDetectorTimer;
 
 
 import SimpleOpenNI.SimpleOpenNI;

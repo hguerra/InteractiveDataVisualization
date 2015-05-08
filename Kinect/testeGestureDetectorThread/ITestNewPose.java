@@ -1,4 +1,4 @@
-package TEST;
+package testeGestureDetectorThread;
 
 import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.GestureRecognize;

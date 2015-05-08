@@ -6,7 +6,16 @@ import java.util.List;
 import com.db4o.config.annotations.UpdatedDepth;
 
 import testeGestureDetector.EGestureResult;
+import testeGestureDetector.EGestureType;
+import testeGestureDetector.Gesture;
+import testeGestureDetector.IGestureSegment;
 import testeGestureDetector.WaveRightSegment1;
+import testeGestureDetector.WaveRightSegment2;
+import testeGestureDetectorThread.WThread1;
+import testeGestureDetectorThread.WThread2;
+import testeGestureDetectorTimer.Check;
+import testeGestureDetectorTimer.Timer;
+import testeGestureDetectorTimer.WaveTimer;
 import badimplementation.WaveGestureTESTE;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
@@ -18,11 +27,6 @@ import br.com.inpe.interactivedatavisualization.kinect.model.gesture.ZoomOutPose
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.NewPose;
 import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
-import TEST.Check;
-import TEST.Timer;
-import TEST.WThread1;
-import TEST.WThread2;
-import TEST.WaveTimer;
 
 /**
  * @author Heitor Guerra Carneiro.
@@ -47,6 +51,10 @@ public class Movements implements Subject {
 	private WaveTimer test;
 	private Timer t;
 	private boolean c = false;
+	private Gesture g;
+	WaveRightSegment1 w1;
+	WaveRightSegment2 w2;
+	IGestureSegment[] gestureParts;
 	
 	
 	
@@ -66,6 +74,10 @@ public class Movements implements Subject {
 		waveTESTE = new WaveGestureTESTE(context);
 		test = new WaveTimer(context);
 		t = new Timer();
+		w1 = new WaveRightSegment1(context);
+		w2 = new WaveRightSegment2(context);
+		gestureParts = new IGestureSegment[] {w1, w2};
+		g = new Gesture(gestureParts, EGestureType.WAVERIGHT);
 	}
 
 	@Override
@@ -106,7 +118,9 @@ public class Movements implements Subject {
 		if(waveTESTE.recognize(userId)){
 			System.out.println("OK");
 		}*/
-		//Wave
+		
+		//Wave with Timer
+		
 		/*
 		if(test.segmentOne(userId)){
 			t.startCounter();
@@ -126,7 +140,10 @@ public class Movements implements Subject {
 			}
 		}
 		*/
-
+		
+		//Wave with Thread
+		
+		/*
 		Thread t = new Thread(new WThread1(context, userId, this));
 		t.start();
 		if(isC()){
@@ -139,6 +156,9 @@ public class Movements implements Subject {
 				e.printStackTrace();
 			}
 		}
+		
+		*/
+		g.updateGesture(userId);
 		
 		//System.gc();
 		//End Wave

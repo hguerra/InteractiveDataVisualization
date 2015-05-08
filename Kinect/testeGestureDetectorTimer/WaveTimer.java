@@ -1,4 +1,4 @@
-package TEST;
+package testeGestureDetectorTimer;
 
 import br.com.inpe.interactivedatavisualization.kinect.model.gesturecheck.PoseRecognize;
 import SimpleOpenNI.SimpleOpenNI;
