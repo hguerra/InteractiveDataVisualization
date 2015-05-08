@@ -3,6 +3,10 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.db4o.config.annotations.UpdatedDepth;
+
+import testeGestureDetector.EGestureResult;
+import testeGestureDetector.WaveRightSegment1;
 import badimplementation.WaveGestureTESTE;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
@@ -16,6 +20,8 @@ import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 import SimpleOpenNI.SimpleOpenNI;
 import TEST.Check;
 import TEST.Timer;
+import TEST.WThread1;
+import TEST.WThread2;
 import TEST.WaveTimer;
 
 /**
@@ -40,6 +46,8 @@ public class Movements implements Subject {
 	private WaveGestureTESTE waveTESTE;
 	private WaveTimer test;
 	private Timer t;
+	private boolean c = false;
+	
 	
 	
 	public Movements(SimpleOpenNI context) {
@@ -99,6 +107,7 @@ public class Movements implements Subject {
 			System.out.println("OK");
 		}*/
 		//Wave
+		/*
 		if(test.segmentOne(userId)){
 			t.startCounter();
 		}
@@ -108,6 +117,7 @@ public class Movements implements Subject {
 				t.setInitialTime(null);
 			}
 		}
+		*/
 		/*
 		if(test.segmentTwo(userId)){
 			if(t.endCounterMillis()>=30 && t.endCounterMillis() <= 40){
@@ -116,12 +126,40 @@ public class Movements implements Subject {
 			}
 		}
 		*/
-		System.gc();
+
+		Thread t = new Thread(new WThread1(context, userId, this));
+		t.start();
+		if(isC()){
+			Thread t2 = new Thread(new WThread2(context, userId, this));
+			try {
+				t2.sleep(30);
+				t2.start();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		//System.gc();
 		//End Wave
 	}
 
 	public void setMovement(Integer type) {
 		this.movement = type;
 		notifyObserversPoseCheck();
+	}
+	@Override
+	public void notifyTest(Integer i) {
+		for (Observer k : listObservers)
+			k.update(i);
+		
+	}
+
+	public boolean isC() {
+		return c;
+	}
+
+	public void setC(boolean c) {
+		this.c = c;
 	}
 }
