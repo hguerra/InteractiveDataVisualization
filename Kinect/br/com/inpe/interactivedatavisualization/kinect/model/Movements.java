@@ -2,17 +2,19 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import testeGestureDetector.EGestureResult;
 import testeGestureDetector.EGestureType;
 import testeGestureDetector.Gesture;
+import testeGestureDetector.GestureDetector;
 import testeGestureDetector.IGestureSegment;
-import testeGestureDetector.WaveRightSegment1;
-import testeGestureDetector.WaveRightSegment2;
 import testeGestureDetectorThread.WThread1;
 import testeGestureDetectorThread.WThread2;
 import testeGestureDetectorTimer.Check;
 import testeGestureDetectorTimer.Timer;
 import testeGestureDetectorTimer.WaveTimer;
+import testeGestureParts.WaveRightSegment1;
+import testeGestureParts.WaveRightSegment2;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.TimeDownPose;
@@ -46,10 +48,10 @@ public class Movements implements Subject {
 	private WaveTimer test;
 	private Timer t;
 	private boolean c = false;
-	private Gesture g;
 	private WaveRightSegment1 w1;
 	private WaveRightSegment2 w2;
 	private IGestureSegment[] gestureParts;
+	private GestureDetector detector;
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -70,7 +72,9 @@ public class Movements implements Subject {
 		w1 = new WaveRightSegment1(context);
 		w2 = new WaveRightSegment2(context);
 		gestureParts = new IGestureSegment[] {w1, w2};
-		g = new Gesture(gestureParts, EGestureType.WAVERIGHT);
+		//g = new Gesture(gestureParts, EGestureType.WAVERIGHT);
+		detector = new GestureDetector();
+		detector.addGesture(EGestureType.WAVERIGHT, gestureParts);
 	}
 
 	@Override
@@ -149,7 +153,9 @@ public class Movements implements Subject {
 		}
 		
 		*/
-		g.updateGesture(userId);
+		//Wave with Gesture Detector
+	
+		detector.updateAllGestures(userId);
 		
 		//System.gc();
 		//End Wave

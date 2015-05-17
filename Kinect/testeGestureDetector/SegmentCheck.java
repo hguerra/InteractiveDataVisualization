@@ -9,16 +9,6 @@ import SimpleOpenNI.SimpleOpenNI;
  * @since April 2015.
  */
 public class SegmentCheck {
-	// Constant
-	// X AND Y
-	public static final int ABOVE = 1;
-	public static final int BELOW = 2;
-	public static final int LEFT_OF = 3;
-	public static final int RIGHT_OF = 4;
-	// Z
-	public static final int CLOSER_OF = 5;
-	public static final int FARTHER_OF = 6;
-
 	private PVector fromJointVector;
 	private PVector toJointVector;
 	private SimpleOpenNI context;
@@ -30,8 +20,8 @@ public class SegmentCheck {
 		toJointVector = new PVector();
 	}
 
-	public boolean check(int fromJoint, int jointRelation,
-			int toJoint, int userId) {
+	public boolean check(int fromJoint, int jointRelation, int toJoint,
+			int userId) {
 
 		// populate the joint vectors for the user we're checking
 		context.getJointPositionSkeleton(userId, fromJoint, fromJointVector);
@@ -40,22 +30,22 @@ public class SegmentCheck {
 		boolean result = false;
 
 		switch (jointRelation) {
-		case ABOVE:
+		case JointRelation.ABOVE:
 			result = (fromJointVector.y > toJointVector.y);
 			break;
-		case BELOW:
+		case JointRelation.BELOW:
 			result = (fromJointVector.y < toJointVector.y);
 			break;
-		case LEFT_OF:
+		case JointRelation.LEFT_OF:
 			result = (fromJointVector.x < toJointVector.x);
 			break;
-		case RIGHT_OF:
+		case JointRelation.RIGHT_OF:
 			result = (fromJointVector.x > toJointVector.x);
 			break;
-		case CLOSER_OF:
+		case JointRelation.CLOSER_OF:
 			result = (fromJointVector.z < toJointVector.z);
 			break;
-		case FARTHER_OF:
+		case JointRelation.FARTHER_OF:
 			result = (fromJointVector.z > toJointVector.z);
 			break;
 		}

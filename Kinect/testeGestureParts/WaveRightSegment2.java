@@ -1,5 +1,10 @@
-package testeGestureDetector;
+package testeGestureParts;
 
+import testeGestureDetector.EGestureResult;
+import testeGestureDetector.IGestureSegment;
+import testeGestureDetector.JointID;
+import testeGestureDetector.JointRelation;
+import testeGestureDetector.SegmentCheck;
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
@@ -16,12 +21,9 @@ public class WaveRightSegment2 implements IGestureSegment {
 
 	@Override
 	public EGestureResult checkGesture(int userId) {
-		/*
-		 * Possible bug segment.ABOVE or JointID
-		 */
-		if (segment.check(JointID.RIGHT_HAND, segment.ABOVE,
+		if (segment.check(JointID.RIGHT_HAND, JointRelation.ABOVE,
 				JointID.RIGHT_ELBOW, userId)) {
-			if (segment.check(JointID.RIGHT_HAND, segment.RIGHT_OF,
+			if (segment.check(JointID.RIGHT_HAND, JointRelation.LEFT_OF,
 					JointID.RIGHT_ELBOW, userId)) {
 				return EGestureResult.SUCCEED;
 			}
