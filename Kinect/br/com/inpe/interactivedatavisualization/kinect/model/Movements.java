@@ -13,6 +13,14 @@ import testeGestureDetectorThread.WThread2;
 import testeGestureDetectorTimer.Check;
 import testeGestureDetectorTimer.Timer;
 import testeGestureDetectorTimer.WaveTimer;
+import testeGestureParts.SwipeLeftSegment1;
+import testeGestureParts.SwipeLeftSegment2;
+import testeGestureParts.SwipeLeftSegment3;
+import testeGestureParts.SwipeRightSegment1;
+import testeGestureParts.SwipeRightSegment2;
+import testeGestureParts.SwipeRightSegment3;
+import testeGestureParts.WaveLeftSegment1;
+import testeGestureParts.WaveLeftSegment2;
 import testeGestureParts.WaveRightSegment1;
 import testeGestureParts.WaveRightSegment2;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
@@ -28,8 +36,8 @@ import SimpleOpenNI.SimpleOpenNI;
 
 /**
  * @author Heitor Guerra Carneiro.
- * @version 1.0
- * @since March 2015.
+ * @version 2.0
+ * @since May 2015.
  */
 public class Movements implements Subject {
 	private Integer movement = 0;
@@ -48,9 +56,20 @@ public class Movements implements Subject {
 	private WaveTimer test;
 	private Timer t;
 	private boolean c = false;
-	private WaveRightSegment1 w1;
-	private WaveRightSegment2 w2;
-	private IGestureSegment[] gestureParts;
+	private WaveRightSegment1 wR1;
+	private WaveRightSegment2 wR2;
+	private IGestureSegment[] waveRightParts;
+	private WaveLeftSegment1 wL1;
+	private WaveLeftSegment2 wL2;
+	private IGestureSegment[] waveLeftParts;
+	private SwipeRightSegment1 sR1;
+	private SwipeRightSegment2 sR2;
+	private SwipeRightSegment3 sR3;
+	private IGestureSegment[] swipeRightParts;
+	private SwipeLeftSegment1 sL1;
+	private SwipeLeftSegment2 sL2;
+	private SwipeLeftSegment3 sL3;
+	private IGestureSegment[] swipeLeftParts;
 	private GestureDetector detector;
 	
 	public Movements(SimpleOpenNI context) {
@@ -69,12 +88,25 @@ public class Movements implements Subject {
 		 */
 		test = new WaveTimer(context);
 		t = new Timer();
-		w1 = new WaveRightSegment1(context);
-		w2 = new WaveRightSegment2(context);
-		gestureParts = new IGestureSegment[] {w1, w2};
-		//g = new Gesture(gestureParts, EGestureType.WAVERIGHT);
+		wR1 = new WaveRightSegment1(context);
+		wR2 = new WaveRightSegment2(context);
+		waveRightParts = new IGestureSegment[] {wR1, wR2};
+		wL1 = new WaveLeftSegment1(context);
+		wL2 = new WaveLeftSegment2(context);
+		waveLeftParts = new IGestureSegment[] {wL1, wL2};
+		sR1 = new SwipeRightSegment1(context);
+		sR2 = new SwipeRightSegment2(context);
+		sR3 = new SwipeRightSegment3(context);
+		swipeRightParts = new IGestureSegment[] {sR1, sR2, sR3};
+		sL1 = new SwipeLeftSegment1(context);
+		sL2 = new SwipeLeftSegment2(context);
+		sL3 = new SwipeLeftSegment3(context);
+		swipeLeftParts = new IGestureSegment[] {sL1, sL2, sL3};
 		detector = new GestureDetector();
-		detector.addGesture(EGestureType.WAVERIGHT, gestureParts);
+		detector.addGesture(EGestureType.WAVERIGHT, waveRightParts);
+		detector.addGesture(EGestureType.WAVELEFT, waveLeftParts);
+		detector.addGesture(EGestureType.RIGHTSWIPE, swipeRightParts);
+		detector.addGesture(EGestureType.LEFTSWIPE, swipeLeftParts);
 	}
 
 	@Override
