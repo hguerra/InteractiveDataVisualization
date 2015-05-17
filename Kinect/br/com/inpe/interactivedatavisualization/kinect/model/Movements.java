@@ -2,9 +2,6 @@ package br.com.inpe.interactivedatavisualization.kinect.model;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import com.db4o.config.annotations.UpdatedDepth;
-
 import testeGestureDetector.EGestureResult;
 import testeGestureDetector.EGestureType;
 import testeGestureDetector.Gesture;
@@ -16,7 +13,6 @@ import testeGestureDetectorThread.WThread2;
 import testeGestureDetectorTimer.Check;
 import testeGestureDetectorTimer.Timer;
 import testeGestureDetectorTimer.WaveTimer;
-import badimplementation.WaveGestureTESTE;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataDownPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.DataUpPose;
 import br.com.inpe.interactivedatavisualization.kinect.model.gesture.TimeDownPose;
@@ -45,18 +41,15 @@ public class Movements implements Subject {
 	private NewPose timeDown;
 	private NewPose wave;
 	/*
-	 * teste
+	 * TEST
 	 */
-	private WaveGestureTESTE waveTESTE;
 	private WaveTimer test;
 	private Timer t;
 	private boolean c = false;
 	private Gesture g;
-	WaveRightSegment1 w1;
-	WaveRightSegment2 w2;
-	IGestureSegment[] gestureParts;
-	
-	
+	private WaveRightSegment1 w1;
+	private WaveRightSegment2 w2;
+	private IGestureSegment[] gestureParts;
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -68,10 +61,10 @@ public class Movements implements Subject {
 		timeUp = new TimeUpPose(context);
 		timeDown = new TimeDownPose(context);
 		wave = new WaveGesture(context);
+		
 		/*
-		 * teste
+		 * TEST
 		 */
-		waveTESTE = new WaveGestureTESTE(context);
 		test = new WaveTimer(context);
 		t = new Timer();
 		w1 = new WaveRightSegment1(context);
@@ -111,13 +104,11 @@ public class Movements implements Subject {
 		if (wave.recognize(userId))
 			setMovement(GestureName.TIMEUP.getValue());
 			*/
+		
+		
 		/*
-		 * teste
+		 * TEST
 		 */
-		/*
-		if(waveTESTE.recognize(userId)){
-			System.out.println("OK");
-		}*/
 		
 		//Wave with Timer
 		
