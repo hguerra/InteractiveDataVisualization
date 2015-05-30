@@ -9,5 +9,5 @@ import br.com.inpe.interactivedatavisualization.kinect.view.Observer;
 public interface Subject {
 	public void registerObserver(Observer observer);
 	public void notifyObserversPoseCheck();
-	public void notifyTest(Integer i);
+	public void notifyObserversPoseCheck(Integer i);
 }
