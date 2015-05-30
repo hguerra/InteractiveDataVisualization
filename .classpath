@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="Kinect"/>
-	<classpathentry kind="src" path="Nasa"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/worldwind/gdal.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/processing/gluegen-rt.jar"/>
@@ -19,5 +19,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/db4o/db4o-8.0.249.16098-all-java5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
