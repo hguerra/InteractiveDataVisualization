@@ -1,11 +1,11 @@
-package br.com.inpe.memorytest;
+package br.com.system.info;
 
 /**
  * @author Heitor Guerra Carneiro
  * @since May 18, 2015
  * @version 1.0
  */
-public class MemoryTest {
+public class MemoryAnalyzer {
 	private Runtime runtime;
 	private Long usedMemoryBefore;
 	private Long usedMemoryAfter;

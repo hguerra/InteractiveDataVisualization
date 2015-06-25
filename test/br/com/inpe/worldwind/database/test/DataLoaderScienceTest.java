@@ -9,9 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.inpe.memorytest.MemoryTest;
 import br.com.inpe.worldwind.database.DataLoaderScience;
 import br.com.inpe.worldwind.database.GeometryRecord;
+import br.com.system.info.MemoryAnalyzer;
 
 import com.db4o.ObjectSet;
 /**
@@ -23,13 +23,13 @@ public class DataLoaderScienceTest {
 	static DataLoaderScience data;
 	private List<GeometryRecord> geometryRecords;
 	private String filename;
-	private MemoryTest memory;
+	private MemoryAnalyzer memory;
 	@Before
 	public void start(){
 		data = DataLoaderScience.getInstance();
 		filename = "../WorldWind/xmldata/data.xml";
 		geometryRecords = new LinkedList<GeometryRecord>();
-		memory = new MemoryTest();
+		memory = new MemoryAnalyzer();
 	}
 
 	@Test
@@ -69,6 +69,6 @@ public class DataLoaderScienceTest {
 		geometryRecords = null;
 		filename = null;
 		System.gc();
-		MemoryTest.calculateusedMemory();
+		MemoryAnalyzer.calculateusedMemory();
 	}
 }
