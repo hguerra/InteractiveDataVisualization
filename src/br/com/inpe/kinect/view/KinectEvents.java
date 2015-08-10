@@ -93,7 +93,7 @@ public class KinectEvents extends Processing implements Observer {
 			image(depth, 0, 0);
 		}
 		int[] userList = kinect.getUsers();
-		// i++ 
+		// i++
 		for (int i = 0; i < userList.length; i++) {
 			if (kinect.isTrackingSkeleton(userList[i])) {
 				// ----------------------------
@@ -151,7 +151,9 @@ public class KinectEvents extends Processing implements Observer {
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_HIP,
 				SimpleOpenNI.SKEL_LEFT_HIP);
 		noStroke();
-		fill(255, 0, 0);
+		// red 255 0 0
+		// blue 0 0 255
+		fill(0, 0, 255);
 		drawJoint(userId, SimpleOpenNI.SKEL_HEAD);
 		drawJoint(userId, SimpleOpenNI.SKEL_NECK);
 		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER);
@@ -195,9 +197,12 @@ public class KinectEvents extends Processing implements Observer {
 
 	public void onLostUser(SimpleOpenNI curContext, int userId) {
 		println("onLostUser - userId: " + userId);
+		// # 22 GitHub
+		curContext.stopTrackingSkeleton(userId);
 	}
 
 	public void onVisibleUser(SimpleOpenNI curContext, int userId) {
+		// required method
 		// println("onVisibleUser - userId: " + userId);
 	}
 
@@ -221,7 +226,7 @@ public class KinectEvents extends Processing implements Observer {
 			setTemp(null);
 			break;
 		}
-		case 3:{
+		case 3: {
 			timeUp.setTime();
 			setTemp(null);
 			break;

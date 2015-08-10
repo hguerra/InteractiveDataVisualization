@@ -27,14 +27,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Point;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 
 import br.com.inpe.worldwind.controller.IAnnotation;
 import br.com.inpe.worldwind.controller.IDraw;
@@ -46,10 +43,10 @@ import br.com.inpe.worldwind.database.GeometryRecord;
  * @since May 16, 2015
  * @version 1.0
  */
-public class WorldWindView extends JFrame implements Observer {
+public class WorldWindView extends JInternalFrame implements Observer {
 	private WorldWindowGLCanvas wwd;
-	private final int HEIGHT = 600;
-	private final int WIDTH = 800;
+	private final int HEIGHT = 760;
+	private final int WIDTH = 1300;
 	public static final double INITIAL_ZOOM = 2.3e7;
 	public static final Position PARA_POS = Position.fromDegrees(-4.72826,
 			-52.302247, 7000000);
@@ -124,7 +121,7 @@ public class WorldWindView extends JFrame implements Observer {
 			AnnotationLayer annLayer = new AnnotationLayer();
 
 			ScreenAnnotation logoDWIH = new ScreenAnnotation("",
-					new Point(0, 0));
+					new Point(1100, 80));
 
 			logoDWIH.getAttributes().setImageSource(pic.getPowerOfTwoImage());
 			logoDWIH.getAttributes().setImageRepeat(AVKey.REPEAT_NONE);
@@ -133,7 +130,7 @@ public class WorldWindView extends JFrame implements Observer {
 			logoDWIH.getAttributes().setHighlightScale(1);
 
 			logoDWIH.getAttributes().setInsets(new Insets(0, 40, 0, 0));
-			logoDWIH.getAttributes().setSize(new Dimension(120, 100));
+			logoDWIH.getAttributes().setSize(new Dimension(160, 100));
 
 			logoDWIH.getAttributes().setImageScale(0.22);
 			logoDWIH.getAttributes().setImageOffset(new Point(10, 10));
@@ -272,6 +269,9 @@ public class WorldWindView extends JFrame implements Observer {
 	}
 
 	public void frameEvents() {
+		//JFrame
+		/*
+		 
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent event) {
@@ -279,7 +279,7 @@ public class WorldWindView extends JFrame implements Observer {
 				event.getWindow().dispose();
 				System.exit(0);
 			}
-		});
+		});*/
 		// this.setUndecorated(true);
 		this.getContentPane().add(layeredPane, java.awt.BorderLayout.CENTER);
 		this.pack();

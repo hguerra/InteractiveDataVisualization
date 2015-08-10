@@ -3,9 +3,12 @@ package br.com.inpe.kinect.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.inpe.kinect.model.gesture.detector.GestureDetector;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
+import br.com.inpe.kinect.model.gesture.segments.LeftClick;
+import br.com.inpe.kinect.model.gesture.segments.StartCheck;
 import br.com.inpe.kinect.model.gesture.segments.SwipeLeftSegment1;
 import br.com.inpe.kinect.model.gesture.segments.SwipeLeftSegment2;
 import br.com.inpe.kinect.model.gesture.segments.SwipeLeftSegment3;
@@ -43,6 +46,10 @@ public class Movements implements Subject {
 	private SwipeLeftSegment3 sL3;
 	private IGestureSegment[] swipeLeftParts;
 	private GestureDetector detector;
+	// startCheck
+	private IGestureSegment startCheck;
+	// leftClick
+	private IGestureSegment leftClick;
 
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -66,6 +73,10 @@ public class Movements implements Subject {
 		detector.addGesture(EGestureType.WAVELEFT, waveLeftParts);
 		detector.addGesture(EGestureType.RIGHTSWIPE, swipeRightParts);
 		detector.addGesture(EGestureType.LEFTSWIPE, swipeLeftParts);
+		// StartCheck
+		startCheck = new StartCheck(context);
+		// leftClick
+		leftClick = new LeftClick(context);
 	}
 
 	@Override
@@ -80,7 +91,16 @@ public class Movements implements Subject {
 	}
 
 	public void poseCheck(int userId) {
-		detector.updateAllGestures(userId);
+		/*
+		 * Method to start and stop gestures of recognition
+		 */
+		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+			detector.updateAllGestures(userId);
+		}
+		if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+			System.out.println("Left Click!");
+		}
+
 	}
 
 	public void setMovement(Integer type) {
