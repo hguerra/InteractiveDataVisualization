@@ -20,6 +20,7 @@ import br.com.inpe.kinect.model.gesture.segments.WaveLeftSegment2;
 import br.com.inpe.kinect.model.gesture.segments.WaveRightSegment1;
 import br.com.inpe.kinect.model.gesture.segments.WaveRightSegment2;
 import br.com.inpe.kinect.view.Observer;
+import br.com.system.info.SystemInfo;
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
@@ -31,25 +32,18 @@ public class Movements implements Subject {
 	private Integer movement = 0;
 	private SimpleOpenNI context;
 	private List<Observer> listObservers;
-	private WaveRightSegment1 wR1;
-	private WaveRightSegment2 wR2;
+	private IGestureSegment wR1;
+	private IGestureSegment wR2;
 	private IGestureSegment[] waveRightParts;
-	private WaveLeftSegment1 wL1;
-	private WaveLeftSegment2 wL2;
+	private IGestureSegment wL1;
+	private IGestureSegment wL2;
 	private IGestureSegment[] waveLeftParts;
-	private SwipeRightSegment1 sR1;
-	private SwipeRightSegment2 sR2;
-	private SwipeRightSegment3 sR3;
-	private IGestureSegment[] swipeRightParts;
-	private SwipeLeftSegment1 sL1;
-	private SwipeLeftSegment2 sL2;
-	private SwipeLeftSegment3 sL3;
-	private IGestureSegment[] swipeLeftParts;
 	private GestureDetector detector;
 	// startCheck
 	private IGestureSegment startCheck;
 	// leftClick
 	private IGestureSegment leftClick;
+	
 
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -60,23 +54,14 @@ public class Movements implements Subject {
 		wL1 = new WaveLeftSegment1(context);
 		wL2 = new WaveLeftSegment2(context);
 		waveLeftParts = new IGestureSegment[] { wL1, wL2 };
-		sR1 = new SwipeRightSegment1(context);
-		sR2 = new SwipeRightSegment2(context);
-		sR3 = new SwipeRightSegment3(context);
-		swipeRightParts = new IGestureSegment[] { sR1, sR2, sR3 };
-		sL1 = new SwipeLeftSegment1(context);
-		sL2 = new SwipeLeftSegment2(context);
-		sL3 = new SwipeLeftSegment3(context);
-		swipeLeftParts = new IGestureSegment[] { sL1, sL2, sL3 };
 		detector = new GestureDetector();
 		detector.addGesture(EGestureType.WAVERIGHT, waveRightParts);
 		detector.addGesture(EGestureType.WAVELEFT, waveLeftParts);
-		detector.addGesture(EGestureType.RIGHTSWIPE, swipeRightParts);
-		detector.addGesture(EGestureType.LEFTSWIPE, swipeLeftParts);
 		// StartCheck
 		startCheck = new StartCheck(context);
 		// leftClick
 		leftClick = new LeftClick(context);
+
 	}
 
 	@Override
@@ -92,7 +77,7 @@ public class Movements implements Subject {
 
 	public void poseCheck(int userId) {
 		/*
-		 * Method to start and stop gestures of recognition
+		 * Method to start and stop gestures recognition
 		 */
 		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			detector.updateAllGestures(userId);

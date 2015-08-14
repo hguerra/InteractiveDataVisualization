@@ -11,6 +11,7 @@ import br.com.inpe.kinect.controller.TimeUp;
 import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
+import br.com.system.info.SystemInfo;
 import processing.core.PImage;
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
@@ -21,6 +22,8 @@ import SimpleOpenNI.SimpleOpenNI;
  * @since March 2015.
  */
 public class KinectEvents extends Processing implements Observer {
+	private final static int WIDTH = 640;
+	private final static int HEIGHT = 480;
 	private Integer temp;
 	private SimpleOpenNI kinect;
 	private Bridge bridge;
@@ -30,10 +33,14 @@ public class KinectEvents extends Processing implements Observer {
 	private Data dataDown;
 	private Time timeUp;
 	private Time timeDown;
+	/**
+	 * SystemInfo
+	 */
+	private SystemInfo info;
 
 	public void setup() {
 		// Size of window application
-		size(640, 480);
+		size(WIDTH, HEIGHT);
 
 		// Initialize the SimpleOpenNi variable.
 		kinect = new SimpleOpenNI(this);
@@ -82,6 +89,10 @@ public class KinectEvents extends Processing implements Observer {
 		timeUp = new TimeUp();
 		timeDown = new TimeDown();
 
+		/*
+		 * Debug
+		 */
+		info = new SystemInfo();
 	}
 
 	public void draw() {
@@ -96,13 +107,8 @@ public class KinectEvents extends Processing implements Observer {
 		// i++
 		for (int i = 0; i < userList.length; i++) {
 			if (kinect.isTrackingSkeleton(userList[i])) {
-				// ----------------------------
-				// Color of skeleton stroke
-				strokeWeight(2);
-				stroke(0, 255, 255);
 				// Skeleton
 				drawSkeleton(userList[i]);
-
 				/*
 				 * Analysis of body position, model method
 				 */
@@ -111,13 +117,15 @@ public class KinectEvents extends Processing implements Observer {
 				/*
 				 * Analysis Update method
 				 */
-				updateCheck();
+				kinectDebug(true, false);
+
 			}
 		}
 	}
 
 	public void drawSkeleton(int userId) {
-		stroke(0);
+		// Color of skeleton stroke
+		stroke(0, 0, 255);
 		strokeWeight(5);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_HEAD, SimpleOpenNI.SKEL_NECK);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_NECK,
@@ -150,27 +158,7 @@ public class KinectEvents extends Processing implements Observer {
 				SimpleOpenNI.SKEL_RIGHT_FOOT);
 		kinect.drawLimb(userId, SimpleOpenNI.SKEL_RIGHT_HIP,
 				SimpleOpenNI.SKEL_LEFT_HIP);
-		noStroke();
-		// red 255 0 0
-		// blue 0 0 255
-		fill(0, 0, 255);
-		drawJoint(userId, SimpleOpenNI.SKEL_HEAD);
-		drawJoint(userId, SimpleOpenNI.SKEL_NECK);
-		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_SHOULDER);
-		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_ELBOW);
-		drawJoint(userId, SimpleOpenNI.SKEL_NECK);
-		drawJoint(userId, SimpleOpenNI.SKEL_RIGHT_SHOULDER);
-		drawJoint(userId, SimpleOpenNI.SKEL_RIGHT_ELBOW);
-		drawJoint(userId, SimpleOpenNI.SKEL_TORSO);
-		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_HIP);
-		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_KNEE);
-		drawJoint(userId, SimpleOpenNI.SKEL_RIGHT_HIP);
-		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_FOOT);
-		drawJoint(userId, SimpleOpenNI.SKEL_RIGHT_KNEE);
-		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_HIP);
-		drawJoint(userId, SimpleOpenNI.SKEL_RIGHT_FOOT);
-		drawJoint(userId, SimpleOpenNI.SKEL_RIGHT_HAND);
-		drawJoint(userId, SimpleOpenNI.SKEL_LEFT_HAND);
+		smooth();
 	}
 
 	public void drawJoint(int userId, int jointID) {
@@ -204,11 +192,6 @@ public class KinectEvents extends Processing implements Observer {
 	public void onVisibleUser(SimpleOpenNI curContext, int userId) {
 		// required method
 		// println("onVisibleUser - userId: " + userId);
-	}
-
-	public void updateCheck() {
-		if (temp != null)
-			System.out.println(temp.toString());
 	}
 
 	@Override
@@ -255,6 +238,24 @@ public class KinectEvents extends Processing implements Observer {
 
 	public void setTemp(Integer temp) {
 		this.temp = temp;
+	}
+
+	public void kinectDebug(boolean memoryInfo, boolean updateGesture) {
+		if (memoryInfo) {
+			message(5, 20, 15, info.MemInfo());
+		}
+		if (updateGesture) {
+			if (getTemp() != null) {
+				message(WIDTH - 20, HEIGHT - 20, 30, temp.toString());
+			}
+		}
+	}
+
+	public void message(float widthScreen, float heightScreen, int sizeFont,
+			String message) {
+		textSize(sizeFont);
+		fill(255);
+		text(message, widthScreen, heightScreen);
 	}
 
 }// END Class

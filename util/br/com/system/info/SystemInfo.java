@@ -44,17 +44,17 @@ public class SystemInfo {
 		long freeMemory = runtime.freeMemory();
 		sb.append("Free memory: ");
 		sb.append(format.format(freeMemory / 1024));
-		sb.append("<br/>");
+		sb.append("\n");
 		sb.append("Allocated memory: ");
 		sb.append(format.format(allocatedMemory / 1024));
-		sb.append("<br/>");
+		sb.append("\n");
 		sb.append("Max memory: ");
 		sb.append(format.format(maxMemory / 1024));
-		sb.append("<br/>");
+		sb.append("\n");
 		sb.append("Total free memory: ");
 		sb.append(format
 				.format((freeMemory + (maxMemory - allocatedMemory)) / 1024));
-		sb.append("<br/>");
+		sb.append("\n");
 		return sb.toString();
 
 	}
