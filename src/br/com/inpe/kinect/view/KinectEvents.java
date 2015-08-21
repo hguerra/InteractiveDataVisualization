@@ -33,10 +33,6 @@ public class KinectEvents extends Processing implements Observer {
 	private Data dataDown;
 	private Time timeUp;
 	private Time timeDown;
-	/**
-	 * SystemInfo
-	 */
-	private SystemInfo info;
 
 	public void setup() {
 		// Size of window application
@@ -89,10 +85,6 @@ public class KinectEvents extends Processing implements Observer {
 		timeUp = new TimeUp();
 		timeDown = new TimeDown();
 
-		/*
-		 * Debug
-		 */
-		info = new SystemInfo();
 	}
 
 	public void draw() {
@@ -117,7 +109,7 @@ public class KinectEvents extends Processing implements Observer {
 				/*
 				 * Analysis Update method
 				 */
-				kinectDebug(true, false);
+				kinectDebug(false, false);
 
 			}
 		}
@@ -242,6 +234,7 @@ public class KinectEvents extends Processing implements Observer {
 
 	public void kinectDebug(boolean memoryInfo, boolean updateGesture) {
 		if (memoryInfo) {
+			SystemInfo info = new SystemInfo();
 			message(5, 20, 15, info.MemInfo());
 		}
 		if (updateGesture) {
@@ -257,5 +250,6 @@ public class KinectEvents extends Processing implements Observer {
 		fill(255);
 		text(message, widthScreen, heightScreen);
 	}
+
 
 }// END Class
