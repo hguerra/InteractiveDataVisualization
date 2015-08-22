@@ -19,6 +19,9 @@ import br.com.inpe.kinect.model.gesture.segments.WaveLeftSegment1;
 import br.com.inpe.kinect.model.gesture.segments.WaveLeftSegment2;
 import br.com.inpe.kinect.model.gesture.segments.WaveRightSegment1;
 import br.com.inpe.kinect.model.gesture.segments.WaveRightSegment2;
+import br.com.inpe.kinect.model.gesture.segments.ZoomSegment1;
+import br.com.inpe.kinect.model.gesture.segments.ZoomSegment2;
+import br.com.inpe.kinect.model.gesture.segments.ZoomSegment3;
 import br.com.inpe.kinect.view.Observer;
 import br.com.system.info.SystemInfo;
 import SimpleOpenNI.SimpleOpenNI;
@@ -43,7 +46,11 @@ public class Movements implements Subject {
 	private IGestureSegment startCheck;
 	// leftClick
 	private IGestureSegment leftClick;
-	
+	private IGestureSegment zoom1;
+	private IGestureSegment zoom2;
+	private IGestureSegment zoom3;
+	private IGestureSegment[] zoomSegments;
+	private GestureDetector zoomDetector;
 
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -61,6 +68,13 @@ public class Movements implements Subject {
 		startCheck = new StartCheck(context);
 		// leftClick
 		leftClick = new LeftClick(context);
+		zoom1 = new ZoomSegment1(context);
+		zoom2 = new ZoomSegment2(context);
+		zoom2 = new ZoomSegment3(context);
+		zoomSegments = new IGestureSegment[] {zoom1, zoom2, zoom3};
+		zoomDetector = new  GestureDetector();
+		zoomDetector.addGesture(EGestureType.ZOOM, zoomSegments);
+		
 
 	}
 
@@ -79,12 +93,15 @@ public class Movements implements Subject {
 		/*
 		 * Method to start and stop gestures recognition
 		 */
+		/*
 		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			detector.updateAllGestures(userId);
 		}
 		if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			System.out.println("Left Click!");
-		}
+		}*/
+		
+		zoomDetector.updateAllGestures(userId);
 
 	}
 

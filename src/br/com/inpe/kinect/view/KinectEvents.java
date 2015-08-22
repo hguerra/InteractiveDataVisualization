@@ -177,8 +177,9 @@ public class KinectEvents extends Processing implements Observer {
 
 	public void onLostUser(SimpleOpenNI curContext, int userId) {
 		println("onLostUser - userId: " + userId);
-		// # 22 GitHub
-		curContext.stopTrackingSkeleton(userId);
+		// # 22 GitHub0
+		if (userId > 1)
+			curContext.stopTrackingSkeleton(userId);
 	}
 
 	public void onVisibleUser(SimpleOpenNI curContext, int userId) {
@@ -250,6 +251,5 @@ public class KinectEvents extends Processing implements Observer {
 		fill(255);
 		text(message, widthScreen, heightScreen);
 	}
-
 
 }// END Class

@@ -52,9 +52,12 @@ public class Gesture {
 
 			this.frameCount++;
 		}
-
+		/**
+		 * checkGesture nullPointer for one gesture
+		 * because the result take the checkGesture in [1], need be [0]
+		 */
 		EGestureResult result = this.gestureParts[this.currentGesturePart]
-				.checkGesture(userId);
+				.checkGesture(userId-1);
 
 		if (result == EGestureResult.SUCCEED) {
 			if (this.currentGesturePart + 1 < this.gestureParts.length) {
