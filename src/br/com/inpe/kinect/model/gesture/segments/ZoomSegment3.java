@@ -16,7 +16,7 @@ public class ZoomSegment3 extends Position implements IGestureSegment {
 	@Override
 	public EGestureResult checkGesture(int userId) {
 		 // Right and Left Hand in front of Shoulders
-		if(getZ(userId, JointID.LEFT_HAND) < getZ(userId, JointID.LEFT_ELBOW) && getY(userId, JointID.RIGHT_HAND) < getZ(userId, JointID.RIGHT_ELBOW)){
+		if(getZ(userId, JointID.LEFT_HAND) < getZ(userId, JointID.LEFT_ELBOW) && getZ(userId, JointID.RIGHT_HAND) < getZ(userId, JointID.RIGHT_ELBOW)){
 			// Hands between head and hip
 			if(getY(userId, JointID.RIGHT_HAND)<getY(userId, JointID.HEAD) && getY(userId, JointID.RIGHT_HAND) > getY(userId, JointID.TORSO) &&
 			getY(userId, JointID.LEFT_HAND) < getY(userId, JointID.HEAD) && getY(userId, JointID.LEFT_HAND) > getY(userId, JointID.TORSO)){

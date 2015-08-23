@@ -24,6 +24,9 @@ import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment1;
 import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment2;
 import br.com.inpe.kinect.model.gesture.segments.test.ExitSegment;
 import br.com.inpe.kinect.model.gesture.segments.test.RestoreSegment;
+import br.com.inpe.kinect.model.gesture.segments.test.RotateAntiClockSegments1;
+import br.com.inpe.kinect.model.gesture.segments.test.RotateAntiClockSegments2;
+import br.com.inpe.kinect.model.gesture.segments.test.RotateAntiClockSegments3;
 import br.com.inpe.kinect.view.Observer;
 import br.com.system.info.SystemInfo;
 import SimpleOpenNI.SimpleOpenNI;
@@ -62,6 +65,10 @@ public class Movements implements Subject {
 	//Teste
 	private IGestureSegment exitSegment;
 	private IGestureSegment restoreSegment;
+	private IGestureSegment rotateAntiClockSegment1;
+	private IGestureSegment rotateAntiClockSegment2;
+	private IGestureSegment rotateAntiClockSegment3;
+	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
 		listObservers = new LinkedList<Observer>();
@@ -91,6 +98,9 @@ public class Movements implements Subject {
 		//Teste
 		exitSegment = new ExitSegment(context);
 		restoreSegment = new RestoreSegment(context);
+		rotateAntiClockSegment1 = new RotateAntiClockSegments1(context);
+		rotateAntiClockSegment2 = new RotateAntiClockSegments2(context);
+		rotateAntiClockSegment3 = new RotateAntiClockSegments3(context);
 		
 		detector = new GestureDetector();
 		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts);
@@ -113,7 +123,7 @@ public class Movements implements Subject {
 		/**
 		 * Testando com as posicoes sepadaras!
 		 */
-		testSegment(userId, restoreSegment);
+		testSegment(userId, rotateAntiClockSegment1);
 		/**
 		 * Teste Gesto Completo	
 		 */

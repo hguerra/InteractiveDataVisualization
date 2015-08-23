@@ -6,10 +6,11 @@ import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
 import br.com.inpe.kinect.model.gesture.detector.Position;
 
-public class RotateAntiClockSegments3 extends Position implements IGestureSegment{
+public class RotateClockSegments1  extends Position implements IGestureSegment{
 
-	public RotateAntiClockSegments3(SimpleOpenNI context) {
+	public RotateClockSegments1(SimpleOpenNI context) {
 		super(context);
+		
 	}
 
 	@Override
@@ -22,7 +23,7 @@ public class RotateAntiClockSegments3 extends Position implements IGestureSegmen
 							 // Hands between shoulders
 							if(getX(userId, JointID.RIGHT_HAND)<getX(userId, JointID.RIGHT_SHOULDER) && getX(userId, JointID.RIGHT_HAND)> getX(userId, JointID.LEFT_SHOULDER)&&
 								getX(userId, JointID.LEFT_HAND)>getX(userId, JointID.LEFT_SHOULDER) && getX(userId, JointID.LEFT_HAND)< getX(userId, JointID.RIGHT_SHOULDER)){
-								return EGestureResult.SUCCEED;
+								return EGestureResult.FAIL;
 							}
 							return EGestureResult.PAUSING;
 						}
