@@ -23,6 +23,7 @@ import br.com.inpe.kinect.model.gesture.segments.old.WaveLeftSegment2;
 import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment1;
 import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment2;
 import br.com.inpe.kinect.model.gesture.segments.test.ExitSegment;
+import br.com.inpe.kinect.model.gesture.segments.test.RestoreSegment;
 import br.com.inpe.kinect.view.Observer;
 import br.com.system.info.SystemInfo;
 import SimpleOpenNI.SimpleOpenNI;
@@ -60,6 +61,7 @@ public class Movements implements Subject {
 	private IGestureSegment[] zoomParts;
 	//Teste
 	private IGestureSegment exitSegment;
+	private IGestureSegment restoreSegment;
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
 		listObservers = new LinkedList<Observer>();
@@ -88,6 +90,7 @@ public class Movements implements Subject {
 		zoomParts = new IGestureSegment[]{zoomSegment1, zoomSegment2, zoomSegment3};
 		//Teste
 		exitSegment = new ExitSegment(context);
+		restoreSegment = new RestoreSegment(context);
 		
 		detector = new GestureDetector();
 		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts);
@@ -110,7 +113,7 @@ public class Movements implements Subject {
 		/**
 		 * Testando com as posicoes sepadaras!
 		 */
-		testSegment(userId, exitSegment);
+		testSegment(userId, restoreSegment);
 		/**
 		 * Teste Gesto Completo	
 		 */
