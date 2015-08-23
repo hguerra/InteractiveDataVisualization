@@ -22,6 +22,7 @@ import br.com.inpe.kinect.model.gesture.segments.old.WaveLeftSegment1;
 import br.com.inpe.kinect.model.gesture.segments.old.WaveLeftSegment2;
 import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment1;
 import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment2;
+import br.com.inpe.kinect.model.gesture.segments.test.ExitSegment;
 import br.com.inpe.kinect.view.Observer;
 import br.com.system.info.SystemInfo;
 import SimpleOpenNI.SimpleOpenNI;
@@ -40,11 +41,12 @@ public class Movements implements Subject {
 	 */
 	// startCheck
 	private IGestureSegment startCheck;
+	private IGestureSegment leftClick;
 	// leftClick
 	/*
 	 * Gesture
 	 */
-	private IGestureSegment leftClick;
+	//Funcionando
 	private IGestureSegment wR1;
 	private IGestureSegment wR2;
 	private IGestureSegment[] waveRightParts;
@@ -56,7 +58,8 @@ public class Movements implements Subject {
 	private IGestureSegment zoomSegment2;
 	private IGestureSegment zoomSegment3;
 	private IGestureSegment[] zoomParts;
-	
+	//Teste
+	private IGestureSegment exitSegment;
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
 		listObservers = new LinkedList<Observer>();
@@ -70,6 +73,7 @@ public class Movements implements Subject {
 		/**
 		 * Gesture
 		 */
+		//Funcionando
 		wR1 = new WaveRightSegment1(context);
 		wR2 = new WaveRightSegment2(context);
 		waveRightParts = new IGestureSegment[] { wR1, wR2 };
@@ -82,6 +86,8 @@ public class Movements implements Subject {
 		zoomSegment2 = new ZoomSegment2(context);
 		zoomSegment3 = new ZoomSegment3(context);
 		zoomParts = new IGestureSegment[]{zoomSegment1, zoomSegment2, zoomSegment3};
+		//Teste
+		exitSegment = new ExitSegment(context);
 		
 		detector = new GestureDetector();
 		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts);
@@ -104,11 +110,7 @@ public class Movements implements Subject {
 		/**
 		 * Testando com as posicoes sepadaras!
 		 */
-		
-		/*if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-			System.out.println("Gesto x reconhecido!");
-		}*/
-		
+		testSegment(userId, exitSegment);
 		/**
 		 * Teste Gesto Completo	
 		 */
@@ -124,6 +126,15 @@ public class Movements implements Subject {
 			System.out.println("Left Click!");
 		}
 		*/
+	}
+	
+	public String testSegment(int userId, IGestureSegment segment){
+		String result = "";
+		if(segment.checkGesture(userId).equals(EGestureResult.SUCCEED)){
+			result  = "Segmento recognized";
+			System.out.println(result);
+		}
+		return result;
 	}
 
 	public void setMovement(Integer type) {
