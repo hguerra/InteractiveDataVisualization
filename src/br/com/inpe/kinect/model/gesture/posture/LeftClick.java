@@ -1,4 +1,4 @@
-package br.com.inpe.kinect.model.gesture.segments;
+package br.com.inpe.kinect.model.gesture.posture;
 
 import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;

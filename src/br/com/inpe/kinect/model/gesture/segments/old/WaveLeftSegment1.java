@@ -1,4 +1,4 @@
-package br.com.inpe.kinect.model.gesture.segments;
+package br.com.inpe.kinect.model.gesture.segments.old;
 
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
@@ -6,26 +6,23 @@ import br.com.inpe.kinect.model.gesture.detector.JointID;
 import br.com.inpe.kinect.model.gesture.detector.JointRelation;
 import br.com.inpe.kinect.model.gesture.detector.SegmentCheck;
 import SimpleOpenNI.SimpleOpenNI;
-
 /**
- * @author Heitor Guerra Carneiro.
+ * @author Heitor Guerra Carneiro
+ * @since May 2015
  * @version 1.0
- * @since April 2015.
  */
-public class WaveRightSegment1 implements IGestureSegment {
-
+public class WaveLeftSegment1 implements IGestureSegment{
 	private SegmentCheck segment;
-
-	public WaveRightSegment1(SimpleOpenNI context) {
+	
+	public WaveLeftSegment1(SimpleOpenNI context) {
 		segment = new SegmentCheck(context);
 	}
-
 	@Override
 	public EGestureResult checkGesture(int userId) {
-		if (segment.check(JointID.RIGHT_HAND, JointRelation.ABOVE,
-				JointID.RIGHT_ELBOW, userId)) {
-			if (segment.check(JointID.RIGHT_HAND, JointRelation.RIGHT_OF,
-					JointID.RIGHT_ELBOW, userId)) {
+		if (segment.check(JointID.LEFT_HAND, JointRelation.ABOVE,
+				JointID.LEFT_ELBOW, userId)) {
+			if (segment.check(JointID.LEFT_HAND, JointRelation.RIGHT_OF,
+					JointID.LEFT_ELBOW, userId)) {
 				return EGestureResult.SUCCEED;
 			}
 			return EGestureResult.PAUSING;

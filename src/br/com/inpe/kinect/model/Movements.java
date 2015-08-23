@@ -7,21 +7,21 @@ import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.inpe.kinect.model.gesture.detector.GestureDetector;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
-import br.com.inpe.kinect.model.gesture.segments.LeftClick;
-import br.com.inpe.kinect.model.gesture.segments.StartCheck;
-import br.com.inpe.kinect.model.gesture.segments.SwipeLeftSegment1;
-import br.com.inpe.kinect.model.gesture.segments.SwipeLeftSegment2;
-import br.com.inpe.kinect.model.gesture.segments.SwipeLeftSegment3;
-import br.com.inpe.kinect.model.gesture.segments.SwipeRightSegment1;
-import br.com.inpe.kinect.model.gesture.segments.SwipeRightSegment2;
-import br.com.inpe.kinect.model.gesture.segments.SwipeRightSegment3;
-import br.com.inpe.kinect.model.gesture.segments.WaveLeftSegment1;
-import br.com.inpe.kinect.model.gesture.segments.WaveLeftSegment2;
-import br.com.inpe.kinect.model.gesture.segments.WaveRightSegment1;
-import br.com.inpe.kinect.model.gesture.segments.WaveRightSegment2;
-import br.com.inpe.kinect.model.gesture.segments.test.Zoom1;
-import br.com.inpe.kinect.model.gesture.segments.test.Zoom2;
-import br.com.inpe.kinect.model.gesture.segments.test.Zoom3;
+import br.com.inpe.kinect.model.gesture.posture.LeftClick;
+import br.com.inpe.kinect.model.gesture.posture.StartCheck;
+import br.com.inpe.kinect.model.gesture.segments.ZoomSegment1;
+import br.com.inpe.kinect.model.gesture.segments.ZoomSegment2;
+import br.com.inpe.kinect.model.gesture.segments.ZoomSegment3;
+import br.com.inpe.kinect.model.gesture.segments.old.SwipeLeftSegment1;
+import br.com.inpe.kinect.model.gesture.segments.old.SwipeLeftSegment2;
+import br.com.inpe.kinect.model.gesture.segments.old.SwipeLeftSegment3;
+import br.com.inpe.kinect.model.gesture.segments.old.SwipeRightSegment1;
+import br.com.inpe.kinect.model.gesture.segments.old.SwipeRightSegment2;
+import br.com.inpe.kinect.model.gesture.segments.old.SwipeRightSegment3;
+import br.com.inpe.kinect.model.gesture.segments.old.WaveLeftSegment1;
+import br.com.inpe.kinect.model.gesture.segments.old.WaveLeftSegment2;
+import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment1;
+import br.com.inpe.kinect.model.gesture.segments.old.WaveRightSegment2;
 import br.com.inpe.kinect.view.Observer;
 import br.com.system.info.SystemInfo;
 import SimpleOpenNI.SimpleOpenNI;
@@ -35,7 +35,16 @@ public class Movements implements Subject {
 	private Integer movement = 0;
 	private SimpleOpenNI context;
 	private List<Observer> listObservers;
-	
+	/*
+	 * Posture
+	 */
+	// startCheck
+	private IGestureSegment startCheck;
+	// leftClick
+	/*
+	 * Gesture
+	 */
+	private IGestureSegment leftClick;
 	private IGestureSegment wR1;
 	private IGestureSegment wR2;
 	private IGestureSegment[] waveRightParts;
@@ -43,20 +52,24 @@ public class Movements implements Subject {
 	private IGestureSegment wL2;
 	private IGestureSegment[] waveLeftParts;
 	private GestureDetector detector;
-	// startCheck
-	private IGestureSegment startCheck;
-	// leftClick
-	private IGestureSegment leftClick;
-	
-	private IGestureSegment z;
-	private IGestureSegment z2;
-	private IGestureSegment z3;
+	private IGestureSegment zoomSegment1;
+	private IGestureSegment zoomSegment2;
+	private IGestureSegment zoomSegment3;
 	private IGestureSegment[] zoomParts;
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
 		listObservers = new LinkedList<Observer>();
-
+		/**
+		 * Posture
+		 */
+		// StartCheck
+		startCheck = new StartCheck(context);
+		// leftClick
+		leftClick = new LeftClick(context);
+		/**
+		 * Gesture
+		 */
 		wR1 = new WaveRightSegment1(context);
 		wR2 = new WaveRightSegment2(context);
 		waveRightParts = new IGestureSegment[] { wR1, wR2 };
@@ -65,21 +78,15 @@ public class Movements implements Subject {
 		wL2 = new WaveLeftSegment2(context);
 		waveLeftParts = new IGestureSegment[] { wL1, wL2 };
 
-		z = new Zoom1(context);
-		z2 = new Zoom2(context);
-		z3 = new Zoom3(context);
-		zoomParts = new IGestureSegment[]{z, z2, z3};
+		zoomSegment1 = new ZoomSegment1(context);
+		zoomSegment2 = new ZoomSegment2(context);
+		zoomSegment3 = new ZoomSegment3(context);
+		zoomParts = new IGestureSegment[]{zoomSegment1, zoomSegment2, zoomSegment3};
 		
 		detector = new GestureDetector();
 		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts);
 		//detector.addGesture(EGestureType.WAVELEFT, waveLeftParts);
-		detector.addGesture(EGestureType.ZOOM, zoomParts);
-		
-		// StartCheck
-		startCheck = new StartCheck(context);
-		// leftClick
-		leftClick = new LeftClick(context);
-		
+		//detector.addGesture(EGestureType.ZOOM, zoomParts);
 	}
 
 	@Override
@@ -94,6 +101,18 @@ public class Movements implements Subject {
 	}
 
 	public void poseCheck(int userId) {
+		/**
+		 * Testando com as posicoes sepadaras!
+		 */
+		
+		/*if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+			System.out.println("Gesto x reconhecido!");
+		}*/
+		
+		/**
+		 * Teste Gesto Completo	
+		 */
+		//detector.updateAllGestures(userId);
 		/*
 		 * Method to start and stop gestures recognition
 		 */
@@ -105,20 +124,6 @@ public class Movements implements Subject {
 			System.out.println("Left Click!");
 		}
 		*/
-		detector.updateAllGestures(userId);
-		/**
-		 * Testando com as posicoes sepadaras!
-		 */
-		/*
-		if(z.checkGesture(userId).equals(EGestureResult.SUCCEED)){
-			System.out.println("pose 1 reconhecida");
-		}
-		if(z2.checkGesture(userId).equals(EGestureResult.SUCCEED)){
-			System.out.println("pose 2 reconhecida");
-		}
-		if(z3.checkGesture(userId).equals(EGestureResult.SUCCEED)){
-			System.out.println("pose 3 reconhecida");
-		}*/
 	}
 
 	public void setMovement(Integer type) {

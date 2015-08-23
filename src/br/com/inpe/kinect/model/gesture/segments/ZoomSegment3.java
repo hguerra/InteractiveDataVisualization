@@ -1,14 +1,16 @@
-package br.com.inpe.kinect.model.gesture.segments.test;
+package br.com.inpe.kinect.model.gesture.segments;
 
+import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import SimpleOpenNI.SimpleOpenNI;
+import br.com.inpe.kinect.model.gesture.detector.Position;
 
-public class Zoom2 extends Position implements IGestureSegment{
+public class ZoomSegment3 extends Position implements IGestureSegment {
 
-	public Zoom2(SimpleOpenNI context) {
+	public ZoomSegment3(SimpleOpenNI context) {
 		super(context);
+
 	}
 
 	@Override
@@ -18,9 +20,9 @@ public class Zoom2 extends Position implements IGestureSegment{
 			// Hands between head and hip
 			if(getY(userId, JointID.RIGHT_HAND)<getY(userId, JointID.HEAD) && getY(userId, JointID.RIGHT_HAND) > getY(userId, JointID.TORSO) &&
 			getY(userId, JointID.LEFT_HAND) < getY(userId, JointID.HEAD) && getY(userId, JointID.LEFT_HAND) > getY(userId, JointID.TORSO)){
-				 // Hands outside shoulders
-				if(getX(userId, JointID.RIGHT_HAND)>getX(userId, JointID.RIGHT_SHOULDER) &&
-					getX(userId, JointID.LEFT_HAND)<getX(userId, JointID.LEFT_SHOULDER)){
+				// Hands outside elbows
+				if(getX(userId, JointID.RIGHT_HAND)>getX(userId, JointID.RIGHT_ELBOW) &&
+					getX(userId, JointID.LEFT_HAND)<getX(userId, JointID.LEFT_ELBOW)){
 					return EGestureResult.SUCCEED;
 				}
 				return EGestureResult.PAUSING;

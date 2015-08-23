@@ -1,4 +1,4 @@
-package br.com.inpe.kinect.model.gesture.segments.test;
+package br.com.inpe.kinect.model.gesture.detector;
 
 import SimpleOpenNI.SimpleOpenNI;
 import processing.core.PVector;
