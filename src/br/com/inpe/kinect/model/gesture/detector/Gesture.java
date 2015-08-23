@@ -57,7 +57,7 @@ public class Gesture {
 		 * because the result take the checkGesture in [1], need be [0]
 		 */
 		EGestureResult result = this.gestureParts[this.currentGesturePart]
-				.checkGesture(userId-1);
+				.checkGesture(userId);
 
 		if (result == EGestureResult.SUCCEED) {
 			if (this.currentGesturePart + 1 < this.gestureParts.length) {

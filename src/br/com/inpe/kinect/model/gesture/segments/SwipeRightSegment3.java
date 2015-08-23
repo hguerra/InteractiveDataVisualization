@@ -24,12 +24,10 @@ public class SwipeRightSegment3 implements IGestureSegment{
 				if(segment.check(JointID.LEFT_HAND, JointRelation.RIGHT_OF, JointID.RIGHT_SHOULDER, userId)){
 					return EGestureResult.SUCCEED;
 				}
-				
+				return EGestureResult.PAUSING;
 			}
-			return EGestureResult.PAUSING;
 		}
 		return EGestureResult.FAIL;
-	
 	}
 
 }
