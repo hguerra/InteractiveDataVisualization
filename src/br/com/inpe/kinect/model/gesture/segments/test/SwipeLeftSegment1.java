@@ -3,9 +3,8 @@ package br.com.inpe.kinect.model.gesture.segments.test;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import br.com.inpe.kinect.model.gesture.detector.JointRelation;
 import br.com.inpe.kinect.model.gesture.detector.Position;
-import br.com.inpe.kinect.model.gesture.detector.SegmentCheck;
+
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
