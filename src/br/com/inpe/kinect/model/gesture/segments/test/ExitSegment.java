@@ -15,9 +15,9 @@ public class ExitSegment extends Position implements IGestureSegment{
 	@Override
 	public EGestureResult checkGesture(int userId) {
 		 // Left and right hands below hip
-		if(getY(userId, JointID.LEFT_HAND)<getY(userId, JointID.TORSO) && getY(userId, JointID.RIGHT_HAND)<getY(userId, JointID.TORSO)){
+		if(getY(userId, JointID.LEFT_HAND)<getY(userId, JointID.CENTER_HIP) && getY(userId, JointID.RIGHT_HAND)<getY(userId, JointID.CENTER_HIP)){
 			// left hand 0.3 to left of center hip
-			if(getX(userId, JointID.LEFT_HAND)<getX(userId, JointID.TORSO)-0.3){
+			if(getX(userId, JointID.LEFT_HAND)<getX(userId, JointID.CENTER_HIP)-0.3){
 				// left hand 0.2 to left of left elbow or 0.1
 				if(getX(userId, JointID.LEFT_HAND)<getX(userId, JointID.LEFT_ELBOW) - 0.2){
 					return EGestureResult.SUCCEED;

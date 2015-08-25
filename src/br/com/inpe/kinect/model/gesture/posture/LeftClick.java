@@ -20,7 +20,7 @@ public class LeftClick implements IGestureSegment {
 				JointID.RIGHT_ELBOW, userId)
 				&& segment.check(JointID.RIGHT_ELBOW, JointRelation.CLOSER_OF,
 						JointID.RIGHT_SHOULDER, userId)
-				&& segment.check(JointID.RIGHT_ELBOW, JointRelation.RIGHT_OF, JointID.NECK, userId)
+				&& segment.check(JointID.RIGHT_ELBOW, JointRelation.RIGHT_OF, JointID.CENTER_SHOULDER, userId)
 				&& !segment.check(JointID.RIGHT_ELBOW, JointRelation.RIGHT_OF,
 						JointID.RIGHT_SHOULDER, userId)
 				)// end method

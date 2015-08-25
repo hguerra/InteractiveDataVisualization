@@ -21,9 +21,9 @@ public class SwipeLeftSegment1 extends Position implements IGestureSegment {
 	@Override
 	public EGestureResult checkGesture(int userId) {
 		// right hand in front of right shoulder
-		if(getZ(userId, JointID.RIGHT_HAND) < getZ(userId, JointID.RIGHT_ELBOW) && getY(userId, JointID.LEFT_HAND) < getY(userId, JointID.NECK)){
+		if(getZ(userId, JointID.RIGHT_HAND) < getZ(userId, JointID.RIGHT_ELBOW) && getY(userId, JointID.LEFT_HAND) < getY(userId, JointID.CENTER_SHOULDER)){
 			// right hand below shoulder height but above hip height
-			if(getY(userId, JointID.RIGHT_HAND) < getY(userId, JointID.HEAD) && getY(userId, JointID.RIGHT_HAND)>getY(userId, JointID.TORSO)){
+			if(getY(userId, JointID.RIGHT_HAND) < getY(userId, JointID.HEAD) && getY(userId, JointID.RIGHT_HAND)>getY(userId, JointID.CENTER_HIP)){
 				// right hand right of right shoulder
 				if(getX(userId, JointID.RIGHT_HAND)>getX(userId, JointID.RIGHT_SHOULDER)){
 					return EGestureResult.SUCCEED;
