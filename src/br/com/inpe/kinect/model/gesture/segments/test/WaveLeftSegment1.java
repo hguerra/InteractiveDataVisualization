@@ -1,4 +1,4 @@
-package br.com.inpe.kinect.model.gesture.segments.old;
+package br.com.inpe.kinect.model.gesture.segments.test;
 
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;

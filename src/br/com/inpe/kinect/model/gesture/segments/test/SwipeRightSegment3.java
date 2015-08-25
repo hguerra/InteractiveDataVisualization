@@ -1,4 +1,4 @@
-package br.com.inpe.kinect.model.gesture.segments.old;
+package br.com.inpe.kinect.model.gesture.segments.test;
 
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
@@ -11,25 +11,23 @@ import SimpleOpenNI.SimpleOpenNI;
  * @since May 2015
  * @version 1.0
  */
-public class SwipeLeftSegment3 implements IGestureSegment{
+public class SwipeRightSegment3 implements IGestureSegment{
 	private SegmentCheck segment;
 
-	public SwipeLeftSegment3(SimpleOpenNI context) {
+	public SwipeRightSegment3(SimpleOpenNI context) {
 		segment = new SegmentCheck(context);
 	}
 	@Override
 	public EGestureResult checkGesture(int userId) {
-		if (segment.check(JointID.RIGHT_HAND, JointRelation.CLOSER_OF, JointID.RIGHT_ELBOW, userId) && segment.check(JointID.LEFT_HAND, JointRelation.BELOW, JointID.TORSO, userId)) {
-			if (segment.check(JointID.RIGHT_HAND, JointRelation.BELOW, JointID.HEAD, userId) && segment.check(JointID.RIGHT_HAND, JointRelation.ABOVE, JointID.TORSO, userId)) {
-				if(segment.check(JointID.RIGHT_HAND, JointRelation.LEFT_OF, JointID.LEFT_SHOULDER, userId)){
+		if (segment.check(JointID.LEFT_HAND, JointRelation.CLOSER_OF, JointID.LEFT_ELBOW, userId) && segment.check(JointID.RIGHT_HAND, JointRelation.BELOW, JointID.TORSO, userId)) {
+			if (segment.check(JointID.LEFT_HAND, JointRelation.BELOW, JointID.HEAD, userId) && segment.check(JointID.LEFT_HAND, JointRelation.ABOVE, JointID.TORSO, userId)) {
+				if(segment.check(JointID.LEFT_HAND, JointRelation.RIGHT_OF, JointID.RIGHT_SHOULDER, userId)){
 					return EGestureResult.SUCCEED;
 				}
-				
+				return EGestureResult.PAUSING;
 			}
-			return EGestureResult.PAUSING;
 		}
 		return EGestureResult.FAIL;
-	
 	}
 
 }
