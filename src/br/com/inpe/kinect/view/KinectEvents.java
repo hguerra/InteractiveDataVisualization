@@ -11,6 +11,7 @@ import br.com.inpe.kinect.controller.TimeUp;
 import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
+import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.system.info.SystemInfo;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -24,7 +25,6 @@ import SimpleOpenNI.SimpleOpenNI;
 public class KinectEvents extends Processing implements Observer {
 	private final static int WIDTH = 640;
 	private final static int HEIGHT = 480;
-	private Integer temp;
 	private SimpleOpenNI kinect;
 	private Bridge bridge;
 	private Zoom zoomIn;
@@ -109,10 +109,38 @@ public class KinectEvents extends Processing implements Observer {
 				/*
 				 * Analysis Update method
 				 */
-				kinectDebug(false, false);
+				kinectDebug(false);
 
 			}
 		}
+	}
+
+	@Override
+	public void update(EGestureType type) {
+		switch (type) {
+		case ZOOM: {
+			zoomIn.setZoom();
+			break;
+		}
+		case SWIPE_LEFT: {
+			System.out.println("OTHER");
+			break;
+		}
+		case SWIPE_RIGHT: {
+			System.out.println("OTHER");
+			break;
+		}
+		case SWIPE_DOWN: {
+			System.out.println("OTHER");
+			break;
+		}
+		case SWIPE_UP: {
+			System.out.println("OTHER");
+			break;
+		}
+
+		}
+
 	}
 
 	public void drawSkeleton(int userId) {
@@ -187,61 +215,10 @@ public class KinectEvents extends Processing implements Observer {
 		// println("onVisibleUser - userId: " + userId);
 	}
 
-	@Override
-	public void update(Integer movement) {
-		setTemp(movement);
-
-		switch (getTemp()) {
-		case 1: {
-			zoomIn.setZoom();
-			setTemp(null);
-			break;
-		}
-		case 2: {
-			zoomOut.setZoom();
-			setTemp(null);
-			break;
-		}
-		case 3: {
-			timeUp.setTime();
-			setTemp(null);
-			break;
-		}
-		case 4: {
-			timeDown.setTime();
-			setTemp(null);
-			break;
-		}
-		case 5: {
-			dataUp.setData();
-			setTemp(null);
-			break;
-		}
-		case 6: {
-			dataDown.setData();
-			setTemp(null);
-			break;
-		}
-		}// End Switch case
-	}
-
-	public Integer getTemp() {
-		return temp;
-	}
-
-	public void setTemp(Integer temp) {
-		this.temp = temp;
-	}
-
-	public void kinectDebug(boolean memoryInfo, boolean updateGesture) {
+	public void kinectDebug(boolean memoryInfo) {
 		if (memoryInfo) {
 			SystemInfo info = new SystemInfo();
 			message(5, 20, 15, info.MemInfo());
-		}
-		if (updateGesture) {
-			if (getTemp() != null) {
-				message(WIDTH - 20, HEIGHT - 20, 30, temp.toString());
-			}
 		}
 	}
 

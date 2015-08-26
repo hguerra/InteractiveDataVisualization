@@ -3,6 +3,8 @@ package br.com.inpe.kinect.model.gesture.detector;
 import java.util.LinkedList;
 import java.util.List;
 
+import br.com.inpe.kinect.model.Subject;
+
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
@@ -20,10 +22,10 @@ public class GestureDetector {
 			gesture.updateGesture(userId);
 		}
 	}
-	
-	public void addGesture(EGestureType type, IGestureSegment[] gestureParts){
-		Gesture gesture = new Gesture(gestureParts, type);
-		this.gestures.add(gesture);
+		
+	public void addGesture(EGestureType type, IGestureSegment[] gestureParts, Subject subject){
+		Gesture gesture = new Gesture(gestureParts, type, subject);
+		this.gestures.add(gesture);		
 	}
 	
 	public void removeGesture(Gesture gesture){

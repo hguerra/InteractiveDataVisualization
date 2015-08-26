@@ -1,5 +1,6 @@
 package br.com.inpe.kinect.model;
 
+import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.inpe.kinect.view.Observer;
 /**
  * @author Heitor Guerra Carneiro.
@@ -8,6 +9,5 @@ import br.com.inpe.kinect.view.Observer;
  */
 public interface Subject {
 	public void registerObserver(Observer observer);
-	public void notifyObserversPoseCheck();
-	public void notifyObserversPoseCheck(Integer i);
+	public void notifyObserverGesture(EGestureType type);
 }

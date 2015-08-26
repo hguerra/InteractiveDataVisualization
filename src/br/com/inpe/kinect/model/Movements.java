@@ -36,8 +36,7 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 2.0
  * @since May 2015.
  */
-public class Movements implements Subject {
-	private Integer movement = 0;
+public class Movements implements Subject{
 	private SimpleOpenNI context;
 	private List<Observer> listObservers;
 	/*
@@ -103,9 +102,9 @@ public class Movements implements Subject {
 		rotateAntiClockSegment3 = new RotateAntiClockSegments3(context);
 		
 		detector = new GestureDetector();
-		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts);
-		//detector.addGesture(EGestureType.WAVELEFT, waveLeftParts);
-		//detector.addGesture(EGestureType.ZOOM, zoomParts);
+		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts, this);
+		//detector.addGesture(EGestureType.WAVELEFT, waveLeftParts, this);
+		detector.addGesture(EGestureType.ZOOM, zoomParts, this);
 	}
 
 	@Override
@@ -113,21 +112,15 @@ public class Movements implements Subject {
 		listObservers.add(observer);
 	}
 
-	@Override
-	public void notifyObserversPoseCheck() {
-		for (Observer i : listObservers)
-			i.update(movement);
-	}
-
 	public void poseCheck(int userId) {
 		/**
-		 * Testando com as posicoes sepadaras!
+		 * position test
 		 */
-		testSegment(userId, rotateAntiClockSegment1);
+		//testSegment(userId, rotateAntiClockSegment1);
 		/**
 		 * Teste Gesto Completo	
 		 */
-		//detector.updateAllGestures(userId);
+		detector.updateAllGestures(userId);
 		/*
 		 * Method to start and stop gestures recognition
 		 */
@@ -150,14 +143,12 @@ public class Movements implements Subject {
 		return result;
 	}
 
-	public void setMovement(Integer type) {
-		this.movement = type;
-		notifyObserversPoseCheck();
-	}
 
 	@Override
-	public void notifyObserversPoseCheck(Integer i) {
-		for (Observer k : listObservers)
-			k.update(i);
+	public void notifyObserverGesture(EGestureType type) {
+		for(Observer i: listObservers){
+			i.update(type);
+		}
 	}
+
 }

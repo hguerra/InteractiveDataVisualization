@@ -1,5 +1,6 @@
 package br.com.inpe.kinect.model.gesture.detector;
 
+import br.com.inpe.kinect.model.Subject;
 
 /**
  * @author Heitor Guerra Carneiro.
@@ -31,14 +32,15 @@ public class Gesture {
 	 * The parts that make up this gesture
 	 */
 	private IGestureSegment[] gestureParts;
-	
-	private EGestureType resultType;
 	/**
-	 * Initializes a new instance of the
+	 * Used to update the gesture type in Movements Class
 	 */
-	public Gesture(IGestureSegment[] gestureParts, EGestureType type) {
+	private Subject kinectModel;
+	
+	public Gesture(IGestureSegment[] gestureParts, EGestureType type, Subject subject) {
 		this.gestureParts = gestureParts;
 		this.type = type;
+		this.kinectModel = subject;
 	}
 
 	/**
@@ -63,7 +65,7 @@ public class Gesture {
 			if (this.currentGesturePart + 1 < this.gestureParts.length) {
 				stillMoving();
 			} else {
-				notifyType(this.type);
+				notifyGetureType(this.type);
 				this.reset();
 			}
 		} else if (result == EGestureResult.FAIL || this.frameCount == 50) {
@@ -97,16 +99,9 @@ public class Gesture {
 		this.paused = true;
 	}
 	
-	public void notifyType(EGestureType type){
-		setResultType(type);
-		System.out.println(type);
+	public void notifyGetureType(EGestureType type){
+		kinectModel. notifyObserverGesture(type);
 	}
 
-	public EGestureType getResultType() {
-		return resultType;
-	}
-
-	public void setResultType(EGestureType resultType) {
-		this.resultType = resultType;
-	}
+	
 }
