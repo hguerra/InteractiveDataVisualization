@@ -8,27 +8,23 @@ import SimpleOpenNI.SimpleOpenNI;
  * @version 1.0
  * @since April 2015.
  */
-public class SegmentCheck {
+public abstract class SegmentCheck {
 	private PVector fromJointVector;
 	private PVector toJointVector;
 	private SimpleOpenNI context;
 
 	public SegmentCheck(SimpleOpenNI context) {
 		this.context = context;
-
 		fromJointVector = new PVector();
 		toJointVector = new PVector();
 	}
 
 	public boolean check(int fromJoint, int jointRelation, int toJoint,
 			int userId) {
-
 		// populate the joint vectors for the user we're checking
 		context.getJointPositionSkeleton(userId, fromJoint, fromJointVector);
 		context.getJointPositionSkeleton(userId, toJoint, toJointVector);
-
 		boolean result = false;
-
 		switch (jointRelation) {
 		case JointRelation.ABOVE:
 			result = (fromJointVector.y > toJointVector.y);

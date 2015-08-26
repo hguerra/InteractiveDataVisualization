@@ -5,15 +5,16 @@ import processing.core.PVector;
 
 public abstract class Position {
 	private SimpleOpenNI context;
+	private PVector vector;
 
 	public Position(SimpleOpenNI context) {
 		this.context = context;
+		vector = new PVector();
 	}
 
 	public PVector vectorJoint(int userId, int jointID) {
-		PVector vectorJoint = new PVector();
-		context.getJointPositionSkeleton(userId, jointID, vectorJoint);
-		return vectorJoint;
+		context.getJointPositionSkeleton(userId, jointID, vector);
+		return vector;
 	}
 
 	public float getX(int userId, int jointID) {

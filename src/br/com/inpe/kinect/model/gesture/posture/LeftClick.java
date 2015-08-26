@@ -7,22 +7,20 @@ import br.com.inpe.kinect.model.gesture.detector.JointID;
 import br.com.inpe.kinect.model.gesture.detector.JointRelation;
 import br.com.inpe.kinect.model.gesture.detector.SegmentCheck;
 
-public class LeftClick implements IGestureSegment {
-	private SegmentCheck segment;
-
+public class LeftClick extends SegmentCheck implements IGestureSegment {
 	public LeftClick(SimpleOpenNI context) {
-		segment = new SegmentCheck(context);
+		super(context);
 	}
 
 	@Override
 	public EGestureResult checkGesture(int userId) {
-		if (segment.check(JointID.RIGHT_HAND, JointRelation.CLOSER_OF,
+		if (check(JointID.RIGHT_HAND, JointRelation.CLOSER_OF,
 				JointID.RIGHT_ELBOW, userId)
-				&& segment.check(JointID.RIGHT_ELBOW, JointRelation.CLOSER_OF,
+				&& check(JointID.RIGHT_ELBOW, JointRelation.CLOSER_OF,
 						JointID.RIGHT_SHOULDER, userId)
-				&& segment.check(JointID.RIGHT_ELBOW, JointRelation.RIGHT_OF, JointID.CENTER_SHOULDER, userId)
-				&& !segment.check(JointID.RIGHT_ELBOW, JointRelation.RIGHT_OF,
-						JointID.RIGHT_SHOULDER, userId)
+						&& check(JointID.RIGHT_ELBOW, JointRelation.RIGHT_OF, JointID.CENTER_SHOULDER, userId)
+						&& !check(JointID.RIGHT_ELBOW, JointRelation.RIGHT_OF,
+								JointID.RIGHT_SHOULDER, userId)
 				)// end method
 			return EGestureResult.SUCCEED;
 		return EGestureResult.FAIL;
