@@ -1,37 +1,33 @@
 package br.com.inpe.kinect.model.gesture.segments.test;
 
+import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import br.com.inpe.kinect.model.gesture.detector.JointRelation;
-import br.com.inpe.kinect.model.gesture.detector.SegmentCheck;
-import SimpleOpenNI.SimpleOpenNI;
+import br.com.inpe.kinect.model.gesture.detector.Position;
 
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
  * @since April 2015.
  */
-public class WaveRightSegment1 implements IGestureSegment {
-
-	private SegmentCheck segment;
+public class WaveRightSegment1 extends Position implements IGestureSegment {
 
 	public WaveRightSegment1(SimpleOpenNI context) {
-		segment = new SegmentCheck(context);
-	}
-
-	@Override
-	public EGestureResult checkGesture(int userId) {
-		if (segment.check(JointID.RIGHT_HAND, JointRelation.ABOVE,
-				JointID.RIGHT_ELBOW, userId)) {
-			if (segment.check(JointID.RIGHT_HAND, JointRelation.RIGHT_OF,
-					JointID.RIGHT_ELBOW, userId)) {
-				return EGestureResult.SUCCEED;
-			}
-			return EGestureResult.PAUSING;
+		super(context);
 		}
 
-		return EGestureResult.FAIL;
-	}
+		@Override
+		public EGestureResult checkGesture(int userId) {
+			// hand above elbow
+			if(getY(userId, JointID.RIGHT_HAND) > getY(userId, JointID.RIGHT_ELBOW)){
+				// hand right of elbow
+				if(getX(userId, JointID.RIGHT_HAND) > getX(userId, JointID.RIGHT_ELBOW)){
+					return EGestureResult.SUCCEED;
+				}
+				return EGestureResult.PAUSING;
+			}
+			return EGestureResult.FAIL;
+		}
 
-}
+	}
