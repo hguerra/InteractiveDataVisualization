@@ -12,9 +12,12 @@ import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
+import br.com.inpe.worldwind.view.AppFrameController;
 import br.com.system.info.SystemInfo;
 import processing.core.PImage;
 import processing.core.PVector;
+import virtualglobe.test.RegisterVirtualGlobe;
+import virtualglobe.test.ZoomAppFrame;
 import SimpleOpenNI.SimpleOpenNI;
 
 /**
@@ -33,6 +36,11 @@ public class KinectEvents extends Processing implements Observer {
 	private Data dataDown;
 	private Time timeUp;
 	private Time timeDown;
+
+	/**
+	 * Test AppFrameController
+	 */
+	//private Zoom zoomAppFrame;
 
 	public void setup() {
 		// Size of window application
@@ -84,7 +92,10 @@ public class KinectEvents extends Processing implements Observer {
 		dataDown = new DataDown();
 		timeUp = new TimeUp();
 		timeDown = new TimeDown();
-
+		/**
+		 * Test AppFrameController
+		 */
+		//zoomAppFrame = new ZoomAppFrame(RegisterVirtualGlobe.getController());
 	}
 
 	public void draw() {
@@ -120,6 +131,10 @@ public class KinectEvents extends Processing implements Observer {
 		switch (type) {
 		case ZOOM: {
 			zoomIn.setZoom();
+			break;
+		}
+		case ZOOM_OUT: {
+			zoomOut.setZoom();
 			break;
 		}
 		case SWIPE_LEFT: {

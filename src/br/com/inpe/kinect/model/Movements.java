@@ -27,6 +27,7 @@ import br.com.inpe.kinect.model.gesture.segments.test.WaveLeftSegment1;
 import br.com.inpe.kinect.model.gesture.segments.test.WaveLeftSegment2;
 import br.com.inpe.kinect.model.gesture.segments.test.WaveRightSegment1;
 import br.com.inpe.kinect.model.gesture.segments.test.WaveRightSegment2;
+import br.com.inpe.kinect.model.gesture.segments.test.ZoomOutSegment1;
 import br.com.inpe.kinect.view.Observer;
 import br.com.system.info.SystemInfo;
 import SimpleOpenNI.SimpleOpenNI;
@@ -67,6 +68,10 @@ public class Movements implements Subject{
 	private IGestureSegment rotateAntiClockSegment1;
 	private IGestureSegment rotateAntiClockSegment2;
 	private IGestureSegment rotateAntiClockSegment3;
+	private IGestureSegment zoomOutSegment1;
+	private IGestureSegment zoomOutSegment2;
+	private IGestureSegment zoomOutSegment3;
+	private IGestureSegment[] zoomOutParts;
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -100,11 +105,16 @@ public class Movements implements Subject{
 		rotateAntiClockSegment1 = new RotateAntiClockSegments1(context);
 		rotateAntiClockSegment2 = new RotateAntiClockSegments2(context);
 		rotateAntiClockSegment3 = new RotateAntiClockSegments3(context);
+		zoomOutSegment1 = new ZoomOutSegment1(context);
+		zoomOutSegment2 = new ZoomSegment1(context);
+		zoomOutSegment3 = new ZoomSegment3(context);
+		zoomOutParts = new IGestureSegment[]{zoomOutSegment1, zoomOutSegment2, zoomOutSegment3};
 		
 		detector = new GestureDetector();
 		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts, this);
 		//detector.addGesture(EGestureType.WAVELEFT, waveLeftParts, this);
 		detector.addGesture(EGestureType.ZOOM, zoomParts, this);
+		detector.addGesture(EGestureType.ZOOM_OUT, zoomOutParts, this);
 	}
 
 	@Override

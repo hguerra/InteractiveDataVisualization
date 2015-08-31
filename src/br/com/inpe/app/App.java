@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+import virtualglobe.test.RegisterVirtualGlobe;
 import br.com.inpe.kinect.view.KinectInternalFrame;
 import br.com.inpe.worldwind.controller.Comment;
 import br.com.inpe.worldwind.controller.DrawLine;
@@ -23,6 +24,7 @@ import br.com.inpe.worldwind.controller.IDraw;
 import br.com.inpe.worldwind.controller.ILine;
 import br.com.inpe.worldwind.controller.ScreenAnnotationLayer;
 import br.com.inpe.worldwind.model.WorldWindModel;
+import br.com.inpe.worldwind.view.AppFrameController;
 import br.com.inpe.worldwind.view.WorldWindView;
 
 public class App extends JFrame{
@@ -32,13 +34,14 @@ public class App extends JFrame{
 	WorldWindModel model = new WorldWindModel();
 	static final  int WIDTH = 1300;
 	static final int HEIGHT = 720;
-	
+	private AppFrameController controller;
 	
 	public App() {
 		InternalFrameControl();
 	}
 	public void worldWindLoadData(){
 		model.registerObserver(view);
+		/*
 		//Draw Polygon
 		
 		IDraw polygonBorderPositions = new DrawPolygon(model, view);
@@ -51,7 +54,6 @@ public class App extends JFrame{
 		annotation.addAnnotation();
 		view.setIAnnotation(annotation);
 		
-		/*
 		//Comment
 		IAnnotation comment = new Comment(view, model);
 		annotation.addAnnotation();
@@ -83,6 +85,12 @@ public class App extends JFrame{
 		view.setBounds(0, 0, WIDTH, HEIGHT);
 		view.setVisible(true);
 		
+		/**
+		 * Teste
+		 */
+		controller = new AppFrameController(view);
+		RegisterVirtualGlobe.setController(controller);
+		RegisterVirtualGlobe.setView(view);
 		
 
 		// ----------------------------------------------
