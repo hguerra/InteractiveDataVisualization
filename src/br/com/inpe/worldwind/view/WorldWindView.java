@@ -271,7 +271,6 @@ public class WorldWindView extends JInternalFrame implements Observer {
 	public void frameEvents() {
 		//JFrame
 		/*
-		 
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent event) {

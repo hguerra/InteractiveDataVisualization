@@ -53,14 +53,14 @@ public class AppFrameController {
 	}
 
 	public void zoom(double ratio) {
-		if (this.view == null){
+		if (this.view == null) {
 			return;
 		}
 		final double zoomFactor = this.view.getZoom();
 		System.out.println("zoomFactor: " + zoomFactor);
 		int newzoom = (int) (zoomFactor * ratio);
 		System.out.println("newZoom: " + newzoom);
-		if (newzoom >= 1071941 && newzoom <= 18437542 ) {
+		if (newzoom >= 1071941 && newzoom <= 18437542) {
 			this.view.setZoom(newzoom);
 			this.view.firePropertyChange(AVKey.VIEW, null, this.view);
 			System.out.println("aumentou zoom");
@@ -151,5 +151,13 @@ public class AppFrameController {
 		lon = lon % 360;
 		return Position.fromDegrees(lat > 90 ? 90 : (lat < -90 ? -90 : lat),
 				lon > 180 ? lon - 360 : (lon < -180 ? 360 + lon : lon), elev);
+	}
+
+	public OrbitView getView() {
+		return view;
+	}
+
+	public void setView(OrbitView view) {
+		this.view = view;
 	}
 }

@@ -2,7 +2,6 @@ package br.com.inpe.app;
 
 import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwind.geom.Position;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -14,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-import virtualglobe.test.RegisterVirtualGlobe;
 import br.com.inpe.kinect.view.KinectInternalFrame;
 import br.com.inpe.worldwind.controller.Comment;
 import br.com.inpe.worldwind.controller.DrawLine;
@@ -89,8 +87,7 @@ public class App extends JFrame{
 		 * Teste
 		 */
 		controller = new AppFrameController(view);
-		RegisterVirtualGlobe.setController(controller);
-		RegisterVirtualGlobe.setView(view);
+		RegisterVirtualGlobe.startFrameController(view, controller);
 		
 
 		// ----------------------------------------------

@@ -8,6 +8,7 @@ import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.inpe.kinect.model.gesture.detector.GestureDetector;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.posture.LeftClick;
+import br.com.inpe.kinect.model.gesture.posture.MoveMap;
 import br.com.inpe.kinect.model.gesture.posture.StartCheck;
 import br.com.inpe.kinect.model.gesture.segments.ZoomSegment1;
 import br.com.inpe.kinect.model.gesture.segments.ZoomSegment2;
@@ -72,6 +73,10 @@ public class Movements implements Subject{
 	private IGestureSegment zoomOutSegment2;
 	private IGestureSegment zoomOutSegment3;
 	private IGestureSegment[] zoomOutParts;
+	/**
+	 * Move Map
+	 */
+	private MoveMap moveMap;
 	
 	public Movements(SimpleOpenNI context) {
 		this.context = context;
@@ -115,6 +120,8 @@ public class Movements implements Subject{
 		//detector.addGesture(EGestureType.WAVELEFT, waveLeftParts, this);
 		detector.addGesture(EGestureType.ZOOM, zoomParts, this);
 		detector.addGesture(EGestureType.ZOOM_OUT, zoomOutParts, this);
+		
+		moveMap = new MoveMap(context);
 	}
 
 	@Override
@@ -138,10 +145,18 @@ public class Movements implements Subject{
 		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			detector.updateAllGestures(userId);
 		}
-		if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-			System.out.println("Left Click!");
-		}
+		
 		*/
+		
+		/**
+		 * Move map
+		 */
+		if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+			System.out.println("leftClick");
+			moveMap.move(userId);
+		}
+		
+		
 	}
 	
 	public String testSegment(int userId, IGestureSegment segment){
