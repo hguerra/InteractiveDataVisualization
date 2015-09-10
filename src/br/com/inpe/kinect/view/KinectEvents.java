@@ -13,6 +13,7 @@ import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
+import br.com.inpe.kinect.model.gesture.posture.HandOpen;
 import br.com.system.info.SystemInfo;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -34,6 +35,7 @@ public class KinectEvents extends Processing implements Observer {
 	private Data dataDown;
 	private Time timeUp;
 	private Time timeDown;
+	private HandOpen handOpen;
 
 	public void setup() {
 		// Size of window application
@@ -85,6 +87,8 @@ public class KinectEvents extends Processing implements Observer {
 		dataDown = new DataDown();
 		timeUp = new TimeUp();
 		timeDown = new TimeDown();
+		
+		handOpen = new HandOpen(kinect, this, WIDTH, HEIGHT);
 	}
 
 	public void draw() {
@@ -95,6 +99,14 @@ public class KinectEvents extends Processing implements Observer {
 		if (depth != null) {
 			image(depth, 0, 0);
 		}
+		/**
+		 * handOpen
+		 */
+		int[] depthMap = kinect.depthMap();
+		handOpen.checkHand(depthMap, 900);
+		/**
+		 * SkeletonTracking
+		 */
 		int[] userList = kinect.getUsers();
 		// i++
 		for (int i = 0; i < userList.length; i++) {
@@ -110,7 +122,6 @@ public class KinectEvents extends Processing implements Observer {
 				 * Analysis Update method
 				 */
 				kinectDebug(false);
-
 			}
 		}
 	}
@@ -140,6 +151,14 @@ public class KinectEvents extends Processing implements Observer {
 		}
 		case SWIPE_UP: {
 			System.out.println("OTHER");
+			break;
+		}
+		case HAND_OPEN: {
+			System.out.println("HAND_OPEN");
+			break;
+		}
+		case HAND_CLOSED: {
+			System.out.println("HAND_CLOSED");
 			break;
 		}
 

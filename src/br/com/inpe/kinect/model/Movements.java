@@ -182,19 +182,19 @@ public class Movements implements Subject{
 		/**
 		 * Move map
 		 */
-		/*
+		
 		if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			System.out.println("leftClick");
-			moveMap.move(userId);
+			//moveMap.move(userId);
 			
-		}*/
+		}
 		/*
 		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			moveMap.move(userId);
 			
 		}*/
 		
-		moveMap.move(userId);
+		//moveMap.move(userId);
 		
 	}
 	

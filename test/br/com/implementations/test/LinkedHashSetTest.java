@@ -1,15 +1,13 @@
 package br.com.implementations.test;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 
 import processing.core.PVector;
 
-public class Test {
+public class LinkedHashSetTest {
 
 	public static void main(String[] args) {
 		PVectorTransform vector = new PVectorTransform(new PVector(1f, 2f, 3f));
@@ -67,10 +65,6 @@ public class Test {
 			set.remove(iterator.next());
 			break;
 		}
-		
-		String base = "50;100";
-		
-		String[] nova = base.split(";");
 	}
 
 }

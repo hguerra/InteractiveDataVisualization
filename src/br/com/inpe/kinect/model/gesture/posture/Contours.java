@@ -1,4 +1,4 @@
-package br.com.inpe.kinect.model;
+package br.com.inpe.kinect.model.gesture.posture;
 
 import processing.core.PApplet;
 import processing.core.PVector;
