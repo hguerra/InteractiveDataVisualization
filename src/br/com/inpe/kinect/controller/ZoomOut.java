@@ -1,5 +1,7 @@
 package br.com.inpe.kinect.controller;
 
+import br.com.inpe.app.RegisterVirtualGlobe;
+
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
@@ -10,6 +12,6 @@ public class ZoomOut implements Zoom{
 	@Override
 	public void setZoom() {
 		System.out.println("ZOOM OUT!");
-		
+		RegisterVirtualGlobe.getController().zoom(1.10);
 	}
 }

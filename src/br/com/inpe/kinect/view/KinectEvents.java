@@ -13,7 +13,6 @@ import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
-import br.com.inpe.worldwind.view.AppFrameController;
 import br.com.system.info.SystemInfo;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -132,7 +131,7 @@ public class KinectEvents extends Processing implements Observer {
 			break;
 		}
 		case SWIPE_RIGHT: {
-			System.out.println("OTHER");
+			System.out.println("SWIPE_RIGHT");
 			break;
 		}
 		case SWIPE_DOWN: {

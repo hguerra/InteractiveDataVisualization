@@ -12,9 +12,6 @@ public class ZoomIn implements Zoom {
 	@Override
 	public void setZoom() {
 		System.out.println("ZOOM IN!");
-		/**
-		 * comment if just run the kinect
-		 */
 		RegisterVirtualGlobe.getController().zoom(0.90);
 	}
 

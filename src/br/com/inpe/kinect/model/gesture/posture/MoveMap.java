@@ -8,29 +8,25 @@ import br.com.inpe.kinect.model.gesture.detector.Position;
 
 public class MoveMap extends Position {
 	private final static double PERCENTAGE = 0.3;
-	private final static int ARM_LENGTH = 400; // this value is used to
-												// determine if the user
-												// wants to interact or not
-												// 400 is a good value for
-												// adults
+	private final static int ARM_LENGTH = 400; 
 	private HandPosition hand;
-
 	public MoveMap(SimpleOpenNI context) {
 		super(context);
 		hand = new HandPosition();
 	}
+
 /*
 	public void move(int userId) {
 		addHandPoints(userId);
 		if (armLength(userId) > ARM_LENGTH) {
-			System.out.println("condicao de braço ok");
+			System.out.println("Ta no if");
 			RegisterVirtualGlobe.getController().pan(
 					hand.getRightDeltaY() * PERCENTAGE,
 					hand.getRightDeltaX() * PERCENTAGE);
 		}
 	}
-	
-*/
+	*/
+
 	public void move(int userId){
 		addHandPoints(userId);
 		RegisterVirtualGlobe.getController().pan(
@@ -40,9 +36,9 @@ public class MoveMap extends Position {
 
 	public void addHandPoints(int userId) {
 		PVector rightPoints = vectorJoint(userId, JointID.RIGHT_HAND);
-		PVector leftPoints = vectorJoint(userId, JointID.LEFT_HAND);
+		//PVector leftPoints = vectorJoint(userId, JointID.LEFT_HAND);
 		hand.addRightHandPoint(rightPoints);
-		hand.addLeftHandPoint(leftPoints);
+		//hand.addLeftHandPoint(leftPoints);
 	}
 
 	/**
