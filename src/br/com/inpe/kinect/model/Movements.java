@@ -2,9 +2,12 @@ package br.com.inpe.kinect.model;
 
 import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import SimpleOpenNI.SimpleOpenNI;
-import br.com.inpe.app.RegisterVirtualGlobe;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.inpe.kinect.model.gesture.detector.GestureDetector;
@@ -43,7 +46,8 @@ import br.com.inpe.kinect.view.Observer;
  * @since May 2015.
  */
 public class Movements implements Subject{
-	private SimpleOpenNI context;
+	private static final int DELTA_T = 200;//milliseconds
+	private boolean toggleDeltaT;
 	private List<Observer> listObservers;
 	/*
 	 * Posture
@@ -98,7 +102,6 @@ public class Movements implements Subject{
 	private MoveMap moveMap;
 	
 	public Movements(SimpleOpenNI context) {
-		this.context = context;
 		listObservers = new LinkedList<Observer>();
 		/**
 		 * Posture
@@ -150,11 +153,15 @@ public class Movements implements Subject{
 		detector = new GestureDetector();
 		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts, this);
 		//detector.addGesture(EGestureType.WAVELEFT, waveLeftParts, this);
-		//detector.addGesture(EGestureType.ZOOM, zoomParts, this);
+		detector.addGesture(EGestureType.ZOOM, zoomParts, this);
 		//detector.addGesture(EGestureType.ZOOM_OUT, zoomOutParts, this);
 		//detector.addGesture(EGestureType.SWIPE_LEFT, swipeLeftParts, this);
 		//detector.addGesture(EGestureType.SWIPE_RIGHT, swipeRightParts, this);
 		moveMap = new MoveMap(context);
+		/**
+		 * Timer
+		 */
+		deltaT(true);
 	}
 
 	@Override
@@ -168,9 +175,11 @@ public class Movements implements Subject{
 		 */
 		//testSegment(userId, rotateAntiClockSegment1);
 		/**
-		 * Teste Gesto Completo	
+		 * Complete Gesture Test
 		 */
-		detector.updateAllGestures(userId);
+		if(isToggleDeltaT()){
+			detector.updateAllGestures(userId);
+		}
 		/*
 		 * Method to start and stop gestures recognition
 		 */
@@ -182,20 +191,24 @@ public class Movements implements Subject{
 		/**
 		 * Move map
 		 */
-		
+		/*
 		if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			System.out.println("leftClick");
 			//moveMap.move(userId);
-			
-		}
+		}*/
 		/*
 		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 			moveMap.move(userId);
-			
 		}*/
-		
 		//moveMap.move(userId);
-		
+	}
+	
+	@Override
+	public void notifyObserverGesture(EGestureType type) {
+		deltaT(true); //pause all gesture check
+		for(Observer i: listObservers){
+			i.update(type);
+		}
 	}
 	
 	public String testSegment(int userId, IGestureSegment segment){
@@ -206,13 +219,48 @@ public class Movements implements Subject{
 		}
 		return result;
 	}
-
-
-	@Override
-	public void notifyObserverGesture(EGestureType type) {
-		for(Observer i: listObservers){
-			i.update(type);
-		}
+	/**
+	 * Timer
+	 */
+	public void deltaT(boolean event){
+		if(event){
+			final long initialDelay = 0; //time to start counter
+			setToggleDeltaT(false);
+			final Timer t = new Timer();
+			t.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					setToggleDeltaT(true);
+					/**
+					 * After cancel task
+					 */
+					t.cancel(); 
+					}
+				}, initialDelay, DELTA_T);
+			}
+	}
+	public void deltaT (){
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				if(isToggleDeltaT())
+					setToggleDeltaT(false);
+				else
+					setToggleDeltaT(true);
+			}
+		};
+		long initialDelay = 0; 
+		long period = 1; 
+		ScheduledExecutorService service = Executors
+		                    .newSingleThreadScheduledExecutor();
+		service.scheduleAtFixedRate(runnable, initialDelay, period, TimeUnit.SECONDS);
+	}
+	
+	public boolean isToggleDeltaT() {
+		return toggleDeltaT;
 	}
 
+	public void setToggleDeltaT(boolean toggleDeltaT) {
+		this.toggleDeltaT = toggleDeltaT;
+	}
 }

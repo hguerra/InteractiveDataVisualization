@@ -1,6 +1,4 @@
 package br.com.inpe.kinect.view;
-
-import br.com.inpe.app.RegisterVirtualGlobe;
 import br.com.inpe.kinect.controller.Bridge;
 import br.com.inpe.kinect.controller.Data;
 import br.com.inpe.kinect.controller.DataDown;
@@ -25,6 +23,7 @@ import SimpleOpenNI.SimpleOpenNI;
  * @since March 2015.
  */
 public class KinectEvents extends Processing implements Observer {
+	private static final long serialVersionUID = 1L;
 	private final static int WIDTH = 640;
 	private final static int HEIGHT = 480;
 	private SimpleOpenNI kinect;
@@ -36,6 +35,7 @@ public class KinectEvents extends Processing implements Observer {
 	private Time timeUp;
 	private Time timeDown;
 	private HandOpen handOpen;
+	private Boolean handClosed = true;
 
 	public void setup() {
 		// Size of window application
@@ -87,7 +87,7 @@ public class KinectEvents extends Processing implements Observer {
 		dataDown = new DataDown();
 		timeUp = new TimeUp();
 		timeDown = new TimeDown();
-		
+
 		handOpen = new HandOpen(kinect, this, WIDTH, HEIGHT);
 	}
 
@@ -154,11 +154,11 @@ public class KinectEvents extends Processing implements Observer {
 			break;
 		}
 		case HAND_OPEN: {
-			System.out.println("HAND_OPEN");
+			//handEvent(EGestureType.HAND_OPEN);
 			break;
 		}
 		case HAND_CLOSED: {
-			System.out.println("HAND_CLOSED");
+			//handEvent(EGestureType.HAND_CLOSED);
 			break;
 		}
 
@@ -218,6 +218,40 @@ public class KinectEvents extends Processing implements Observer {
 		ellipse(convertedJoint.x, convertedJoint.y, 5, 5);
 	}
 
+	public void handEvent(EGestureType type) {
+		if (type.equals(EGestureType.HAND_OPEN) && handClosed) {
+			// start pressed event
+			System.out.println("aberta");
+			// toggle event
+			handClosed = false;
+		} else if (type.equals(EGestureType.HAND_CLOSED) && !handClosed) {
+			// release event
+			System.out.println("fechada");
+			// toggle event
+			handClosed = true;
+		}
+	}
+
+	public void kinectDebug(boolean memoryInfo) {
+		if (memoryInfo) {
+			SystemInfo info = new SystemInfo();
+			message(5, 20, 15, info.MemInfo());
+		}
+	}
+
+	public void message(float widthScreen, float heightScreen, int sizeFont,
+			String message) {
+		textSize(sizeFont);
+		fill(255);
+		text(message, widthScreen, heightScreen);
+	}
+
+	/**
+	 * @param curContext
+	 * @param userId
+	 * 
+	 *            SimpleOpenNI events
+	 */
 	// user-tracking callbacks!
 	public void onNewUser(SimpleOpenNI curContext, int userId) {
 		println("onNewUser - userId: " + userId);
@@ -237,19 +271,4 @@ public class KinectEvents extends Processing implements Observer {
 		// required method
 		// println("onVisibleUser - userId: " + userId);
 	}
-
-	public void kinectDebug(boolean memoryInfo) {
-		if (memoryInfo) {
-			SystemInfo info = new SystemInfo();
-			message(5, 20, 15, info.MemInfo());
-		}
-	}
-
-	public void message(float widthScreen, float heightScreen, int sizeFont,
-			String message) {
-		textSize(sizeFont);
-		fill(255);
-		text(message, widthScreen, heightScreen);
-	}
-
 }// END Class

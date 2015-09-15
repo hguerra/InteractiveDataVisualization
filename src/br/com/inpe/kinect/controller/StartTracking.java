@@ -10,7 +10,6 @@ import SimpleOpenNI.SimpleOpenNI;
  * @since March 2015.
  */
 public class StartTracking implements Bridge {
-	private SimpleOpenNI context;
 	private Movements movement;
 
 	public StartTracking(SimpleOpenNI context) {

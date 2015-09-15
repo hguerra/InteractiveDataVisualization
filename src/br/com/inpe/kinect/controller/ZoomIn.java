@@ -12,7 +12,7 @@ public class ZoomIn implements Zoom {
 	@Override
 	public void setZoom() {
 		System.out.println("ZOOM IN!");
-		RegisterVirtualGlobe.getController().zoom(0.90);
+		//RegisterVirtualGlobe.getFrameController().zoom(0.90);
 	}
 
 }

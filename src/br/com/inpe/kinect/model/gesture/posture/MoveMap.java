@@ -29,7 +29,7 @@ public class MoveMap extends Position {
 
 	public void move(int userId){
 		addHandPoints(userId);
-		RegisterVirtualGlobe.getController().pan(
+		RegisterVirtualGlobe.getFrameController().pan(
 				hand.getRightDeltaY() * PERCENTAGE,
 				hand.getRightDeltaX() * PERCENTAGE);
 	}

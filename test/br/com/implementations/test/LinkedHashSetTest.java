@@ -8,7 +8,6 @@ import java.util.List;
 import processing.core.PVector;
 
 public class LinkedHashSetTest {
-
 	public static void main(String[] args) {
 		PVectorTransform vector = new PVectorTransform(new PVector(1f, 2f, 3f));
 		PVectorTransform vector2 = new PVectorTransform(new PVector(3f, 2f, 1f));

@@ -12,6 +12,6 @@ public class ZoomOut implements Zoom{
 	@Override
 	public void setZoom() {
 		System.out.println("ZOOM OUT!");
-		RegisterVirtualGlobe.getController().zoom(1.10);
+		RegisterVirtualGlobe.getFrameController().zoom(1.10);
 	}
 }
