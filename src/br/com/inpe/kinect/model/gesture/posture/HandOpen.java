@@ -1,15 +1,18 @@
 package br.com.inpe.kinect.model.gesture.posture;
+
 import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.Subject;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
-import br.com.inpe.kinect.model.gesture.detector.Position;
+import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
 import br.com.inpe.kinect.view.KinectEvents;
 import br.com.inpe.kinect.view.Observer;
 
-public class HandOpen extends Position implements Subject{
+public class HandOpen extends SkeletonPoints implements Subject {
+	public static int MIN_FINGERS_HAND_OPEN = 3;
+	public static int MAX_FINGERS_HAND_OPEN = 6;
 	private HandRecognize fingers;
 	private Observer observer;
-	
+
 	public HandOpen(SimpleOpenNI context, KinectEvents screen, int width,
 			int height) {
 		super(context);
@@ -19,22 +22,28 @@ public class HandOpen extends Position implements Subject{
 	}
 
 	public void checkHand(int[] depthMap, int threshold) {
-			fingers.setThreshold(threshold);
-			fingers.update(depthMap);
-			boolean result = (fingers.getNumFingers() > 3 && fingers
-					.getNumFingers() < 7) ? true : false;
-			EGestureType type = result ? EGestureType.HAND_OPEN : EGestureType.HAND_CLOSED;
-			notifyObserverGesture(type);
+		fingers.setThreshold(threshold);
+		fingers.update(depthMap);
+		boolean result = (fingers.getNumFingers() > MIN_FINGERS_HAND_OPEN && fingers
+				.getNumFingers() < MAX_FINGERS_HAND_OPEN) ? true : false;
+		EPostureType type = result ? EPostureType.HAND_OPEN
+				: EPostureType.HAND_CLOSED;
+		notifyObserverPosture(type);
 	}
+
 	@Override
 	public void registerObserver(Observer observer) {
 		this.observer = observer;
-		
+
+	}
+
+	@Override
+	public void notifyObserverPosture(EPostureType type) {
+		observer.update(type);
 	}
 
 	@Override
 	public void notifyObserverGesture(EGestureType type) {
-		observer.update(type);
 	}
 
 }

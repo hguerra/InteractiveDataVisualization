@@ -4,14 +4,14 @@ import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import br.com.inpe.kinect.model.gesture.detector.Position;
+import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
 
 /**
  * @author Heitor Guerra Carneiro.
  * @version 1.0
  * @since April 2015.
  */
-public class WaveRightSegment1 extends Position implements IGestureSegment {
+public class WaveRightSegment1 extends SkeletonPoints implements IGestureSegment {
 
 	public WaveRightSegment1(SimpleOpenNI context) {
 		super(context);

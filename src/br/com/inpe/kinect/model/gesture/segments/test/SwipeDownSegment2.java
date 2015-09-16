@@ -4,13 +4,13 @@ import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import br.com.inpe.kinect.model.gesture.detector.Position;
+import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
 /**
  * 
  * @author Heitor
  *
  */
-public class SwipeDownSegment2 extends Position implements IGestureSegment{
+public class SwipeDownSegment2 extends SkeletonPoints implements IGestureSegment{
 
 	public SwipeDownSegment2(SimpleOpenNI context) {
 		super(context);

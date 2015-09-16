@@ -4,9 +4,9 @@ import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.app.RegisterVirtualGlobe;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import br.com.inpe.kinect.model.gesture.detector.Position;
+import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
 
-public class MoveMap extends Position {
+public class MoveMap extends SkeletonPoints {
 	private final static double PERCENTAGE = 0.3;
 	private final static int ARM_LENGTH = 400; 
 	private HandPosition hand;

@@ -4,9 +4,9 @@ import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import br.com.inpe.kinect.model.gesture.detector.Position;
+import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
 
-public class RotateClockSegments2 extends Position implements IGestureSegment{
+public class RotateClockSegments2 extends SkeletonPoints implements IGestureSegment{
 
 	public RotateClockSegments2(SimpleOpenNI context) {
 		super(context);

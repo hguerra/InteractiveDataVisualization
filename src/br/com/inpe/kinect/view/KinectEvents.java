@@ -1,8 +1,8 @@
 package br.com.inpe.kinect.view;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
+import processing.core.PImage;
+import processing.core.PVector;
+import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.controller.Bridge;
 import br.com.inpe.kinect.controller.Data;
 import br.com.inpe.kinect.controller.DataDown;
@@ -15,11 +15,9 @@ import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
+import br.com.inpe.kinect.model.gesture.posture.EPostureType;
 import br.com.inpe.kinect.model.gesture.posture.HandOpen;
 import br.com.system.info.SystemInfo;
-import processing.core.PImage;
-import processing.core.PVector;
-import SimpleOpenNI.SimpleOpenNI;
 
 /**
  * @author Heitor Guerra Carneiro.
@@ -94,7 +92,7 @@ public class KinectEvents extends Processing implements Observer {
 		timeDown = new TimeDown();
 
 		handOpen = new HandOpen(kinect, this, WIDTH, HEIGHT);
-		
+
 	}
 
 	public void draw() {
@@ -158,15 +156,20 @@ public class KinectEvents extends Processing implements Observer {
 			System.out.println("OTHER");
 			break;
 		}
+		}
+	}
+
+	@Override
+	public void update(EPostureType type) {
+		switch (type) {
 		case HAND_OPEN: {
-			handEvent(EGestureType.HAND_OPEN);
+			handEvent(EPostureType.HAND_OPEN);
 			break;
 		}
 		case HAND_CLOSED: {
-			handEvent(EGestureType.HAND_CLOSED);
+			handEvent(EPostureType.HAND_CLOSED);
 			break;
 		}
-
 		}
 
 	}
@@ -223,19 +226,20 @@ public class KinectEvents extends Processing implements Observer {
 		ellipse(convertedJoint.x, convertedJoint.y, 5, 5);
 	}
 
-	public void handEvent(EGestureType type) {
-		if (type.equals(EGestureType.HAND_OPEN) && handClosed) {
+	public void handEvent(EPostureType type) {
+		if (type.equals(EPostureType.HAND_OPEN) && handClosed) {
 			// start pressed event
 			System.out.println("aberta");
 			// toggle event
 			handClosed = false;
-		} else if (type.equals(EGestureType.HAND_CLOSED) && !handClosed) {
+		} else if (type.equals(EPostureType.HAND_CLOSED) && !handClosed) {
 			// release event
 			System.out.println("fechada");
 			// toggle event
 			handClosed = true;
 		}
 	}
+
 	public void kinectDebug(boolean memoryInfo) {
 		if (memoryInfo) {
 			SystemInfo info = new SystemInfo();

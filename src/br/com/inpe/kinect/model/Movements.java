@@ -7,11 +7,13 @@ import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.inpe.kinect.model.gesture.detector.GestureDetector;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
+import br.com.inpe.kinect.model.gesture.posture.EPostureType;
 import br.com.inpe.kinect.model.gesture.posture.LeftClick;
 import br.com.inpe.kinect.model.gesture.posture.MoveMap;
 import br.com.inpe.kinect.model.gesture.posture.StartCheck;
@@ -206,6 +208,12 @@ public class Movements implements Subject{
 	@Override
 	public void notifyObserverGesture(EGestureType type) {
 		deltaT(true); //pause all gesture check
+		for(Observer i: listObservers){
+			i.update(type);
+		}
+	}
+	@Override
+	public void notifyObserverPosture(EPostureType type) {
 		for(Observer i: listObservers){
 			i.update(type);
 		}

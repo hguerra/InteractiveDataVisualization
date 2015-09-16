@@ -3,11 +3,11 @@ package br.com.inpe.kinect.model.gesture.detector;
 import SimpleOpenNI.SimpleOpenNI;
 import processing.core.PVector;
 
-public abstract class Position {
+public abstract class SkeletonPoints {
 	private SimpleOpenNI context;
 	private PVector vector;
 
-	public Position(SimpleOpenNI context) {
+	public SkeletonPoints(SimpleOpenNI context) {
 		this.context = context;
 		vector = new PVector();
 	}

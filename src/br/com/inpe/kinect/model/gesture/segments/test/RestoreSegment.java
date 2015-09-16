@@ -4,9 +4,9 @@ import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
-import br.com.inpe.kinect.model.gesture.detector.Position;
+import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
 
-public class RestoreSegment extends Position implements IGestureSegment{
+public class RestoreSegment extends SkeletonPoints implements IGestureSegment{
 
 	public RestoreSegment(SimpleOpenNI context) {
 		super(context);
