@@ -1,9 +1,9 @@
-package br.com.inpe.kinect.model.gesture.posture;
+package br.com.inpe.kinect.model;
 
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Contours {
+public class FingerContours {
 	double TAU = 3.14159 * 2;
 	public double[] tx; // tmp
 	public double[] vx; // tmp
@@ -41,11 +41,11 @@ public class Contours {
 
 	public PApplet applet;
 
-	public Contours(PApplet _applet) {
+	public FingerContours(PApplet _applet) {
 		this(_applet, 640, 480);
 	}
 
-	public Contours(PApplet _applet, int w, int h) {
+	public FingerContours(PApplet _applet, int w, int h) {
 		this.applet = _applet;
 		this.w = w;
 		this.h = h;

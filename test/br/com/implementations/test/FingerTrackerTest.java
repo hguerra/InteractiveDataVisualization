@@ -1,12 +1,12 @@
 package br.com.implementations.test;
 
-import br.com.inpe.kinect.model.gesture.posture.HandRecognize;
+import br.com.inpe.kinect.model.FingerTracker;
 import processing.core.*;
 import SimpleOpenNI.*;
 
-public class FingerTracker extends PApplet {
+public class FingerTrackerTest extends PApplet {
 	private static final long serialVersionUID = 1L;
-	HandRecognize fingers;
+	FingerTracker fingers;
 	SimpleOpenNI kinect;
 
 	int threshold = 700; // 625
@@ -19,7 +19,7 @@ public class FingerTracker extends PApplet {
 
 		kinect.setMirror(true);
 
-		fingers = new HandRecognize(this, 640, 480);
+		fingers = new FingerTracker(this, 640, 480);
 
 		fingers.setMeltFactor(100);
 
@@ -66,14 +66,14 @@ public class FingerTracker extends PApplet {
 				: false;
 	}
 
-	public void drawFingerContour(HandRecognize fingers) {
+	public void drawFingerContour(FingerTracker fingers) {
 		stroke(0, 255, 0);
 		for (int k = 0; k < fingers.getNumContours(); k++) {
 			fingers.drawContour(k);
 		}
 	}
 
-	public void drawFinger(HandRecognize fingers) {
+	public void drawFinger(FingerTracker fingers) {
 		noStroke();
 		fill(255, 0, 0);
 		for (int i = 0; i < fingers.getNumFingers(); i++) {

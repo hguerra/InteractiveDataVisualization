@@ -15,7 +15,7 @@ import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
-import br.com.inpe.kinect.model.gesture.posture.EPostureType;
+import br.com.inpe.kinect.model.gesture.detector.EPostureType;
 import br.com.inpe.kinect.model.gesture.posture.HandOpen;
 import br.com.system.info.SystemInfo;
 
@@ -28,6 +28,7 @@ public class KinectEvents extends Processing implements Observer {
 	private static final long serialVersionUID = 1L;
 	private final static int WIDTH = 640;
 	private final static int HEIGHT = 480;
+	private final static int THRESHOLD = 900;
 	private SimpleOpenNI kinect;
 	private Bridge bridge;
 	private Zoom zoomIn;
@@ -107,7 +108,7 @@ public class KinectEvents extends Processing implements Observer {
 		 * handOpen
 		 */
 		int[] depthMap = kinect.depthMap();
-		handOpen.checkHand(depthMap, 900);
+		handOpen.checkHand(depthMap, THRESHOLD);
 		/**
 		 * SkeletonTracking
 		 */

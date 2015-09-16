@@ -1,9 +1,9 @@
-package br.com.inpe.kinect.model.gesture.posture;
+package br.com.inpe.kinect.model;
 
 import processing.core.PApplet;
 import processing.core.PVector;
-public class HandRecognize {
-	private Contours contours;
+public class FingerTracker {
+	private FingerContours contours;
 	int w;
 	int h;
 	int numfingers;
@@ -19,10 +19,10 @@ public class HandRecognize {
 	double ROUNDNESS_THRESHOLD = -1.33;	  // minimum allowable value for 
                                           // ratio of area / perimeter of fingertip
 	
-	public HandRecognize(PApplet parent, int w, int h) {
+	public FingerTracker(PApplet parent, int w, int h) {
 		this.w = w;
 		this.h = h;
-		contours = new Contours(parent, w, h);
+		contours = new FingerContours(parent, w, h);
 		setThreshold(128);
 		
 		screenx = new double[w * h];
