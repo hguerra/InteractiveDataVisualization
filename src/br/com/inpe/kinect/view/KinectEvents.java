@@ -1,4 +1,8 @@
 package br.com.inpe.kinect.view;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 import br.com.inpe.kinect.controller.Bridge;
 import br.com.inpe.kinect.controller.Data;
 import br.com.inpe.kinect.controller.DataDown;
@@ -36,6 +40,7 @@ public class KinectEvents extends Processing implements Observer {
 	private Time timeDown;
 	private HandOpen handOpen;
 	private Boolean handClosed = true;
+	private Boolean handDeltaT = true;
 
 	public void setup() {
 		// Size of window application
@@ -89,6 +94,7 @@ public class KinectEvents extends Processing implements Observer {
 		timeDown = new TimeDown();
 
 		handOpen = new HandOpen(kinect, this, WIDTH, HEIGHT);
+		
 	}
 
 	public void draw() {
@@ -117,7 +123,6 @@ public class KinectEvents extends Processing implements Observer {
 				 * Analysis of body position, model method
 				 */
 				bridge.initPoseCheck(userList[i]);
-
 				/*
 				 * Analysis Update method
 				 */
@@ -154,11 +159,11 @@ public class KinectEvents extends Processing implements Observer {
 			break;
 		}
 		case HAND_OPEN: {
-			//handEvent(EGestureType.HAND_OPEN);
+			handEvent(EGestureType.HAND_OPEN);
 			break;
 		}
 		case HAND_CLOSED: {
-			//handEvent(EGestureType.HAND_CLOSED);
+			handEvent(EGestureType.HAND_CLOSED);
 			break;
 		}
 
@@ -231,7 +236,6 @@ public class KinectEvents extends Processing implements Observer {
 			handClosed = true;
 		}
 	}
-
 	public void kinectDebug(boolean memoryInfo) {
 		if (memoryInfo) {
 			SystemInfo info = new SystemInfo();
@@ -271,4 +275,5 @@ public class KinectEvents extends Processing implements Observer {
 		// required method
 		// println("onVisibleUser - userId: " + userId);
 	}
+
 }// END Class
