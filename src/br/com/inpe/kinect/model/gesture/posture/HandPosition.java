@@ -9,7 +9,7 @@ import processing.core.PVector;
 
 public class HandPosition {
 	/* Limit of arraylist */
-	private static final int MAX_POINTS = 50;
+	private static final int MAX_POINTS = 4;
 	private List<PVector> rightHandCoords;
 	private List<PVector> leftHandCoords;
 	/**
@@ -63,7 +63,7 @@ public class HandPosition {
 		}
 	}
 */
-	public boolean isGreaterthanMaxPoints(){
+	public boolean isGreaterThanMaxPoints(){
 		return collectionRightHandCoords.size()>MAX_POINTS;
 	}
 	public boolean isGreaterEqualsMaxPoints(){
@@ -102,7 +102,7 @@ public class HandPosition {
 	}
 	
 	public synchronized void addRightHandPoint(PVector realPoints) {
-		if(isGreaterthanMaxPoints())
+		if(isGreaterThanMaxPoints())
 			removeFirst();
 		collectionRightHandCoords.add(PVectorToString(realPoints));
 	}

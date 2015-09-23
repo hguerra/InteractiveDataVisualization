@@ -204,6 +204,7 @@ public class Movements implements Subject{
 		//moveMap.move(userId);
 	}
 	
+	
 	@Override
 	public void notifyObserverGesture(EGestureType type) {
 		deltaT(true); //pause all gesture check
