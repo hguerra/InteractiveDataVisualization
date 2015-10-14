@@ -29,7 +29,7 @@ public class OpenFile {
 	public Object recoverChooser() throws ClassNotFoundException {
 		fileChooser = new JFileChooser();
 		fileChooser
-				.setFileFilter(new FileNameExtensionFilter("ser", "ser"));
+				.setFileFilter(new FileNameExtensionFilter("gesture", "gesture"));
 		if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			File newFile = new File(fileChooser.getSelectedFile().toString());
 			try {

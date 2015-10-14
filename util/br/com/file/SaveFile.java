@@ -28,7 +28,7 @@ public class SaveFile {
 		fileChooser = new JFileChooser();
 		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 			File newFile = new File(fileChooser.getSelectedFile().toString()
-					+ "." + "paint");
+					+ "." + "gesture");
 			try {
 				FileOutputStream outFile = new FileOutputStream(newFile);
 				ObjectOutputStream s = new ObjectOutputStream(outFile);

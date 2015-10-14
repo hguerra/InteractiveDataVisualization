@@ -11,11 +11,8 @@ import java.util.concurrent.TimeUnit;
 import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.kinect.model.gesture.detector.EGestureResult;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
-import br.com.inpe.kinect.model.gesture.detector.EPostureType;
 import br.com.inpe.kinect.model.gesture.detector.GestureDetector;
 import br.com.inpe.kinect.model.gesture.detector.IGestureSegment;
-import br.com.inpe.kinect.model.gesture.posture.LeftClick;
-import br.com.inpe.kinect.model.gesture.posture.StartCheck;
 import br.com.inpe.kinect.model.gesture.segments.ZoomSegment1;
 import br.com.inpe.kinect.model.gesture.segments.ZoomSegment2;
 import br.com.inpe.kinect.model.gesture.segments.ZoomSegment3;
@@ -39,6 +36,15 @@ import br.com.inpe.kinect.model.gesture.segments.test.WaveLeftSegment2;
 import br.com.inpe.kinect.model.gesture.segments.test.WaveRightSegment1;
 import br.com.inpe.kinect.model.gesture.segments.test.WaveRightSegment2;
 import br.com.inpe.kinect.model.gesture.segments.test.ZoomOutSegment1;
+import br.com.inpe.kinect.model.posture.Click;
+import br.com.inpe.kinect.model.posture.EPostureType;
+import br.com.inpe.kinect.model.posture.IPosture;
+import br.com.inpe.kinect.model.posture.LeftClick;
+import br.com.inpe.kinect.model.posture.Posture;
+import br.com.inpe.kinect.model.posture.PostureDetector;
+import br.com.inpe.kinect.model.posture.PostureFilter;
+import br.com.inpe.kinect.model.posture.Start;
+import br.com.inpe.kinect.model.posture.StartCheck;
 import br.com.inpe.kinect.view.Observer;
 
 /**
@@ -46,8 +52,8 @@ import br.com.inpe.kinect.view.Observer;
  * @version 2.0
  * @since May 2015.
  */
-public class Movements implements Subject{
-	private static final int DELTA_T = 200;//milliseconds
+public class Movements implements Subject {
+	private static final int DELTA_T = 200;// milliseconds
 	private boolean toggleDeltaT;
 	private List<Observer> listObservers;
 	/*
@@ -101,7 +107,15 @@ public class Movements implements Subject{
 	 * Move Map
 	 */
 	private MoveMap moveMap;
-	
+
+	/**
+	 * Filter
+	 */
+	private IPosture click;
+	private IPosture start;
+	private PostureFilter filter;
+	private PostureDetector postureDetector;
+
 	public Movements(SimpleOpenNI context) {
 		listObservers = new LinkedList<Observer>();
 		/**
@@ -123,7 +137,8 @@ public class Movements implements Subject{
 		zoomSegment1 = new ZoomSegment1(context);
 		zoomSegment2 = new ZoomSegment2(context);
 		zoomSegment3 = new ZoomSegment3(context);
-		zoomParts = new IGestureSegment[]{zoomSegment1, zoomSegment2, zoomSegment3};
+		zoomParts = new IGestureSegment[] { zoomSegment1, zoomSegment2,
+				zoomSegment3 };
 		exitSegment = new ExitSegment(context);
 		restoreSegment = new RestoreSegment(context);
 		rotateAntiClockSegment1 = new RotateAntiClockSegments1(context);
@@ -132,7 +147,8 @@ public class Movements implements Subject{
 		zoomOutSegment1 = new ZoomOutSegment1(context);
 		zoomOutSegment2 = new ZoomSegment1(context);
 		zoomOutSegment3 = new ZoomSegment3(context);
-		zoomOutParts = new IGestureSegment[]{zoomOutSegment1, zoomOutSegment2, zoomOutSegment3};
+		zoomOutParts = new IGestureSegment[] { zoomOutSegment1,
+				zoomOutSegment2, zoomOutSegment3 };
 		/**
 		 * Swipe
 		 */
@@ -146,23 +162,33 @@ public class Movements implements Subject{
 		swipeUp2 = new SwipeUpSegment2(context);
 		swipeDown1 = new SwipeDownSegment1(context);
 		swipeDown2 = new SwipeDownSegment2(context);
-		swipeLeftParts = new IGestureSegment[]{swipeLeft1, swipeLeft2, swipeLeft3};
-		swipeRightParts = new IGestureSegment[]{swipeRight1, swipeRight2, swipeRight3};
-		swipeUpParts = new IGestureSegment[]{swipeUp1, swipeUp2};
-		swipeDownParts = new IGestureSegment[]{swipeDown1, swipeDown2};
-		
+		swipeLeftParts = new IGestureSegment[] { swipeLeft1, swipeLeft2,
+				swipeLeft3 };
+		swipeRightParts = new IGestureSegment[] { swipeRight1, swipeRight2,
+				swipeRight3 };
+		swipeUpParts = new IGestureSegment[] { swipeUp1, swipeUp2 };
+		swipeDownParts = new IGestureSegment[] { swipeDown1, swipeDown2 };
+
 		detector = new GestureDetector();
-		//detector.addGesture(EGestureType.WAVERIGHT, waveRightParts, this);
-		//detector.addGesture(EGestureType.WAVELEFT, waveLeftParts, this);
+		// detector.addGesture(EGestureType.WAVERIGHT, waveRightParts, this);
+		// detector.addGesture(EGestureType.WAVELEFT, waveLeftParts, this);
 		detector.addGesture(EGestureType.ZOOM, zoomParts, this);
-		//detector.addGesture(EGestureType.ZOOM_OUT, zoomOutParts, this);
-		//detector.addGesture(EGestureType.SWIPE_LEFT, swipeLeftParts, this);
-		//detector.addGesture(EGestureType.SWIPE_RIGHT, swipeRightParts, this);
+		// detector.addGesture(EGestureType.ZOOM_OUT, zoomOutParts, this);
+		// detector.addGesture(EGestureType.SWIPE_LEFT, swipeLeftParts, this);
+		// detector.addGesture(EGestureType.SWIPE_RIGHT, swipeRightParts, this);
 		moveMap = new MoveMap(context);
+
 		/**
-		 * Timer
+		 * Filter
 		 */
-		deltaT(true);
+		// open the file
+		click = new Click(context);
+		start = new Start(context);
+		filter = new PostureFilter(this);
+		postureDetector = new PostureDetector();
+		postureDetector.addPosture(new Posture(click, filter));
+		postureDetector.addPosture(new Posture(start, filter));
+
 	}
 
 	@Override
@@ -174,65 +200,70 @@ public class Movements implements Subject{
 		/**
 		 * position test
 		 */
-		//testSegment(userId, rotateAntiClockSegment1);
+		// testSegment(userId, rotateAntiClockSegment1);
 		/**
 		 * Complete Gesture Test
 		 */
-		if(isToggleDeltaT()){
+		if (isToggleDeltaT()) {
 			detector.updateAllGestures(userId);
 		}
 		/*
 		 * Method to start and stop gestures recognition
 		 */
 		/*
-		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-			detector.updateAllGestures(userId);
-		}*/
-		
+		 * if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+		 * detector.updateAllGestures(userId); }
+		 */
+
 		/**
 		 * Move map
 		 */
 		/*
-		if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-			System.out.println("leftClick");
-			//moveMap.move(userId);
-		}*/
+		 * if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+		 * System.out.println("leftClick"); //moveMap.move(userId); }
+		 */
 		/*
-		if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-			moveMap.move(userId);
-		}*/
-		//moveMap.move(userId);
+		 * if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+		 * moveMap.move(userId); }
+		 */
+		// moveMap.move(userId);
+
+		/**
+		 * Filter
+		 */
+		postureDetector.updateAllPosture(userId);
 	}
-	
-	
+
 	@Override
 	public void notifyObserverGesture(EGestureType type) {
-		deltaT(true); //pause all gesture check
-		for(Observer i: listObservers){
+		deltaT(true); // pause all gesture check
+		for (Observer i : listObservers) {
 			i.update(type);
 		}
 	}
+
 	@Override
 	public void notifyObserverPosture(EPostureType type) {
-		for(Observer i: listObservers){
+		for (Observer i : listObservers) {
 			i.update(type);
 		}
 	}
-	
-	public String testSegment(int userId, IGestureSegment segment){
+
+	public String testSegment(int userId, IGestureSegment segment) {
 		String result = "";
-		if(segment.checkGesture(userId).equals(EGestureResult.SUCCEED)){
-			result  = "Segmento recognized";
+		if (segment.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
+			result = "Segmento recognized";
 			System.out.println(result);
 		}
 		return result;
 	}
+
 	/**
 	 * Timer
 	 */
-	public void deltaT(boolean event){
-		if(event){
-			final long initialDelay = 0; //time to start counter
+	public void deltaT(boolean event) {
+		if (event) {
+			final long initialDelay = 0; // time to start counter
 			setToggleDeltaT(false);
 			final Timer t = new Timer();
 			t.schedule(new TimerTask() {
@@ -242,28 +273,30 @@ public class Movements implements Subject{
 					/**
 					 * After cancel task
 					 */
-					t.cancel(); 
-					}
-				}, initialDelay, DELTA_T);
-			}
+					t.cancel();
+				}
+			}, initialDelay, DELTA_T);
+		}
 	}
-	public void deltaT (){
+
+	public void deltaT() {
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				if(isToggleDeltaT())
+				if (isToggleDeltaT())
 					setToggleDeltaT(false);
 				else
 					setToggleDeltaT(true);
 			}
 		};
-		long initialDelay = 0; 
-		long period = 1; 
+		long initialDelay = 0;
+		long period = 1;
 		ScheduledExecutorService service = Executors
-		                    .newSingleThreadScheduledExecutor();
-		service.scheduleAtFixedRate(runnable, initialDelay, period, TimeUnit.SECONDS);
+				.newSingleThreadScheduledExecutor();
+		service.scheduleAtFixedRate(runnable, initialDelay, period,
+				TimeUnit.SECONDS);
 	}
-	
+
 	public boolean isToggleDeltaT() {
 		return toggleDeltaT;
 	}

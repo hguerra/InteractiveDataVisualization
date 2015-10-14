@@ -15,8 +15,8 @@ import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
-import br.com.inpe.kinect.model.gesture.detector.EPostureType;
-import br.com.inpe.kinect.model.gesture.posture.HandOpen;
+import br.com.inpe.kinect.model.posture.EPostureType;
+import br.com.inpe.kinect.model.posture.HandOpen;
 import br.com.system.info.SystemInfo;
 
 /**
@@ -169,6 +169,14 @@ public class KinectEvents extends Processing implements Observer {
 		}
 		case HAND_CLOSED: {
 			handEvent(EPostureType.HAND_CLOSED);
+			break;
+		}
+		case CLICK: {
+			System.out.println("Click");
+			break;
+		}
+		case STATUS_CHANGE: {
+			System.out.println("Start");
 			break;
 		}
 		}

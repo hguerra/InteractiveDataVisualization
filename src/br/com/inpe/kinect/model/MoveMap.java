@@ -5,7 +5,7 @@ import SimpleOpenNI.SimpleOpenNI;
 import br.com.inpe.app.RegisterVirtualGlobe;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
 import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
-import br.com.inpe.kinect.model.gesture.posture.HandPosition;
+import br.com.inpe.kinect.model.posture.HandPosition;
 
 public class MoveMap extends SkeletonPoints {
 	private final static double PERCENTAGE = 0.3;

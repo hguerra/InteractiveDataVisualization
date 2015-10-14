@@ -1,7 +1,7 @@
 package br.com.inpe.kinect.model;
 
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
-import br.com.inpe.kinect.model.gesture.detector.EPostureType;
+import br.com.inpe.kinect.model.posture.EPostureType;
 import br.com.inpe.kinect.view.Observer;
 /**
  * @author Heitor Guerra Carneiro.
