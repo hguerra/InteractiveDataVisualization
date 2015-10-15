@@ -2,39 +2,28 @@ package br.com.inpe.kinect.model;
 
 import processing.core.PVector;
 import SimpleOpenNI.SimpleOpenNI;
-import br.com.inpe.app.RegisterVirtualGlobe;
 import br.com.inpe.kinect.model.gesture.detector.JointID;
 import br.com.inpe.kinect.model.gesture.detector.SkeletonPoints;
-import br.com.inpe.kinect.model.posture.HandPosition;
 import br.com.inpe.kinect.model.posture.HandPositionOriginal;
 
 public class MoveMap extends SkeletonPoints {
 	private final static double PERCENTAGE = 0.3;
 	private final static int ARM_LENGTH = 400;
+	private final static double ZOOM_FACTOR_MIN = 0.97;
+	private final static double ZOOM_FACTOR_MAX = 1.03;
 	// private HandPosition hand;
 	private HandPositionOriginal hand;
 	private boolean rightHandPan = true;
 
 	public MoveMap(SimpleOpenNI context) {
 		super(context);
-		// hand = new HandPosition();
 		hand = new HandPositionOriginal();
 	}
-
-	// public void move(int userId){
-	// addHandPoints(userId);
-	// RegisterVirtualGlobe.getFrameController().pan(
-	// hand.getRightDeltaY() * PERCENTAGE,
-	// hand.getRightDeltaX() * PERCENTAGE);
-	// }
 
 	public void move(int userId)
 	// using HandPositionOriginal
 	{
 		addHandPoints(userId);
-
-		System.out.println("right:" + hand.getRightHandCoords());
-		System.out.println("left:" + hand.getLeftHandCoords());
 		/**
 		 * method update SkeletonKinectHandler
 		 */
@@ -70,25 +59,25 @@ public class MoveMap extends SkeletonPoints {
 				: (distRightHandtoShoulder > ARM_LENGTH && distLeftHandtoShoulder > ARM_LENGTH))) {
 			if (Math.abs(prevHandsDist - currHandsDist) > 30) {
 				if (prevHandsDist < currHandsDist) {
-					// this.controller.zoom(0.97);
-					System.out.println("zomm:" + 0.97);
+					// this.controller.zoom(ZOOM_FACTOR_MIN);
+					//System.out.println("zomm:" + ZOOM_FACTOR_MIN);
 				} else if (prevHandsDist > currHandsDist) {
-					// this.controller.zoom(1.03);
-					System.out.println("zomm:" + 1.03);
+					// this.controller.zoom(ZOOM_FACTOR_MAX);
+					//System.out.println("zomm:" + ZOOM_FACTOR_MAX);
 				}
 			}
 			return;
 		} else if (distRightHandtoShoulder > ARM_LENGTH) {
 
-			// this.controller.pan(rightDeltaY * 0.3, rightDeltaX * 0.3);
-			System.out.println("pan:" + rightDeltaY * 0.3 + "," + rightDeltaX
-					* 0.3);
+			// this.controller.pan(rightDeltaY * PERCENTAGE, rightDeltaX * PERCENTAGE);
+			System.out.println("pan:" + rightDeltaY * PERCENTAGE + "," + rightDeltaX
+					* PERCENTAGE);
 			rightHandPan = true;
 		} else if (distLeftHandtoShoulder > ARM_LENGTH) {
 			
 			// this.controller.pan(leftDeltaY * 0.3, leftDeltaX * 0.3);
-			System.out.println("pan:" + leftDeltaY * 0.3 + "," + leftDeltaX
-					* 0.3);
+			System.out.println("pan:" + leftDeltaY * PERCENTAGE + "," + leftDeltaX
+					* PERCENTAGE);
 			rightHandPan = false;
 		}
 
@@ -100,7 +89,6 @@ public class MoveMap extends SkeletonPoints {
 		hand.addRightHandPoint(rightPoints);
 		hand.addLeftHandPoint(leftPoints);
 	}
-
 	/**
 	 * calculate armLength (JointID.RIGHT_HAND, JointID.RIGHT_SHOULDER)
 	 */
