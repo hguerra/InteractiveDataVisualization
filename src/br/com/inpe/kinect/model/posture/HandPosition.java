@@ -5,13 +5,13 @@ import java.util.List;
 
 import processing.core.PVector;
 
-public class HandPositionOriginal {
+public class HandPosition {
 	/* Limit of arraylist */
 	private static final int MAX_POINTS = 4;
 	private List<PVector> rightHandCoords;
 	private List<PVector> leftHandCoords;
 
-	public HandPositionOriginal() {
+	public HandPosition() {
 		rightHandCoords = new ArrayList<PVector>(MAX_POINTS);
 		leftHandCoords = new ArrayList<PVector>(MAX_POINTS);
 	}

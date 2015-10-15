@@ -177,7 +177,6 @@ public class Movements implements Subject {
 		// detector.addGesture(EGestureType.SWIPE_LEFT, swipeLeftParts, this);
 		// detector.addGesture(EGestureType.SWIPE_RIGHT, swipeRightParts, this);
 		moveMap = new MoveMap(context);
-
 		/**
 		 * Filter
 		 */
@@ -198,36 +197,17 @@ public class Movements implements Subject {
 
 	public void poseCheck(int userId) {
 		/**
-		 * position test
-		 */
-		// testSegment(userId, rotateAntiClockSegment1);
-		/**
 		 * Complete Gesture Test
+		 *
+		 * Method to start and stop gestures recognition
 		 */
 		if (isToggleDeltaT()) {
 			detector.updateAllGestures(userId);
 		}
-		/*
-		 * Method to start and stop gestures recognition
-		 */
-		/*
-		 * if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-		 * detector.updateAllGestures(userId); }
-		 */
 		/**
 		 * Move map
 		 */
 		moveMap.move(userId);
-		/*
-		 * if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-		 * System.out.println("leftClick"); //moveMap.move(userId); }
-		 */
-		/*
-		 * if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
-		 * moveMap.move(userId); }
-		 */
-		// moveMap.move(userId);
-
 		/**
 		 * Filter
 		 */

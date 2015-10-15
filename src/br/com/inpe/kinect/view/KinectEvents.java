@@ -14,6 +14,7 @@ import br.com.inpe.kinect.controller.TimeUp;
 import br.com.inpe.kinect.controller.Zoom;
 import br.com.inpe.kinect.controller.ZoomIn;
 import br.com.inpe.kinect.controller.ZoomOut;
+import br.com.inpe.kinect.model.SwitchTracker;
 import br.com.inpe.kinect.model.gesture.detector.EGestureType;
 import br.com.inpe.kinect.model.posture.EPostureType;
 import br.com.inpe.kinect.model.posture.HandOpen;
@@ -132,52 +133,74 @@ public class KinectEvents extends Processing implements Observer {
 
 	@Override
 	public void update(EGestureType type) {
-		switch (type) {
-		case ZOOM: {
-			zoomIn.setZoom();
-			break;
+		if (SwitchTracker.isGESTURE()) {
+			SwitchTracker.gestureTurnOn();
+			switch (type) {
+			case ZOOM: {
+				zoomIn.setZoom();
+				break;
+			}
+			case ZOOM_OUT: {
+				zoomOut.setZoom();
+				break;
+			}
+			case SWIPE_LEFT: {
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			case SWIPE_RIGHT: {
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			case SWIPE_DOWN: {
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			case SWIPE_UP: {
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			default: {
+				SwitchTracker.allTurnOn();
+				break;
+			}
+
+			}
 		}
-		case ZOOM_OUT: {
-			zoomOut.setZoom();
-			break;
-		}
-		case SWIPE_LEFT: {
-			break;
-		}
-		case SWIPE_RIGHT: {
-			break;
-		}
-		case SWIPE_DOWN: {
-			break;
-		}
-		case SWIPE_UP: {
-			break;
-		}
-		}
+
 	}
 
 	@Override
 	public void update(EPostureType type) {
-		
-//		switch (type) {
-//		case HAND_OPEN: {
-//			handEvent(EPostureType.HAND_OPEN);
-//			break;
-//		}
-//		case HAND_CLOSED: {
-//			handEvent(EPostureType.HAND_CLOSED);
-//			break;
-//		}
-//		case CLICK: {
-//			System.out.println("Click");
-//			break;
-//		}
-//		case STATUS_CHANGE: {
-//			System.out.println("Start");
-//			break;
-//		}
-//		}
-
+		if (SwitchTracker.isPOSTURE()) {
+			SwitchTracker.postureTurnOn();
+			switch (type) {
+			case HAND_OPEN: {
+				handEvent(EPostureType.HAND_OPEN);
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			case HAND_CLOSED: {
+				handEvent(EPostureType.HAND_CLOSED);
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			case CLICK: {
+				System.out.println("Click");
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			case STATUS_CHANGE: {
+				System.out.println("Start");
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			default: {
+				SwitchTracker.allTurnOn();
+				break;
+			}
+			}
+		}
 	}
 
 	public void drawSkeleton(int userId) {

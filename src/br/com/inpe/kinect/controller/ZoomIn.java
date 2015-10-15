@@ -1,6 +1,7 @@
 package br.com.inpe.kinect.controller;
 
 import br.com.inpe.app.RegisterVirtualGlobe;
+import br.com.inpe.kinect.model.SwitchTracker;
 
 
 /**
@@ -9,10 +10,11 @@ import br.com.inpe.app.RegisterVirtualGlobe;
  * @since March 2015.
  */
 public class ZoomIn implements Zoom {
+	private final static double ZOOM_FACTOR_MIN = 0.97;
 	@Override
 	public void setZoom() {
-		System.out.println("ZOOM IN!");
-		//RegisterVirtualGlobe.getFrameController().zoom(0.90);
+		RegisterVirtualGlobe.getFrameController().zoom(ZOOM_FACTOR_MIN);
+		SwitchTracker.allTurnOn();
 	}
 
 }
