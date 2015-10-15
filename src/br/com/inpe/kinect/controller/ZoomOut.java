@@ -12,7 +12,8 @@ public class ZoomOut implements Zoom{
 	private final static double ZOOM_FACTOR_MAX = 1.03;
 	@Override
 	public void setZoom() {
-		RegisterVirtualGlobe.getFrameController().zoom(ZOOM_FACTOR_MAX);
+		System.out.println("ZOOM IN");
+		//RegisterVirtualGlobe.getFrameController().zoom(ZOOM_FACTOR_MAX);
 		SwitchTracker.allTurnOn();
 	}
 }

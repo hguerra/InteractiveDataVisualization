@@ -51,14 +51,16 @@ public class MoveMap extends SkeletonPoints {
 			if (distRightHandtoShoulder > ARM_LENGTH) {
 				// RegisterVirtualGlobe.getFrameController().pan(rightDeltaY *
 				// PERCENTAGE, rightDeltaX * PERCENTAGE);
-				System.out.println("pan:" + rightDeltaY * PERCENTAGE + ","
-						+ rightDeltaX * PERCENTAGE);
+				
+				//System.out.println("pan:" + rightDeltaY * PERCENTAGE + ","
+				//		+ rightDeltaX * PERCENTAGE);
 				setRightHandPan(true);
 			} else if (distLeftHandtoShoulder > ARM_LENGTH) {
 				// RegisterVirtualGlobe.getFrameController().pan(leftDeltaY *
 				// 0.3, leftDeltaX * 0.3);
-				System.out.println("pan:" + leftDeltaY * PERCENTAGE + ","
-						+ leftDeltaX * PERCENTAGE);
+				
+				//System.out.println("pan:" + leftDeltaY * PERCENTAGE + ","
+				//		+ leftDeltaX * PERCENTAGE);
 				setRightHandPan(false);
 			}
 			

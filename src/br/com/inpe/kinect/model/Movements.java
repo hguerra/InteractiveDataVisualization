@@ -107,7 +107,6 @@ public class Movements implements Subject {
 	 * Move Map
 	 */
 	private MoveMap moveMap;
-
 	/**
 	 * Filter
 	 */
@@ -118,13 +117,6 @@ public class Movements implements Subject {
 
 	public Movements(SimpleOpenNI context) {
 		listObservers = new LinkedList<Observer>();
-		/**
-		 * Posture
-		 */
-		// StartCheck
-		startCheck = new StartCheck(context);
-		// leftClick
-		leftClick = new LeftClick(context);
 		/**
 		 * Gesture
 		 */
@@ -180,7 +172,13 @@ public class Movements implements Subject {
 		/**
 		 * Filter
 		 */
-		// open the file
+		/**
+		 * Posture
+		 */
+		// StartCheck
+		startCheck = new StartCheck(context);
+		// leftClick
+		leftClick = new LeftClick(context);
 		click = new Click(context);
 		start = new Start(context);
 		filter = new PostureFilter(this);
@@ -201,9 +199,7 @@ public class Movements implements Subject {
 		 *
 		 * Method to start and stop gestures recognition
 		 */
-		if (isToggleDeltaT()) {
-			detector.updateAllGestures(userId);
-		}
+		detector.updateAllGestures(userId);
 		/**
 		 * Move map
 		 */
@@ -212,6 +208,9 @@ public class Movements implements Subject {
 		 * Filter
 		 */
 		postureDetector.updateAllPosture(userId);
+		/**
+		 * Click special case, with click posture is recognized and hand closed
+		 */
 	}
 
 	@Override
