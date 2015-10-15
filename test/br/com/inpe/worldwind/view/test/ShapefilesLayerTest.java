@@ -30,7 +30,7 @@ public class ShapefilesLayerTest extends JFrame {
 
 		shapefile = new ShapefilesLayer();
 
-		layers = shapefile.makeShapefileLayers(FILE_PATH_BRAZIL_REGIOES);
+		layers = shapefile.makeShapefileLayers(FILE_PATH_WORLD);
 
 		for (Layer l : layers) {
 			ApplicationTemplate.insertBeforePlacenames(wwd, l);

@@ -5,14 +5,13 @@ import processing.core.PVector;
 
 public abstract class SkeletonPoints {
 	private SimpleOpenNI context;
-	private PVector vector;
 
 	public SkeletonPoints(SimpleOpenNI context) {
 		this.context = context;
-		vector = new PVector();
 	}
 
 	public PVector vectorJoint(int userId, int jointID) {
+		PVector vector = new PVector();
 		context.getJointPositionSkeleton(userId, jointID, vector);
 		return vector;
 	}

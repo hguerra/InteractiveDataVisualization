@@ -214,10 +214,10 @@ public class Movements implements Subject {
 		 * if (startCheck.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 		 * detector.updateAllGestures(userId); }
 		 */
-
 		/**
 		 * Move map
 		 */
+		moveMap.move(userId);
 		/*
 		 * if (leftClick.checkGesture(userId).equals(EGestureResult.SUCCEED)) {
 		 * System.out.println("leftClick"); //moveMap.move(userId); }

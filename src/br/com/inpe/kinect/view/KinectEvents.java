@@ -142,19 +142,15 @@ public class KinectEvents extends Processing implements Observer {
 			break;
 		}
 		case SWIPE_LEFT: {
-			System.out.println("OTHER");
 			break;
 		}
 		case SWIPE_RIGHT: {
-			System.out.println("SWIPE_RIGHT");
 			break;
 		}
 		case SWIPE_DOWN: {
-			System.out.println("OTHER");
 			break;
 		}
 		case SWIPE_UP: {
-			System.out.println("OTHER");
 			break;
 		}
 		}
@@ -162,24 +158,25 @@ public class KinectEvents extends Processing implements Observer {
 
 	@Override
 	public void update(EPostureType type) {
-		switch (type) {
-		case HAND_OPEN: {
-			handEvent(EPostureType.HAND_OPEN);
-			break;
-		}
-		case HAND_CLOSED: {
-			handEvent(EPostureType.HAND_CLOSED);
-			break;
-		}
-		case CLICK: {
-			System.out.println("Click");
-			break;
-		}
-		case STATUS_CHANGE: {
-			System.out.println("Start");
-			break;
-		}
-		}
+		
+//		switch (type) {
+//		case HAND_OPEN: {
+//			handEvent(EPostureType.HAND_OPEN);
+//			break;
+//		}
+//		case HAND_CLOSED: {
+//			handEvent(EPostureType.HAND_CLOSED);
+//			break;
+//		}
+//		case CLICK: {
+//			System.out.println("Click");
+//			break;
+//		}
+//		case STATUS_CHANGE: {
+//			System.out.println("Start");
+//			break;
+//		}
+//		}
 
 	}
 
