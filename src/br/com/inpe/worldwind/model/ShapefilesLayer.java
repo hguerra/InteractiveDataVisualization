@@ -7,10 +7,10 @@ import gov.nasa.worldwindx.examples.util.ShapefileLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 
- * @author Heitor
- * Class used to add shapefiles
+ * @author Heitor Class used to add shapefiles
  */
 public class ShapefilesLayer {
 	public List<Layer> makeShapefileLayers(String filepath) {
@@ -24,6 +24,22 @@ public class ShapefilesLayer {
 			ShapefileLoader loader = new ShapefileLoader();
 			return loader.createLayersFromSource(filepath);
 		}
+	}
+
+	public List<Layer> makeShapefileLayers(String filepath, String layerName,
+			boolean pickEnabled) {
+		List<Layer> layers = new ArrayList<Layer>();
+		if (OpenStreetMapShapefileLoader.isOSMPlacesSource(filepath)) {
+			Layer layer = OpenStreetMapShapefileLoader
+					.makeLayerFromOSMPlacesSource(filepath);
+			layers = new ArrayList<Layer>();
+			layers.add(layer);
+		} else {
+			ShapefileLoader loader = new ShapefileLoader();
+			layers = loader.createLayersFromSource(filepath);
+		}
+		setLayersName(layers, layerName, pickEnabled);
+		return layers;
 	}
 
 	public void setLayersName(List<Layer> layers, String makeDisplayName,

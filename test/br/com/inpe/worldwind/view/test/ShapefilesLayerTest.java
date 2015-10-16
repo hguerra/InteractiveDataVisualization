@@ -25,23 +25,63 @@ public class ShapefilesLayerTest extends JFrame {
 	public static final String FILE_PATH_WORLD = "shapefiles/world/TM_WORLD_BORDERS_SIMPL-0.2.shp";
 	private WorldWindowGLCanvas wwd;
 	private ShapefilesLayer shapefile;
-	private List<Layer> layers;
 	private List<String> files = Arrays.asList(FILE_PATH_BRAZIL_REGIOES,
 			FILE_PATH_BRAZIL_ESTADOS, FILE_PATH_BRAZIL_MUNICIPIOS,
 			FILE_PATH_USA, FILE_PATH_WORLD);
 	private int iteratorInsertLayer = 0;
-	private int iteratorRemoveLayer = files.size()>0? files.size()-1:0;
-	
+	private int iteratorRemoveLayer = files.size() > 0 ? files.size() - 1 : 0;
+
 	public ShapefilesLayerTest() {
 		wwd = new WorldWindowGLCanvas();
 		wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
 		this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
 		wwd.setModel(new BasicModel());
 		shapefile = new ShapefilesLayer();
-		// insertLayer(FILE_PATH_BRAZIL_REGIOES);
+		/**
+		 * start Timer
+		 */
 		timerInsertLayer();
 	}
 
+	public void insertLayer(List<Layer> layers) {
+		for (Layer l : layers) {
+			insertBeforeCompass(wwd, l);
+		}
+		wwd.redraw();
+	}
+
+	public void insertLayer(String path, String layerName, boolean pickEnabled) {
+		List<Layer> layers = shapefile.makeShapefileLayers(path, layerName,
+				pickEnabled);
+		insertLayer(layers);
+	}
+
+	public void insertLayer(String path) {
+		List<Layer> layers = shapefile.makeShapefileLayers(path);
+		insertLayer(layers);
+	}
+
+	public void removeLayer(String layerName) {
+		List<Layer> toRemoveLayers = wwd.getModel().getLayers();
+		for (Layer l : toRemoveLayers) {
+			if (l.getName().equals(layerName)) {
+				toRemoveLayers.remove(l);
+			}
+
+		}
+		wwd.redraw();
+	}
+
+	public void removeLayer() {
+		removeLayer("Renderable");
+	}
+
+	/**
+	 * Important Method
+	 * 
+	 * @param wwd
+	 * @param layer
+	 */
 	public void insertBeforeCompass(WorldWindow wwd, Layer layer) {
 		// Insert the layer into the layer list just before the compass.
 		int compassPosition = 0;
@@ -61,35 +101,6 @@ public class ShapefilesLayerTest extends JFrame {
 				compassPosition = toRemoveLayers.indexOf(l);
 		}
 		toRemoveLayers.remove(compassPosition);
-	}
-	public void removeTest(){
-		List<Layer> toRemoveLayers = wwd.getModel().getLayers();
-		for(Layer l: layers){
-			toRemoveLayers.remove(l);
-		}
-		wwd.redraw();
-	}
-	public void insertLayer(String path) {
-		layers = shapefile.makeShapefileLayers(path);
-		for (Layer l : layers) {
-			insertBeforeCompass(wwd, l);
-		}
-		// to use in removeTest
-		//layers = null;
-		wwd.redraw();
-	}
-
-	public void executeInsertLayer(int i) {
-		System.out.println(files.get(i));
-		insertLayer(files.get(i));
-	}
-
-	public void executeRemoveLayer(int i) {
-		System.out.println(files.get(i));
-		//removeCompassLayer(wwd);
-		//wwd.redraw();
-		// to use in removeTest
-		removeTest();
 	}
 
 	public void timerInsertLayer() {
@@ -129,6 +140,29 @@ public class ShapefilesLayerTest extends JFrame {
 				}
 			}
 		}, initialDelay, 5000);
+	}
+
+	/**
+	 * Run in other Threads
+	 * 
+	 * @param i
+	 */
+	public void executeInsertLayer(int i) {
+		// File name
+		System.out.println(files.get(i));
+		// Insert layer with default name, for remove this, need remove all
+		// elements
+		// insertLayer(files.get(i));
+		// Insert layer with specific name, can remove by name
+		insertLayer(files.get(i), "arquivo-" + i, true);
+	}
+
+	public void executeRemoveLayer(int i) {
+		System.out.println(files.get(i));
+		// remove all layers add
+		// removeLayer();
+		// remove specific layer by name
+		removeLayer("arquivo-" + i);
 	}
 
 	public static void main(String[] args) {
