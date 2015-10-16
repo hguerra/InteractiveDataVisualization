@@ -1,11 +1,7 @@
 package br.com.inpe.worldwind.view.test;
 
 import gov.nasa.worldwind.BasicModel;
-import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
-import gov.nasa.worldwind.layers.CompassLayer;
-import gov.nasa.worldwind.layers.Layer;
-import gov.nasa.worldwind.layers.LayerList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,71 +32,11 @@ public class ShapefilesLayerTest extends JFrame {
 		wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
 		this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
 		wwd.setModel(new BasicModel());
-		shapefile = new ShapefilesLayer();
+		shapefile = new ShapefilesLayer(wwd);
 		/**
 		 * start Timer
 		 */
 		timerInsertLayer();
-	}
-
-	public void insertLayer(List<Layer> layers) {
-		for (Layer l : layers) {
-			insertBeforeCompass(wwd, l);
-		}
-		wwd.redraw();
-	}
-
-	public void insertLayer(String path, String layerName, boolean pickEnabled) {
-		List<Layer> layers = shapefile.makeShapefileLayers(path, layerName,
-				pickEnabled);
-		insertLayer(layers);
-	}
-
-	public void insertLayer(String path) {
-		List<Layer> layers = shapefile.makeShapefileLayers(path);
-		insertLayer(layers);
-	}
-
-	public void removeLayer(String layerName) {
-		List<Layer> toRemoveLayers = wwd.getModel().getLayers();
-		for (Layer l : toRemoveLayers) {
-			if (l.getName().equals(layerName)) {
-				toRemoveLayers.remove(l);
-			}
-
-		}
-		wwd.redraw();
-	}
-
-	public void removeLayer() {
-		removeLayer("Renderable");
-	}
-
-	/**
-	 * Important Method
-	 * 
-	 * @param wwd
-	 * @param layer
-	 */
-	public void insertBeforeCompass(WorldWindow wwd, Layer layer) {
-		// Insert the layer into the layer list just before the compass.
-		int compassPosition = 0;
-		LayerList layers = wwd.getModel().getLayers();
-		for (Layer l : layers) {
-			if (l instanceof CompassLayer)
-				compassPosition = layers.indexOf(l);
-		}
-		layers.add(compassPosition, layer);
-	}
-
-	public void removeCompassLayer(WorldWindow wwd) {
-		int compassPosition = 0;
-		LayerList toRemoveLayers = wwd.getModel().getLayers();
-		for (Layer l : toRemoveLayers) {
-			if (l instanceof CompassLayer)
-				compassPosition = toRemoveLayers.indexOf(l);
-		}
-		toRemoveLayers.remove(compassPosition);
 	}
 
 	public void timerInsertLayer() {
@@ -152,9 +88,10 @@ public class ShapefilesLayerTest extends JFrame {
 		System.out.println(files.get(i));
 		// Insert layer with default name, for remove this, need remove all
 		// elements
-		// insertLayer(files.get(i));
+
+		// shapefile.insertLayer(files.get(i));
 		// Insert layer with specific name, can remove by name
-		insertLayer(files.get(i), "arquivo-" + i, true);
+		shapefile.insertLayer(files.get(i), "arquivo-" + i, true);
 	}
 
 	public void executeRemoveLayer(int i) {
@@ -162,7 +99,7 @@ public class ShapefilesLayerTest extends JFrame {
 		// remove all layers add
 		// removeLayer();
 		// remove specific layer by name
-		removeLayer("arquivo-" + i);
+		shapefile.removeLayer("arquivo-" + i);
 	}
 
 	public static void main(String[] args) {
