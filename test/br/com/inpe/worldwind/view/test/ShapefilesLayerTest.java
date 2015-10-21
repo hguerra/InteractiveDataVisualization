@@ -3,6 +3,8 @@ package br.com.inpe.worldwind.view.test;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
+import java.awt.Color;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
@@ -36,7 +38,9 @@ public class ShapefilesLayerTest extends JFrame {
 		/**
 		 * start Timer
 		 */
-		timerInsertLayer();
+		shapefile.insertRenderableLayer(FILE_PATH_BRAZIL_ESTADOS, Color.RED, Color.BLUE);
+		
+		//timerInsertLayer();
 	}
 
 	public void timerInsertLayer() {
