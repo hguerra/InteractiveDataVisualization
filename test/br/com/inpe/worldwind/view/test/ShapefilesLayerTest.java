@@ -38,9 +38,10 @@ public class ShapefilesLayerTest extends JFrame {
 		/**
 		 * start Timer
 		 */
-		shapefile.insertRenderableLayer(FILE_PATH_BRAZIL_ESTADOS, Color.RED, Color.BLUE);
-		
-		//timerInsertLayer();
+		//shapefile.insertLayerBeforeCompass(FILE_PATH_BRAZIL_ESTADOS);
+		//shapefile.insertRenderableLayer(FILE_PATH_BRAZIL_ESTADOS, Color.RED, Color.BLUE);
+		//shapefile.insertRenderableLayerBeforeCompass(FILE_PATH_BRAZIL_ESTADOS);
+		timerInsertLayer();
 	}
 
 	public void timerInsertLayer() {
@@ -95,7 +96,7 @@ public class ShapefilesLayerTest extends JFrame {
 
 		// shapefile.insertLayer(files.get(i));
 		// Insert layer with specific name, can remove by name
-		shapefile.insertLayer(files.get(i), "arquivo-" + i, true);
+		shapefile.insertLayerBeforeCompass(files.get(i), "arquivo-" + i, true);
 	}
 
 	public void executeRemoveLayer(int i) {
