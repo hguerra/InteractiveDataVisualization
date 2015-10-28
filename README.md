@@ -15,3 +15,7 @@ The tool brings the demonstration that it is possible to achieve the interconnec
 ## Documentation
 
 https://github.com/hguerra/InteractiveDataVisualization/wiki
+
+## Schedule
+
+https://docs.google.com/spreadsheets/d/1tzZRx5t86pgqOCpYlsMC900UX9t2QwqST6HHLdJxYgU/edit?usp=sharing
