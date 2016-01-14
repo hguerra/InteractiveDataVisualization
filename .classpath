@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="src" path="util"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/worldwind/gdal.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/processing/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/processing/jogl-all.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/processing/core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/simpleopenni/SimpleOpenNI/library/SimpleOpenNI.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/worldwind/worldwind.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/worldwind/worldwindx.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/Programas/ProjetoVisualizaçãoInterativa/workspace/InteractiveDataVisualization/Libraries/World Wind"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Heitor/workspace/InteractiveDataVisualization/library/db4o/db4o-8.0.249.16098-all-java5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/NITE2/com.primesense.nite.jar"/>
+	<classpathentry kind="lib" path="lib/OpenNI2/org.openni.jar"/>
+	<classpathentry kind="lib" path="lib/kinect4j.jar"/>
+	<classpathentry kind="lib" path="lib/jogl/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="lib/jogl/jogl-all.jar"/>
+	<classpathentry kind="lib" path="lib/worldwind/worldwind.jar"/>
+	<classpathentry kind="lib" path="lib/worldwind/worldwindx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
