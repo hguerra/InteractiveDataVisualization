@@ -10,5 +10,7 @@
 	<classpathentry kind="lib" path="lib/jogl/jogl-all.jar"/>
 	<classpathentry kind="lib" path="lib/worldwind/worldwind.jar"/>
 	<classpathentry kind="lib" path="lib/worldwind/worldwindx.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/GDAL/java/gdal.jar"/>
+	<classpathentry kind="lib" path="lib/gdal-util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
