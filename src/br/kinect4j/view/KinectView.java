@@ -16,7 +16,6 @@ import br.com.kinect4j.engine.core.PoseController;
 import br.com.kinect4j.engine.defaultcore.DefaultPoseController;
 import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
-import br.com.util.SkeletonInfoPrinter;
 import br.inpe.worldwind.controller.ScenarioController;
 import br.inpe.worldwind.layer.VegetationScenarioLayer.VegetationScenarioApp;
 import br.kinect4j.controller.HandsUpController;
@@ -27,6 +26,7 @@ import br.kinect4j.controller.WaveRightController;
 import br.kinect4j.controller.ZoomInController;
 import br.kinect4j.controller.ZoomOutController;
 import br.kinect4j.engine.Pan;
+import br.kinect4j.util.SkeletonInfoPrinter;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
 public class KinectView extends Kinect4jView {
