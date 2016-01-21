@@ -12,5 +12,7 @@
 	<classpathentry kind="lib" path="lib/worldwind/worldwindx.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/GDAL/java/gdal.jar"/>
 	<classpathentry kind="lib" path="lib/gdal-util.jar"/>
+	<classpathentry kind="lib" path="lib/postgis-jdbc-2.2.0dev.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-9.4.1207.jre6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

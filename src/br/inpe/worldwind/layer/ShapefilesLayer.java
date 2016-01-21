@@ -41,7 +41,7 @@ import java.util.Set;
 
 import org.w3c.dom.Document;
 
-import br.kinect4j.util.ShapefileInfo;
+import br.inpe.util.ShapefileInfo;
 
 /**
  * 

@@ -1,4 +1,4 @@
-package br.kinect4j.util;
+package br.inpe.util;
 
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import gov.nasa.worldwind.formats.shapefile.ShapefileRecord;

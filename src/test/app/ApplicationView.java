@@ -16,7 +16,7 @@ import br.com.kinect4j.engine.core.PoseController;
 import br.com.kinect4j.engine.defaultcore.DefaultPoseController;
 import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
-import br.kinect4j.util.SkeletonInfoPrinter;
+import br.inpe.util.SkeletonInfoPrinter;
 
 public class ApplicationView extends Kinect4jView {
 	private static final long serialVersionUID = 1L;

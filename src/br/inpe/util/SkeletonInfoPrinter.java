@@ -1,4 +1,4 @@
-package br.kinect4j.util;
+package br.inpe.util;
 
 import com.primesense.nite.Point3D;
 
