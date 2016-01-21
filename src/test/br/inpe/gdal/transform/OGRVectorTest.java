@@ -22,30 +22,38 @@ public class OGRVectorTest {
 		org = new OGRVector();
 	}
 
-//	@Test
-//	public void shpToKml() {
-//		org.transform(GeoFormat.KML, OUT_PUT, VEGTYPE_2000);
-//		Assert.assertEquals(true, foundFile(GeoFormat.KML,OUT_PUT));
-//	}
-//
-//	@Test
-//	public void shpToGeoJson() {
-//		org.transform(GeoFormat.GEO_JSON, OUT_PUT, VEGTYPE_2000);
-//		Assert.assertEquals(true, foundFile(GeoFormat.GEO_JSON,OUT_PUT));
-//	}
-//	
-//	@Test
-//	public void kmlToShp() {
-//		String kml = FILE_PATH_GDAL_TRANSFORM + "vegtype-gdal.kml";
-//		org.transform(GeoFormat.SHAPEFILE, OUT_PUT, kml);
-//		Assert.assertEquals(true, foundFile(GeoFormat.SHAPEFILE,OUT_PUT));
-//	}
+	@Test
+	public void shpToKml() {
+		org.transform(GeoFormat.KML, OUT_PUT, VEGTYPE_2000);
+		Assert.assertEquals(true, foundFile(GeoFormat.KML,OUT_PUT));
+	}
+
+	@Test
+	public void shpToGeoJson() {
+		org.transform(GeoFormat.GEO_JSON, OUT_PUT, VEGTYPE_2000);
+		Assert.assertEquals(true, foundFile(GeoFormat.GEO_JSON,OUT_PUT));
+	}
+	
+	@Test
+	public void kmlToShp() {
+		String kml = FILE_PATH_GDAL_TRANSFORM + "vegtype-gdal.kml";
+		org.transform(GeoFormat.SHAPEFILE, OUT_PUT, kml);
+		Assert.assertEquals(true, foundFile(GeoFormat.SHAPEFILE,OUT_PUT));
+	}
 
 	@Test
 	public void reprojectTest() {
 		String reproject = FILE_PATH_GDAL_TRANSFORM + "vegtype-gdal-reproject";
 		org.reproject(GeoFormat.SHAPEFILE, "4236", reproject, VEGTYPE_2000);
 	}
+	
+	@Test
+	public void rasterToShp() {
+		String input = "data/vegtype-inland/raster/vegtype_2000.tif";
+		String output = "data/gdal/fromTiff.shp";
+		org.rasterToShapefile(output, input);
+	}
+	
 	
 	@After
 	public void destroy() {

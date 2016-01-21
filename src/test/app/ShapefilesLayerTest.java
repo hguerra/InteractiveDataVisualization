@@ -36,7 +36,9 @@ public class ShapefilesLayerTest extends JFrame {
 	public static final String VEGTYPE_2040 = FILE_PATH_MODELOS+"vegtype_2040.shp";
 	public static final String VEGTYPE_2045 = FILE_PATH_MODELOS+"vegtype_2045.shp";
 	public static final String VEGTYPE_2050 = FILE_PATH_MODELOS+"vegtype_2050.shp";
-
+	// Gdal convert
+	public static final String FILE_PATH_GDAL_TRANSFORM = "data/gdal/";
+	public static final String VEGTYPE_2000_GDAL = FILE_PATH_GDAL_TRANSFORM+"fromTiff.shp";
 
 	private WorldWindowGLCanvas wwd;
 	private ShapefilesLayer shapefile;
@@ -55,8 +57,8 @@ public class ShapefilesLayerTest extends JFrame {
 		/**
 		 * Inserindo modelos
 		 */
-		shapefile.insertRenderableLayer(VEGTYPE_2000,
-				DefaultColors.getOriginalColors1());
+//		shapefile.insertRenderableLayer(VEGTYPE_2000_GDAL,
+//				DefaultColors.getOriginalColors1());
 	
 //		shapefile.insertRenderableLayer(VEGTYPE_2005,
 //		DefaultColors.getOriginalColors2());
@@ -79,7 +81,7 @@ public class ShapefilesLayerTest extends JFrame {
 //		shapefile.insertRenderableLayer(FILE_PATH_DADOS_ANA_PART_1, Color.red, null);
 //		shapefile.insertRenderableLayer(FILE_PATH_DADOS_ANA_PART_2, Color.red, null);
 		
-		//shapefile.printShapefileInfo(VEGTYPE_2005, "attr", true);
+		shapefile.printShapefileInfo(VEGTYPE_2000_GDAL, "attr", true);
 	}
 
 	void printMapColors(Map<Double, Color> colors) {

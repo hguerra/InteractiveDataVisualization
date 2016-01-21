@@ -1,5 +1,8 @@
 package br.inpe.worldwind.controller;
 
+import java.util.ConcurrentModificationException;
+
+import br.inpe.worldwind.layer.VegetationScenarioLayer.VegetationScenarioApp;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Angle;
@@ -7,10 +10,6 @@ import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.view.orbit.OrbitView;
-
-import java.util.ConcurrentModificationException;
-
-import br.inpe.worldwind.layer.VegetationScenarioLayer.VegetationScenarioApp;
 
 public class ScenarioController {
 
