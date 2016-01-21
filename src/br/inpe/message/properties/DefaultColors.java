@@ -1,6 +1,8 @@
 package br.inpe.message.properties;
 
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DefaultColors {
 	public static final Color c1 = new Color(0, 100, 1);// Color.decode("#006401");
@@ -28,5 +30,18 @@ public class DefaultColors {
 	public static Color[] getOriginalColors2() {
 		Color[] colors = { c1, c2, c9, c10, c11, c12, c3, cNegative127 };
 		return colors;
+	}
+
+	public static Map<Integer, Color> getDefaultColors(){
+		Map<Integer, Color> map = new HashMap<>();
+		map.put(1, c1);
+		map.put(2, c2);
+		map.put(9, c9);
+		map.put(10, c10);
+		map.put(11, c11);
+		map.put(12, c12);
+		map.put(3, c3);
+		map.put(-127, cNegative127);
+		return map;
 	}
 }
