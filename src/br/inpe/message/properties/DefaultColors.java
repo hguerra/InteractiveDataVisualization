@@ -32,16 +32,16 @@ public class DefaultColors {
 		return colors;
 	}
 
-	public static Map<Integer, Color> getDefaultColors(){
-		Map<Integer, Color> map = new HashMap<>();
-		map.put(1, c1);
-		map.put(2, c2);
-		map.put(9, c9);
-		map.put(10, c10);
-		map.put(11, c11);
-		map.put(12, c12);
-		map.put(3, c3);
-		map.put(-127, cNegative127);
+	public static Map<Double, Color> getDefaultColors(){
+		Map<Double, Color> map = new HashMap<>();
+		map.put(1.0, c1);
+		map.put(2.0, c2);
+		map.put(9.0, c9);
+		map.put(10.0, c10);
+		map.put(11.0, c11);
+		map.put(12.0, c12);
+		map.put(3.0, c3);
+		map.put(-127.0, cNegative127);
 		return map;
 	}
 }

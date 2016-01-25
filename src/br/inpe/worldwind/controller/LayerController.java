@@ -43,7 +43,7 @@ public interface LayerController {
 		layers.add(compassPosition - 1, layer);
 	}
 	
-	public static void insertListBeforeCompass(WorldWindow wwd, List<Layer> layers){
+	public static void insertBeforeCompass(WorldWindow wwd, List<Layer> layers){
 		for(Layer l: layers){
 			insertBeforeCompass(wwd, l);
 		}
@@ -65,8 +65,17 @@ public interface LayerController {
 		wwd.getModel().getLayers().remove(layer);
 		wwd.redraw();
 	}
+	public static void removeBeforeCompass(WorldWindow wwd, String layerName){
+		List<Layer> allLayers =  wwd.getModel().getLayers();
+		for (Layer layer : allLayers) {
+			if (layer.getName().equals(layerName)) {
+				allLayers.remove(layer);
+			}
+		}
+		wwd.redraw();
+	}
 	
-	public static void removeListBeforeCompass(WorldWindow wwd, List<Layer> layers){
+	public static void removeBeforeCompass(WorldWindow wwd, List<Layer> layers){
 		for (Layer l : layers) {
 			wwd.getModel().getLayers().remove(l);
 		}

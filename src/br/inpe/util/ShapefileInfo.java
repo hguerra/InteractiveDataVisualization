@@ -1,16 +1,26 @@
 package br.inpe.util;
 
-import gov.nasa.worldwind.formats.shapefile.Shapefile;
-import gov.nasa.worldwind.formats.shapefile.ShapefileRecord;
-import gov.nasa.worldwind.geom.LatLon;
-import gov.nasa.worldwind.util.VecBuffer;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import gov.nasa.worldwind.formats.shapefile.Shapefile;
+import gov.nasa.worldwind.formats.shapefile.ShapefileRecord;
+import gov.nasa.worldwind.geom.LatLon;
+import gov.nasa.worldwind.util.VecBuffer;
+
 public class ShapefileInfo {
+
+	public static void printShapefileInfo(String filePath, String attributeName, boolean unique) {
+		Shapefile shapefile = new Shapefile(filePath);
+		if (unique) {
+			ShapefileInfo.printUniqueShapefileAttributs(shapefile, attributeName);
+		} else {
+			ShapefileInfo.printShapefileAttributs(shapefile);
+		}
+	}
+
 	public static void printShapefileAttributs(ShapefileRecord r) {
 		for (Map.Entry<String, Object> a : r.getAttributes().getEntries()) {
 			if (a.getKey() != null)
@@ -38,16 +48,14 @@ public class ShapefileInfo {
 		}
 	}
 
-	public static void printUniqueShapefileAttributs(Shapefile shapefile,
-			String attributeName) {
+	public static void printUniqueShapefileAttributs(Shapefile shapefile, String attributeName) {
 		Set set = getShapefileUniqueAttributs(shapefile, attributeName);
 		for (Object s : set) {
 			System.out.print(s + ", ");
 		}
 	}
 
-	public static Set getShapefileUniqueAttributs(Shapefile shapefile,
-			String attributeName) {
+	public static Set getShapefileUniqueAttributs(Shapefile shapefile, String attributeName) {
 		Set values = new HashSet();
 		while (shapefile.hasNext()) {
 			ShapefileRecord r = shapefile.nextRecord();
@@ -63,8 +71,8 @@ public class ShapefileInfo {
 	}
 
 	public static void printShapefileInfo(ShapefileRecord r) {
-		System.out.printf("%d, %s: %d parts, %d points", r.getRecordNumber(),
-				r.getShapeType(), r.getNumberOfParts(), r.getNumberOfPoints());
+		System.out.printf("%d, %s: %d parts, %d points", r.getRecordNumber(), r.getShapeType(), r.getNumberOfParts(),
+				r.getNumberOfPoints());
 		for (Map.Entry<String, Object> a : r.getAttributes().getEntries()) {
 			if (a.getKey() != null)
 				System.out.printf(", %s", a.getKey());
@@ -81,8 +89,7 @@ public class ShapefileInfo {
 
 		VecBuffer vb = r.getPointBuffer(0);
 		for (LatLon ll : vb.getLocations()) {
-			System.out.printf("\t%f, %f\n", ll.getLatitude().degrees,
-					ll.getLongitude().degrees);
+			System.out.printf("\t%f, %f\n", ll.getLatitude().degrees, ll.getLongitude().degrees);
 		}
 	}
 

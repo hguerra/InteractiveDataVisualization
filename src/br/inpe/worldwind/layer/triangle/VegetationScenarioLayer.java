@@ -1,4 +1,4 @@
-package br.inpe.worldwind.layer;
+package br.inpe.worldwind.layer.triangle;
 
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -56,7 +56,7 @@ public class VegetationScenarioLayer {
 
 		ScreenAnnotation logoAnnotation;
 
-		private ShapefilesLayer shapefile;
+		private LayerFactory shapefile;
 
 		String activeLayer = "a";
 
@@ -113,7 +113,7 @@ public class VegetationScenarioLayer {
 
 			this.controller = new ScenarioController(this);
 
-			shapefile = new ShapefilesLayer(getWwd());
+			shapefile = new LayerFactory();
 
 			/**
 			 * Dados
@@ -180,13 +180,11 @@ public class VegetationScenarioLayer {
 			kinect.startFirstDevice();
 
 			UserTracker userTracker = UserTracker.create();
-			
+
 			kinectHandler = new KinectView(userTracker, this);
-			
-			
+
 			kinectHandler.setBounds(15, 585, 224, 168);
-			layeredPane.add(kinectHandler, new Integer(
-					JLayeredPane.DEFAULT_LAYER.intValue() + 1));
+			layeredPane.add(kinectHandler, new Integer(JLayeredPane.DEFAULT_LAYER.intValue() + 1));
 		}
 
 		/**
@@ -395,11 +393,11 @@ public class VegetationScenarioLayer {
 			this.logoAnnotation = logoAnnotation;
 		}
 
-		public ShapefilesLayer getShapefile() {
+		public LayerFactory getShapefile() {
 			return shapefile;
 		}
 
-		public void setShapefile(ShapefilesLayer shapefile) {
+		public void setShapefile(LayerFactory shapefile) {
 			this.shapefile = shapefile;
 		}
 

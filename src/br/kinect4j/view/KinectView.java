@@ -18,7 +18,7 @@ import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
 import br.inpe.util.SkeletonInfoPrinter;
 import br.inpe.worldwind.controller.ScenarioController;
-import br.inpe.worldwind.layer.VegetationScenarioLayer.VegetationScenarioApp;
+import br.inpe.worldwind.layer.triangle.VegetationScenarioLayer.VegetationScenarioApp;
 import br.kinect4j.controller.HandsUpController;
 import br.kinect4j.controller.SwipeLeftToRightController;
 import br.kinect4j.controller.SwipeRightToLeftController;

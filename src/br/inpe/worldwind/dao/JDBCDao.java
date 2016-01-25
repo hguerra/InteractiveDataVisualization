@@ -54,11 +54,11 @@ public class JDBCDao<T extends GeometryRecord> extends JDBCStatement implements 
 			//execute query
 			ResultSet rs = getResultSet(sql.toString());
 			
-			Map<Integer, Color> defaultColors = DefaultColors.getDefaultColors();
+			Map<Double, Color> defaultColors = DefaultColors.getDefaultColors();
 					
 			while (rs.next()) {
 				PGgeometry geom = (PGgeometry)rs.getObject("geom");
-				Integer attr = rs.getInt("attr");
+				Double attr = rs.getDouble("attr");
 				List<Position> borderPositions = new ArrayList<>();
 				
 				if (geom.getGeoType() == Geometry.POLYGON) {

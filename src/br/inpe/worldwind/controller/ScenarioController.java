@@ -2,7 +2,7 @@ package br.inpe.worldwind.controller;
 
 import java.util.ConcurrentModificationException;
 
-import br.inpe.worldwind.layer.VegetationScenarioLayer.VegetationScenarioApp;
+import br.inpe.worldwind.layer.triangle.VegetationScenarioLayer.VegetationScenarioApp;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Angle;
