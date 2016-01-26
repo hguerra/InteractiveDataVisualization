@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
@@ -17,6 +20,7 @@ import br.inpe.worldwind.dao.JDBCDao;
 import br.inpe.worldwind.dao.model.vegtype_2000;
 import br.inpe.worldwind.defaultcontroller.CommentLayer;
 import br.inpe.worldwind.defaultcontroller.LineLayer;
+import br.inpe.worldwind.defaultcontroller.PointLayer;
 import br.inpe.worldwind.defaultcontroller.Polygon2DLayer;
 import br.inpe.worldwind.defaultcontroller.Polygon3DLayer;
 import br.inpe.worldwind.defaultcontroller.ScreenAnnotationLayer;
@@ -41,6 +45,7 @@ public class WorldWindControllersTest extends JFrame {
 	private LayerController comment;
 	private LayerController line;
 	private LayerController polygon3d;
+	private LayerController points;
 
 	public WorldWindControllersTest() {
 		worldWindConfig();
@@ -65,6 +70,9 @@ public class WorldWindControllersTest extends JFrame {
 
 		// Poygon3D
 		// polygon3DController();
+
+		// Point
+		pointController();
 	}
 
 	/**
@@ -115,6 +123,19 @@ public class WorldWindControllersTest extends JFrame {
 		geometryRecords.addAll(vegtype2000);
 		polygon3d = new Polygon3DLayer(wwd, geometryRecords);
 		polygon3d.asyncDraw();
+	}
+
+	private void pointController() {
+		Map<String, List<Position>> positions = new HashMap<>();
+		Position pointPosition = Position.fromDegrees(50, 7.5);
+		Position pointPosition2 = Position.fromDegrees(51, 7.5);
+		Position pointPosition3 = Position.fromDegrees(52, 7.5);
+
+		positions.put("Point Mark", Arrays.asList(pointPosition, pointPosition2, pointPosition3));
+
+		points = new PointLayer(wwd, positions);
+
+		points.asyncDraw();
 	}
 
 	/**

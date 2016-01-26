@@ -22,13 +22,14 @@ public class Polygon2DLayer implements LayerController {
 
 	@Override
 	public void draw() {
-		for (GeometryRecord geom : geometryRecords) {
+		geometryRecords.forEach(geom -> {
 			Polygon polygon = new Polygon(geom.getBorderPositions());
 			polygon.setAttributes(geom.getSideAttributes());
 			polygon.setValue(AVKey.DISPLAY_NAME, geom.getDisplayName());
 
 			renderableLayer.addRenderable(polygon);
-		}
+
+		});
 
 		LayerController.insertBeforeCompass(canvas, renderableLayer);
 	}
