@@ -13,12 +13,14 @@ import javax.swing.JFrame;
 
 import br.inpe.message.properties.DefaultColors;
 import br.inpe.util.FilePathTest;
+import br.inpe.worldwind.controller.GeoJSONController;
 import br.inpe.worldwind.controller.LayerController;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.dao.GeometryRecord;
 import br.inpe.worldwind.dao.JDBCDao;
 import br.inpe.worldwind.dao.model.vegtype_2000;
 import br.inpe.worldwind.defaultcontroller.CommentLayer;
+import br.inpe.worldwind.defaultcontroller.GeoJSONLayer;
 import br.inpe.worldwind.defaultcontroller.LineLayer;
 import br.inpe.worldwind.defaultcontroller.PointLayer;
 import br.inpe.worldwind.defaultcontroller.Polygon2DLayer;
@@ -46,6 +48,7 @@ public class WorldWindControllersTest extends JFrame {
 	private LayerController line;
 	private LayerController polygon3d;
 	private LayerController points;
+	private GeoJSONController jsonController;
 
 	public WorldWindControllersTest() {
 		worldWindConfig();
@@ -60,7 +63,7 @@ public class WorldWindControllersTest extends JFrame {
 		// polygon2DController();
 
 		// ShapefileController
-		shapefileController();
+		// shapefileController();
 
 		// CommentLayer
 		// commentController();
@@ -72,7 +75,11 @@ public class WorldWindControllersTest extends JFrame {
 		// polygon3DController();
 
 		// Point
-		pointController();
+		// pointController();
+
+		// GeoJSONController
+		geoJSONController();
+
 	}
 
 	/**
@@ -136,6 +143,29 @@ public class WorldWindControllersTest extends JFrame {
 		points = new PointLayer(wwd, positions);
 
 		points.asyncDraw();
+	}
+
+	private void geoJSONController() {
+		jsonController = new GeoJSONLayer(wwd, "attr");
+
+		/**
+		 * addGeoJSON(String layerName, GeoJSONObject json, Map
+		 * <Double,Color> colors)
+		 */
+		// GeoJSONProperties p = new GeoJSONProperties("attr");
+		// List<GeoJSONObject> json =
+		// p.createGeoJSONObjectFromSource(FilePathTest.VEGTYPE_2000_GDAL_GEOJSON);
+		// jsonController.addGeoJSON("Veg2000", json.get(0),
+		// DefaultColors.getDefaultColors());
+
+		/*
+		 * boolean addGeoJSON(String filepath, String layerName, Map<Double,
+		 * Color> colors)
+		 */
+		jsonController.addGeoJSON("Veg2000", FilePathTest.VEGTYPE_2000_GDAL_GEOJSON, DefaultColors.getDefaultColors());
+
+		// end test
+		jsonController.asyncDraw();
 	}
 
 	/**

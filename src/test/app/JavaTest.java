@@ -1,31 +1,75 @@
 package test.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import br.inpe.util.FilePathTest;
 import br.inpe.util.GenericFactory;
+import br.inpe.util.ShapefileInfo;
 import br.inpe.worldwind.dao.GeometryRecord;
 import br.inpe.worldwind.dao.JDBCDao;
 import br.inpe.worldwind.dao.model.vegtype_2000;
+import br.inpe.worldwind.engine.GeoJSONProperties;
+import gov.nasa.worldwind.avlist.AVList;
+import gov.nasa.worldwind.formats.geojson.GeoJSONFeature;
+import gov.nasa.worldwind.formats.geojson.GeoJSONFeatureCollection;
+import gov.nasa.worldwind.formats.geojson.GeoJSONObject;
+import gov.nasa.worldwind.layers.Layer;
+import gov.nasa.worldwind.layers.RenderableLayer;
 
 public class JavaTest {
 	public static void main(String[] args) {
-//		System.out.println(GenericFactory.getSimpleName(GeometryRecord.class));
-//		
-//		GeometryRecord g = GenericFactory.getInstance(vegtype_2000.class);
-//		
-//		g.setDisplayName("Test getInstance");
-//		
-//		System.out.println(g);
-//		
-//		System.out.println(g.getDisplayName());
+		// System.out.println(GenericFactory.getSimpleName(GeometryRecord.class));
+		//
+		// GeometryRecord g = GenericFactory.getInstance(vegtype_2000.class);
+		//
+		// g.setDisplayName("Test getInstance");
+		//
+		// System.out.println(g);
+		//
+		// System.out.println(g.getDisplayName());
+
+		// JDBCDao<vegtype_2000> dao = new JDBCDao<>();
+		//
+		// List<vegtype_2000> all = dao.getAll(vegtype_2000.class);
+		//
+		// for(vegtype_2000 v: all){
+		// System.out.println(v.getDisplayName());
+		// }
 		
-		JDBCDao<vegtype_2000> dao = new JDBCDao<>();
+		 GeoJSONProperties geo = new GeoJSONProperties("attr");
 		
-		List<vegtype_2000> all = dao.getAll(vegtype_2000.class);
+		 List<Layer> layers = new ArrayList<>();
 		
-		for(vegtype_2000 v: all){
-			System.out.println(v.getDisplayName());
-		}
+		 // transform all GeoJSONObject in layers
+		 List<GeoJSONObject> geos =
+		 geo.createGeoJSONObjectFromSource(FilePathTest.VEGTYPE_2000_GDAL_GEOJSON);
+		 geos.forEach(g -> {
+		 RenderableLayer layer = new RenderableLayer();
+		 geo.addGeoJSONGeometryToLayer(g, layer);
+		 layers.add(layer);
+		 });
+		
+		 // layers
+		 layers.forEach(l -> {
+		 ShapefileInfo.printEntries(l.getEntries());
+		 });
+
+		// GeoJson Analysis
+
+//		GeoJsonProperties geo = new GeoJsonProperties("attr");
+//		// transform all GeoJSONObject in layers
+//		List<GeoJSONObject> geos = geo.createGeoJSONObjectFromSource(FilePathTest.VEGTYPE_2000_GDAL_GEOJSON);
+//		geos.forEach(g -> {
+//			GeoJSONFeatureCollection c = g.asFeatureCollection();
+//			GeoJSONFeature[] features = c.getFeatures();
+//
+//			for (GeoJSONFeature f : features) {
+//				AVList properties = f.getProperties();
+//				ShapefileInfo.printEntries(properties.getEntries());
+//			}
+//		});
+
 	}
-	
+
 }

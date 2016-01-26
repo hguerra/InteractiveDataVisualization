@@ -24,7 +24,7 @@ import gov.nasa.worldwindx.examples.util.ShapefileLoader;
 public class ShapefileProperties extends ShapefileLoader {
 	private HashMap<Renderable, Set<Entry<String, Object>>> atable = new HashMap<Renderable, Set<Entry<String, Object>>>();
 	private String attributeName;
-	
+
 	public ShapefileProperties(String attributeName) {
 		this.attributeName = attributeName;
 	}
@@ -46,7 +46,8 @@ public class ShapefileProperties extends ShapefileLoader {
 		return colors;
 	}
 
-	public void addRenderablesForPolygon(Shapefile shp, String layersName, List<Layer> layers, Map<Double, Color> colors) {
+	public void addRenderablesForPolygon(Shapefile shp, String layersName, List<Layer> layers,
+			Map<Double, Color> colors) {
 		RenderableLayer layer = new RenderableLayer();
 		layer.setName(layersName);
 		layers.add(layer);
@@ -117,15 +118,6 @@ public class ShapefileProperties extends ShapefileLoader {
 	/**
 	 * Methods to set the shapefile attributes.
 	 */
-	public ShapeAttributes createPolygonAttributes(ShapefileRecord record, Map<Double, Color> colors) {
-		ShapeAttributes attrs = new BasicShapeAttributes();
-		double key = (double) record.getAttributes().getValue(attributeName);
-		Material interior = new Material(colors.get(key));
-		attrs.setInteriorMaterial(interior);
-		attrs.setDrawOutline(false);
-		return attrs;
-	}
-
 	@Override
 	protected void addRenderablesForPolylines(Shapefile shp, RenderableLayer layer) {
 		while (shp.hasNext()) {
@@ -134,6 +126,20 @@ public class ShapefileProperties extends ShapefileLoader {
 			layer.addRenderable(this.createPolyline(record, attrs));
 
 		}
+	}
+
+	protected ShapeAttributes createPolygonAttributes(ShapefileRecord record, Map<Double, Color> colors) {
+		ShapeAttributes attrs = new BasicShapeAttributes();
+		attrs.setDrawOutline(false);
+
+		Object key = record.getAttributes().getValue(attributeName);
+
+		if (key != null) {
+			Material interior = new Material(colors.get((double) key));
+			attrs.setInteriorMaterial(interior);
+		}
+
+		return attrs;
 	}
 
 	@Override
