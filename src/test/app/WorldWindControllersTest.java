@@ -18,6 +18,7 @@ import br.inpe.worldwind.dao.model.vegtype_2000;
 import br.inpe.worldwind.defaultcontroller.CommentLayer;
 import br.inpe.worldwind.defaultcontroller.LineLayer;
 import br.inpe.worldwind.defaultcontroller.Polygon2DLayer;
+import br.inpe.worldwind.defaultcontroller.Polygon3DLayer;
 import br.inpe.worldwind.defaultcontroller.ScreenAnnotationLayer;
 import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
 import gov.nasa.worldwind.BasicModel;
@@ -39,6 +40,7 @@ public class WorldWindControllersTest extends JFrame {
 	private ShapefileController shpController;
 	private LayerController comment;
 	private LayerController line;
+	private LayerController polygon3d;
 
 	public WorldWindControllersTest() {
 		worldWindConfig();
@@ -56,11 +58,13 @@ public class WorldWindControllersTest extends JFrame {
 		shapefileController();
 
 		// CommentLayer
-		commentController();
+		// commentController();
 
 		// LineLayer
+		// lineController();
 
-		lineController();
+		// Poygon3D
+		// polygon3DController();
 	}
 
 	/**
@@ -102,6 +106,15 @@ public class WorldWindControllersTest extends JFrame {
 		MeasureTool measureTool = new MeasureTool(wwd);
 		line = new LineLayer(wwd, 3, positions, displayName, Color.ORANGE, measureTool);
 		line.asyncDraw();
+	}
+
+	private void polygon3DController() {
+		JDBCDao<vegtype_2000> dao = new JDBCDao<>();
+		List<vegtype_2000> vegtype2000 = dao.getAll(vegtype_2000.class);
+		List<GeometryRecord> geometryRecords = new ArrayList<>();
+		geometryRecords.addAll(vegtype2000);
+		polygon3d = new Polygon3DLayer(wwd, geometryRecords);
+		polygon3d.asyncDraw();
 	}
 
 	/**
