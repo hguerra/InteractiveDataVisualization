@@ -3,6 +3,8 @@ package test.app;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -10,12 +12,18 @@ import br.inpe.message.properties.DefaultColors;
 import br.inpe.util.FilePathTest;
 import br.inpe.worldwind.controller.LayerController;
 import br.inpe.worldwind.controller.ShapefileController;
+import br.inpe.worldwind.dao.GeometryRecord;
+import br.inpe.worldwind.dao.JDBCDao;
+import br.inpe.worldwind.dao.model.vegtype_2000;
 import br.inpe.worldwind.defaultcontroller.CommentLayer;
+import br.inpe.worldwind.defaultcontroller.LineLayer;
+import br.inpe.worldwind.defaultcontroller.Polygon2DLayer;
 import br.inpe.worldwind.defaultcontroller.ScreenAnnotationLayer;
 import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.util.measure.MeasureTool;
 
 public class WorldWindControllersTest extends JFrame {
 	/**
@@ -30,6 +38,7 @@ public class WorldWindControllersTest extends JFrame {
 	private LayerController polygon2d;
 	private ShapefileController shpController;
 	private LayerController comment;
+	private LayerController line;
 
 	public WorldWindControllersTest() {
 		worldWindConfig();
@@ -38,29 +47,66 @@ public class WorldWindControllersTest extends JFrame {
 
 	private final void controllersConfig() {
 		// ScreenAnnotationLayer
+		screenAnnotationController();
+
+		// Polygon2D
+		// polygon2DController();
+
+		// ShapefileController
+		shapefileController();
+
+		// CommentLayer
+		commentController();
+
+		// LineLayer
+
+		lineController();
+	}
+
+	/**
+	 * Individual controllers
+	 */
+
+	private void screenAnnotationController() {
 		screenAnnotation = new ScreenAnnotationLayer(wwd, 780, 530, "images/ccst-novo2.png", new Insets(0, 40, 0, 0),
 				new Dimension(265, 200));
 		screenAnnotation.asyncDraw();
+	}
 
-		// Polygon2D
-		// JDBCDao<vegtype_2000> dao = new JDBCDao<>();
-		// List<vegtype_2000> vegtype2000 = dao.getAll(vegtype_2000.class);
-		// List<GeometryRecord> geometryRecords = new ArrayList<>();
-		// geometryRecords.addAll(vegtype2000);
-		// polygon2d = new Polygon2DLayer(wwd, geometryRecords);
-		// polygon2d.asyncDraw();
+	private void polygon2DController() {
+		JDBCDao<vegtype_2000> dao = new JDBCDao<>();
+		List<vegtype_2000> vegtype2000 = dao.getAll(vegtype_2000.class);
+		List<GeometryRecord> geometryRecords = new ArrayList<>();
+		geometryRecords.addAll(vegtype2000);
+		polygon2d = new Polygon2DLayer(wwd, geometryRecords);
+		polygon2d.asyncDraw();
+	}
 
-		// ShapefileController
+	private void shapefileController() {
 		shpController = new ShapefileLayer(wwd, "attr");
 		shpController.addShapefile(FilePathTest.VEGTYPE_2000, DefaultColors.getOriginalColors1());
 		shpController.asyncDraw();
+	}
 
-		// CommentLayer
+	private void commentController() {
 		comment = new CommentLayer(wwd, new Position(Position.fromDegrees(-23, -45), 0.1), new Dimension(480, 145),
 				"\n\n\n\n\n Interactive Data Visualization", "images/ccst-novo2.png", 0.2, Color.white, Color.white);
 		comment.asyncDraw();
 	}
 
+	private void lineController() {
+		List<Position> positions = new ArrayList<Position>();
+		positions.add(Position.fromDegrees(-23, -45));
+		positions.add(Position.fromDegrees(-8.5, -37));
+		String displayName = "Distance Test";
+		MeasureTool measureTool = new MeasureTool(wwd);
+		line = new LineLayer(wwd, 3, positions, displayName, Color.ORANGE, measureTool);
+		line.asyncDraw();
+	}
+
+	/**
+	 * WorldWind config
+	 */
 	private final void worldWindConfig() {
 		wwd = new WorldWindowGLCanvas();
 		wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
