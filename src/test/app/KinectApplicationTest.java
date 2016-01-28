@@ -10,13 +10,13 @@ import com.primesense.nite.UserTracker;
 
 import br.com.kinect4j.device.DeviceConfig;
 
-public class Application {
-	private ApplicationView skeletonTracker;
+public class KinectApplicationTest {
+	private KinectApplicationViewTest skeletonTracker;
 	private JFrame frame;
 	private boolean isRunning = true;
 
-	public Application(UserTracker userTracker) {
-		this.skeletonTracker = new ApplicationView(userTracker);
+	public KinectApplicationTest(UserTracker userTracker) {
+		this.skeletonTracker = new KinectApplicationViewTest(userTracker);
 		frame = new JFrame("Kinect View");
 		// register to closing event
 		frame.addWindowListener(new WindowAdapter() {
@@ -52,7 +52,7 @@ public class Application {
 
 		UserTracker userTracker = UserTracker.create();
 
-		Application app = new Application(userTracker);
+		KinectApplicationTest app = new KinectApplicationTest(userTracker);
 		app.run();
 	}
 }

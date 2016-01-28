@@ -15,6 +15,11 @@ public class SkeletonInfoPrinter {
 		if (percentage != 0 && percentage % 10 == 0)
 			System.out.println("Percentage:" + percentage + "%");
 	}
+	
+	public static <T extends Enum<T>> void printPercentage(T name, int percentage) {
+		if (percentage != 0 && percentage % 10 == 0)
+			System.out.println(name+" :" + percentage + "%");
+	}
 
 	public static void printCoords(Point3D<Float> previous, Point3D<Float> actual) {
 		StringBuffer json = new StringBuffer();

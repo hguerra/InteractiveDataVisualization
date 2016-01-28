@@ -7,13 +7,13 @@ import com.primesense.nite.UserData;
 import com.primesense.nite.UserTracker;
 
 import br.com.kinect4j.controller.Controller;
-import br.com.kinect4j.controller.DefaultGestureControllerAlternative;
+import br.com.kinect4j.controller.DefaultGestureController;
 import br.com.kinect4j.controller.DefaultGestureName;
+import br.com.kinect4j.controller.DefaultPoseController;
 import br.com.kinect4j.controller.DefaultPoseName;
 import br.com.kinect4j.controller.movements.HandsUp;
 import br.com.kinect4j.engine.core.GestureController;
 import br.com.kinect4j.engine.core.PoseController;
-import br.com.kinect4j.engine.defaultcore.DefaultPoseController;
 import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
 import br.inpe.util.SkeletonInfoPrinter;
@@ -82,12 +82,12 @@ public class KinectView extends Kinect4jView {
 		/**
 		 * Pose Controller
 		 */
-		poseDetector = new DefaultPoseController();
+		poseDetector = new DefaultPoseController<DefaultPoseName>();
 		poseDetector.addPose(DefaultPoseName.HANDS_UP, 100, new HandsUp(skeleton), this);
 		/**
 		 * Gesture Controller
 		 */
-		gestureDetector = new DefaultGestureControllerAlternative(skeleton, this);
+		gestureDetector = new DefaultGestureController<DefaultGestureName>(skeleton, this);
 
 		this.poseControllers = createPoseControllers();
 		this.gestureControllers = createGestureControllers();
@@ -121,13 +121,15 @@ public class KinectView extends Kinect4jView {
 	}
 
 	@Override
-	public void updateGestureName(DefaultGestureName name) {
+	public <T extends Enum<T>> void updateGestureName(T name) {
 		gestureControllers.get(name).kinectActionPerformed();
+
 	}
 
 	@Override
-	public void updatePoseName(DefaultPoseName name) {
+	public <T extends Enum<T>> void updatePoseName(T name) {
 		poseControllers.get(name).kinectActionPerformed();
+
 	}
 
 	public void switchGestureTraking() {

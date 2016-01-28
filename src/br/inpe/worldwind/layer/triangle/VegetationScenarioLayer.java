@@ -106,7 +106,7 @@ public class VegetationScenarioLayer {
 					System.exit(0);
 				}
 			});
-			this.setUndecorated(true);
+			this.setUndecorated(false);//default true
 			this.getContentPane().add(layeredPane, java.awt.BorderLayout.CENTER);
 			this.pack();
 			this.setBounds(0, 0, width, height);
@@ -184,7 +184,7 @@ public class VegetationScenarioLayer {
 			kinectHandler = new KinectView(userTracker, this);
 
 			kinectHandler.setBounds(15, 585, 224, 168);
-			layeredPane.add(kinectHandler, new Integer(JLayeredPane.DEFAULT_LAYER.intValue() + 1));
+			// layeredPane.add(kinectHandler, new Integer(JLayeredPane.DEFAULT_LAYER.intValue() + 1));
 		}
 
 		/**
