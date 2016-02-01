@@ -177,8 +177,8 @@ public class WorldWindControllersTest extends JFrame {
 		this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
 		wwd.setModel(new BasicModel());
 	}
-
-	public static void main(String[] args) {
+	
+	public void run(){
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				JFrame frame = new WorldWindControllersTest();
@@ -186,6 +186,10 @@ public class WorldWindControllersTest extends JFrame {
 				frame.pack();
 				frame.setVisible(true);
 			}
-		});
+		});	
+	}
+
+	public static void main(String[] args) {
+		new WorldWindControllersTest().run();
 	}
 }

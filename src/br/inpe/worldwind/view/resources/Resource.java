@@ -15,4 +15,8 @@ public class Resource {
 	public static URL getLoginFXML(){
 		return getURL("login-fxml.fxml");
 	}
+	
+	public static URL getHomeFXML(){
+		return getURL("home-fxml.fxml");
+	}
 }
