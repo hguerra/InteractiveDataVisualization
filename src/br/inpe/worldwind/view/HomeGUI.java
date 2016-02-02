@@ -11,10 +11,11 @@ public class HomeGUI extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent parent = FXMLLoader.load(Resource.getHomeFXML());
+		Parent parent = FXMLLoader.load(Resource.getHomeDefaultFXML());
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
 		stage.setTitle("Tela principal");
+		//stage.setResizable(false);
 		stage.show();
 	}
 

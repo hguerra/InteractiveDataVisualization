@@ -6,43 +6,54 @@
 .pane-options {
 	-fx-background-color: #2C3138;	
 }
+
 /* Buttons*/
+
 .btnGlobe {
-	-fx-background-image:url("globe40x40.png") ;
+	-fx-background-image: url("globe40x40.png");
+	-fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
 .btnLayer {
-	-fx-background-image:url("layers40x40.png") ;
+	-fx-background-image:url("layers40x40.png");
+	-fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
 .btnDataBase {
-	-fx-background-image:url("database30x40.png") ;
+	-fx-background-image:url("database30x40.png");
+	-fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
 .btnKinect {
-	-fx-background-image:url("kinect40x40.png") ;
+	-fx-background-image:url("kinect40x40.png");
+	-fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
 .btnProfile {
-	-fx-background-image:url("user40x40.png") ;
+	-fx-background-image:url("user40x40.png");
+	-fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
 .btnClose {
-	-fx-background-image:url("close40x40.png") ;
+	-fx-background-image:url("close40x40.png");
+	-fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
 .btnStart {
-	-fx-background-image:url("start40x40.png") ;
+	-fx-background-image:url("start40x40.png");
+	-fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
+
 /* Buttons hover*/
+
 .btnGlobe:hover {
 	-fx-cursor: hand;
 }
@@ -64,28 +75,34 @@
 .btnStart:hover {
 	-fx-cursor: hand;
 }
-/* Buttons selected*/
 
-.btnGlobe:selected {
-	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+/* Button pressed*/
+
+.btnGlobe:pressed {
+	-fx-background-image: url("globe40x40-selected.png");
+	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnLayer:selected {
-	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+.btnLayer:pressed  {
+	-fx-background-image: url("layers40x40-selected.png");
+	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnDataBase:selected {
-	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+.btnDataBase:pressed  {
+	-fx-background-image: url("database30x40-selected.png");
+	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnKinect:selected {
-	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+.btnKinect:pressed  {
+	-fx-background-image: url("kinect40x40-selected.png");
+	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnProfile:selected {
-	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+.btnProfile:pressed  {
+	-fx-background-image: url("user40x40-selected.png");
+	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnClose:selected {
-	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );	
+.btnClose:pressed  {
+	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnStart:selected {
- 	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+.btnStart:pressed  {
+ 	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 
 /*-----------------------------------------------------*/

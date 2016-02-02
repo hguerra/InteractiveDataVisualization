@@ -19,4 +19,7 @@ public class Resource {
 	public static URL getHomeFXML(){
 		return getURL("home-fxml.fxml");
 	}
+	public static URL getHomeDefaultFXML(){
+		return getURL("home-default-fxml.fxml");
+	}
 }
