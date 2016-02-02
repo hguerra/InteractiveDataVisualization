@@ -22,4 +22,8 @@ public class Resource {
 	public static URL getHomeDefaultFXML(){
 		return getURL("home-default-fxml.fxml");
 	}
+	
+	public static String getStylesheet(String stylesheet){
+		return getURL(stylesheet).toExternalForm();
+	}
 }
