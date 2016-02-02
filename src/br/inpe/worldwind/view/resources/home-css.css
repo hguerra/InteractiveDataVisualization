@@ -1,4 +1,105 @@
-.pane {
-	-fx-background-color: linear-gradient(from 0% 0% to 
-		100% 100%, blue 0%, silver 100%);	
+/*-----------------------------------------------------*/
+/*-------------------Pane options----------------------*/
+/*-----------------------------------------------------*/
+/*Pane*/
+
+.pane-options {
+	-fx-background-color: #2C3138;	
+}
+/* Buttons*/
+.btnGlobe {
+	-fx-background-image:url("globe40x40.png") ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+.btnLayer {
+	-fx-background-image:url("layers40x40.png") ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+.btnDataBase {
+	-fx-background-image:url("database30x40.png") ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+.btnKinect {
+	-fx-background-image:url("kinect40x40.png") ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+.btnProfile {
+	-fx-background-image:url("user40x40.png") ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+.btnClose {
+	-fx-background-image:url("close40x40.png") ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+.btnStart {
+	-fx-background-image:url("start40x40.png") ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+/* Buttons hover*/
+.btnGlobe:hover {
+	-fx-cursor: hand;
+}
+.btnLayer:hover {
+	-fx-cursor: hand;
+}
+.btnDataBase:hover {
+	-fx-cursor: hand;
+}
+.btnKinect:hover {
+	-fx-cursor: hand;
+}
+.btnProfile:hover {
+	-fx-cursor: hand;
+}
+.btnClose:hover {
+	-fx-cursor: hand;
+}
+.btnStart:hover {
+	-fx-cursor: hand;
+}
+/* Buttons selected*/
+
+.btnGlobe:selected {
+	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+.btnLayer:selected {
+	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+.btnDataBase:selected {
+	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+.btnKinect:selected {
+	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+.btnProfile:selected {
+	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+.btnClose:selected {
+	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );	
+}
+.btnStart:selected {
+ 	-fx-effect: dropshadow( three-pass-box , rgba(255.0,255.0,255.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+}
+
+/*-----------------------------------------------------*/
+/*-------------------Pane setup------------------------*/
+/*-----------------------------------------------------*/
+
+.pane-setup {
+	-fx-background-color: #475259;	
+}
+.pane-options-title {
+	-fx-text-fill: #969697;
+	-fx-font-size: 16px;
+}
+.pane-options-subtitle {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 14px;
 }

@@ -1,6 +1,5 @@
 .pane {
-	-fx-background-color: linear-gradient(from 0% 0% to 
-		100% 100%, blue 0%, silver 100%);	
+	-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, blue 0.0%, silver 100.0%);	
 }
 
 .btEntrar {

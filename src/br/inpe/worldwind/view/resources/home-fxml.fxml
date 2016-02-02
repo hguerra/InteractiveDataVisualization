@@ -11,40 +11,28 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="css-anchor-pane" fx:id="anchorPane"
-	maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-	minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0"
-	xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.inpe.worldwind.view.HomeController">
+<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.HomeController">
 	<children>
-		<Separator layoutX="266.0" orientation="VERTICAL"
-			prefHeight="480.0" prefWidth="0.0" />
-		<Pane id="css-pane-setup" fx:id="paneOptions" layoutX="55.0"
-			prefHeight="480.0" prefWidth="213.0" style="-fx-background-color: #475259;">
+		<Separator layoutX="266.0" orientation="VERTICAL" prefHeight="480.0" prefWidth="0.0" />
+		<Pane id="css-pane-setup" fx:id="paneSetup" layoutX="55.0" prefHeight="480.0" prefWidth="213.0" style="-fx-background-color: #475259;">
 			<children>
-				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0"
-					prefWidth="143.0" text="Layer name:" textFill="#969697">
+				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0" prefWidth="143.0" text="Layer name:" textFill="#969697">
 					<font>
 						<Font size="16.0" />
 					</font>
 				</Label>
-				<Label fx:id="lblLayers" layoutX="9.0" layoutY="37.0" text="Shapefile"
-					textFill="WHITE">
+				<Label fx:id="lblLayers" layoutX="9.0" layoutY="37.0" text="Shapefile" textFill="WHITE">
 					<font>
 						<Font size="14.0" />
 					</font>
 				</Label>
-				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3"
-					prefHeight="0.0" prefWidth="200.0" />
-				<ComboBox fx:id="comboLayer" layoutX="8.0" layoutY="75.0"
-					prefWidth="150.0" promptText="Vegetation Scenario" />
+				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
+				<ComboBox fx:id="comboLayer" layoutX="8.0" layoutY="75.0" prefWidth="150.0" promptText="Vegetation Scenario" />
 			</children>
 		</Pane>
-		<Pane fx:id="paneSetup" layoutX="-5.0" prefHeight="480.0"
-			prefWidth="60.0" style="-fx-background-color: #2C3138;">
+		<Pane id="css-pane-options" fx:id="paneOptions" layoutX="-5.0" prefHeight="480.0" prefWidth="60.0" style="-fx-background-color: #2C3138;">
 			<children>
-				<Button fx:id="btnKinect" layoutX="13.0" layoutY="5.0"
-					mnemonicParsing="false">
+				<Button fx:id="btnKinect" layoutX="14.0" layoutY="165.0" mnemonicParsing="false">
 					<effect>
 						<ImageInput>
 							<source>
@@ -53,8 +41,7 @@
 						</ImageInput>
 					</effect>
 				</Button>
-				<Button fx:id="btnGlobe" layoutX="13.0" layoutY="49.0"
-					mnemonicParsing="false">
+				<Button fx:id="btnGlobe" layoutX="13.0" layoutY="8.0" mnemonicParsing="false">
 					<effect>
 						<ImageInput>
 							<source>
@@ -63,8 +50,7 @@
 						</ImageInput>
 					</effect>
 				</Button>
-				<Button fx:id="btnLayer" layoutX="13.0" layoutY="102.0"
-					mnemonicParsing="false">
+				<Button fx:id="btnLayer" layoutX="13.0" layoutY="61.0" mnemonicParsing="false">
 					<effect>
 						<ImageInput>
 							<source>
@@ -73,8 +59,7 @@
 						</ImageInput>
 					</effect>
 				</Button>
-				<Button fx:id="btnClose" layoutX="11.0" layoutY="380.0"
-					mnemonicParsing="false">
+				<Button fx:id="btnClose" layoutX="11.0" layoutY="380.0" mnemonicParsing="false">
 					<effect>
 						<ImageInput>
 							<source>
@@ -83,8 +68,7 @@
 						</ImageInput>
 					</effect>
 				</Button>
-				<Button fx:id="btnStart" layoutX="12.0" layoutY="434.0"
-					mnemonicParsing="false">
+				<Button fx:id="btnStart" layoutX="12.0" layoutY="434.0" mnemonicParsing="false">
 					<effect>
 						<ImageInput>
 							<source>
@@ -93,8 +77,7 @@
 						</ImageInput>
 					</effect>
 				</Button>
-				<Button fx:id="btnProfile" layoutX="13.0" layoutY="215.0"
-					mnemonicParsing="false">
+				<Button fx:id="btnProfile" layoutX="13.0" layoutY="211.0" mnemonicParsing="false">
 					<effect>
 						<ImageInput>
 							<source>
@@ -103,8 +86,7 @@
 						</ImageInput>
 					</effect>
 				</Button>
-				<Button fx:id="btnDataBase" layoutX="18.0" layoutY="157.0"
-					mnemonicParsing="false">
+				<Button fx:id="btnDataBase" layoutX="18.0" layoutY="116.0" mnemonicParsing="false">
 					<effect>
 						<ImageInput>
 							<source>
@@ -115,11 +97,9 @@
 				</Button>
 			</children>
 		</Pane>
-		<Pane fx:id="paneView" layoutX="269.0" prefHeight="480.0"
-			prefWidth="373.0">
+		<Pane fx:id="paneView" layoutX="269.0" prefHeight="480.0" prefWidth="373.0">
 			<children>
-				<ImageView fx:id="imgMock" fitHeight="480.0" fitWidth="373.0"
-					layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+				<ImageView fx:id="imgMock" fitHeight="480.0" fitWidth="373.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@worldwind-flat-mock.png" />
 					</image>
