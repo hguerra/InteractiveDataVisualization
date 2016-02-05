@@ -80,29 +80,31 @@
 
 .btnGlobe:pressed {
 	-fx-background-image: url("globe40x40-selected.png");
-	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 .btnLayer:pressed  {
 	-fx-background-image: url("layers40x40-selected.png");
-	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 .btnDataBase:pressed  {
 	-fx-background-image: url("database30x40-selected.png");
-	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 .btnKinect:pressed  {
 	-fx-background-image: url("kinect40x40-selected.png");
-	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 .btnProfile:pressed  {
 	-fx-background-image: url("user40x40-selected.png");
-	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 .btnClose:pressed  {
-	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
+	-fx-background-image:url("close40x40-selected.png");
+	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 .btnStart:pressed  {
- 	-fx-effect: dropshadow( three-pass-box , rgba(60,163,128) , 5.0, 0.0 , 0.0 , 1.0 );
+	-fx-background-image:url("start40x40-selected.png");
+ 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
 
 /*-----------------------------------------------------*/
@@ -114,9 +116,39 @@
 }
 .pane-options-title {
 	-fx-text-fill: #969697;
-	-fx-font-size: 16px;
+	-fx-font-size: 16.0px;
 }
 .pane-options-subtitle {
 	-fx-text-fill: #ffffff;
-	-fx-font-size: 14px;
+	-fx-font-size: 14.0px;
+}
+.pane-options-text {
+	-fx-text-fill: #ffffff;
+}
+/* Button enable/disable kinect */
+.toggleBtnKinect {
+	-fx-text-fill: white;
+	-fx-background-color: green;
+}
+.toggleBtnKinect:selected {
+	-fx-text-fill: white;
+	-fx-background-color: red;
+}
+.toggleBtnKinect:hover {
+	-fx-cursor: hand;
+}
+/*Clear list of data*/
+.btnClearTrash {
+	-fx-background-image:url("trash16x16.png");
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+.btnClearTrash:hover {
+	-fx-cursor: hand;
+}
+.btnClearTrash:pressed {
+	-fx-background-image:url("trash16x16-selected.png");
+	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
+	
 }
