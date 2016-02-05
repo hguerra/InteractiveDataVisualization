@@ -6,24 +6,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.SetupHomeController1">
+<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
 		<Separator layoutX="266.0" orientation="VERTICAL" prefHeight="480.0" prefWidth="0.0" />
 		<Pane id="css-pane-setup" fx:id="paneSetup" layoutX="55.0" prefHeight="480.0" prefWidth="213.0" styleClass="pane-setup">
 			<children>
-				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title" text="Basic:" />
-				<Label fx:id="lblData" layoutX="9.0" layoutY="37.0" styleClass="pane-options-subtitle" text="Data" />
+				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title" text="Database:" />
+				<Label fx:id="lblDatabase" layoutX="9.0" layoutY="91.0" styleClass="pane-options-subtitle" text="Dabase:" />
 				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
-				<ComboBox fx:id="comboLayer" layoutX="28.0" layoutY="67.0" prefHeight="25.0" prefWidth="150.0" promptText="Vegetation Scenario" />
-            <Label fx:id="lblScenario" layoutX="9.0" layoutY="111.0" styleClass="pane-options-subtitle" text="Scenario" />
-            <ListView fx:id="listViewScenario" layoutX="13.0" layoutY="143.0" prefHeight="255.0" prefWidth="185.0">
+            <Label fx:id="lblScenario" layoutX="9.0" layoutY="309.0" styleClass="pane-options-subtitle" text="Scenario" />
+            <ListView fx:id="listViewScenario" layoutX="13.0" layoutY="341.0" prefHeight="65.0" prefWidth="185.0">
                <contextMenu>
                   <ContextMenu fx:id="contextMenu">
                     <items>
@@ -34,7 +36,15 @@
             </ListView>
             <Label fx:id="lblKinect" layoutX="11.0" layoutY="413.0" styleClass="pane-options-subtitle" text="Kinect" />
             <ToggleButton fx:id="toggleBtnKinect" layoutX="23.0" layoutY="441.0" mnemonicParsing="false" styleClass="toggleBtnKinect" text="Enable" />
-            <Button fx:id="btnTrash" layoutX="180.0" layoutY="115.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
+            <Button fx:id="btnTrash" layoutX="180.0" layoutY="313.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
+            <TextField fx:id="txtDatabase" layoutX="77.0" layoutY="89.0" prefHeight="25.0" prefWidth="122.0" />
+            <Label fx:id="lblPassword" layoutX="9.0" layoutY="126.0" styleClass="pane-options-subtitle" text="Password:" />
+            <Button fx:id="btnConnect" layoutX="28.0" layoutY="159.0" mnemonicParsing="false" text="Connect" />
+            <PasswordField fx:id="pwdDatabase" layoutX="77.0" layoutY="124.0" prefHeight="25.0" prefWidth="122.0" />
+            <ComboBox fx:id="comboDatabase" layoutX="23.0" layoutY="45.0" prefWidth="150.0" promptText="Database" />
+            <Label fx:id="lblSQL" layoutX="11.0" layoutY="197.0" styleClass="pane-options-subtitle" text="SQL:" />
+            <TextArea fx:id="txtSQL" layoutX="11.0" layoutY="223.0" prefHeight="40.0" prefWidth="185.0" />
+            <Button fx:id="btnRun" layoutX="32.0" layoutY="274.0" mnemonicParsing="false" text="Run" />
 			</children>
 		</Pane>
 		<Pane id="css-pane-options" fx:id="paneOptions" layoutX="-5.0" prefHeight="480.0" prefWidth="60.0" styleClass="pane-options">
