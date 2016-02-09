@@ -126,15 +126,30 @@ public class SetupHomeController1 implements Initializable {
 			new Thread(task).start();
 		});
 
-		btnGlobe.setOnAction(event -> this.paneSetup.getChildren().addAll(elementsSetupPanelBasic));
+		btnGlobe.setOnAction(event -> {
+			clearPaneSetup();
+			this.paneSetup.getChildren().addAll(elementsSetupPanelBasic);
+		});
 
-		btnLayer.setOnAction(event -> this.paneSetup.getChildren().addAll(elementsSetupPanelLayer));
+		btnLayer.setOnAction(event -> {
+			clearPaneSetup();
+			this.paneSetup.getChildren().addAll(elementsSetupPanelLayer);
+		});
 
-		btnDataBase.setOnAction(event -> this.paneSetup.getChildren().addAll(elementsSetupPanelDatabase));
+		btnDataBase.setOnAction(event -> {
+			clearPaneSetup();
+			this.paneSetup.getChildren().addAll(elementsSetupPanelDatabase);
+		});
 
-		btnKinect.setOnAction(event -> this.paneSetup.getChildren().addAll(elementsSetupPanelKinect));
+		btnKinect.setOnAction(event -> {
+			clearPaneSetup();
+			this.paneSetup.getChildren().addAll(elementsSetupPanelKinect);
+		});
 
-		btnProfile.setOnAction(event -> this.paneSetup.getChildren().addAll(elementsSetupPanelProfile));
+		btnProfile.setOnAction(event -> {
+			clearPaneSetup();
+			this.paneSetup.getChildren().addAll(elementsSetupPanelProfile);
+		});
 
 	}
 
@@ -179,15 +194,11 @@ public class SetupHomeController1 implements Initializable {
 		this.elementsSetupPanelDatabase = FXCollections.observableArrayList();
 		this.elementsSetupPanelKinect = FXCollections.observableArrayList();
 		this.elementsSetupPanelProfile = FXCollections.observableArrayList();
-		// loadSetupPane(elementsSetupPanelBasic,
-		// Resource.getPaneSetupBasicFXML());
+		loadSetupPane(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
 		loadSetupPane(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
-		// loadSetupPane(elementsSetupPanelDatabase,
-		// Resource.getPaneSetupDatabaseFXML());
-		// loadSetupPane(elementsSetupPanelKinect,
-		// Resource.getPaneSetupKinectFXML());
-		// loadSetupPane(elementsSetupPanelProfile,
-		// Resource.getPaneSetupProfileFXML());
+		loadSetupPane(elementsSetupPanelDatabase, Resource.getPaneSetupDatabaseFXML());
+		loadSetupPane(elementsSetupPanelKinect, Resource.getPaneSetupKinectFXML());
+		loadSetupPane(elementsSetupPanelProfile, Resource.getPaneSetupProfileFXML());
 
 	}
 }
