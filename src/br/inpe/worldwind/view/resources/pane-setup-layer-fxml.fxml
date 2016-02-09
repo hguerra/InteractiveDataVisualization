@@ -12,30 +12,51 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="css-anchor-pane" fx:id="anchorPane"
+	maxHeight="480.0" maxWidth="213.0" minHeight="480.0" minWidth="213.0"
+	prefHeight="480.0" prefWidth="213.0" stylesheets="@home-css.css"
+	xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="br.inpe.worldwind.view.controllers.SetupLayerController">
 	<children>
-		<Pane fx:id="paneSetup" prefHeight="480.0" prefWidth="213.0" styleClass="pane-setup">
+		<Pane fx:id="paneSetup" prefHeight="480.0" prefWidth="213.0"
+			styleClass="pane-setup">
 			<children>
-      				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title" text="Layer:" />
-      				<Label fx:id="lblTitle" layoutX="9.0" layoutY="37.0" styleClass="pane-options-subtitle" text="Title:" />
-      				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
-            <Label fx:id="lblScenario" layoutX="9.0" layoutY="176.0" styleClass="pane-options-subtitle" text="Scenario" />
-            <ListView fx:id="listViewScenario" layoutX="13.0" layoutY="208.0" prefHeight="199.0" prefWidth="185.0">
-               <contextMenu>
-                  <ContextMenu fx:id="contextMenu">
-                    <items>
-                      <MenuItem fx:id="menuItemRemove" mnemonicParsing="false" text="Remove" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
-            </ListView>
-            <Label fx:id="lblKinect" layoutX="11.0" layoutY="413.0" styleClass="pane-options-subtitle" text="Kinect" />
-            <ToggleButton fx:id="toggleBtnKinect" layoutX="23.0" layoutY="441.0" mnemonicParsing="false" styleClass="toggleBtnKinect" text="Enable" />
-            <Button fx:id="btnTrash" layoutX="180.0" layoutY="180.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
-            <TextField fx:id="txtTitle" layoutX="41.0" layoutY="35.0" prefHeight="25.0" prefWidth="158.0" />
-            <Label fx:id="lblReference" layoutX="9.0" layoutY="66.0" styleClass="pane-options-subtitle" text="Reference:" />
-            <TextArea layoutX="15.0" layoutY="89.0" prefHeight="40.0" prefWidth="185.0" />
-            <Button fx:id="btnLoad" layoutX="28.0" layoutY="137.0" mnemonicParsing="false" text="Load" />
+				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0"
+					prefWidth="143.0" styleClass="pane-options-title" text="Layer:" />
+				<Label fx:id="lblTitle" layoutX="9.0" layoutY="37.0"
+					styleClass="pane-options-subtitle" text="Title:" />
+				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3"
+					prefHeight="0.0" prefWidth="200.0" />
+				<Label fx:id="lblScenario" layoutX="9.0" layoutY="176.0"
+					styleClass="pane-options-subtitle" text="Scenario" />
+				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="208.0"
+					prefHeight="199.0" prefWidth="185.0">
+					<contextMenu>
+						<ContextMenu fx:id="contextMenu">
+							<items>
+								<MenuItem fx:id="menuItemRemove" mnemonicParsing="false"
+									text="Remove" />
+							</items>
+						</ContextMenu>
+					</contextMenu>
+				</ListView>
+				<Label fx:id="lblKinect" layoutX="11.0" layoutY="413.0"
+					styleClass="pane-options-subtitle" text="Kinect" />
+				<ToggleButton fx:id="toggleBtnKinect" layoutX="23.0"
+					layoutY="441.0" mnemonicParsing="false" styleClass="toggleBtnKinect"
+					text="Enable" />
+				<Button fx:id="btnTrash" layoutX="180.0" layoutY="180.0"
+					maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0"
+					mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0"
+					styleClass="btnClearTrash" />
+				<TextField fx:id="txtTitle" layoutX="41.0" layoutY="35.0"
+					prefHeight="25.0" prefWidth="158.0" />
+				<Label fx:id="lblReference" layoutX="9.0" layoutY="66.0"
+					styleClass="pane-options-subtitle" text="Reference:" />
+				<TextArea layoutX="15.0" layoutY="89.0" prefHeight="40.0"
+					prefWidth="185.0" />
+				<Button fx:id="btnLoad" layoutX="28.0" layoutY="137.0"
+					mnemonicParsing="false" text="Load" />
 			</children>
 		</Pane>
 	</children>
