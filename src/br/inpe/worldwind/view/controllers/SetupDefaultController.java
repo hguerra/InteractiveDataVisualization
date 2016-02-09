@@ -13,12 +13,6 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -55,39 +49,9 @@ public class SetupDefaultController implements SetupController {
 
 	@FXML
 	private Pane paneView;
-	/* Pane Setup Basic */
+	/* Pane Setup */
 	@FXML
 	private Pane paneSetup;
-
-	@FXML
-	private Label lblLayerName;
-
-	@FXML
-	private Label lblData;
-
-	@FXML
-	private ComboBox<?> comboLayer;
-
-	@FXML
-	private Label lblScenario;
-
-	@FXML
-	private ListView<?> listViewScenario;
-
-	@FXML
-	private ContextMenu contextMenu;
-
-	@FXML
-	private MenuItem menuItemRemove;
-
-	@FXML
-	private Label lblKinect;
-
-	@FXML
-	private ToggleButton toggleBtnKinect;
-
-	@FXML
-	private Button btnTrash;
 	/* Pane View */
 	@FXML
 	private ImageView imgMock;
@@ -100,6 +64,8 @@ public class SetupDefaultController implements SetupController {
 		initPaneSetup();
 		/* add events */
 		initPaneSetupEvents();
+		/* set default screen */
+		setPaneSetupComponents(SetupView.BASIC);
 	}
 
 	@Override

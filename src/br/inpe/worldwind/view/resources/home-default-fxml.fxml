@@ -1,99 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="css-anchor-pane" fx:id="anchorPane"
-	maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0"
-	prefHeight="480.0" prefWidth="640.0" stylesheets="@home-css.css"
-	xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.inpe.worldwind.view.controllers.SetupDefaultController">
+<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.controllers.SetupDefaultController">
 	<children>
-		<Separator layoutX="266.0" orientation="VERTICAL"
-			prefHeight="480.0" prefWidth="0.0" />
-		<Pane fx:id="paneSetup" layoutX="55.0" prefHeight="480.0"
-			prefWidth="213.0" styleClass="pane-setup">
+		<Separator layoutX="266.0" orientation="VERTICAL" prefHeight="480.0" prefWidth="0.0" />
+		<Pane fx:id="paneSetup" layoutX="55.0" prefHeight="480.0" prefWidth="213.0" styleClass="pane-setup" />
+		<Pane id="css-pane-options" fx:id="paneOptions" layoutX="-5.0" prefHeight="480.0" prefWidth="60.0" styleClass="pane-options">
 			<children>
-				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0"
-					prefWidth="143.0" styleClass="pane-options-title" text="Basic:" />
-				<Label fx:id="lblData" layoutX="9.0" layoutY="37.0"
-					styleClass="pane-options-subtitle" text="Data" />
-				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3"
-					prefHeight="0.0" prefWidth="200.0" />
-				<ComboBox fx:id="comboLayer" layoutX="28.0" layoutY="67.0"
-					prefHeight="25.0" prefWidth="150.0" promptText="Vegetation Scenario" />
-				<Label fx:id="lblScenario" layoutX="9.0" layoutY="111.0"
-					styleClass="pane-options-subtitle" text="Scenario" />
-				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="143.0"
-					prefHeight="255.0" prefWidth="185.0">
-					<contextMenu>
-						<ContextMenu fx:id="contextMenu">
-							<items>
-								<MenuItem fx:id="menuItemRemove" mnemonicParsing="false"
-									text="Remove" />
-							</items>
-						</ContextMenu>
-					</contextMenu>
-				</ListView>
-				<Label fx:id="lblKinect" layoutX="11.0" layoutY="413.0"
-					styleClass="pane-options-subtitle" text="Kinect" />
-				<ToggleButton fx:id="toggleBtnKinect" layoutX="23.0"
-					layoutY="441.0" mnemonicParsing="false" styleClass="toggleBtnKinect"
-					text="Enable" />
-				<Button fx:id="btnTrash" layoutX="180.0" layoutY="115.0"
-					maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0"
-					mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0"
-					styleClass="btnClearTrash" />
+				<Button fx:id="btnKinect" layoutX="14.0" layoutY="166.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnKinect" />
+				<Button fx:id="btnGlobe" layoutX="13.0" layoutY="8.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnGlobe" />
+				<Button fx:id="btnLayer" layoutX="13.0" layoutY="61.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnLayer" />
+				<Button fx:id="btnClose" layoutX="11.0" layoutY="377.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnClose" />
+				<Button fx:id="btnStart" layoutX="12.0" layoutY="434.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnStart" />
+				<Button fx:id="btnProfile" layoutX="12.0" layoutY="211.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnProfile" />
+				<Button fx:id="btnDataBase" layoutX="13.0" layoutY="116.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnDataBase" />
 			</children>
 		</Pane>
-		<Pane id="css-pane-options" fx:id="paneOptions" layoutX="-5.0"
-			prefHeight="480.0" prefWidth="60.0" styleClass="pane-options">
+		<Pane fx:id="paneView" layoutX="269.0" prefHeight="480.0" prefWidth="373.0">
 			<children>
-				<Button fx:id="btnKinect" layoutX="14.0" layoutY="166.0"
-					maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-					styleClass="btnKinect" />
-				<Button fx:id="btnGlobe" layoutX="13.0" layoutY="8.0"
-					maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-					styleClass="btnGlobe" />
-				<Button fx:id="btnLayer" layoutX="13.0" layoutY="61.0"
-					maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-					styleClass="btnLayer" />
-				<Button fx:id="btnClose" layoutX="11.0" layoutY="377.0"
-					maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-					styleClass="btnClose" />
-				<Button fx:id="btnStart" layoutX="12.0" layoutY="434.0"
-					maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-					styleClass="btnStart" />
-				<Button fx:id="btnProfile" layoutX="12.0" layoutY="211.0"
-					maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-					styleClass="btnProfile" />
-				<Button fx:id="btnDataBase" layoutX="13.0" layoutY="116.0"
-					maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0"
-					mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0"
-					styleClass="btnDataBase" />
-			</children>
-		</Pane>
-		<Pane fx:id="paneView" layoutX="269.0" prefHeight="480.0"
-			prefWidth="373.0">
-			<children>
-				<ImageView fx:id="imgMock" fitHeight="480.0" fitWidth="373.0"
-					layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+				<ImageView fx:id="imgMock" fitHeight="480.0" fitWidth="373.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@worldwind-flat-mock.png" />
 					</image>
