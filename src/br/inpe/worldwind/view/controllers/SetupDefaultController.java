@@ -5,15 +5,13 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.resources.Resource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -26,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import test.app.WorldWindControllersTest;
 
-public class SetupDefaultController implements Initializable {
+public class SetupDefaultController implements SetupController {
 	/* Pane Options */
 	@FXML
 	private AnchorPane anchorPane;
@@ -94,38 +92,18 @@ public class SetupDefaultController implements Initializable {
 	@FXML
 	private ImageView imgMock;
 
-	/* Backup */
-	private ObservableList<Node> elementsSetupPanelBasic;
-	private ObservableList<Node> elementsSetupPanelLayer;
-	private ObservableList<Node> elementsSetupPanelDatabase;
-	private ObservableList<Node> elementsSetupPanelKinect;
-	private ObservableList<Node> elementsSetupPanelProfile;
+	private ManagerSetupController manager = ManagerSetupController.getInstance();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* Load all panes before */
 		initPaneSetup();
-
 		/* add events */
-		initPaneOptionsEvents();
-
 		initPaneSetupEvents();
 	}
 
-	public boolean addElementsPaneSetup(Node... elements) {
-		return getPaneSetupChildren().addAll(elements);
-	}
-
-	public void clearPaneSetup() {
-		getPaneSetupChildren().clear();
-	}
-
-	private ObservableList<Node> getPaneSetupChildren() {
-		return this.paneSetup.getChildren();
-	}
-
-	/* Pane Options */
-	private void initPaneOptionsEvents() {
+	@Override
+	public void initPaneSetupEvents() {
 		btnStart.setOnAction(event -> new WorldWindControllersTest().run());
 		btnClose.setOnAction(event -> {
 
@@ -146,71 +124,55 @@ public class SetupDefaultController implements Initializable {
 		});
 
 		btnGlobe.setOnAction(event -> {
-			clearPaneSetup();
-			this.paneSetup.getChildren().addAll(elementsSetupPanelBasic);
+			setPaneSetupComponents(SetupView.BASIC);
 		});
 
 		btnLayer.setOnAction(event -> {
-			clearPaneSetup();
-			this.paneSetup.getChildren().addAll(elementsSetupPanelLayer);
+			setPaneSetupComponents(SetupView.LAYER);
 		});
 
 		btnDataBase.setOnAction(event -> {
-			clearPaneSetup();
-			this.paneSetup.getChildren().addAll(elementsSetupPanelDatabase);
+			setPaneSetupComponents(SetupView.DATABASE);
 		});
 
 		btnKinect.setOnAction(event -> {
-			clearPaneSetup();
-			this.paneSetup.getChildren().addAll(elementsSetupPanelKinect);
+			setPaneSetupComponents(SetupView.KINECT);
 		});
 
 		btnProfile.setOnAction(event -> {
-			clearPaneSetup();
-			this.paneSetup.getChildren().addAll(elementsSetupPanelProfile);
+			setPaneSetupComponents(SetupView.PROFILE);
 		});
 	}
 
-	/* Load Setup panel */
-	protected boolean loadPaneSetup(URL location) {
-		try {
-			Parent parent = FXMLLoader.load(location);
-			return this.paneSetup.getChildren().addAll(parent.getChildrenUnmodifiable());
-		} catch (Exception e) {
-			System.err.println(e);
-			return false;
-		}
-	}
-
-	protected boolean loadPaneSetup(ObservableList<Node> elements, URL location) {
-		try {
-			Parent parent = FXMLLoader.load(location);
-			ObservableList<Node> parentList = parent.getChildrenUnmodifiable();
-			elements.addAll(parentList);
-			return true;
-		} catch (Exception e) {
-			System.err.println(e);
-			return false;
-		}
+	@Override
+	public ObservableList<Node> getPaneSetupChildren() {
+		return this.paneSetup.getChildren();
 	}
 
 	private void initPaneSetup() {
-		this.elementsSetupPanelBasic = FXCollections.observableArrayList();
-		this.elementsSetupPanelLayer = FXCollections.observableArrayList();
-		this.elementsSetupPanelDatabase = FXCollections.observableArrayList();
-		this.elementsSetupPanelKinect = FXCollections.observableArrayList();
-		this.elementsSetupPanelProfile = FXCollections.observableArrayList();
-		elementsSetupPanelBasic.addAll(this.paneSetup.getChildren());
+		/* create list */
+		ObservableList<Node> elementsSetupPanelBasic = FXCollections.observableArrayList();
+		ObservableList<Node> elementsSetupPanelLayer = FXCollections.observableArrayList();
+		ObservableList<Node> elementsSetupPanelDatabase = FXCollections.observableArrayList();
+		ObservableList<Node> elementsSetupPanelKinect = FXCollections.observableArrayList();
+		ObservableList<Node> elementsSetupPanelProfile = FXCollections.observableArrayList();
+		/* add elements */
+		loadPaneSetup(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
 		loadPaneSetup(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
 		loadPaneSetup(elementsSetupPanelDatabase, Resource.getPaneSetupDatabaseFXML());
 		loadPaneSetup(elementsSetupPanelKinect, Resource.getPaneSetupKinectFXML());
 		loadPaneSetup(elementsSetupPanelProfile, Resource.getPaneSetupProfileFXML());
-
+		/* add elements in ManagerSetupController */
+		manager.addElement(SetupView.BASIC, elementsSetupPanelBasic);
+		manager.addElement(SetupView.LAYER, elementsSetupPanelLayer);
+		manager.addElement(SetupView.DATABASE, elementsSetupPanelDatabase);
+		manager.addElement(SetupView.KINECT, elementsSetupPanelKinect);
+		manager.addElement(SetupView.PROFILE, elementsSetupPanelProfile);
 	}
 
-	private void initPaneSetupEvents() {
-		btnTrash.setOnAction(event -> {
-			System.out.println("Lixeira");
-		});
+	private void setPaneSetupComponents(SetupView key) {
+		clearPaneSetup();
+		this.paneSetup.getChildren().addAll(manager.getElement(key));
 	}
+
 }

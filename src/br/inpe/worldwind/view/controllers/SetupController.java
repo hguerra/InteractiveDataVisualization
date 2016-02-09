@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.Pane;
 
 public interface SetupController extends Initializable{
 	
@@ -45,8 +46,8 @@ public interface SetupController extends Initializable{
 		}
 	}
 	
-	default Parent addSetupController(SetupView setup, Parent parent){
+	default ObservableList<Node> addSetupController(SetupView setup, Pane pane){
 		ManagerSetupController manager = ManagerSetupController.getInstance();
-		return manager.addElement(setup, parent);
+		return manager.addElement(setup, pane);
 	}
 }

@@ -3,7 +3,9 @@ package br.inpe.worldwind.view.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.Parent;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 public class ManagerSetupController {
 	public enum SetupView {
@@ -11,7 +13,7 @@ public class ManagerSetupController {
 	}
 
 	private static ManagerSetupController uniqueInstance;
-	private Map<SetupView, Parent> elementsView;
+	private Map<SetupView, ObservableList<Node>> elementsView;
 
 	private ManagerSetupController() {
 		this.elementsView = new HashMap<>();
@@ -24,15 +26,18 @@ public class ManagerSetupController {
 		return uniqueInstance;
 	}
 
-	public synchronized Parent addElement(SetupView setup, Parent parent) {
+	public synchronized ObservableList<Node> addElement(SetupView setup, Pane parent) {
+		return this.elementsView.put(setup, parent.getChildren());
+	}
+	public synchronized ObservableList<Node> addElement(SetupView setup, ObservableList<Node> parent) {
 		return this.elementsView.put(setup, parent);
 	}
 
-	public synchronized Parent removeElement(SetupView setup) {
+	public synchronized ObservableList<Node> removeElement(SetupView setup) {
 		return this.elementsView.remove(setup);
 	}
 
-	public synchronized Parent getElement(SetupView key) {
+	public synchronized ObservableList<Node> getElement(SetupView key) {
 		return this.elementsView.get(key);
 	}
 

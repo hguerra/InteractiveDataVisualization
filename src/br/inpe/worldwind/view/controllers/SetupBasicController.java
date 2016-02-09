@@ -57,7 +57,7 @@ public class SetupBasicController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addSetupController(SetupView.BASIC, anchorPane);
+		addSetupController(SetupView.BASIC, paneSetup);
 
 	}
 
