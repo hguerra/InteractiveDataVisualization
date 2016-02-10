@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -17,21 +18,21 @@
 				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title" text="Layer Color:" />
 				<Label fx:id="lblAttribute" layoutX="9.0" layoutY="37.0" styleClass="pane-options-subtitle" text="Attribute name:" />
 				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
-				<Label fx:id="lblValues" layoutX="9.0" layoutY="115.0" styleClass="pane-options-subtitle" text="Values" />
-				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="147.0" prefHeight="279.0" prefWidth="185.0">
+				<Label fx:id="lblValues" layoutX="9.0" layoutY="199.0" styleClass="pane-options-subtitle" text="Values" />
+				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="231.0" prefHeight="184.0" prefWidth="185.0">
 					<contextMenu>
 						<ContextMenu fx:id="contextMenu">
 							<items>
 								<MenuItem fx:id="menuItemRemove" mnemonicParsing="false" text="Remove" />
-                        <MenuItem fx:id="menuItemAddColor" mnemonicParsing="false" text="Add Color" />
 							</items>
 						</ContextMenu>
 					</contextMenu>
 				</ListView>
-				<Button fx:id="btnTrash" layoutX="180.0" layoutY="119.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
+				<Button fx:id="btnTrash" layoutX="180.0" layoutY="203.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
 				<TextField fx:id="txtAttribute" layoutX="113.0" layoutY="35.0" prefHeight="25.0" prefWidth="86.0" />
-				<Button fx:id="btnLoad" layoutX="14.0" layoutY="73.0" mnemonicParsing="false" text="Load" />
+				<Button fx:id="btnAddColor" layoutX="127.0" layoutY="138.0" mnemonicParsing="false" text="Add Color" />
             <Button fx:id="btnSave" layoutX="136.0" layoutY="440.0" mnemonicParsing="false" text="Save" />
+            <ColorPicker fx:id="colorPicker" layoutX="22.0" layoutY="89.0" />
 			</children>
 		</Pane>
 	</children>

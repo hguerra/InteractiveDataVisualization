@@ -90,17 +90,21 @@ public class DefaultTriangleProperties {
 
 	public void addLayers(List<String> filePath, String attributeName, Color... color) {
 		filePath.forEach(veg -> {
-			try {
-				String displayName = ShapefileController.getDisplayName(veg);
-				Shapefile shpColors = ShapefileController.createShapefile(veg);
-				Shapefile shapefile = ShapefileController.createShapefile(veg);
-				Map<Double, Color> mapColors = shpProperties.createPolygonColors(shpColors, attributeName, color);
-				List<Layer> layers = shapefile2Layers(displayName, shapefile, mapColors);
-				addLayers(displayName, layers);
-			} catch (Exception e) {
-				System.err.println(e);
-			}
+			addLayers(veg, attributeName, color);
 		});
+	}
+
+	public void addLayers(String filePath, String attributeName, Color... color) {
+		try {
+			String displayName = ShapefileController.getDisplayName(filePath);
+			Shapefile shpColors = ShapefileController.createShapefile(filePath);
+			Shapefile shapefile = ShapefileController.createShapefile(filePath);
+			Map<Double, Color> mapColors = shpProperties.createPolygonColors(shpColors, attributeName, color);
+			List<Layer> layers = shapefile2Layers(displayName, shapefile, mapColors);
+			addLayers(displayName, layers);
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 	}
 
 	public Map<String, List<Layer>> layerFactory(List<String> filePath, String attributeName, Color... color) {
@@ -147,5 +151,4 @@ public class DefaultTriangleProperties {
 		profile.setDao(new ConnectionFactory(JDBC_DRIVER, IP, DATA_BASE, USER, PASSWORD));
 		addLayers(DefaultFilePath.vegtypesSequence, DefaultColors.getDefaultColors());
 	}
-
 }

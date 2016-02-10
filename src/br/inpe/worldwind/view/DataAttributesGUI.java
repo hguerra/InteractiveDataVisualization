@@ -8,7 +8,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class DataAttributesGUI extends Application{
+	private static Stage currentStage;
 
+	public static boolean closeStage() {
+		if (currentStage == null)
+			return false;
+		currentStage.close();
+		return true;
+	}
 	@Override
 	public void start(Stage stage) throws Exception {
 		Parent parent = FXMLLoader.load(Resource.getDataAttributesFXML());
@@ -17,6 +24,7 @@ public class DataAttributesGUI extends Application{
 		stage.setTitle("DataAttributesGUI");
 		//stage.setResizable(false);
 		stage.show();
+		currentStage = stage;
 	}
 
 	public static void main(String[] args) {

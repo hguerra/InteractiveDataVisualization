@@ -6,8 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.worldwind.controller.ShapefileController;
+import br.inpe.worldwind.view.DataAttributesGUI;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class SetupLayerController implements SetupController {
 	@FXML
@@ -70,14 +75,17 @@ public class SetupLayerController implements SetupController {
 
 	@FXML
 	private Button btnLoad;
-	
-    @FXML
-    private Button btnColor;
-	
+
+	@FXML
+	private Button btnColor;
+
+	@FXML
+	private Button btnRun;
+
 	private Map<String, String> externalFilePath = new HashMap<>();
-	
+
 	private Map<String, String> dataReference = new HashMap<>();
-	
+
 	private ObservableList<String> listOfView = FXCollections.observableArrayList();
 
 	@Override
@@ -100,25 +108,29 @@ public class SetupLayerController implements SetupController {
 				String title = txtTitle.getText();
 				String reference = txtReference.getText();
 
-				if (title.equals("")) 
+				if (title.equals(""))
 					title = ShapefileController.getDisplayName(path);
-		
+
 				externalFilePath.put(title, path);
 				listOfView.add(title);
-				
-				if(!reference.equals("")){
+
+				if (!reference.equals("")) {
 					dataReference.put(title, reference);
 				}
 			}
 			listViewScenario.setItems(listOfView);
 		});
-		
+
 		menuItemRemove.setOnAction(event -> {
 			int index = listViewScenario.getSelectionModel().getSelectedIndex();
+
+			if (index < 0)
+				return;
+
 			listOfView.remove(index);
 			listViewScenario.setItems(listOfView);
 		});
-		
+
 		btnTrash.setOnAction(event -> {
 			listOfView.clear();
 		});
@@ -127,6 +139,46 @@ public class SetupLayerController implements SetupController {
 			DefaultTriangleProperties.getInstance().setKinectEnable(toggleBtnKinect.isSelected());
 			System.out.println("toggleBtnKinect:" + toggleBtnKinect.isSelected());
 		});
+
+		btnColor.setOnAction(event -> {
+			try {
+				new DataAttributesGUI().start(new Stage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+
+		btnRun.setOnAction(event -> {
+			DefaultTriangleProperties triangle = DefaultTriangleProperties.getInstance();
+
+			String attr = "attr";
+
+			Color[] colors = ManagerSetupController.getInstance().getColors(attr);
+
+			String title = "vegtype-gdal.shp";
+
+			try {
+				String path = externalFilePath.get(title);
+
+				if (path == null) {
+					JOptionPane.showMessageDialog(null, "Please add some file!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return;
+				} else if (colors == null) {
+					JOptionPane.showMessageDialog(null, "Please choice the colors!", "Erro", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				java.awt.Color[] awtColors = convertFX2AWT(colors);
+				
+				System.out.println(awtColors);
+
+				triangle.addLayers(path, attr, awtColors);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		});
 	}
 
 	@Override
@@ -134,4 +186,17 @@ public class SetupLayerController implements SetupController {
 		return this.paneSetup.getChildren();
 	}
 
+	private java.awt.Color[] convertFX2AWT(javafx.scene.paint.Color... colors) {
+		java.awt.Color[] awtColors = new java.awt.Color[colors.length];
+
+		for (int i = 0; i < colors.length; i++) {
+			Color c = colors[i];
+			int r = (int) c.getRed();
+			int g = (int) c.getGreen();
+			int b = (int) c.getBlue();
+			java.awt.Color newColor = new java.awt.Color(r, g, b);
+			awtColors[i] = newColor;
+		}
+		return awtColors;
+	}
 }

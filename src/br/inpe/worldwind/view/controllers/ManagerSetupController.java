@@ -6,6 +6,7 @@ import java.util.Map;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class ManagerSetupController {
 	public enum SetupView {
@@ -29,6 +30,7 @@ public class ManagerSetupController {
 	public synchronized ObservableList<Node> addElement(SetupView setup, Pane parent) {
 		return this.elementsView.put(setup, parent.getChildren());
 	}
+
 	public synchronized ObservableList<Node> addElement(SetupView setup, ObservableList<Node> parent) {
 		return this.elementsView.put(setup, parent);
 	}
@@ -39,6 +41,26 @@ public class ManagerSetupController {
 
 	public synchronized ObservableList<Node> getElement(SetupView key) {
 		return this.elementsView.get(key);
+	}
+
+	/* Color */
+
+	private Map<String, Color[]> attributesColor = new HashMap<>();
+
+	public Color[] addAttributesColor(String attrName, Color... color) {
+		return attributesColor.put(attrName, color);
+	}
+
+	public Color[] removeAttributesColor(String attrName) {
+		return attributesColor.remove(attrName);
+	}
+
+	public Map<String, Color[]> getAttributesColor() {
+		return attributesColor;
+	}
+
+	public Color[] getColors(String attrName) {
+		return attributesColor.get(attrName);
 	}
 
 }

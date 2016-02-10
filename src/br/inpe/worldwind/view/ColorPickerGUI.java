@@ -7,7 +7,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ColorPickerGUI extends Application{
+public class ColorPickerGUI extends Application {
+
+	private static Stage currentStage;
+
+	public static boolean closeStage() {
+		if (currentStage == null)
+			return false;
+		currentStage.close();
+		return true;
+	}
+	
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -15,8 +25,9 @@ public class ColorPickerGUI extends Application{
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
 		stage.setTitle("ColorPickerGUI");
-		//stage.setResizable(false);
+		// stage.setResizable(false);
 		stage.show();
+		currentStage = stage;
 	}
 
 	public static void main(String[] args) {
