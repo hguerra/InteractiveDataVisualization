@@ -7,15 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class TesteKinect extends Application {
+public class ColorPickerGUI extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent parent = FXMLLoader.load(Resource.getPaneSetupKinectFXML());
+		Parent parent = FXMLLoader.load(Resource.getColorPickerFXML());
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Tela principal");
-		// stage.setResizable(false);
+		stage.setTitle("ColorPickerGUI");
+		//stage.setResizable(false);
 		stage.show();
 	}
 

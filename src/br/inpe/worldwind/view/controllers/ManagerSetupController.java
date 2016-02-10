@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 
 public class ManagerSetupController {
 	public enum SetupView {
-		BASIC, LAYER, DATABASE, KINECT, PROFILE;
+		BASIC, LAYER, LAYER_ATTRIBUTES, LAYER_COLOR, DATABASE, KINECT, PROFILE;
 	}
 
 	private static ManagerSetupController uniqueInstance;

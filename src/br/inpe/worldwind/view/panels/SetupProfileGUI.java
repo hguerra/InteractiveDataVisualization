@@ -1,4 +1,4 @@
-package br.inpe.worldwind.view;
+package br.inpe.worldwind.view.panels;
 
 import br.inpe.worldwind.view.resources.Resource;
 import javafx.application.Application;
@@ -7,14 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class TesteProfile extends Application{
+public class SetupProfileGUI extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		Parent parent = FXMLLoader.load(Resource.getPaneSetupProfileFXML());
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Tela principal");
+		stage.setTitle("SetupProfileGUI");
 		//stage.setResizable(false);
 		stage.show();
 	}

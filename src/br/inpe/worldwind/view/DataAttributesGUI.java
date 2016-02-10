@@ -7,14 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class TesteDatabase extends Application{
+public class DataAttributesGUI extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent parent = FXMLLoader.load(Resource.getPaneSetupDatabaseFXML());
+		Parent parent = FXMLLoader.load(Resource.getDataAttributesFXML());
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Tela principal");
+		stage.setTitle("DataAttributesGUI");
 		//stage.setResizable(false);
 		stage.show();
 	}

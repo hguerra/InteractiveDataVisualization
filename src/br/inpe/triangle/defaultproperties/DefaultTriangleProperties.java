@@ -28,6 +28,7 @@ public class DefaultTriangleProperties {
 	// profile
 	private ShapefileProperties shpProperties;
 	private Profile profile;
+	private boolean kinectEnable = true;
 
 	private DefaultTriangleProperties() {
 		this.shpProperties = new ShapefileProperties();
@@ -54,6 +55,14 @@ public class DefaultTriangleProperties {
 
 	public Profile getProfile() {
 		return profile;
+	}
+
+	public void setKinectEnable(boolean selected) {
+		this.kinectEnable = selected;
+	}
+
+	public boolean isKinectEnable() {
+		return kinectEnable;
 	}
 
 	public List<String> getDefaultKeys() {
