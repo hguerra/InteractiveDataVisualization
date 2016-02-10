@@ -1,4 +1,4 @@
-package br.kinect4j.movements;
+package br.inpe.kinect4j.movements;
 
 import com.primesense.nite.JointType;
 import com.primesense.nite.UserData;

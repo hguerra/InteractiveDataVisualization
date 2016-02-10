@@ -1,4 +1,4 @@
-package br.kinect4j.view;
+package br.inpe.kinect4j.view;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,17 +16,17 @@ import br.com.kinect4j.engine.core.GestureController;
 import br.com.kinect4j.engine.core.PoseController;
 import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
+import br.inpe.kinect4j.controller.HandsUpController;
+import br.inpe.kinect4j.controller.SwipeLeftToRightController;
+import br.inpe.kinect4j.controller.SwipeRightToLeftController;
+import br.inpe.kinect4j.controller.WaveLeftController;
+import br.inpe.kinect4j.controller.WaveRightController;
+import br.inpe.kinect4j.controller.ZoomInController;
+import br.inpe.kinect4j.controller.ZoomOutController;
+import br.inpe.kinect4j.engine.Pan;
 import br.inpe.util.SkeletonInfoPrinter;
 import br.inpe.worldwind.controller.ScenarioController;
 import br.inpe.worldwind.layer.triangle.VegetationScenarioLayer.VegetationScenarioApp;
-import br.kinect4j.controller.HandsUpController;
-import br.kinect4j.controller.SwipeLeftToRightController;
-import br.kinect4j.controller.SwipeRightToLeftController;
-import br.kinect4j.controller.WaveLeftController;
-import br.kinect4j.controller.WaveRightController;
-import br.kinect4j.controller.ZoomInController;
-import br.kinect4j.controller.ZoomOutController;
-import br.kinect4j.engine.Pan;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
 public class KinectView extends Kinect4jView {

@@ -18,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import test.app.WorldWindControllersTest;
 
-public class SetupDefaultController implements SetupController {
+public class DefaultController implements SetupController {
 	/* Pane Options */
 	@FXML
 	private AnchorPane anchorPane;

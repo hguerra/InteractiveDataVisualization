@@ -13,10 +13,9 @@ import gov.nasa.worldwind.render.BasicShapeAttributes;
 import gov.nasa.worldwind.render.Material;
 import gov.nasa.worldwind.render.Renderable;
 import gov.nasa.worldwind.render.ShapeAttributes;
+import gov.nasa.worldwind.util.WWIO;
 
 public interface ShapefileController extends LayerController {
-
-	String getDisplayName(Object source);
 
 	List<Layer> shapefile2Layers(String layerName, Shapefile shapefile, Map<Double, Color> colors);
 
@@ -28,11 +27,21 @@ public interface ShapefileController extends LayerController {
 
 	boolean addShapefile(String filepath, Color... colors);
 
-	default Shapefile createShapefile(String filepath) throws Exception {
+	public static Shapefile createShapefile(String filepath) throws Exception {
 		return new Shapefile(new File(filepath));
 	}
 
-	default void setRenderableLayerColor(RenderableLayer layer, Color interiorColor) {
+	public static String getDisplayName(Object source) {
+		String name = WWIO.getSourcePath(source);
+		if (name != null)
+			name = WWIO.getFilename(name);
+		if (name == null) {
+			name = "Shapefile";
+		}
+		return name;
+	}
+
+	public static void setRenderableLayerColor(RenderableLayer layer, Color interiorColor) {
 		java.util.Iterator<Renderable> iterator = layer.getRenderables().iterator();
 		while (iterator.hasNext()) {
 			Renderable next = null;

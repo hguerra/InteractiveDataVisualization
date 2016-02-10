@@ -11,7 +11,7 @@ import org.postgis.Geometry;
 import org.postgis.PGgeometry;
 import org.postgis.Polygon;
 
-import br.inpe.message.properties.DefaultColors;
+import br.inpe.triangle.defaultproperties.DefaultColors;
 import br.inpe.util.GenericFactory;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.BasicShapeAttributes;

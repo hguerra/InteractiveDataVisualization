@@ -13,7 +13,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Point;
 
-import br.inpe.message.properties.DefaultDataReferences;
+import br.inpe.triangle.defaultproperties.DefaultDataReferences;
 
 public class VegetationScenearioAnnotation extends RenderableLayer {
 

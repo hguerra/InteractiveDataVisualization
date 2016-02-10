@@ -23,10 +23,14 @@ import gov.nasa.worldwindx.examples.util.ShapefileLoader;
 
 public class ShapefileProperties extends ShapefileLoader {
 	private HashMap<Renderable, Set<Entry<String, Object>>> atable = new HashMap<Renderable, Set<Entry<String, Object>>>();
-	private String attributeName;
+	private String attributeName = "attr";
 
-	public ShapefileProperties(String attributeName) {
+	public void setAttributeName(String attributeName) {
 		this.attributeName = attributeName;
+	}
+
+	public String getAttributeName() {
+		return attributeName;
 	}
 
 	public Map<Double, Color> createPolygonColors(Shapefile shp, String attributeName, Color[] interiorMaterial) {

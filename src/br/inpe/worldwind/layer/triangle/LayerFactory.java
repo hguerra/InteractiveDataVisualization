@@ -20,7 +20,7 @@ public class LayerFactory {
 	private ShapefileProperties properties;
 
 	public LayerFactory() {
-		properties = new ShapefileProperties("attr");
+		properties = new ShapefileProperties();
 	}
 
 	/**

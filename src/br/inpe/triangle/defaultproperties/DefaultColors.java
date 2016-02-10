@@ -1,4 +1,4 @@
-package br.inpe.message.properties;
+package br.inpe.triangle.defaultproperties;
 
 import java.awt.Color;
 import java.util.HashMap;

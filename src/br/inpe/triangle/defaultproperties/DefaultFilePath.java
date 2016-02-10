@@ -1,9 +1,9 @@
-package br.inpe.util;
+package br.inpe.triangle.defaultproperties;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class FilePathTest {
+public class DefaultFilePath {
 	public static final String FILE_PATH_MODELOS = "data/vegtype-inland/shapefile/";
 	public static final String VEGTYPE_2000 = FILE_PATH_MODELOS + "vegtype_2000.shp";
 	public static final String VEGTYPE_2005 = FILE_PATH_MODELOS + "vegtype_2005.shp";

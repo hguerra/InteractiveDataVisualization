@@ -1,7 +1,7 @@
-package br.kinect4j.controller;
+package br.inpe.kinect4j.controller;
 
 import br.com.kinect4j.controller.Controller;
-import br.kinect4j.view.KinectView;
+import br.inpe.kinect4j.view.KinectView;
 
 public class HandsUpController implements Controller {
 	private KinectView view;

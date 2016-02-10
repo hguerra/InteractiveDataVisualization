@@ -5,27 +5,57 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-	private static final String JDBC_DRIVER = "postgresql";
-	private static final String IP = "localhost";
-	private static final String DATA_BASE = "vegetation_scenario";
-	private static final String USER = "postgres";
-	private static final String PASSWORD = "11";
+	private SGBD sgdb;
+	private String ip;
+	private String database;
+	private String user;
+	private String password;
 
-	public synchronized static Connection getSession() {
+	public ConnectionFactory(SGBD sgdb, String ip, String database, String user, String password) {
+		this.sgdb = sgdb;
+		this.ip = ip;
+		this.database = database;
+		this.user = user;
+		this.password = password;
+	}
+
+	public synchronized Connection getSession() {
 		StringBuffer driver = new StringBuffer();
-		driver.append("jdbc:").append(JDBC_DRIVER).append("://").append(IP).append("/").append(DATA_BASE);
+		driver.append("jdbc:").append(getSgdb().toString()).append("://").append(getIp()).append("/")
+				.append(getDatabase());
 		try {
-			return DriverManager.getConnection(driver.toString(), USER, PASSWORD);
+			return DriverManager.getConnection(driver.toString(), getUser(), getPassword());
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	public synchronized static void shutdown(Connection session) {
+
+	public synchronized void shutdown(Connection session) {
 		try {
 			session.close();
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
 	}
+
+	public SGBD getSgdb() {
+		return sgdb;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public String getDatabase() {
+		return database;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
 }

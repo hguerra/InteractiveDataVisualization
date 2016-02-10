@@ -3,16 +3,9 @@ package test.app;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.inpe.util.FilePathTest;
-import br.inpe.util.GenericFactory;
+import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.util.ShapefileInfo;
-import br.inpe.worldwind.dao.GeometryRecord;
-import br.inpe.worldwind.dao.JDBCDao;
-import br.inpe.worldwind.dao.model.vegtype_2000;
 import br.inpe.worldwind.engine.GeoJSONProperties;
-import gov.nasa.worldwind.avlist.AVList;
-import gov.nasa.worldwind.formats.geojson.GeoJSONFeature;
-import gov.nasa.worldwind.formats.geojson.GeoJSONFeatureCollection;
 import gov.nasa.worldwind.formats.geojson.GeoJSONObject;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.layers.RenderableLayer;
@@ -43,7 +36,7 @@ public class JavaTest {
 		
 		 // transform all GeoJSONObject in layers
 		 List<GeoJSONObject> geos =
-		 geo.createGeoJSONObjectFromSource(FilePathTest.VEGTYPE_2000_GDAL_GEOJSON);
+		 geo.createGeoJSONObjectFromSource(DefaultFilePath.VEGTYPE_2000_GDAL_GEOJSON);
 		 geos.forEach(g -> {
 		 RenderableLayer layer = new RenderableLayer();
 		 geo.addGeoJSONGeometryToLayer(g, layer);

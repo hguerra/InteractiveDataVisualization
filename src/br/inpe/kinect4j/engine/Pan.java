@@ -1,12 +1,12 @@
-package br.kinect4j.engine;
+package br.inpe.kinect4j.engine;
 
 import com.primesense.nite.UserData;
 
 import br.com.kinect4j.engine.core.Skeleton;
 import br.com.kinect4j.engine.core.SkeletonCoordinates;
 import br.com.kinect4j.engine.defaultcore.DefaultSkeletonCoordinates;
+import br.inpe.kinect4j.view.KinectView;
 import br.inpe.worldwind.controller.ScenarioController;
-import br.kinect4j.view.KinectView;
 
 public class Pan {
 	private static final double FACTOR = 0.3;

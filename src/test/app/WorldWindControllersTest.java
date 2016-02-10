@@ -11,8 +11,8 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import br.inpe.message.properties.DefaultColors;
-import br.inpe.util.FilePathTest;
+import br.inpe.triangle.defaultproperties.DefaultColors;
+import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.worldwind.controller.GeoJSONController;
 import br.inpe.worldwind.controller.LayerController;
 import br.inpe.worldwind.controller.ShapefileController;
@@ -103,7 +103,7 @@ public class WorldWindControllersTest extends JFrame {
 
 	private void shapefileController() {
 		shpController = new ShapefileLayer(wwd, "attr");
-		shpController.addShapefile(FilePathTest.VEGTYPE_2000, DefaultColors.getOriginalColors1());
+		shpController.addShapefile(DefaultFilePath.VEGTYPE_2000, DefaultColors.getOriginalColors1());
 		shpController.asyncDraw();
 	}
 
@@ -154,7 +154,7 @@ public class WorldWindControllersTest extends JFrame {
 		 */
 		// GeoJSONProperties p = new GeoJSONProperties("attr");
 		// List<GeoJSONObject> json =
-		// p.createGeoJSONObjectFromSource(FilePathTest.VEGTYPE_2000_GDAL_GEOJSON);
+		// p.createGeoJSONObjectFromSource(DefaultFilePath.VEGTYPE_2000_GDAL_GEOJSON);
 		// jsonController.addGeoJSON("Veg2000", json.get(0),
 		// DefaultColors.getDefaultColors());
 
@@ -162,7 +162,8 @@ public class WorldWindControllersTest extends JFrame {
 		 * boolean addGeoJSON(String filepath, String layerName, Map<Double,
 		 * Color> colors)
 		 */
-		jsonController.addGeoJSON("Veg2000", FilePathTest.VEGTYPE_2000_GDAL_GEOJSON, DefaultColors.getDefaultColors());
+		jsonController.addGeoJSON("Veg2000", DefaultFilePath.VEGTYPE_2000_GDAL_GEOJSON,
+				DefaultColors.getDefaultColors());
 
 		// end test
 		jsonController.asyncDraw();
@@ -173,12 +174,12 @@ public class WorldWindControllersTest extends JFrame {
 	 */
 	private final void worldWindConfig() {
 		wwd = new WorldWindowGLCanvas();
-		wwd.setPreferredSize(new java.awt.Dimension(1000, 800));
+		wwd.setPreferredSize(new java.awt.Dimension(1200, 800));
 		this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
 		wwd.setModel(new BasicModel());
 	}
-	
-	public void run(){
+
+	public void run() {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				JFrame frame = new WorldWindControllersTest();
@@ -186,7 +187,7 @@ public class WorldWindControllersTest extends JFrame {
 				frame.pack();
 				frame.setVisible(true);
 			}
-		});	
+		});
 	}
 
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package br.inpe.message.properties;
+package br.inpe.triangle.defaultproperties;
 
 public class DefaultDataReferences {
 	public final static String vegetationScenarioTitle = "Vegetation Scenario";

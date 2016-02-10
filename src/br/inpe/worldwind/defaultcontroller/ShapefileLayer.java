@@ -8,21 +8,22 @@ import java.util.Map;
 import br.inpe.worldwind.controller.LayerController;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.engine.ShapefileProperties;
-import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
+import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.util.WWIO;
 
 public class ShapefileLayer implements ShapefileController {
-	private WorldWindowGLCanvas canvas;
+	private WorldWindow canvas;
 	private ShapefileProperties properties;
 	private List<Layer> layers;
 	private String attributeName;
 
-	public ShapefileLayer(WorldWindowGLCanvas canvas, String attributeName) {
+	public ShapefileLayer(WorldWindow canvas, String attributeName) {
 		this.canvas = canvas;
-		this.properties = new ShapefileProperties(attributeName);
+		this.properties = new ShapefileProperties();
+		this.properties.setAttributeName(attributeName);
 		this.layers = new ArrayList<>();
 		this.attributeName = attributeName;
 	}
@@ -39,7 +40,6 @@ public class ShapefileLayer implements ShapefileController {
 		LayerController.removeBeforeCompass(canvas, layers);
 	}
 
-	@Override
 	public String getDisplayName(Object source) {
 		String name = WWIO.getSourcePath(source);
 		if (name != null)
@@ -78,8 +78,8 @@ public class ShapefileLayer implements ShapefileController {
 		boolean success = true;
 		try {
 			String layerName = getDisplayName(filepath);
-			Shapefile shpColors = createShapefile(filepath);
-			Shapefile shapefile = createShapefile(filepath);
+			Shapefile shpColors = ShapefileController.createShapefile(filepath);
+			Shapefile shapefile = ShapefileController.createShapefile(filepath);
 			Map<Double, Color> colors = properties.createPolygonColors(shpColors, attributeName, c);
 			addShapefile(layerName, shapefile, colors);
 		} catch (Exception e) {

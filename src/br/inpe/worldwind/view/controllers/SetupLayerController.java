@@ -1,5 +1,6 @@
 package br.inpe.worldwind.view.controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 
 public class SetupLayerController implements SetupController {
 	@FXML
@@ -68,14 +70,22 @@ public class SetupLayerController implements SetupController {
 
 	@Override
 	public void initPaneSetupEvents() {
-		
+
 		btnLoad.setOnAction(event -> {
-			System.out.println("BtnLoad");
+			FileChooser fileChooser = new FileChooser();
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+					"Shapefiles (*.shp), GeoJson (*.geojson)", "*.shp", "*.geojson");
+			fileChooser.getExtensionFilters().add(extFilter);
+			File file = fileChooser.showOpenDialog(null);
+			if (file != null) {
+				String path = file.getAbsolutePath();
+				System.out.println(path);
+			}
 		});
 		btnTrash.setOnAction(event -> {
 			System.out.println("btnTrash");
 		});
-		
+
 		toggleBtnKinect.setOnAction(event -> {
 			System.out.println("toggleBtnKinect:" + toggleBtnKinect.isSelected());
 		});
