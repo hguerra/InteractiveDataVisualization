@@ -14,7 +14,7 @@ public class HomeGUI extends Application{
 		Parent parent = FXMLLoader.load(Resource.getHomeDefaultFXML());
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
-		stage.setTitle("Tela principal");
+		stage.setTitle("Triangle of Sustainability");
 		//stage.setResizable(false);
 		stage.show();
 	}

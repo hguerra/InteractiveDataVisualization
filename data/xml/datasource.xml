@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataSource>
+    <colors>
+        <entry>
+            <key>1.0</key>
+            <value>#006401</value>
+        </entry>
+        <entry>
+            <key>2.0</key>
+            <value>#388237</value>
+        </entry>
+    </colors>
+    <filepath>data/xml/datasource.xml</filepath>
+    <format>SHAPEFILE</format>
+</dataSource>

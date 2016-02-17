@@ -41,7 +41,11 @@ public class Resource {
 	}
 
 	public static URL getDataAttributesFXML() {
-		return getURL("pane-setup-dataattribute-fxml.fxml");
+		return getURL("pane-setup-dataattribute-fxml.fxml"); 
+	}
+	
+	public static URL getDataAttributes2FXML() {
+		return getURL("pane-setup-dataattribute-fxml-2.fxml"); // pane-setup-dataattribute-fxml-2.fxml
 	}
 
 	public static URL getColorPickerFXML() {
