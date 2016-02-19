@@ -8,19 +8,32 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 public class XMLBuilder {
-	public static Object buildObjectFromXML(Class<?> typeOfClass, String filepath) {
+	private static XMLBuilder uniqueInstance;
+
+	private XMLBuilder() {
+	}
+
+	public static XMLBuilder getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new XMLBuilder();
+		}
+		return uniqueInstance;
+	}
+
+	@SuppressWarnings("unchecked")
+	public synchronized <T> T buildObjectFromXML(Class<?> typeOfClass, String filepath) {
 		try {
 			File file = new File(filepath);
 			JAXBContext jaxbContext = JAXBContext.newInstance(typeOfClass);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			return jaxbUnmarshaller.unmarshal(file);
+			return (T) jaxbUnmarshaller.unmarshal(file);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	public static <T> boolean buildXML(T object, String filepath, boolean printOut) {
+	public synchronized <T> boolean buildXML(T object, String filepath, boolean printOut) {
 		boolean success = true;
 		try {
 			File file = new File(filepath);

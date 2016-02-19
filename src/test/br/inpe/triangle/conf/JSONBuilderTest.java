@@ -1,10 +1,6 @@
 package test.br.inpe.triangle.conf;
 
 import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Map;
 
 import org.junit.After;
@@ -12,39 +8,37 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.conf.JSONBuilder;
 
 public class JSONBuilderTest {
-	private Gson gson;
+	private JSONBuilder builder;
 	private DataSource data;
 
 	@Before
 	public void init() {
-		gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		builder = JSONBuilder.getInstance();
 		data = MockConf.createDefaultDataSource();
 	}
 
 	@Test
 	public void testDataSourceWriteJSON() {
-		String json = gson.toJson(data);
+		String json = builder.getJSON(data);
 		Boolean expected = true;
-		Boolean actual = writerJSON(json, MockConf.FILE_PATH + "datasource");
+		Boolean actual = builder.writeJSON(json, MockConf.FILE_PATH + "datasource.json");
 		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testDataSourceFromJSON() {
-		String expected = "ESRI Shapefile - data/xml/datasource.xml - {1.0=#006401, 2.0=#388237}";
-		DataSource actual = readJSON(DataSource.class, MockConf.FILE_PATH + "datasource.json");
+		String expected = "ESRI Shapefile - data/vegtype-inland/shapefile/vegtype_2000.shp - {1.0=#006401, 2.0=#388237, 9.0=#F07A00, 10.0=#D15400, 11.0=#B23000, 12.0=#930900, 3.0=#719F71, -127.0=#000000}";
+		DataSource actual = builder.readJSON(DataSource.class, MockConf.FILE_PATH + "datasource.json");
 		Assert.assertEquals(expected, actual.toString());
 	}
 
 	@Test
 	public void testDataSourceColorFromJSON() {
-		DataSource object = readJSON(DataSource.class, MockConf.FILE_PATH + "datasource.json");
+		DataSource object = builder.readJSON(DataSource.class, MockConf.FILE_PATH + "datasource.json");
 		Map<Double, Color> expected = data.getAwtColors();
 		Map<Double, Color> actual = object.getAwtColors();
 		Assert.assertEquals(expected, actual);
@@ -52,33 +46,7 @@ public class JSONBuilderTest {
 
 	@After
 	public void after() {
-		gson = null;
+		builder = null;
 		data = null;
-	}
-
-	// write and read
-	private boolean writerJSON(String json, String filepath) {
-		boolean success = true;
-		try {
-			FileWriter writer = new FileWriter(filepath + ".json");
-			writer.write(json);
-			writer.close();
-		} catch (IOException e) {
-			success = false;
-			e.printStackTrace();
-		}
-		return success;
-	}
-
-	private <T> T readJSON(Class<?> typeOfClass, String filepath) {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(filepath));
-			// convert the json string back to object
-			T obj = gson.fromJson(br, typeOfClass);
-			return obj;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 }

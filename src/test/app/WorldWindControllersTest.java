@@ -11,6 +11,8 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
+import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.conf.JSONBuilder;
 import br.inpe.triangle.defaultproperties.DefaultColors;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.worldwind.controller.GeoJSONController;
@@ -29,8 +31,10 @@ import br.inpe.worldwind.defaultcontroller.ScreenAnnotationLayer;
 import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
+import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.util.measure.MeasureTool;
+import test.br.inpe.triangle.conf.MockConf;
 
 public class WorldWindControllersTest extends JFrame {
 	/**
@@ -49,6 +53,12 @@ public class WorldWindControllersTest extends JFrame {
 	private LayerController polygon3d;
 	private LayerController points;
 	private GeoJSONController jsonController;
+
+	/**
+	 * User config
+	 */
+
+	private JSONBuilder jsonBuilder;
 
 	public WorldWindControllersTest() {
 		worldWindConfig();
@@ -78,8 +88,38 @@ public class WorldWindControllersTest extends JFrame {
 		// pointController();
 
 		// GeoJSONController
-		geoJSONController();
+		// geoJSONController();
 
+		createFromDataSource();
+
+	}
+
+	/**
+	 * Conf
+	 */
+	private void createFromDataSource() {
+		jsonBuilder = JSONBuilder.getInstance();
+		DataSource data = jsonBuilder.readJSON(DataSource.class, MockConf.FILE_PATH + "datasource.json");
+		if (data == null)
+			return;
+		shapefileController(data);
+	}
+
+	private void shapefileController(DataSource data) {
+		shpController = new ShapefileLayer(wwd, "attr");
+
+		try {
+			String filepath = data.getFilepath();
+
+			Shapefile shp = ShapefileController.createShapefile(filepath);
+			
+			shpController.addShapefile(ShapefileController.getDisplayName(filepath), shp, data.getAwtColors());
+			
+			shpController.asyncDraw();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

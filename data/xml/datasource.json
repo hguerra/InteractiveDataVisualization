@@ -1,1 +1,1 @@
-{"format":"SHAPEFILE","filepath":"data/xml/datasource.xml","colors":{"1.0":"#006401","2.0":"#388237"}}
+{"format":"SHAPEFILE","filepath":"data/vegtype-inland/shapefile/vegtype_2000.shp","colors":{"1.0":"#006401","2.0":"#388237","9.0":"#F07A00","10.0":"#D15400","11.0":"#B23000","12.0":"#930900","3.0":"#719F71","-127.0":"#000000"}}
