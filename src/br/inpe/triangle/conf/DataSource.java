@@ -7,13 +7,19 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.google.gson.annotations.Expose;
+
 import br.inpe.gdal.transform.GeoFormat;
 
 @XmlRootElement
 public class DataSource {
+	@Expose
 	private GeoFormat format;
+	@Expose
 	private String filepath;
+	@Expose
 	private Map<Double, String> colors;
+	// exclude attribute
 	private Map<Double, java.awt.Color> awtColors;
 
 	public DataSource() {

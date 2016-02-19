@@ -19,8 +19,9 @@ public class XMLBuilder {
 			return null;
 		}
 	}
-	
-	public static <T> void buildXML(T object, String filepath, boolean printOut) {
+
+	public static <T> boolean buildXML(T object, String filepath, boolean printOut) {
+		boolean success = true;
 		try {
 			File file = new File(filepath);
 			JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
@@ -32,7 +33,9 @@ public class XMLBuilder {
 				jaxbMarshaller.marshal(object, System.out);
 		} catch (JAXBException e) {
 			e.printStackTrace();
+			success = false;
 		}
+		return success;
 	}
 
 }

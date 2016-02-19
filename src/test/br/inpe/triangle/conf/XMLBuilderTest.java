@@ -17,17 +17,19 @@ public class XMLBuilderTest {
 
 	@Before
 	public void init() {
-		toXML = MockXML.createDefaultDataSource();
+		toXML = MockConf.createDefaultDataSource();
 	}
 
 	@Test
 	public void testGenerateXML() {
-		XMLBuilder.buildXML(toXML, MockXML.DATA_SOURCE_XML, true);
+		Boolean expected = true;
+		Boolean actual = XMLBuilder.buildXML(toXML, MockConf.DATA_SOURCE_XML, true);
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testGenerateObject() {
-		fromXML = (DataSource) XMLBuilder.buildObjectFromXML(DataSource.class, MockXML.DATA_SOURCE_XML);
+		fromXML = (DataSource) XMLBuilder.buildObjectFromXML(DataSource.class, MockConf.DATA_SOURCE_XML);
 		Map<Double, Color> expected = toXML.getAwtColors();
 		Map<Double, Color> actual = fromXML.getAwtColors();
 		Assert.assertEquals(expected, actual);
