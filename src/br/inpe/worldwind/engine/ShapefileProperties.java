@@ -24,28 +24,43 @@ import gov.nasa.worldwindx.examples.util.ShapefileLoader;
 public class ShapefileProperties extends ShapefileLoader {
 	private HashMap<Renderable, Set<Entry<String, Object>>> atable = new HashMap<Renderable, Set<Entry<String, Object>>>();
 	private String attributeName = "attr";
-
-	public void setAttributeName(String attributeName) {
-		this.attributeName = attributeName;
-	}
-
-	public String getAttributeName() {
-		return attributeName;
-	}
+	private Color defaultAttributeColor = Color.BLACK;
 
 	public Map<Double, Color> createPolygonColors(Shapefile shp, String attributeName, Color[] interiorMaterial) {
-		Object[] variation = getShapefileUniqueAttributes(shp, attributeName).toArray();
 		Map<Double, Color> colors = new TreeMap<Double, Color>();
+		Object[] variation = getShapefileUniqueAttributes(shp, attributeName).toArray();
+		if (variation == null)
+			return colors;
 		if (variation.length <= interiorMaterial.length) {
 			for (int i = 0; i < variation.length; i++) {
 				double key = (double) variation[i];
 				colors.put(key, interiorMaterial[i]);
 			}
-		} else if (variation.length > interiorMaterial.length) {
-			for (int i = 0; i < interiorMaterial.length; i++) {
-				double key = (double) variation[i];
-				colors.put(key, interiorMaterial[i]);
+		} else if (variation.length > interiorMaterial.length)
+		/**
+		 * put default color
+		 */
+		{
+			if (interiorMaterial.length == 0) {
+				for (int i = 0; i < variation.length; i++) {
+					double key = (double) variation[i];
+					colors.put(key, getDefaultAttributeColor());
+				}
+
+			} else {
+				// add colors
+				for (int i = 0; i < interiorMaterial.length; i++) {
+					double key = (double) variation[i];
+					colors.put(key, interiorMaterial[i]);
+				}
+				// add default colors
+				int init = interiorMaterial.length;
+				for (int i = init; i < variation.length; i++) {
+					double key = (double) variation[i];
+					colors.put(key, getDefaultAttributeColor());
+				}
 			}
+
 		}
 		return colors;
 	}
@@ -162,5 +177,24 @@ public class ShapefileProperties extends ShapefileLoader {
 			next = iterator.next();
 			atable.put(next, record.getAttributes().getEntries());
 		}
+	}
+
+	/**
+	 * Getters and Setters
+	 */
+	public void setAttributeName(String attributeName) {
+		this.attributeName = attributeName;
+	}
+
+	public String getAttributeName() {
+		return attributeName;
+	}
+
+	public Color getDefaultAttributeColor() {
+		return defaultAttributeColor;
+	}
+
+	public void setDefaultAttributeColor(Color defaultColor) {
+		this.defaultAttributeColor = defaultColor;
 	}
 }
