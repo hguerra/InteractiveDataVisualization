@@ -29,8 +29,6 @@ public class JSONBuilder {
 	}
 
 	public synchronized boolean writeJSON(String json, File file) {
-		if (!file.exists())
-			return false;
 		try {
 			FileWriter writer = new FileWriter(file);
 			writer.write(json);

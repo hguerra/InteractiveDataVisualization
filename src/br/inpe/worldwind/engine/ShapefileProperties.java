@@ -1,6 +1,7 @@
 package br.inpe.worldwind.engine;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -63,6 +64,12 @@ public class ShapefileProperties extends ShapefileLoader {
 
 		}
 		return colors;
+	}
+	
+	public List<Layer> createLayers(String layerName, Shapefile shapefile, Map<Double, Color> colors) {
+		List<Layer> layers = new ArrayList<>();
+		addRenderablesForPolygon(shapefile, layerName, layers, colors);
+		return layers;
 	}
 
 	public void addRenderablesForPolygon(Shapefile shp, String layersName, List<Layer> layers,

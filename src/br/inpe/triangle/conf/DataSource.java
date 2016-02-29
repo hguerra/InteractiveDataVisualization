@@ -24,6 +24,7 @@ public class DataSource {
 
 	public DataSource() {
 		this.awtColors = new HashMap<>();
+		this.colors = new HashMap<>();
 	}
 
 	/**
@@ -72,7 +73,6 @@ public class DataSource {
 	public Map<Double, java.awt.Color> getAwtColors() {
 		if (!awtColors.isEmpty())
 			return this.awtColors;
-
 		colors.forEach((k, v) -> {
 			java.awt.Color value = Color.decode(v);
 			if (value == null)
