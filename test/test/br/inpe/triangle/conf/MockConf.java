@@ -4,17 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.inpe.gdal.transform.GeoFormat;
-import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 
 public class MockConf {
-	public static final String FILE_PATH = "data/xml/";
-	public static final String DATA_SOURCE_XML = FILE_PATH + "datasource.xml";
+	public static final String FILE_PATH = "data/triangle/";
+	public static final String DATA_SOURCE_XML = FILE_PATH + "data.xml";
 	public static final String PROPERTIES_XML = FILE_PATH + "properties.xml";
-	public static final String DATA_SOURCE_PROPERTIES = FILE_PATH + "datasource.properties";
+	public static final String DATA_SOURCE_PROPERTIES = FILE_PATH + "data.properties";
 
-	public static DataSource createDefaultDataSource() {
-		DataSource data = new DataSource();
+	public static Data createDefaultData() {
+		Data data = new Data();
 		
 		data.setFormat(GeoFormat.SHAPEFILE);
 		data.setFilepath(DefaultFilePath.VEGTYPE_2000);
@@ -32,5 +32,11 @@ public class MockConf {
 		data.setColors(colors);
 
 		return data;
+	}
+	
+	public static Map<String, Data> createDefaultDataSource(){
+		Map<String, Data> dataSource = new HashMap<>();
+		
+		return dataSource;
 	}
 }

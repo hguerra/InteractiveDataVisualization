@@ -8,18 +8,18 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.XMLBuilder;
 
 public class XMLBuilderTest {
 	private XMLBuilder builder;
-	private DataSource toXML;
-	private DataSource fromXML;
+	private Data toXML;
+	private Data fromXML;
 
 	@Before
 	public void init() {
 		builder = XMLBuilder.getInstance();
-		toXML = MockConf.createDefaultDataSource();
+		toXML = MockConf.createDefaultData();
 	}
 
 	@Test
@@ -31,7 +31,7 @@ public class XMLBuilderTest {
 
 	@Test
 	public void testGenerateObject() {
-		fromXML = builder.buildObjectFromXML(DataSource.class, MockConf.DATA_SOURCE_XML);
+		fromXML = builder.buildObjectFromXML(Data.class, MockConf.DATA_SOURCE_XML);
 		Map<Double, Color> expected = toXML.getAwtColors();
 		Map<Double, Color> actual = fromXML.getAwtColors();
 		Assert.assertEquals(expected, actual);

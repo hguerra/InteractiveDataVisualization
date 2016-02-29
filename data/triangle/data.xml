@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<dataSource>
+<data>
     <colors>
         <entry>
             <key>1.0</key>
@@ -36,4 +36,4 @@
     </colors>
     <filepath>data/vegtype-inland/shapefile/vegtype_2000.shp</filepath>
     <format>SHAPEFILE</format>
-</dataSource>
+</data>

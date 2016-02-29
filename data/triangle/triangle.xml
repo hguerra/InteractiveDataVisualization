@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<triangleData>
-    <dataSource>
+<dataSource>
+    <dataSet>
         <entry>
             <key>Test1</key>
             <value>
@@ -42,5 +42,5 @@
                 <format>SHAPEFILE</format>
             </value>
         </entry>
-    </dataSource>
-</triangleData>
+    </dataSet>
+</dataSource>

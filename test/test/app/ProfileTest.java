@@ -1,9 +1,5 @@
 package test.app;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
@@ -38,21 +34,6 @@ public class ProfileTest extends Application {
 
 	public Profile getProfile() {
 		return defaultTriangle.getProfile();
-	}
-
-	public void serialize(String path, Object obj) throws Exception {
-		FileOutputStream outFile = new FileOutputStream(path);
-		ObjectOutputStream s = new ObjectOutputStream(outFile);
-		s.writeObject(obj);
-		s.close();
-	}
-
-	public Object deserialize(String path) throws Exception {
-		FileInputStream inFile = new FileInputStream(path);
-		ObjectInputStream d = new ObjectInputStream(inFile);
-		Object o = d.readObject();
-		d.close();
-		return o;
 	}
 
 	/**

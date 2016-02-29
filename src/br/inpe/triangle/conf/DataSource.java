@@ -1,7 +1,8 @@
 package br.inpe.triangle.conf;
 
-import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -10,76 +11,82 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.google.gson.annotations.Expose;
 
 import br.inpe.gdal.transform.GeoFormat;
+import br.inpe.worldwind.controller.ShapefileController;
+import br.inpe.worldwind.engine.ShapefileProperties;
+import gov.nasa.worldwind.formats.shapefile.Shapefile;
+import gov.nasa.worldwind.layers.Layer;
 
 @XmlRootElement
 public class DataSource {
 	@Expose
-	private GeoFormat format;
-	@Expose
-	private String filepath;
-	@Expose
-	private Map<Double, String> colors;
-	// exclude attribute
-	private Map<Double, java.awt.Color> awtColors;
+	private Map<String, Data> dataSet;
+	private Map<String, List<Layer>> layers;
+	private ShapefileProperties shpProperties;
 
 	public DataSource() {
-		this.awtColors = new HashMap<>();
-		this.colors = new HashMap<>();
+		this.dataSet = new HashMap<>();
+		this.layers = new HashMap<>();
+		this.shpProperties = new ShapefileProperties();
 	}
 
-	/**
-	 * Bean
-	 * 
-	 * @return
-	 */
-	public GeoFormat getFormat() {
-		return format;
+	public Data addData(String name, Data data) {
+		addLayers(name, data);
+		return dataSet.put(name, data);
 	}
 
-	@XmlElement
-	public void setFormat(GeoFormat format) {
-		this.format = format;
+	public Data addData(String name, GeoFormat format, String filepath, Map<Double, String> colors) {
+		Data data = new Data();
+		data.setFormat(format);
+		data.setFilepath(filepath);
+		data.setColors(colors);
+		addLayers(name, data);
+		return addData(name, data);
 	}
 
-	public String getFilepath() {
-		return filepath;
+	public Data removeData(Data data) {
+		return dataSet.remove(data);
 	}
 
-	@XmlElement
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
-	}
-
-	public Map<Double, String> getColors() {
-		return colors;
-	}
-
-	@XmlElement
-	public void setColors(Map<Double, String> colors) {
-		this.colors = colors;
-	}
-	
-	
-	@Override
-	public String toString() {
-		return new StringBuffer().append(format).append(" - ").append(filepath).append(" - ").append(colors).toString();
-	}
-
-	/**
-	 * Transform methods
-	 * 
-	 * @return
-	 */
-	public Map<Double, java.awt.Color> getAwtColors() {
-		if (!awtColors.isEmpty())
-			return this.awtColors;
-		colors.forEach((k, v) -> {
-			java.awt.Color value = Color.decode(v);
-			if (value == null)
-				value = java.awt.Color.black;
-			this.awtColors.put(k, value);
+	public Map<String, List<Layer>> getLayers() {
+		if (!layers.isEmpty())
+			return this.layers;
+		dataSet.forEach((k, v) -> {
+			List<Layer> value = createLayers(v);
+			if (!value.isEmpty())
+				this.layers.put(k, value);
 		});
+		return this.layers;
+	}
 
-		return this.awtColors;
+	public List<Layer> addLayers(String name, Data data) {
+		List<Layer> value = createLayers(data);
+		if (!value.isEmpty())
+			return this.layers.put(name, value);
+		return null;
+	}
+
+	public List<Layer> removeLayers(List<Layer> l) {
+		return this.layers.remove(l);
+	}
+
+	public List<Layer> createLayers(Data data) {
+		List<Layer> layer = new ArrayList<>();
+		try {
+			String displayName = ShapefileController.getDisplayName(data.getFilepath());
+			Shapefile shapefile = ShapefileController.createShapefile(data.getFilepath());
+			layer = shpProperties.createLayers(displayName, shapefile, data.getAwtColors());
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		return layer;
+	}
+
+	public Map<String, Data> getDataSet() {
+		return dataSet;
+	}
+
+	@XmlElement
+	public void setDataSet(Map<String, Data> dataSet) {
+		this.dataSet = dataSet;
 	}
 }

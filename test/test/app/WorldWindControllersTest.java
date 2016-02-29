@@ -11,7 +11,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.JSONBuilder;
 import br.inpe.triangle.defaultproperties.DefaultColors;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
@@ -99,13 +99,13 @@ public class WorldWindControllersTest extends JFrame {
 	 */
 	private void createFromDataSource() {
 		jsonBuilder = JSONBuilder.getInstance();
-		DataSource data = jsonBuilder.readJSON(DataSource.class, MockConf.FILE_PATH + "datasource.json");
+		Data data = jsonBuilder.readJSON(Data.class, MockConf.FILE_PATH + "datasource.json");
 		if (data == null)
 			return;
 		shapefileController(data);
 	}
 
-	private void shapefileController(DataSource data) {
+	private void shapefileController(Data data) {
 		shpController = new ShapefileLayer(wwd, "attr");
 
 		try {
