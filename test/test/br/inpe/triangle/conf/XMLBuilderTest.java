@@ -25,13 +25,13 @@ public class XMLBuilderTest {
 	@Test
 	public void testGenerateXML() {
 		Boolean expected = true;
-		Boolean actual =builder.buildXML(toXML, MockConf.DATA_SOURCE_XML, true);
+		Boolean actual =builder.buildXML(toXML, MockConf.DATA_XML, true);
 		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
 	public void testGenerateObject() {
-		fromXML = builder.buildObjectFromXML(Data.class, MockConf.DATA_SOURCE_XML);
+		fromXML = builder.buildObjectFromXML(Data.class, MockConf.DATA_XML);
 		Map<Double, Color> expected = toXML.getAwtColors();
 		Map<Double, Color> actual = fromXML.getAwtColors();
 		Assert.assertEquals(expected, actual);
