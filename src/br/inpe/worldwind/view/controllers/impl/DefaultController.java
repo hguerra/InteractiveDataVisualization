@@ -1,10 +1,12 @@
-package br.inpe.worldwind.view.controllers;
+package br.inpe.worldwind.view.controllers.impl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import br.inpe.worldwind.view.controllers.ManagerSetupController;
+import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.resources.Resource;
 import javafx.collections.FXCollections;

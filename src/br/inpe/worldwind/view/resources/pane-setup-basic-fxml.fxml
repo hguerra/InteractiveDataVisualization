@@ -15,7 +15,7 @@
 	maxHeight="480.0" maxWidth="213.0" minHeight="480.0" minWidth="213.0"
 	prefHeight="480.0" prefWidth="213.0" stylesheets="@home-css.css"
 	xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.inpe.worldwind.view.controllers.SetupBasicController">
+	fx:controller="br.inpe.worldwind.view.controllers.impl.SetupBasicController">
 	<children>
 		<Pane fx:id="paneSetup" prefHeight="480.0" prefWidth="213.0"
 			styleClass="pane-setup">

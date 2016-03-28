@@ -1,4 +1,4 @@
-package br.inpe.worldwind.view;
+package br.inpe.worldwind.view.impl;
 
 import br.inpe.worldwind.view.resources.Resource;
 import javafx.application.Application;

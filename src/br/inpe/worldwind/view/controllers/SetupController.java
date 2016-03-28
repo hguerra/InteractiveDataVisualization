@@ -10,20 +10,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
-public interface SetupController extends Initializable{
-	
+public interface SetupController extends Initializable {
 	void initPaneSetupEvents();
-	
+
 	ObservableList<Node> getPaneSetupChildren();
-	
+
 	default boolean addElementsPaneSetup(Node... elements) {
 		return getPaneSetupChildren().addAll(elements);
 	}
-	
+
 	default void clearPaneSetup() {
 		getPaneSetupChildren().clear();
 	}
-	
+
 	default boolean loadPaneSetup(URL location) {
 		try {
 			Parent parent = FXMLLoader.load(location);
@@ -33,7 +32,7 @@ public interface SetupController extends Initializable{
 			return false;
 		}
 	}
-	
+
 	default boolean loadPaneSetup(ObservableList<Node> elements, URL location) {
 		try {
 			Parent parent = FXMLLoader.load(location);
@@ -45,8 +44,8 @@ public interface SetupController extends Initializable{
 			return false;
 		}
 	}
-	
-	default ObservableList<Node> addSetupController(SetupView setup, Pane pane){
+
+	default ObservableList<Node> addSetupController(SetupView setup, Pane pane) {
 		ManagerSetupController manager = ManagerSetupController.getInstance();
 		return manager.addElement(setup, pane);
 	}

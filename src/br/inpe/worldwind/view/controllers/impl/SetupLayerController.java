@@ -1,4 +1,4 @@
-package br.inpe.worldwind.view.controllers;
+package br.inpe.worldwind.view.controllers.impl;
 
 import java.io.File;
 import java.net.URL;
@@ -10,8 +10,10 @@ import javax.swing.JOptionPane;
 
 import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.worldwind.controller.ShapefileController;
-import br.inpe.worldwind.view.DataAttributesGUI;
+import br.inpe.worldwind.view.controllers.ManagerSetupController;
+import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.impl.DataAttributesGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
