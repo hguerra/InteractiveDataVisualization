@@ -7,9 +7,9 @@ import javafx.scene.control.Control;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public abstract class ModelFX extends Application {
+public abstract class ApplicationFX extends Application {
 
-	private Stage stage;
+	private static Stage currentStage;
 
 	public abstract Scene getScene();
 
@@ -77,24 +77,23 @@ public abstract class ModelFX extends Application {
 		primaryStage.setScene(getScene());
 		primaryStage.setTitle(getSceneTitle());
 		primaryStage.show();
-		/**
-		 * Layout deve ser iniciado depois do stage.show(), antes disso, o valor
-		 * sera -1.0.
-		 */
 		initLayout();
-		this.stage = primaryStage;
-	}
-
-	public static void main(String[] args) {
-		launch(args);
+		currentStage = primaryStage;
 	}
 
 	/* Getters and Setters */
 	public Stage getStage() {
-		return stage;
+		return currentStage;
 	}
 
 	public void setStage(Stage stage) {
-		this.stage = stage;
+		currentStage = stage;
+	}
+	
+	public static boolean closeStage() {
+		if (currentStage == null)
+			return false;
+		currentStage.close();
+		return true;
 	}
 }

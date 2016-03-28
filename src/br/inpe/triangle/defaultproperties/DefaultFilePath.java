@@ -32,4 +32,9 @@ public class DefaultFilePath {
 	public static final String FILE_PATH_DADOS_ANA_PART_1 = "data/LuccME/Triangle_SceB_novaproj_part1.shp";
 	public static final String FILE_PATH_DADOS_ANA_PART_2 = "data/LuccME/Triangle_SceB_novaproj_part2.shp";
 
+	/**
+	 * Plano diretor 2011
+	 */
+	public static final String PLANO_DIRETOR_2011 = "C:\\Users\\Heitor\\Desktop\\ecometrica\\dados-caraguatatuba\\plano_diretor_2011_convertido\\PD2011_CARAGUA_FINAL.shp";
+
 }

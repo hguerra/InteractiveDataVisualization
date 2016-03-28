@@ -2,7 +2,7 @@ package test.app;
 
 import javax.swing.JOptionPane;
 
-import br.inpe.worldwind.view.ModelFX;
+import br.inpe.worldwind.view.ApplicationFX;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -11,7 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class ModelFxTest extends ModelFX {
+public class ModelFxTest extends ApplicationFX {
 	private Scene scene;
 	private AnchorPane pane;
 	private TextField txLogin;
