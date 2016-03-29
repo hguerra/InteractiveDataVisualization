@@ -67,7 +67,7 @@ public class SetupDataAttributeController implements SetupController {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initPaneSetupEvents();
-		addSetupController(SetupView.LAYER_ATTRIBUTES, anchorPane);
+		addView(SetupView.LAYER_ATTRIBUTES, anchorPane);
 	}
 
 	@Override
@@ -119,5 +119,9 @@ public class SetupDataAttributeController implements SetupController {
 	private void refreshScenario(){
 		listViewScenario.setItems(listOfView);
 	}
-
+	@Override
+	public void update(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,5 +1,8 @@
 package br.inpe.worldwind.view.impl;
 
+import br.inpe.worldwind.view.controllers.ManagerSetupController;
+import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.resources.Resource;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,11 +20,20 @@ public class ColorPickerGUI extends Application {
 		currentStage.close();
 		return true;
 	}
-	
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Parent parent = FXMLLoader.load(Resource.getColorPickerFXML());
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(Resource.getColorPickerFXML());
+		Parent parent = fxmlLoader.load();
+		Object controller = fxmlLoader.getController();
+
+		if (controller instanceof SetupController) {
+			System.out.println(controller);
+			ManagerSetupController instance = ManagerSetupController.getInstance();
+			instance.addController(SetupView.LAYER_COLOR, (SetupController) controller);
+			System.out.println(instance.getController(SetupView.LAYER_COLOR));
+		}
 		Scene scene = new Scene(parent);
 		stage.setScene(scene);
 		stage.setTitle("ColorPickerGUI");

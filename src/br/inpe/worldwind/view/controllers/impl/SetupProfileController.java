@@ -80,7 +80,7 @@ public class SetupProfileController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addSetupController(SetupView.PROFILE, anchorPane);
+		addView(SetupView.PROFILE, anchorPane);
 
 	}
 
@@ -94,6 +94,12 @@ public class SetupProfileController implements SetupController {
 	@Override
 	public ObservableList<Node> getPaneSetupChildren() {
 		return this.paneSetup.getChildren();
+	}
+	
+	@Override
+	public void update(Object object) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

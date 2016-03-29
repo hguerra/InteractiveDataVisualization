@@ -14,6 +14,8 @@ public interface SetupController extends Initializable {
 	void initPaneSetupEvents();
 
 	ObservableList<Node> getPaneSetupChildren();
+	
+	void update(Object object);
 
 	default boolean addElementsPaneSetup(Node... elements) {
 		return getPaneSetupChildren().addAll(elements);
@@ -45,8 +47,17 @@ public interface SetupController extends Initializable {
 		}
 	}
 
-	default ObservableList<Node> addSetupController(SetupView setup, Pane pane) {
+	default ObservableList<Node> addView(SetupView setup, Pane pane) {
 		ManagerSetupController manager = ManagerSetupController.getInstance();
 		return manager.addElement(setup, pane);
+	}
+
+	default SetupController addController(SetupView setup, Object controller) {
+		if (!(controller instanceof SetupController)){
+			return null;			
+		}
+
+		ManagerSetupController manager = ManagerSetupController.getInstance();
+		return manager.addController(setup, (SetupController) controller);
 	}
 }

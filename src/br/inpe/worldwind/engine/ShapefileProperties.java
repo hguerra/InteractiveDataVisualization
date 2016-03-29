@@ -65,7 +65,7 @@ public class ShapefileProperties extends ShapefileLoader {
 		}
 		return colors;
 	}
-	
+
 	public List<Layer> createLayers(String layerName, Shapefile shapefile, Map<Double, Color> colors) {
 		List<Layer> layers = new ArrayList<>();
 		addRenderablesForPolygon(shapefile, layerName, layers, colors);
@@ -139,6 +139,15 @@ public class ShapefileProperties extends ShapefileLoader {
 				.filter(entries -> entries.getKey().equals(attributeName)).collect(Collectors.toSet()).stream()
 				.map(entries -> entries.getValue()).collect(Collectors.toSet());
 		return found;
+	}
+
+	public static Set<String> getShapefileColumns(Shapefile shp) {
+		Set<String> columns = new HashSet<>();
+		while (shp.hasNext()) {
+			ShapefileRecord r = shp.nextRecord();
+			r.getAttributes().getEntries().forEach(column -> columns.add(column.getKey()));
+		}
+		return columns;
 	}
 
 	/**

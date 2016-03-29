@@ -2,6 +2,7 @@ package br.inpe.worldwind.view;
 
 import java.net.URL;
 
+import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,16 +16,21 @@ public abstract class ApplicationFXML extends Application {
 
 	protected abstract URL getFXML();
 
+	protected abstract SetupView getSetupView();
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent parent = FXMLLoader.load(getFXML());
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getFXML());
+		Parent parent = fxmlLoader.load();
+		/* add scene */
 		Scene scene = new Scene(parent);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle(getSceneTitle());
 		primaryStage.show();
 		currentStage = primaryStage;
 	}
-	
+
 	public static boolean closeStage() {
 		if (currentStage == null)
 			return false;

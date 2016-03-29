@@ -71,7 +71,7 @@ public class SetupDataAttributeController2 implements SetupController {
 	@Override
 	public void initPaneSetupEvents() {
 		initPaneSetupEvents();
-		addSetupController(SetupView.LAYER_ATTRIBUTES, anchorPane);
+		addView(SetupView.LAYER_ATTRIBUTES, anchorPane);
 
 	}
 
@@ -83,5 +83,9 @@ public class SetupDataAttributeController2 implements SetupController {
 	private void mockValues(){
 		
 	}
-
+	@Override
+	public void update(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 }

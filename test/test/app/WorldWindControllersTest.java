@@ -73,7 +73,7 @@ public class WorldWindControllersTest extends JFrame {
 		// polygon2DController();
 
 		// ShapefileController
-		 shapefileController();
+		// shapefileController();
 
 		// CommentLayer
 		// commentController();
@@ -90,7 +90,7 @@ public class WorldWindControllersTest extends JFrame {
 		// GeoJSONController
 		// geoJSONController();
 
-		//createFromDataSource();
+		createFromDataSource();
 
 	}
 
@@ -99,7 +99,7 @@ public class WorldWindControllersTest extends JFrame {
 	 */
 	private void createFromDataSource() {
 		jsonBuilder = JSONBuilder.getInstance();
-		Data data = jsonBuilder.readJSON(Data.class, MockConf.FILE_PATH + "datasource.json");
+		Data data = jsonBuilder.readJSON(Data.class, MockConf.FILE_PATH + "data.json");
 		if (data == null)
 			return;
 		shapefileController(data);
@@ -143,8 +143,7 @@ public class WorldWindControllersTest extends JFrame {
 
 	private void shapefileController() {
 		shpController = new ShapefileLayer(wwd, "attr");
-		//shpController.addShapefile(DefaultFilePath.VEGTYPE_2000, DefaultColors.getOriginalColors1());
-		shpController.addShapefile(DefaultFilePath.PLANO_DIRETOR_2011, DefaultColors.getOriginalColors1());
+		shpController.addShapefile(DefaultFilePath.VEGTYPE_2000, DefaultColors.getOriginalColors1());
 		shpController.asyncDraw();
 	}
 

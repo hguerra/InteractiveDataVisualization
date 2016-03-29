@@ -14,7 +14,7 @@ public abstract class ApplicationSetupController implements SetupController {
 	protected abstract SetupView getSetupView();
 
 	protected abstract Pane getPaneView();
-
+	
 	@Override
 	public ObservableList<Node> getPaneSetupChildren() {
 		return getPaneView().getChildren();
@@ -27,7 +27,9 @@ public abstract class ApplicationSetupController implements SetupController {
 		/* add events */
 		initPaneSetupEvents();
 		/* set screen */
-		addSetupController(getSetupView(), getPaneView());
+		addView(getSetupView(), getPaneView());
+		/* set controller */
+		addController(getSetupView(), this);
 	}
 
 }

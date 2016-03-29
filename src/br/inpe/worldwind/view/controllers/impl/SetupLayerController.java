@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
 import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
-import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
-import br.inpe.worldwind.view.impl.DataAttributesGUI;
+import br.inpe.worldwind.view.controllers.SetupController;
+import br.inpe.worldwind.view.impl.StyleData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -93,7 +93,7 @@ public class SetupLayerController implements SetupController {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initPaneSetupEvents();
-		addSetupController(SetupView.LAYER, anchorPane);
+		addView(SetupView.LAYER, anchorPane);
 	}
 
 	@Override
@@ -109,17 +109,18 @@ public class SetupLayerController implements SetupController {
 				String path = file.getAbsolutePath();
 				String title = txtTitle.getText();
 				String reference = txtReference.getText();
-
+				/* title */
 				if (title.equals(""))
 					title = ShapefileController.getDisplayName(path);
 
 				externalFilePath.put(title, path);
 				listOfView.add(title);
-
+				/* reference */
 				if (!reference.equals("")) {
 					dataReference.put(title, reference);
 				}
 			}
+			// end
 			listViewScenario.setItems(listOfView);
 		});
 
@@ -144,7 +145,21 @@ public class SetupLayerController implements SetupController {
 
 		btnColor.setOnAction(event -> {
 			try {
-				new DataAttributesGUI().start(new Stage());
+				/* data */
+				if (!listOfView.isEmpty()) {
+					String item = listViewScenario.getSelectionModel().getSelectedItem();
+					if (item == null) {
+						JOptionPane.showMessageDialog(null, "Please selected some data before!", "NO DATA SELECTED",
+								JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					new StyleData().start(new Stage());
+					SetupController controller = ManagerSetupController.getInstance().getController(SetupView.STYLE_DATA);
+					controller.update(externalFilePath.get(item));
+				} else
+					JOptionPane.showMessageDialog(null, "Please add some data before!", "NO DATA",
+							JOptionPane.WARNING_MESSAGE);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -171,7 +186,7 @@ public class SetupLayerController implements SetupController {
 				}
 
 				java.awt.Color[] awtColors = convertFX2AWT(colors);
-				
+
 				System.out.println(awtColors);
 
 				triangle.addLayers(path, attr, awtColors);
@@ -200,5 +215,11 @@ public class SetupLayerController implements SetupController {
 			awtColors[i] = newColor;
 		}
 		return awtColors;
+	}
+	
+	@Override
+	public void update(Object object) {
+		// TODO Auto-generated method stub
+		
 	}
 }

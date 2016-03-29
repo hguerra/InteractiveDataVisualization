@@ -2,6 +2,7 @@ package test.br.inpe.worldwind.engine;
 
 import java.awt.Color;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -43,7 +44,7 @@ public class ShapefilePropertiesTest {
 	@Test
 	public void testCreatePolygonColorsOneColor() {
 		// One color
-		Color[] interiorMaterial = new Color[] {Color.red};
+		Color[] interiorMaterial = new Color[] { Color.red };
 
 		Map<Double, Color> colors = prop.createPolygonColors(shp, attributeName, interiorMaterial);
 		Object expected = 7;
@@ -64,6 +65,15 @@ public class ShapefilePropertiesTest {
 		Object actual = colors.size();
 
 		System.out.println("Default:" + colors);
+
+		Assert.assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testGetDataColumns() {
+		Set<String> dataColumns = ShapefileProperties.getShapefileColumns(shp);
+		Object expected = 1;
+		Object actual = dataColumns.size();
 
 		Assert.assertEquals(expected, actual);
 	}

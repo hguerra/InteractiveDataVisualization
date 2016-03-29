@@ -42,7 +42,7 @@ public class SetupKinectController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addSetupController(SetupView.KINECT, anchorPane);
+		addView(SetupView.KINECT, anchorPane);
 
 	}
 
@@ -57,5 +57,11 @@ public class SetupKinectController implements SetupController {
 	@Override
 	public ObservableList<Node> getPaneSetupChildren() {
 		return this.paneSetup.getChildren();
+	}
+	
+	@Override
+	public void update(Object object) {
+		// TODO Auto-generated method stub
+		
 	}
 }

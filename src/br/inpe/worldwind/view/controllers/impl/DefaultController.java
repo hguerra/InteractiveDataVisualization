@@ -143,4 +143,10 @@ public class DefaultController implements SetupController {
 		this.paneSetup.getChildren().addAll(manager.getElement(key));
 	}
 
+	@Override
+	public void update(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

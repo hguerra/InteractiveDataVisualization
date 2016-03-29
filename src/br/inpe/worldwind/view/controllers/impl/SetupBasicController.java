@@ -58,7 +58,7 @@ public class SetupBasicController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addSetupController(SetupView.BASIC, paneSetup);
+		addView(SetupView.BASIC, paneSetup);
 
 	}
 
@@ -77,5 +77,10 @@ public class SetupBasicController implements SetupController {
 	@Override
 	public ObservableList<Node> getPaneSetupChildren() {
 		return this.paneSetup.getChildren();
+	}
+	@Override
+	public void update(Object object) {
+		// TODO Auto-generated method stub
+		
 	}
 }
