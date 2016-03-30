@@ -1,5 +1,7 @@
 package br.inpe.worldwind.view;
 
+import java.awt.Color;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -40,6 +42,10 @@ public class DataProperty {
 
 	public StringProperty getDescriptionProperty() {
 		return description;
+	}
+
+	public void setColor(Color value) {
+		this.color.set(value);
 	}
 
 }

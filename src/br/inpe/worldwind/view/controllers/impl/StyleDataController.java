@@ -1,12 +1,12 @@
 package br.inpe.worldwind.view.controllers.impl;
 
+import java.awt.Color;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-
+import br.inpe.util.color.ColorBrewer.ColorBrewerName;
+import br.inpe.util.color.ColorMath;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.engine.ShapefileProperties;
-import br.inpe.worldwind.view.ColorBrewerName;
 import br.inpe.worldwind.view.DataProperty;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -66,10 +67,23 @@ public class StyleDataController<T> extends ApplicationSetupController {
 	@Override
 	protected void initPaneSetup() {
 		/* tblViewStyle */
-		columnColor.setCellValueFactory(cellData -> cellData.getValue().getColorProperty());
 		columnValue.setCellValueFactory(cellData -> cellData.getValue().getValueProperty());
 		columnDescription.setCellValueFactory(cellData -> cellData.getValue().getDescriptionProperty());
-
+		columnColor.setCellValueFactory(cellData -> cellData.getValue().getColorProperty());
+		columnColor.setCellFactory(column -> {
+			return new TableCell<DataProperty, java.awt.Color>() {
+				@Override
+				protected void updateItem(java.awt.Color item, boolean empty) {
+					super.updateItem(item, empty);
+					if (item == null || empty) {
+						setText(null);
+						setStyle("");
+					} else {
+						setStyle(new StringBuilder().append("-fx-background-color: ").append(ColorMath.toHex(item)).toString());
+					}
+				}
+			};
+		});
 		/* comboColorBrewer */
 		comboColorBrewer.setItems(FXCollections.observableArrayList(ColorBrewerName.values()));
 		comboColorBrewer.getSelectionModel().select(ColorBrewerName.YlGn);
@@ -83,11 +97,7 @@ public class StyleDataController<T> extends ApplicationSetupController {
 				return;
 			String key = comboColumn.getSelectionModel().getSelectedItem();
 			Set<Object> uniqueAttrs = ShapefileProperties.getShapefileUniqueAttributes(shp, key);
-			/**
-			 * TODO
-			 * 
-			 * using DataProperty to insert in tableview
-			 */
+			
 			ObservableList<DataProperty> values = FXCollections.observableArrayList();
 
 			uniqueAttrs.forEach(v -> {
@@ -97,7 +107,10 @@ public class StyleDataController<T> extends ApplicationSetupController {
 			tblViewStyle.setItems(values);
 		});
 		btnOK.setOnAction(event -> {
-			JOptionPane.showMessageDialog(null, "OK");
+			Color color = ColorMath.generateRandomColor();
+			DataProperty selected = tblViewStyle.getSelectionModel().getSelectedItem();
+			if(selected == null) return;
+			selected.setColor(color);
 		});
 	}
 
@@ -127,5 +140,5 @@ public class StyleDataController<T> extends ApplicationSetupController {
 		}
 
 	}
-
+	
 }
