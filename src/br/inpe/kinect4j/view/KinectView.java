@@ -24,7 +24,7 @@ import br.inpe.kinect4j.controller.WaveRightController;
 import br.inpe.kinect4j.controller.ZoomInController;
 import br.inpe.kinect4j.controller.ZoomOutController;
 import br.inpe.kinect4j.engine.Pan;
-import br.inpe.util.SkeletonInfoPrinter;
+import br.inpe.util.status.SkeletonInfoPrinter;
 import br.inpe.worldwind.controller.ScenarioController;
 import br.inpe.worldwind.layer.triangle.VegetationScenarioLayer.VegetationScenarioApp;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;

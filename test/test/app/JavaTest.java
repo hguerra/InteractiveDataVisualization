@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
-import br.inpe.util.ShapefileInfo;
+import br.inpe.util.status.ShapefileInfo;
 import br.inpe.worldwind.engine.GeoJSONProperties;
 import gov.nasa.worldwind.formats.geojson.GeoJSONObject;
 import gov.nasa.worldwind.layers.Layer;

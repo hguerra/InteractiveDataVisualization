@@ -1,4 +1,4 @@
-package br.inpe.util;
+package br.inpe.util.reflection;
 
 public class GenericFactory {
 	private GenericFactory() {}

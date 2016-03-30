@@ -13,7 +13,7 @@ import br.com.kinect4j.engine.core.PoseController;
 import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
 import br.inpe.kinect4j.movements.PoseT;
-import br.inpe.util.SkeletonInfoPrinter;
+import br.inpe.util.status.SkeletonInfoPrinter;
 
 public class KinectApplicationViewTest extends Kinect4jView {
 	private static final long serialVersionUID = 1L;

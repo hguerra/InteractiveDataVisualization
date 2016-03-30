@@ -1,4 +1,4 @@
-package br.inpe.util;
+package br.inpe.util.collection;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;

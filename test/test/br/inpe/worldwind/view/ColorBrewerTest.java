@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import br.inpe.worldwind.view.ColorBrewer;
+import br.inpe.util.color.ColorBrewer;
 
 
 public class ColorBrewerTest {

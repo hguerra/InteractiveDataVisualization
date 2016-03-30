@@ -12,7 +12,7 @@ import org.postgis.PGgeometry;
 import org.postgis.Polygon;
 
 import br.inpe.triangle.defaultproperties.DefaultColors;
-import br.inpe.util.GenericFactory;
+import br.inpe.util.reflection.GenericFactory;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.render.BasicShapeAttributes;
 import gov.nasa.worldwind.render.Material;

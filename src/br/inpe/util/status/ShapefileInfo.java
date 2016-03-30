@@ -1,4 +1,4 @@
-package br.inpe.util;
+package br.inpe.util.status;
 
 import java.util.HashSet;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package br.inpe.util;
+package br.inpe.util.status;
 
 import com.primesense.nite.Point3D;
 
