@@ -55,10 +55,6 @@ public class Resource {
 	public static URL getStyleDataFXML() {
 		return getURL("pane-style-data.fxml");
 	}
-	public static URL getColorBrewerJSON() {
-		return getURL("colorbrewer.json");
-	}
-
 
 	public static String getStylesheet(String stylesheet) {
 		return getURL(stylesheet).toExternalForm();

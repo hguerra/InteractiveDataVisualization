@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ColorBrewer {
-	public enum ColorBrewerName {
-		YlGn, YlGnBu, GnBu, BuGn, PuBuGn, PuBu, BuPu, RdPu, PuRd, OrRd, YlOrRd, YlOrBr, Purples, Blues, Greens, Oranges, Reds, Greys, PuOr, BrBG, PRGn, PiYG, RdBu, RdGy, RdYlBu, Spectral, RdYlGn, Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3;
-	}
 
 	private Map<String, List<String>> YlGn;
 	private Map<String, List<String>> YlGnBu;
@@ -52,8 +49,8 @@ public class ColorBrewer {
 	 * 
 	 * @return
 	 */
-	public Map<String, List<java.awt.Color>> getAwtColors(Map<String, List<String>> colors) {
-		Map<String, List<java.awt.Color>> awtColors = new HashMap<>();
+	public Map<Integer, List<java.awt.Color>> getAwtColors(Map<String, List<String>> colors) {
+		Map<Integer, List<java.awt.Color>> awtColors = new HashMap<>();
 		colors.forEach((k, v) -> {
 			List<java.awt.Color> listOfColors = new ArrayList<>();
 			v.forEach(c -> {
@@ -62,7 +59,7 @@ public class ColorBrewer {
 					value = java.awt.Color.black;
 				listOfColors.add(value);
 			});
-			awtColors.put(k, listOfColors);
+			awtColors.put(Integer.parseInt(k), listOfColors);
 		});
 		return awtColors;
 	}
@@ -347,5 +344,164 @@ public class ColorBrewer {
 
 	public void setSet3(Map<String, List<String>> set3) {
 		Set3 = set3;
+	}
+
+	public Map<String, List<String>> getValue(ColorBrewerName key) {
+		switch (key) {
+		case YlGn:
+			return getYlGn();
+		case YlGnBu:
+			return getYlGnBu();
+		case GnBu:
+			return getGnBu();
+		case BuGn:
+			return getBuGn();
+		case PuBuGn:
+			return getPuBuGn();
+		case PuBu:
+			return getPuBu();
+		case BuPu:
+			return getBuPu();
+		case RdPu:
+			return getRdPu();
+		case PuRd:
+			return getPuRd();
+		case OrRd:
+			return getOrRd();
+		case YlOrRd:
+			return getYlOrRd();
+		case YlOrBr:
+			return getYlOrBr();
+		case Purples:
+			return getPurples();
+		case Blues:
+			return getBlues();
+		case Greens:
+			return getGreens();
+		case Oranges:
+			return getOranges();
+		case Reds:
+			return getReds();
+		case Greys:
+			return getGreys();
+		case PuOr:
+			return getPuOr();
+		case BrBG:
+			return getBrBG();
+		case PRGn:
+			return getPRGn();
+		case PiYG:
+			return getPiYG();
+		case RdBu:
+			return getRdBu();
+		case RdGy:
+			return getRdGy();
+		case RdYlBu:
+			return getRdYlBu();
+		case Spectral:
+			return getSpectral();
+		case RdYlGn:
+			return getRdYlGn();
+		case Accent:
+			return getAccent();
+		case Dark2:
+			return getDark2();
+		case Paired:
+			return getPaired();
+		case Pastel1:
+			return getPastel1();
+		case Pastel2:
+			return getPastel2();
+		case Set1:
+			return getSet1();
+		case Set2:
+			return getSet2();
+		case Set3:
+			return getSet3();
+		default:
+			return new HashMap<>();
+		}
+	}
+
+	public enum ColorBrewerName {
+		YlGn, YlGnBu, GnBu, BuGn, PuBuGn, PuBu, BuPu, RdPu, PuRd, OrRd, YlOrRd, YlOrBr, Purples, Blues, Greens, Oranges, Reds, Greys, PuOr, BrBG, PRGn, PiYG, RdBu, RdGy, RdYlBu, Spectral, RdYlGn, Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3;
+
+		public String toString() {
+			switch (this) {
+			case YlGn:
+				return "YlGn";
+			case YlGnBu:
+				return "YlGnBu";
+			case GnBu:
+				return "GnBu";
+			case BuGn:
+				return "BuGn";
+			case PuBuGn:
+				return "PuBuGn";
+			case PuBu:
+				return "PuBu";
+			case BuPu:
+				return "BuPu";
+			case RdPu:
+				return "RdPu";
+			case PuRd:
+				return "PuRd";
+			case OrRd:
+				return "OrRd";
+			case YlOrRd:
+				return "YlOrRd";
+			case YlOrBr:
+				return "YlOrBr";
+			case Purples:
+				return "Purples";
+			case Blues:
+				return "Blues";
+			case Greens:
+				return "Greens";
+			case Oranges:
+				return "Oranges";
+			case Reds:
+				return "Reds";
+			case Greys:
+				return "Greys";
+			case PuOr:
+				return "PuOr";
+			case BrBG:
+				return "BrBG";
+			case PRGn:
+				return "PRGn";
+			case PiYG:
+				return "PiYG";
+			case RdBu:
+				return "RdBu";
+			case RdGy:
+				return "RdGy";
+			case RdYlBu:
+				return "RdYlBu";
+			case Spectral:
+				return "Spectral";
+			case RdYlGn:
+				return "RdYlGn";
+			case Accent:
+				return "Accent";
+			case Dark2:
+				return "Dark2";
+			case Paired:
+				return "Paired";
+			case Pastel1:
+				return "Pastel1";
+			case Pastel2:
+				return "Pastel2";
+			case Set1:
+				return "Set1";
+			case Set2:
+				return "Set2";
+			case Set3:
+				return "Set3";
+			default:
+				return "UNDEFINED";
+			}
+		};
+
 	}
 }
