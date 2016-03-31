@@ -2,12 +2,12 @@ package br.inpe.worldwind.view.controllers.impl;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import br.inpe.gdal.transform.GeoFormat;
 import br.inpe.triangle.conf.Data;
 import br.inpe.util.color.ColorBrewer;
 import br.inpe.util.color.ColorBrewer.ColorBrewerName;
@@ -20,6 +20,7 @@ import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.impl.ColorPickerGUI;
+import br.inpe.worldwind.view.impl.StyleData;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -129,23 +130,25 @@ public class StyleDataController<T> extends ApplicationSetupController {
 				e.printStackTrace();
 			}
 		});
-		btnOK.setOnAction(event -> {
-			Color color = ColorMath.generateRandomColor();
-			DataProperty selected = tblViewStyle.getSelectionModel().getSelectedItem();
-			if (selected == null)
-				return;
-			selected.setColor(color);
-
-		});
-
 		btnApply.setOnAction(event -> {
-			data.setFilepath(data.getFilepath());
-			data.setFormat(GeoFormat.SHAPEFILE);
-
-			tblViewStyle.getItems().forEach(dataProperty -> {
-
+			/**
+			 * TODO
+			 */
+			Map<Double, java.awt.Color> awtColors = new HashMap<>();
+			tblViewStyle.getItems().forEach(data -> {
+				try {
+					/**
+					 * TODO refactor in the future, remove casting
+					 */
+					awtColors.put((Double) data.getValue(), data.getColor());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			});
-			// data.setColors(colors);
+			this.data.setAwtColors(awtColors);
+		});
+		btnOK.setOnAction(event -> {
+			StyleData.closeStage();
 		});
 
 		/* Table */

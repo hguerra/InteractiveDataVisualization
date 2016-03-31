@@ -2,6 +2,8 @@ package br.inpe.worldwind.view.controllers.impl;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -14,6 +16,7 @@ import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.impl.StyleData;
+import br.inpe.worldwind.view.impl.WorldWindView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,7 +31,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -87,6 +89,8 @@ public class SetupLayerController implements SetupController {
 	private Button btnRun;
 
 	private ObservableList<String> listOfView = FXCollections.observableArrayList();
+
+	// private ShapefileController shpController = new ShapefileLayer();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -180,31 +184,13 @@ public class SetupLayerController implements SetupController {
 		});
 
 		btnRun.setOnAction(event -> {
-			DefaultTriangleProperties triangle = DefaultTriangleProperties.getInstance();
-
-			String attr = "attr";
-
-			Color[] colors = MANAGER.getColors(attr);
-
-			String title = "vegtype-gdal.shp";
+			List<Data> dataset = new ArrayList<>();
+			listOfView.forEach(key -> {
+				dataset.add(MANAGER.getData(key));
+			});
 
 			try {
-				String path = MANAGER.getData(title).getFilepath();
-
-				if (path == null) {
-					JOptionPane.showMessageDialog(null, "Please add some file!", "Erro", JOptionPane.ERROR_MESSAGE);
-					return;
-				} else if (colors == null) {
-					JOptionPane.showMessageDialog(null, "Please choice the colors!", "Erro", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				java.awt.Color[] awtColors = convertFX2AWT(colors);
-
-				System.out.println(awtColors);
-
-				triangle.addLayers(path, attr, awtColors);
-
+				new WorldWindView().run();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -215,20 +201,6 @@ public class SetupLayerController implements SetupController {
 	@Override
 	public ObservableList<Node> getPaneSetupChildren() {
 		return this.paneSetup.getChildren();
-	}
-
-	private java.awt.Color[] convertFX2AWT(javafx.scene.paint.Color... colors) {
-		java.awt.Color[] awtColors = new java.awt.Color[colors.length];
-
-		for (int i = 0; i < colors.length; i++) {
-			Color c = colors[i];
-			int r = (int) c.getRed();
-			int g = (int) c.getGreen();
-			int b = (int) c.getBlue();
-			java.awt.Color newColor = new java.awt.Color(r, g, b);
-			awtColors[i] = newColor;
-		}
-		return awtColors;
 	}
 
 	@Override

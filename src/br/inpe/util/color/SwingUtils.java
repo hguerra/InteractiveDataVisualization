@@ -1,14 +1,15 @@
 package br.inpe.util.color;
 
+import java.awt.Component;
+
+import javax.swing.JLabel;
+
 import javafx.event.EventType;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
-
-import javax.swing.JLabel;
-import java.awt.Component;
 
 /**
  * common swing utilities
@@ -26,6 +27,14 @@ public class SwingUtils {
 			return new java.awt.Color((float) color.getRed(), (float) color.getGreen(), (float) color.getBlue(),
 					(float) color.getOpacity());
 		}
+	}
+
+	public static java.awt.Color[] toAwt(Color... colors) {
+		java.awt.Color[] awtColors = new java.awt.Color[colors.length];
+		for (int i = 0; i < colors.length; i++) {
+			awtColors[i] = toAwt(colors[i]);
+		}
+		return awtColors;
 	}
 
 	public static Color fromAwt(final java.awt.Color color) {
