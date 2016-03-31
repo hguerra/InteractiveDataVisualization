@@ -30,7 +30,6 @@ public class DataSource {
 	}
 
 	public Data addData(String name, Data data) {
-		addLayers(name, data);
 		return dataSet.put(name, data);
 	}
 
@@ -39,23 +38,35 @@ public class DataSource {
 		data.setFormat(format);
 		data.setFilepath(filepath);
 		data.setColors(colors);
+		return addData(name, data);
+	}
+
+	public Data addDataAwtColors(String name, GeoFormat format, String filepath,
+			Map<Double, java.awt.Color> awtColors) {
+		Data data = new Data();
+		data.setFormat(format);
+		data.setFilepath(filepath);
+		data.setAwtColors(awtColors);
 		addLayers(name, data);
 		return addData(name, data);
 	}
 
-	public Data removeData(Data data) {
-		return dataSet.remove(data);
+	public Data removeData(String name) {
+		return dataSet.remove(name);
 	}
 
-	public Map<String, List<Layer>> getLayers() {
-		if (!layers.isEmpty())
-			return this.layers;
+	public Map<String, List<Layer>> refreshLayers(){
 		dataSet.forEach((k, v) -> {
 			List<Layer> value = createLayers(v);
 			if (!value.isEmpty())
 				this.layers.put(k, value);
 		});
 		return this.layers;
+	}
+	public Map<String, List<Layer>> getLayers() {
+		if (!layers.isEmpty())
+			return this.layers;
+		return refreshLayers();
 	}
 
 	public List<Layer> addLayers(String name, Data data) {
@@ -81,6 +92,11 @@ public class DataSource {
 		return layer;
 	}
 
+	/**
+	 * Getters and setters
+	 * 
+	 * @return
+	 */
 	public Map<String, Data> getDataSet() {
 		return dataSet;
 	}

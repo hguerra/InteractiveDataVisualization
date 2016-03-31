@@ -14,6 +14,8 @@ import br.inpe.gdal.transform.GeoFormat;
 @XmlRootElement
 public class Data {
 	@Expose
+	private String reference;
+	@Expose
 	private GeoFormat format;
 	@Expose
 	private String filepath;
@@ -58,8 +60,16 @@ public class Data {
 	public void setColors(Map<Double, String> colors) {
 		this.colors = colors;
 	}
-	
-	
+
+	public String getReference() {
+		return reference;
+	}
+
+	@XmlElement
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
 	@Override
 	public String toString() {
 		return new StringBuffer().append(format).append(" - ").append(filepath).append(" - ").append(colors).toString();
@@ -82,4 +92,9 @@ public class Data {
 
 		return this.awtColors;
 	}
+
+	public void setAwtColors(Map<Double, java.awt.Color> awtColors) {
+		this.awtColors = awtColors;
+	}
+
 }

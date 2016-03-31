@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import br.inpe.gdal.transform.GeoFormat;
+import br.inpe.triangle.conf.Data;
 import br.inpe.util.color.ColorBrewer;
 import br.inpe.util.color.ColorBrewer.ColorBrewerName;
 import br.inpe.util.color.ColorMath;
@@ -36,6 +38,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class StyleDataController<T> extends ApplicationSetupController {
+	private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
 
 	@FXML
 	private AnchorPane anchorPane;
@@ -72,10 +75,10 @@ public class StyleDataController<T> extends ApplicationSetupController {
 
 	@FXML
 	private Button btnOK;
-
+	/* ColorBrewer */
+	private ColorBrewer colorBrewer = MANAGER.getColorBrewer();
 	/* actual data */
-	private Shapefile shp;
-	private ColorBrewer colorBrewer = ManagerSetupController.getInstance().getColorBrewer();
+	private Data data;
 
 	@Override
 	protected void initPaneSetup() {
@@ -113,13 +116,18 @@ public class StyleDataController<T> extends ApplicationSetupController {
 	public void initPaneSetupEvents() {
 		/* Buttons */
 		btnClassify.setOnAction(event -> {
-			if (shp == null)
-				return;
-			/* get uniques attrs */
-			String key = comboColumn.getSelectionModel().getSelectedItem();
-			Set<Object> uniqueAttrs = ShapefileProperties.getShapefileUniqueAttributes(shp, key);
-			/* add list to the tableview */
-			tblViewStyle.setItems(classifyByColorBrewer(uniqueAttrs));
+			try {
+				Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
+				if (shp == null)
+					return;
+				/* get uniques attrs */
+				String key = comboColumn.getSelectionModel().getSelectedItem();
+				Set<Object> uniqueAttrs = ShapefileProperties.getShapefileUniqueAttributes(shp, key);
+				/* add list to the tableview */
+				tblViewStyle.setItems(classifyByColorBrewer(uniqueAttrs));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		});
 		btnOK.setOnAction(event -> {
 			Color color = ColorMath.generateRandomColor();
@@ -127,6 +135,17 @@ public class StyleDataController<T> extends ApplicationSetupController {
 			if (selected == null)
 				return;
 			selected.setColor(color);
+
+		});
+
+		btnApply.setOnAction(event -> {
+			data.setFilepath(data.getFilepath());
+			data.setFormat(GeoFormat.SHAPEFILE);
+
+			tblViewStyle.getItems().forEach(dataProperty -> {
+
+			});
+			// data.setColors(colors);
 		});
 
 		/* Table */
@@ -162,10 +181,11 @@ public class StyleDataController<T> extends ApplicationSetupController {
 
 	@Override
 	public void update(Object object) {
-		if (object instanceof String) {
+		if (object instanceof Data) {
 			try {
-				this.shp = ShapefileController.createShapefile(object.toString());
-				Shapefile shpColumns = ShapefileController.createShapefile(object.toString());
+				this.data = (Data) object;
+
+				Shapefile shpColumns = ShapefileController.createShapefile(data.getFilepath());
 				Set<String> columns = ShapefileProperties.getShapefileColumns(shpColumns);
 				comboColumn.setItems(FXCollections.observableArrayList(columns));
 				comboColumn.getSelectionModel().selectFirst();

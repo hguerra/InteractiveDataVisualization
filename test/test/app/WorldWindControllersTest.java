@@ -88,9 +88,9 @@ public class WorldWindControllersTest extends JFrame {
 		// pointController();
 
 		// GeoJSONController
-		// geoJSONController();
+		geoJSONController();
 
-		createFromDataSource();
+		//createFromDataSource();
 
 	}
 
@@ -187,17 +187,6 @@ public class WorldWindControllersTest extends JFrame {
 
 	private void geoJSONController() {
 		jsonController = new GeoJSONLayer(wwd, "attr");
-
-		/**
-		 * addGeoJSON(String layerName, GeoJSONObject json, Map
-		 * <Double,Color> colors)
-		 */
-		// GeoJSONProperties p = new GeoJSONProperties("attr");
-		// List<GeoJSONObject> json =
-		// p.createGeoJSONObjectFromSource(DefaultFilePath.VEGTYPE_2000_GDAL_GEOJSON);
-		// jsonController.addGeoJSON("Veg2000", json.get(0),
-		// DefaultColors.getDefaultColors());
-
 		/*
 		 * boolean addGeoJSON(String filepath, String layerName, Map<Double,
 		 * Color> colors)

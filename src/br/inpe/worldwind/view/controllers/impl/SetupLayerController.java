@@ -2,12 +2,12 @@ package br.inpe.worldwind.view.controllers.impl;
 
 import java.io.File;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import br.inpe.gdal.transform.GeoFormat;
+import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
@@ -33,6 +33,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class SetupLayerController implements SetupController {
+	private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
+
 	@FXML
 	private AnchorPane anchorPane;
 
@@ -84,10 +86,6 @@ public class SetupLayerController implements SetupController {
 	@FXML
 	private Button btnRun;
 
-	private Map<String, String> externalFilePath = new HashMap<>();
-
-	private Map<String, String> dataReference = new HashMap<>();
-
 	private ObservableList<String> listOfView = FXCollections.observableArrayList();
 
 	@Override
@@ -101,8 +99,15 @@ public class SetupLayerController implements SetupController {
 
 		btnLoad.setOnAction(event -> {
 			FileChooser fileChooser = new FileChooser();
-			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-					"Shapefiles (*.shp), GeoJson (*.geojson)", "*.shp", "*.geojson");
+			// default
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Shapefiles (*.shp)", "*.shp");
+			/**
+			 * TODO
+			 */
+			// FileChooser.ExtensionFilter extFilter = new
+			// FileChooser.ExtensionFilter(
+			// "Shapefiles (*.shp), GeoJson (*.geojson)", "*.shp", "*.geojson");
+			// add extension filter
 			fileChooser.getExtensionFilters().add(extFilter);
 			File file = fileChooser.showOpenDialog(null);
 			if (file != null) {
@@ -113,12 +118,19 @@ public class SetupLayerController implements SetupController {
 				if (title.equals(""))
 					title = ShapefileController.getDisplayName(path);
 
-				externalFilePath.put(title, path);
-				listOfView.add(title);
+				/* add Data */
+				Data data = new Data();
+				data.setFormat(GeoFormat.SHAPEFILE);
+				data.setFilepath(path);
+
 				/* reference */
-				if (!reference.equals("")) {
-					dataReference.put(title, reference);
-				}
+				if (!reference.equals(""))
+					data.setReference(reference);
+
+				// add in observable list
+				listOfView.add(title);
+				// add data in Manager
+				MANAGER.addData(title, data);
 			}
 			// end
 			listViewScenario.setItems(listOfView);
@@ -154,8 +166,10 @@ public class SetupLayerController implements SetupController {
 						return;
 					}
 					new StyleData().start(new Stage());
-					SetupController controller = ManagerSetupController.getInstance().getController(SetupView.STYLE_DATA);
-					controller.update(externalFilePath.get(item));
+
+					SetupController controller = MANAGER.getController(SetupView.STYLE_DATA);
+					Data selectedData = MANAGER.getData(item);
+					controller.update(selectedData);
 				} else
 					JOptionPane.showMessageDialog(null, "Please add some data before!", "NO DATA",
 							JOptionPane.WARNING_MESSAGE);
@@ -170,12 +184,12 @@ public class SetupLayerController implements SetupController {
 
 			String attr = "attr";
 
-			Color[] colors = ManagerSetupController.getInstance().getColors(attr);
+			Color[] colors = MANAGER.getColors(attr);
 
 			String title = "vegtype-gdal.shp";
 
 			try {
-				String path = externalFilePath.get(title);
+				String path = MANAGER.getData(title).getFilepath();
 
 				if (path == null) {
 					JOptionPane.showMessageDialog(null, "Please add some file!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -216,10 +230,10 @@ public class SetupLayerController implements SetupController {
 		}
 		return awtColors;
 	}
-	
+
 	@Override
 	public void update(Object object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

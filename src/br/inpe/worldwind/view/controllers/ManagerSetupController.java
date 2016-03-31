@@ -9,6 +9,9 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+import br.inpe.triangle.conf.Data;
+import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.util.color.ColorBrewer;
 import javafx.collections.ObservableList;
@@ -27,13 +30,21 @@ public class ManagerSetupController {
 	private Map<SetupView, SetupController> controllers;
 	/* ColorBrewer */
 	private ColorBrewer colorBrewer;
+	/* Data */
+	private DataSource sessionDataSource;
 
 	private ManagerSetupController() {
 		this.elementsView = new HashMap<>();
 		this.controllers = new HashMap<>();
 		this.colorBrewer = createColorBrewer();
+		this.sessionDataSource = DefaultDataSource.getInstance().createDefaultDataSource();
 	}
 
+	/**
+	 * Singleton
+	 * 
+	 * @return
+	 */
 	public static ManagerSetupController getInstance() {
 		if (uniqueInstance == null) {
 			uniqueInstance = new ManagerSetupController();
@@ -41,7 +52,13 @@ public class ManagerSetupController {
 		return uniqueInstance;
 	}
 
-	/* Elements of view */
+	/**
+	 * Elements of view
+	 * 
+	 * @param setup
+	 * @param parent
+	 * @return
+	 */
 	public synchronized ObservableList<Node> addElement(SetupView setup, Pane parent) {
 		return this.elementsView.put(setup, parent.getChildren());
 	}
@@ -58,7 +75,13 @@ public class ManagerSetupController {
 		return this.elementsView.get(key);
 	}
 
-	/* Controllers */
+	/**
+	 * Controllers
+	 * 
+	 * @param view
+	 * @param controller
+	 * @return
+	 */
 	public synchronized SetupController addController(SetupView view, SetupController controller) {
 		return this.controllers.put(view, controller);
 	}
@@ -71,8 +94,11 @@ public class ManagerSetupController {
 		return this.controllers.get(view);
 	}
 
-	/* Color */
-
+	/**
+	 * Color
+	 * 
+	 * TODO refactor this using datasource
+	 */
 	private Map<String, Color[]> attributesColor = new HashMap<>();
 
 	public Color[] addAttributesColor(String attrName, Color... color) {
@@ -91,6 +117,11 @@ public class ManagerSetupController {
 		return attributesColor.get(attrName);
 	}
 
+	/**
+	 * ColorBrewer
+	 * 
+	 * @return
+	 */
 	public ColorBrewer getColorBrewer() {
 		return colorBrewer;
 	}
@@ -104,6 +135,20 @@ public class ManagerSetupController {
 			e.printStackTrace();
 		}
 		return new ColorBrewer();
+	}
+
+	/**
+	 * Data Source
+	 * @return 
+	 */
+	public Data addData(String name, Data data) {
+		return this.sessionDataSource.addData(name, data);
+	}
+	public Data removeData(String name){
+		return this.sessionDataSource.removeData(name);
+	}
+	public Data getData(String name){
+		return this.sessionDataSource.getDataSet().get(name);
 	}
 
 }
