@@ -23,8 +23,8 @@ public class StyleData extends ApplicationFXML {
 		return SetupView.STYLE_DATA;
 	}
 
-	public static void main(String[] args) {
-		launch(args);
+	@Override
+	protected boolean exitOnCloseRequest() {
+		return false;
 	}
-
 }

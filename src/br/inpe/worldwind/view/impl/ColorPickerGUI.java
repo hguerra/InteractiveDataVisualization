@@ -22,4 +22,9 @@ public class ColorPickerGUI extends ApplicationFXML {
 		return SetupView.LAYER_COLOR;
 	}
 
+	@Override
+	protected boolean exitOnCloseRequest() {
+		return false;
+	}
+
 }

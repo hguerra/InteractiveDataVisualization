@@ -90,8 +90,6 @@ public class SetupLayerController implements SetupController {
 
 	private ObservableList<String> listOfView = FXCollections.observableArrayList();
 
-	// private ShapefileController shpController = new ShapefileLayer();
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initPaneSetupEvents();
@@ -189,9 +187,8 @@ public class SetupLayerController implements SetupController {
 			listOfView.forEach(key -> {
 				dataset.add(MANAGER.getData(key));
 			});
-
 			try {
-				new WorldWindView().run();
+				WorldWindView.run(dataset);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -14,6 +15,7 @@ import br.inpe.triangle.conf.DataSource;
 import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.util.color.ColorBrewer;
+import gov.nasa.worldwind.layers.Layer;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -150,5 +152,12 @@ public class ManagerSetupController {
 	public Data getData(String name){
 		return this.sessionDataSource.getDataSet().get(name);
 	}
-
+	
+	public Map<String, List<Layer>> getLayersFromDataSource(){
+		return this.sessionDataSource.getLayers();
+	}
+	
+	public List<Layer> getLayerFromDataSource(String title){
+		return this.getLayersFromDataSource().get(title);
+	}
 }

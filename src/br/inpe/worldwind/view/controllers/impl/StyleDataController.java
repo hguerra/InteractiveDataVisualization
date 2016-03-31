@@ -20,7 +20,6 @@ import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.impl.ColorPickerGUI;
-import br.inpe.worldwind.view.impl.StyleData;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -151,7 +150,8 @@ public class StyleDataController<T> extends ApplicationSetupController {
 			this.data.setDescription(description);
 		});
 		btnOK.setOnAction(event -> {
-			StyleData.closeStage();
+			Stage stage = (Stage) btnOK.getScene().getWindow();
+			stage.close();
 		});
 
 		/* Table */

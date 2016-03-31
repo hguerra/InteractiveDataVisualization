@@ -1,5 +1,7 @@
 package br.inpe.worldwind.view.impl;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 
 import br.inpe.triangle.conf.Data;
@@ -18,32 +20,35 @@ public class WorldWindView extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private WorldWindowGLCanvas wwd;
 	private ShapefileController shpController;
+	private List<Data> dataset;
 
-	public WorldWindView() {
+	public WorldWindView(List<Data> dataset) {
+		this.dataset = dataset;
 		worldWindConfig();
 		controllersConfig();
 	}
-	
-	private final void controllersConfig(){
-		Data data = MANAGER.getData("vegtype-gdal.shp");
-		shapefileController(data);
+
+	private final void controllersConfig() {
+		this.shpController = new ShapefileLayer(wwd);
+		drawViewDataset();
 	}
-	
-	private void shapefileController(Data data) {
-		shpController = new ShapefileLayer(wwd);
 
+	private void drawViewDataset() {
+		dataset.forEach(data -> {
+			draw(data);
+		});
+		shpController.asyncDraw();
+	}
+
+	private void draw(Data data) {
 		try {
-			String filepath = data.getFilepath();
-
-			Shapefile shp = ShapefileController.createShapefile(filepath);
-			
-			shpController.addShapefile(ShapefileController.getDisplayName(filepath), shp, data.getAwtColors());
-			
-			shpController.asyncDraw();
+			Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
+			if (shp == null)
+				return;
+			shpController.addShapefile(data.getTitle(), shp, data.getAwtColors());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
@@ -56,13 +61,23 @@ public class WorldWindView extends JFrame {
 		wwd.setModel(new BasicModel());
 	}
 
-	public void run() {
+	public static void run(List<Data> dataset) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				JFrame frame = new WorldWindView();
+				JFrame frame = new WorldWindView(dataset);
 				frame.pack();
 				frame.setVisible(true);
 			}
 		});
+	}
+
+	/**
+	 * Setters
+	 * 
+	 * @param dataset
+	 */
+	public void setDataset(List<Data> dataset) {
+		// TODO Auto-generated method stub
+
 	}
 }

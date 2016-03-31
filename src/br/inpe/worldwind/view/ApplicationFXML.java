@@ -4,10 +4,13 @@ import java.net.URL;
 
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public abstract class ApplicationFXML extends Application {
 	private static Stage currentStage;
@@ -18,6 +21,8 @@ public abstract class ApplicationFXML extends Application {
 
 	protected abstract SetupView getSetupView();
 
+	protected abstract boolean exitOnCloseRequest();
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader();
@@ -27,8 +32,20 @@ public abstract class ApplicationFXML extends Application {
 		Scene scene = new Scene(parent);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle(getSceneTitle());
+		setOnCloseRequest(primaryStage);
 		primaryStage.show();
 		currentStage = primaryStage;
+	}
+
+	private void setOnCloseRequest(Stage stage) {
+		if(!exitOnCloseRequest()) return;
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
 	}
 
 	public static boolean closeStage() {
@@ -37,4 +54,5 @@ public abstract class ApplicationFXML extends Application {
 		currentStage.close();
 		return true;
 	}
+
 }
