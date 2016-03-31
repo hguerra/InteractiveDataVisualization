@@ -25,7 +25,7 @@ public interface ShapefileController extends LayerController {
 
 	void addShapefile(String layerName, Shapefile shapefile, Map<Double, Color> colors);
 
-	boolean addShapefile(String filepath, Color... colors);
+	boolean addShapefile(String filepath, String columnName, Color... colors);
 
 	public static Shapefile createShapefile(String filepath) throws Exception {
 		return new Shapefile(new File(filepath));

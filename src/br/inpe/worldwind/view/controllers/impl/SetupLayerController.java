@@ -124,6 +124,7 @@ public class SetupLayerController implements SetupController {
 
 				/* add Data */
 				Data data = new Data();
+				data.setTitle(title);
 				data.setFormat(GeoFormat.SHAPEFILE);
 				data.setFilepath(path);
 

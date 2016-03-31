@@ -30,7 +30,7 @@ public class WorldWindView extends JFrame {
 	}
 	
 	private void shapefileController(Data data) {
-		shpController = new ShapefileLayer(wwd, "attr");
+		shpController = new ShapefileLayer(wwd);
 
 		try {
 			String filepath = data.getFilepath();

@@ -14,6 +14,8 @@ import br.inpe.gdal.transform.GeoFormat;
 @XmlRootElement
 public class Data {
 	@Expose
+	private String title;
+	@Expose
 	private String reference;
 	@Expose
 	private GeoFormat format;
@@ -21,12 +23,15 @@ public class Data {
 	private String filepath;
 	@Expose
 	private Map<Double, String> colors;
+	@Expose
+	private Map<Double, String> description;
 	// exclude attribute
 	private Map<Double, java.awt.Color> awtColors;
 
 	public Data() {
-		this.awtColors = new HashMap<>();
 		this.colors = new HashMap<>();
+		this.awtColors = new HashMap<>();
+		this.description = new HashMap<>();
 	}
 
 	/**
@@ -70,9 +75,22 @@ public class Data {
 		this.reference = reference;
 	}
 
-	@Override
-	public String toString() {
-		return new StringBuffer().append(format).append(" - ").append(filepath).append(" - ").append(colors).toString();
+	public String getTitle() {
+		return title;
+	}
+
+	@XmlElement
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Map<Double, String> getDescription() {
+		return description;
+	}
+
+	@XmlElement
+	public void setDescription(Map<Double, String> description) {
+		this.description = description;
 	}
 
 	/**
@@ -95,6 +113,11 @@ public class Data {
 
 	public void setAwtColors(Map<Double, java.awt.Color> awtColors) {
 		this.awtColors = awtColors;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuffer().append(format).append(" - ").append(filepath).append(" - ").append(colors).toString();
 	}
 
 }

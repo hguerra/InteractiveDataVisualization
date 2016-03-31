@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.gson.annotations.Expose;
 
-import br.inpe.gdal.transform.GeoFormat;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.engine.ShapefileProperties;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
@@ -33,29 +32,11 @@ public class DataSource {
 		return dataSet.put(name, data);
 	}
 
-	public Data addData(String name, GeoFormat format, String filepath, Map<Double, String> colors) {
-		Data data = new Data();
-		data.setFormat(format);
-		data.setFilepath(filepath);
-		data.setColors(colors);
-		return addData(name, data);
-	}
-
-	public Data addDataAwtColors(String name, GeoFormat format, String filepath,
-			Map<Double, java.awt.Color> awtColors) {
-		Data data = new Data();
-		data.setFormat(format);
-		data.setFilepath(filepath);
-		data.setAwtColors(awtColors);
-		addLayers(name, data);
-		return addData(name, data);
-	}
-
 	public Data removeData(String name) {
 		return dataSet.remove(name);
 	}
 
-	public Map<String, List<Layer>> refreshLayers(){
+	public Map<String, List<Layer>> refreshLayers() {
 		dataSet.forEach((k, v) -> {
 			List<Layer> value = createLayers(v);
 			if (!value.isEmpty())
@@ -63,6 +44,7 @@ public class DataSource {
 		});
 		return this.layers;
 	}
+
 	public Map<String, List<Layer>> getLayers() {
 		if (!layers.isEmpty())
 			return this.layers;

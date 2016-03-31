@@ -90,7 +90,7 @@ public class WorldWindControllersTest extends JFrame {
 		// GeoJSONController
 		geoJSONController();
 
-		//createFromDataSource();
+		// createFromDataSource();
 
 	}
 
@@ -106,20 +106,20 @@ public class WorldWindControllersTest extends JFrame {
 	}
 
 	private void shapefileController(Data data) {
-		shpController = new ShapefileLayer(wwd, "attr");
+		shpController = new ShapefileLayer(wwd);
 
 		try {
 			String filepath = data.getFilepath();
 
 			Shapefile shp = ShapefileController.createShapefile(filepath);
-			
+
 			shpController.addShapefile(ShapefileController.getDisplayName(filepath), shp, data.getAwtColors());
-			
+
 			shpController.asyncDraw();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -142,8 +142,8 @@ public class WorldWindControllersTest extends JFrame {
 	}
 
 	private void shapefileController() {
-		shpController = new ShapefileLayer(wwd, "attr");
-		shpController.addShapefile(DefaultFilePath.VEGTYPE_2000, DefaultColors.getOriginalColors1());
+		shpController = new ShapefileLayer(wwd);
+		shpController.addShapefile(DefaultFilePath.VEGTYPE_2000, "attr", DefaultColors.getOriginalColors1());
 		shpController.asyncDraw();
 	}
 

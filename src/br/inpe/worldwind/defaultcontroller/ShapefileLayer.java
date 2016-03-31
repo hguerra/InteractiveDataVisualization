@@ -18,14 +18,12 @@ public class ShapefileLayer implements ShapefileController {
 	private WorldWindow canvas;
 	private ShapefileProperties properties;
 	private List<Layer> layers;
-	private String attributeName;
 
-	public ShapefileLayer(WorldWindow canvas, String attributeName) {
+	public ShapefileLayer(WorldWindow canvas) {
 		this.canvas = canvas;
 		this.properties = new ShapefileProperties();
-		this.properties.setAttributeName(attributeName);
 		this.layers = new ArrayList<>();
-		this.attributeName = attributeName;
+
 	}
 
 	@Override
@@ -74,13 +72,13 @@ public class ShapefileLayer implements ShapefileController {
 	}
 
 	@Override
-	public boolean addShapefile(String filepath, Color... c) {
+	public boolean addShapefile(String filepath, String columnName, Color... c) {
 		boolean success = true;
 		try {
 			String layerName = getDisplayName(filepath);
 			Shapefile shpColors = ShapefileController.createShapefile(filepath);
 			Shapefile shapefile = ShapefileController.createShapefile(filepath);
-			Map<Double, Color> colors = properties.createPolygonColors(shpColors, attributeName, c);
+			Map<Double, Color> colors = properties.createPolygonColors(shpColors, columnName, c);
 			addShapefile(layerName, shapefile, colors);
 		} catch (Exception e) {
 			success = false;

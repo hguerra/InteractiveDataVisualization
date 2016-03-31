@@ -131,21 +131,24 @@ public class StyleDataController<T> extends ApplicationSetupController {
 			}
 		});
 		btnApply.setOnAction(event -> {
-			/**
-			 * TODO
-			 */
+			// maps
 			Map<Double, java.awt.Color> awtColors = new HashMap<>();
+			Map<Double, String> description = new HashMap<>();
+			// insert values
 			tblViewStyle.getItems().forEach(data -> {
 				try {
 					/**
 					 * TODO refactor in the future, remove casting
 					 */
 					awtColors.put((Double) data.getValue(), data.getColor());
+					description.put((Double) data.getValue(), data.getDescription());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			});
+			// apply
 			this.data.setAwtColors(awtColors);
+			this.data.setDescription(description);
 		});
 		btnOK.setOnAction(event -> {
 			StyleData.closeStage();

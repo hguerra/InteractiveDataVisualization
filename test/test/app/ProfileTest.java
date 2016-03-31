@@ -98,7 +98,7 @@ public class ProfileTest extends Application {
 		wwd.setModel(new BasicModel());
 
 		// Shapefile
-		shpController = new ShapefileLayer(wwd, "attr");
+		shpController = new ShapefileLayer(wwd);
 		// drawShapefile();
 		drawScenario(2000);
 
