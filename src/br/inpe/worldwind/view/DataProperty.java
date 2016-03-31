@@ -47,5 +47,9 @@ public class DataProperty {
 	public void setColor(Color value) {
 		this.color.set(value);
 	}
+	
+	public void setDescription(String value){
+		this.description.set(value);
+	}
 
 }

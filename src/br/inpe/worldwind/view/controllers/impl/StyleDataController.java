@@ -10,24 +10,30 @@ import java.util.Set;
 import br.inpe.util.color.ColorBrewer;
 import br.inpe.util.color.ColorBrewer.ColorBrewerName;
 import br.inpe.util.color.ColorMath;
+import br.inpe.util.color.SwingUtils;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.engine.ShapefileProperties;
 import br.inpe.worldwind.view.DataProperty;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.impl.ColorPickerGUI;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class StyleDataController<T> extends ApplicationSetupController {
 
@@ -74,6 +80,8 @@ public class StyleDataController<T> extends ApplicationSetupController {
 	@Override
 	protected void initPaneSetup() {
 		/* tblViewStyle */
+		tblViewStyle.setEditable(true);
+		/* set cell value factory (type of things) */
 		columnValue.setCellValueFactory(cellData -> cellData.getValue().getValueProperty());
 		columnDescription.setCellValueFactory(cellData -> cellData.getValue().getDescriptionProperty());
 		columnColor.setCellValueFactory(cellData -> cellData.getValue().getColorProperty());
@@ -92,8 +100,10 @@ public class StyleDataController<T> extends ApplicationSetupController {
 				}
 			};
 		});
-		/* comboColorBrewer */
+		/* set if is editable */
+		columnDescription.setCellFactory(TextFieldTableCell.<DataProperty> forTableColumn());
 
+		/* comboColorBrewer */
 		comboColorBrewer.setItems(FXCollections.observableArrayList(ColorBrewerName.values()));
 		comboColorBrewer.getSelectionModel().select(ColorBrewerName.YlGn);
 
@@ -101,6 +111,7 @@ public class StyleDataController<T> extends ApplicationSetupController {
 
 	@Override
 	public void initPaneSetupEvents() {
+		/* Buttons */
 		btnClassify.setOnAction(event -> {
 			if (shp == null)
 				return;
@@ -117,6 +128,26 @@ public class StyleDataController<T> extends ApplicationSetupController {
 				return;
 			selected.setColor(color);
 		});
+
+		/* Table */
+		columnColor.setOnEditStart(new EventHandler<TableColumn.CellEditEvent<DataProperty, Color>>() {
+			@Override
+			public void handle(CellEditEvent<DataProperty, Color> event) {
+				try {
+					new ColorPickerGUI().start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		columnDescription.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<DataProperty, String>>() {
+			@Override
+			public void handle(CellEditEvent<DataProperty, String> event) {
+				event.getTableView().getItems().get(event.getTablePosition().getRow())
+						.setDescription(event.getNewValue());
+			}
+		});
+
 	}
 
 	@Override
@@ -131,17 +162,29 @@ public class StyleDataController<T> extends ApplicationSetupController {
 
 	@Override
 	public void update(Object object) {
-		if (!(object instanceof String))
-			return;
-
-		try {
-			this.shp = ShapefileController.createShapefile(object.toString());
-			Shapefile shpColumns = ShapefileController.createShapefile(object.toString());
-			Set<String> columns = ShapefileProperties.getShapefileColumns(shpColumns);
-			comboColumn.setItems(FXCollections.observableArrayList(columns));
-			comboColumn.getSelectionModel().selectFirst();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (object instanceof String) {
+			try {
+				this.shp = ShapefileController.createShapefile(object.toString());
+				Shapefile shpColumns = ShapefileController.createShapefile(object.toString());
+				Set<String> columns = ShapefileProperties.getShapefileColumns(shpColumns);
+				comboColumn.setItems(FXCollections.observableArrayList(columns));
+				comboColumn.getSelectionModel().selectFirst();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (object instanceof javafx.scene.paint.Color) {
+			DataProperty item = tblViewStyle.getSelectionModel().getSelectedItem();
+			if (item == null)
+				return;
+			try {
+				// javafx
+				javafx.scene.paint.Color javafxColor = (javafx.scene.paint.Color) object;
+				// java.awt.Color
+				java.awt.Color awtColor = SwingUtils.toAwt(javafxColor);
+				item.setColor(awtColor);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -195,7 +238,7 @@ public class StyleDataController<T> extends ApplicationSetupController {
 
 	private void defaultClassify(Set<Object> uniqueAttrs, ObservableList<DataProperty> values) {
 		uniqueAttrs.forEach(v -> {
-			values.add(new DataProperty(java.awt.Color.black, v, ""));
+			values.add(new DataProperty(java.awt.Color.BLACK, v, ""));
 		});
 	}
 

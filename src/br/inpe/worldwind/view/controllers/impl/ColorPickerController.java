@@ -3,6 +3,7 @@ package br.inpe.worldwind.view.controllers.impl;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.impl.ColorPickerGUI;
@@ -16,7 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class SetupColorPickerController implements SetupController {
+public class ColorPickerController implements SetupController {
 	@FXML
 	private AnchorPane anchorPane;
 
@@ -31,7 +32,7 @@ public class SetupColorPickerController implements SetupController {
 
 	@FXML
 	private ColorPicker colorPicker;
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
@@ -43,6 +44,8 @@ public class SetupColorPickerController implements SetupController {
 	public void initPaneSetupEvents() {
 		btnAddColor.setOnAction(event -> {
 			Color c = colorPicker.getValue();
+			SetupController controller = ManagerSetupController.getInstance().getController(SetupView.STYLE_DATA);
+			controller.update(c);
 			ColorPickerGUI.closeStage();
 		});
 
@@ -52,10 +55,11 @@ public class SetupColorPickerController implements SetupController {
 	public ObservableList<Node> getPaneSetupChildren() {
 		return this.paneSetup.getChildren();
 	}
+
 	@Override
 	public void update(Object object) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
