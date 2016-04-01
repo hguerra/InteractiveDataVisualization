@@ -2,38 +2,39 @@
 <data>
     <colors>
         <entry>
-            <key>1.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">1.0</key>
             <value>#006401</value>
         </entry>
         <entry>
-            <key>2.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">2.0</key>
             <value>#388237</value>
         </entry>
         <entry>
-            <key>9.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">9.0</key>
             <value>#F07A00</value>
         </entry>
         <entry>
-            <key>10.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">10.0</key>
             <value>#D15400</value>
         </entry>
         <entry>
-            <key>11.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">11.0</key>
             <value>#B23000</value>
         </entry>
         <entry>
-            <key>12.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">12.0</key>
             <value>#930900</value>
         </entry>
         <entry>
-            <key>3.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">3.0</key>
             <value>#719F71</value>
         </entry>
         <entry>
-            <key>-127.0</key>
+            <key xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:double">-127.0</key>
             <value>#000000</value>
         </entry>
     </colors>
+    <description/>
     <filepath>data/vegtype-inland/shapefile/vegtype_2000.shp</filepath>
     <format>SHAPEFILE</format>
 </data>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.google.gson.annotations.Expose;
 
@@ -121,7 +122,7 @@ public class Data {
 
 		return this.awtColors;
 	}
-
+	@XmlTransient
 	public void setAwtColors(Map<Object, java.awt.Color> awtColors) {
 		this.awtColors = awtColors;
 	}

@@ -15,6 +15,7 @@ import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import gov.nasa.worldwind.layers.Layer;
 
 public class DefaultDataSource {
+	private static final String VEG_COLUMN_NAME = "attr";
 	private static DefaultDataSource uniqueInstance;
 	private List<String> filepath;
 	private Map<Object, String> colors;
@@ -48,9 +49,12 @@ public class DefaultDataSource {
 		filepath.forEach(veg -> {
 			try {
 				Data data = new Data();
-				data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS + veg);
+				data.setTitle(veg);
+				data.setReference(DefaultDataReferences.vegetationScenarioReference);
 				data.setFormat(GeoFormat.SHAPEFILE);
+				data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS + veg);
 				data.setColors(colors);
+				data.setColumn(VEG_COLUMN_NAME);
 				dataSet.put(veg, data);
 			} catch (Exception e) {
 				System.err.println(e);
@@ -59,6 +63,12 @@ public class DefaultDataSource {
 		DataSource dataSource = new DataSource();
 		dataSource.setDataSet(dataSet);
 		return dataSource;
+	}
+
+	public Map<String, DataSource> createDataSourceGroup() {
+		Map<String, DataSource> dataSourceGroup = new HashMap<>();
+		dataSourceGroup.put(DefaultDataReferences.vegetationScenarioTitle, createDefaultDataSource());
+		return dataSourceGroup;
 	}
 
 	public Map<String, List<Layer>> layerFactory(List<String> filePath, String attributeName, Color... color) {

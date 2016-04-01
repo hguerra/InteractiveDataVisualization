@@ -37,7 +37,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class StyleDataController<T> extends ApplicationSetupController {
+public class StyleDataController extends ApplicationSetupController {
 	private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
 
 	@FXML

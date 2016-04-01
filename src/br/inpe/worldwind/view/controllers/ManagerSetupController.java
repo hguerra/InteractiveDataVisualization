@@ -16,6 +16,7 @@ import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.util.color.ColorBrewer;
 import gov.nasa.worldwind.layers.Layer;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -34,12 +35,15 @@ public class ManagerSetupController {
 	private ColorBrewer colorBrewer;
 	/* Data */
 	private DataSource sessionDataSource;
+	/* Default Data */
+	private Map<String, DataSource> dataSourceGroup;
 
 	private ManagerSetupController() {
 		this.elementsView = new HashMap<>();
 		this.controllers = new HashMap<>();
 		this.colorBrewer = createColorBrewer();
-		this.sessionDataSource = DefaultDataSource.getInstance().createDefaultDataSource();
+		this.sessionDataSource = new DataSource();
+		this.dataSourceGroup = DefaultDataSource.getInstance().createDataSourceGroup();
 	}
 
 	/**
@@ -141,23 +145,95 @@ public class ManagerSetupController {
 
 	/**
 	 * Data Source
-	 * @return 
+	 */
+	/**
+	 * add data in DataSource
+	 * 
+	 * @param name
+	 * @param data
+	 * @return
 	 */
 	public Data addData(String name, Data data) {
 		return this.sessionDataSource.addData(name, data);
 	}
-	public Data removeData(String name){
+
+	/**
+	 * remove Data from memory
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public Data removeData(String name) {
 		return this.sessionDataSource.removeData(name);
 	}
-	public Data getData(String name){
+
+	public Data getData(String name) {
 		return this.sessionDataSource.getDataSet().get(name);
 	}
-	
-	public Map<String, List<Layer>> getLayersFromDataSource(){
+
+	/**
+	 * Get specific list of layers
+	 * 
+	 * @param title
+	 * @return
+	 */
+	public List<Layer> getLayerFromDataSource(String title) {
+		return this.getLayersFromDataSource().get(title);
+	}
+
+	/**
+	 * Get all layers in memory
+	 * 
+	 * @return
+	 */
+	public Map<String, List<Layer>> getLayersFromDataSource() {
 		return this.sessionDataSource.getLayers();
 	}
-	
-	public List<Layer> getLayerFromDataSource(String title){
-		return this.getLayersFromDataSource().get(title);
+
+	/**
+	 * Get Layer Title from DataSource
+	 * 
+	 * @return
+	 */
+	public ObservableList<String> getTitleFromDataSource() {
+		ObservableList<String> result = FXCollections.observableArrayList();
+		this.sessionDataSource.getDataSet().forEach((k, v) -> result.add(k));
+		return result;
+	}
+
+	/**
+	 * DefaultData
+	 */
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Map<String, DataSource> getDataSourceGroup() {
+		return dataSourceGroup;
+	}
+
+	/**
+	 * 
+	 * @param group
+	 * @return
+	 */
+	public DataSource getDataSourceFromGroup(String group) {
+		return getDataSourceGroup().get(group);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public ObservableList<String> getTitleFromDataSourceGroup() {
+		ObservableList<String> result = FXCollections.observableArrayList();
+		getDataSourceGroup().forEach((k, v) -> result.add(k));
+		return result;
+	}
+	public ObservableList<String> getTitleFromDataSourceGroup(String group) {
+		ObservableList<String> result = FXCollections.observableArrayList();
+		getDataSourceFromGroup(group).getDataSet().forEach((k,v) -> result.add(k));
+		return result;
 	}
 }

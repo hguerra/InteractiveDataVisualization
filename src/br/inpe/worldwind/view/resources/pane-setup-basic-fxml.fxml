@@ -11,45 +11,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="css-anchor-pane" fx:id="anchorPane"
-	maxHeight="480.0" maxWidth="213.0" minHeight="480.0" minWidth="213.0"
-	prefHeight="480.0" prefWidth="213.0" stylesheets="@home-css.css"
-	xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.inpe.worldwind.view.controllers.impl.SetupBasicController">
+<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="213.0" minHeight="480.0" minWidth="213.0" prefHeight="480.0" prefWidth="213.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.controllers.impl.SetupBasicController">
 	<children>
-		<Pane fx:id="paneSetup" prefHeight="480.0" prefWidth="213.0"
-			styleClass="pane-setup">
+		<Pane fx:id="paneSetup" prefHeight="480.0" prefWidth="213.0" styleClass="pane-setup">
 			<children>
-				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0"
-					prefWidth="143.0" styleClass="pane-options-title" text="Basic:" />
-				<Label fx:id="lblData" layoutX="9.0" layoutY="37.0"
-					styleClass="pane-options-subtitle" text="Data" />
-				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3"
-					prefHeight="0.0" prefWidth="200.0" />
-				<ComboBox fx:id="comboLayer" layoutX="28.0" layoutY="67.0"
-					prefHeight="25.0" prefWidth="150.0" promptText="Vegetation Scenario" />
-				<Label fx:id="lblScenario" layoutX="9.0" layoutY="111.0"
-					styleClass="pane-options-subtitle" text="Scenario" />
-				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="143.0"
-					prefHeight="255.0" prefWidth="185.0">
+				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title" text="Basic:" />
+				<Label fx:id="lblData" layoutX="9.0" layoutY="37.0" styleClass="pane-options-subtitle" text="Data" />
+				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
+				<ComboBox fx:id="comboLayer" layoutX="28.0" layoutY="67.0" prefHeight="25.0" prefWidth="150.0" />
+				<Label fx:id="lblScenario" layoutX="9.0" layoutY="111.0" styleClass="pane-options-subtitle" text="Scenario" />
+				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="143.0" prefHeight="255.0" prefWidth="185.0">
 					<contextMenu>
 						<ContextMenu fx:id="contextMenu">
 							<items>
-								<MenuItem fx:id="menuItemRemove" mnemonicParsing="false"
-									text="Remove" />
+								<MenuItem fx:id="menuItemRemove" mnemonicParsing="false" text="Remove" />
 							</items>
 						</ContextMenu>
 					</contextMenu>
 				</ListView>
-				<Label fx:id="lblKinect" layoutX="11.0" layoutY="413.0"
-					styleClass="pane-options-subtitle" text="Kinect" />
-				<ToggleButton fx:id="toggleBtnKinect" layoutX="23.0"
-					layoutY="441.0" mnemonicParsing="false" styleClass="toggleBtnKinect"
-					text="Enable" />
-				<Button fx:id="btnTrash" layoutX="180.0" layoutY="115.0"
-					maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0"
-					mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0"
-					styleClass="btnClearTrash" />
+				<Label fx:id="lblKinect" layoutX="11.0" layoutY="413.0" styleClass="pane-options-subtitle" text="Kinect" />
+				<ToggleButton fx:id="toggleBtnKinect" layoutX="23.0" layoutY="441.0" mnemonicParsing="false" styleClass="toggleBtnKinect" text="Enable" />
+				<Button fx:id="btnTrash" layoutX="180.0" layoutY="115.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
 			</children>
 		</Pane>
 	</children>
