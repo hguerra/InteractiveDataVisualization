@@ -17,7 +17,7 @@ import gov.nasa.worldwind.layers.Layer;
 public class DefaultDataSource {
 	private static DefaultDataSource uniqueInstance;
 	private List<String> filepath;
-	private Map<Double, String> colors;
+	private Map<Object, String> colors;
 	private ShapefileProperties prop;
 
 	private DefaultDataSource() {
@@ -48,7 +48,7 @@ public class DefaultDataSource {
 		filepath.forEach(veg -> {
 			try {
 				Data data = new Data();
-				data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS+veg);
+				data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS + veg);
 				data.setFormat(GeoFormat.SHAPEFILE);
 				data.setColors(colors);
 				dataSet.put(veg, data);
@@ -68,8 +68,8 @@ public class DefaultDataSource {
 				String displayName = ShapefileController.getDisplayName(veg);
 				Shapefile shpColors = ShapefileController.createShapefile(veg);
 				Shapefile shapefile = ShapefileController.createShapefile(veg);
-				Map<Double, Color> mapColors = prop.createPolygonColors(shpColors, attributeName, color);
-				List<Layer> l = prop.createLayers(displayName, shapefile, mapColors);
+				Map<Object, Color> mapColors = prop.createPolygonColors(shpColors, attributeName, color);
+				List<Layer> l = prop.createLayers(displayName, attributeName, shapefile, mapColors);
 				result.put(displayName, l);
 			} catch (Exception e) {
 				System.err.println(e);
@@ -78,13 +78,14 @@ public class DefaultDataSource {
 		return result;
 	}
 
-	public Map<String, List<Layer>> layerFactory(List<String> filePath, Map<Double, Color> colors) {
+	public Map<String, List<Layer>> layerFactory(List<String> filePath, String attributeName,
+			Map<Object, Color> colors) {
 		Map<String, List<Layer>> result = new HashMap<>();
 		filePath.forEach(veg -> {
 			try {
 				String displayName = ShapefileController.getDisplayName(veg);
 				Shapefile shp = ShapefileController.createShapefile(veg);
-				List<Layer> l = prop.createLayers(displayName, shp, colors);
+				List<Layer> l = prop.createLayers(displayName, attributeName, shp, colors);
 				result.put(displayName, l);
 			} catch (Exception e) {
 				System.err.println(e);

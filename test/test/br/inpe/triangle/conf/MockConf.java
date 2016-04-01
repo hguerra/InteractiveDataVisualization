@@ -15,7 +15,7 @@ public class MockConf {
 		Data data = new Data();
 		data.setFormat(GeoFormat.SHAPEFILE);
 		data.setFilepath(DefaultFilePath.VEGTYPE_2000);
-		Map<Double, String> colors = new HashMap<>();
+		Map<Object, String> colors = new HashMap<>();
 		colors.put(1.0, "#006401");
 		colors.put(2.0, "#388237");
 		colors.put(9.0, "#F07A00");

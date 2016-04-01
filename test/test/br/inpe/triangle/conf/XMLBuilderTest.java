@@ -32,8 +32,8 @@ public class XMLBuilderTest {
 	@Test
 	public void testGenerateObject() {
 		fromXML = builder.buildObjectFromXML(Data.class, MockConf.DATA_XML);
-		Map<Double, Color> expected = toXML.getAwtColors();
-		Map<Double, Color> actual = fromXML.getAwtColors();
+		Map<Object, Color> expected = toXML.getAwtColors();
+		Map<Object, Color> actual = fromXML.getAwtColors();
 		Assert.assertEquals(expected, actual);
 	}
 

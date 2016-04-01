@@ -22,11 +22,13 @@ public class Data {
 	@Expose
 	private String filepath;
 	@Expose
-	private Map<Double, String> colors;
+	private Map<Object, String> colors;
 	@Expose
-	private Map<Double, String> description;
+	private Map<Object, String> description;
+	@Expose
+	private String column;
 	// exclude attribute
-	private Map<Double, java.awt.Color> awtColors;
+	private Map<Object, java.awt.Color> awtColors;
 
 	public Data() {
 		this.colors = new HashMap<>();
@@ -57,12 +59,12 @@ public class Data {
 		this.filepath = filepath;
 	}
 
-	public Map<Double, String> getColors() {
+	public Map<Object, String> getColors() {
 		return colors;
 	}
 
 	@XmlElement
-	public void setColors(Map<Double, String> colors) {
+	public void setColors(Map<Object, String> colors) {
 		this.colors = colors;
 	}
 
@@ -84,13 +86,22 @@ public class Data {
 		this.title = title;
 	}
 
-	public Map<Double, String> getDescription() {
+	public Map<Object, String> getDescription() {
 		return description;
 	}
 
 	@XmlElement
-	public void setDescription(Map<Double, String> description) {
+	public void setDescription(Map<Object, String> description) {
 		this.description = description;
+	}
+	
+	public String getColumn() {
+		return this.column;
+	}
+	
+	@XmlElement
+	public void setColumn(String column) {
+		this.column = column;
 	}
 
 	/**
@@ -98,7 +109,7 @@ public class Data {
 	 * 
 	 * @return
 	 */
-	public Map<Double, java.awt.Color> getAwtColors() {
+	public Map<Object, java.awt.Color> getAwtColors() {
 		if (!awtColors.isEmpty())
 			return this.awtColors;
 		colors.forEach((k, v) -> {
@@ -111,7 +122,7 @@ public class Data {
 		return this.awtColors;
 	}
 
-	public void setAwtColors(Map<Double, java.awt.Color> awtColors) {
+	public void setAwtColors(Map<Object, java.awt.Color> awtColors) {
 		this.awtColors = awtColors;
 	}
 
@@ -119,5 +130,4 @@ public class Data {
 	public String toString() {
 		return new StringBuffer().append(format).append(" - ").append(filepath).append(" - ").append(colors).toString();
 	}
-
 }

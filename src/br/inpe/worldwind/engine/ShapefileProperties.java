@@ -24,11 +24,14 @@ import gov.nasa.worldwindx.examples.util.ShapefileLoader;
 
 public class ShapefileProperties extends ShapefileLoader {
 	private HashMap<Renderable, Set<Entry<String, Object>>> atable = new HashMap<Renderable, Set<Entry<String, Object>>>();
-	private String attributeName = "attr";
+	// private String attributeName = "attr";
 	private Color defaultAttributeColor = Color.BLACK;
 
-	public Map<Double, Color> createPolygonColors(Shapefile shp, String attributeName, Color[] interiorMaterial) {
-		Map<Double, Color> colors = new TreeMap<Double, Color>();
+	public Map<Object, Color> createPolygonColors(Shapefile shp, String attributeName, Color[] interiorMaterial) {
+		/**
+		 * TODO refactor treemap
+		 */
+		Map<Object, Color> colors = new TreeMap<Object, Color>();
 		Object[] variation = getShapefileUniqueAttributes(shp, attributeName).toArray();
 		if (variation == null)
 			return colors;
@@ -66,14 +69,14 @@ public class ShapefileProperties extends ShapefileLoader {
 		return colors;
 	}
 
-	public List<Layer> createLayers(String layerName, Shapefile shapefile, Map<Double, Color> colors) {
+	public List<Layer> createLayers(String layerName, String attributeName, Shapefile shapefile,  Map<Object, Color> colors) {
 		List<Layer> layers = new ArrayList<>();
-		addRenderablesForPolygon(shapefile, layerName, layers, colors);
+		addRenderablesForPolygon(shapefile, layerName, attributeName, layers, colors);
 		return layers;
 	}
 
-	public void addRenderablesForPolygon(Shapefile shp, String layersName, List<Layer> layers,
-			Map<Double, Color> colors) {
+	public void addRenderablesForPolygon(Shapefile shp, String layersName, String attributeName, List<Layer> layers,
+			Map<Object, Color> colors) {
 		RenderableLayer layer = new RenderableLayer();
 		layer.setName(layersName);
 		layers.add(layer);
@@ -86,7 +89,7 @@ public class ShapefileProperties extends ShapefileLoader {
 
 				if (!Shapefile.isPolygonType(record.getShapeType()))
 					continue;
-				ShapeAttributes attrs = this.createPolygonAttributes(record, colors);
+				ShapeAttributes attrs = this.createPolygonAttributes(record, attributeName, colors);
 				this.createPolygon(record, attrs, layer);
 				if (layer.getNumRenderables() > this.numPolygonsPerLayer) {
 					layer = new RenderableLayer();
@@ -163,15 +166,19 @@ public class ShapefileProperties extends ShapefileLoader {
 		}
 	}
 
-	protected ShapeAttributes createPolygonAttributes(ShapefileRecord record, Map<Double, Color> colors) {
+	protected ShapeAttributes createPolygonAttributes(ShapefileRecord record, String attributeName,
+			Map<Object, Color> colors) {
 		ShapeAttributes attrs = new BasicShapeAttributes();
 		attrs.setDrawOutline(false);
 
 		Object key = record.getAttributes().getValue(attributeName);
 
 		if (key != null) {
-			Material interior = new Material(colors.get((double) key));
-			attrs.setInteriorMaterial(interior);
+			Color color = colors.get(key);
+			if (color != null) {
+				Material interior = new Material(color);
+				attrs.setInteriorMaterial(interior);
+			}
 		}
 
 		return attrs;
@@ -198,14 +205,6 @@ public class ShapefileProperties extends ShapefileLoader {
 	/**
 	 * Getters and Setters
 	 */
-	public void setAttributeName(String attributeName) {
-		this.attributeName = attributeName;
-	}
-
-	public String getAttributeName() {
-		return attributeName;
-	}
-
 	public Color getDefaultAttributeColor() {
 		return defaultAttributeColor;
 	}

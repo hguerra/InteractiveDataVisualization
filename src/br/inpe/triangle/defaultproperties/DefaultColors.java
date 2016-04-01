@@ -32,8 +32,8 @@ public class DefaultColors {
 		return colors;
 	}
 
-	public static Map<Double, Color> getDefaultColors(){
-		Map<Double, Color> map = new HashMap<>();
+	public static Map<Object, Color> getDefaultColors(){
+		Map<Object, Color> map = new HashMap<>();
 		map.put(1.0, c1);
 		map.put(2.0, c2);
 		map.put(9.0, c9);

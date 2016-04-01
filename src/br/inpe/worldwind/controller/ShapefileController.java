@@ -17,13 +17,13 @@ import gov.nasa.worldwind.util.WWIO;
 
 public interface ShapefileController extends LayerController {
 
-	List<Layer> shapefile2Layers(String layerName, Shapefile shapefile, Map<Double, Color> colors);
+	List<Layer> shapefile2Layers(String layerName, String attributeName, Shapefile shapefile, Map<Object, Color> colors);
 
-	RenderableLayer shapefile2RenderableLayer(String layerName, Shapefile shapefile, Map<Double, Color> colors);
+	RenderableLayer shapefile2RenderableLayer(String layerName, String attributeName, Shapefile shapefile, Map<Object, Color> colors);
 
 	void addShapefile(Layer layer);
 
-	void addShapefile(String layerName, Shapefile shapefile, Map<Double, Color> colors);
+	void addShapefile(String layerName,  String attributeName, Shapefile shapefile, Map<Object, Color> colors);
 
 	boolean addShapefile(String filepath, String columnName, Color... colors);
 

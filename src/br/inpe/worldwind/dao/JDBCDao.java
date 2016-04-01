@@ -54,7 +54,7 @@ public class JDBCDao<T extends GeometryRecord> extends JDBCStatement implements 
 			//execute query
 			ResultSet rs = getResultSet(sql.toString());
 			
-			Map<Double, Color> defaultColors = DefaultColors.getDefaultColors();
+			Map<Object, Color> defaultColors = DefaultColors.getDefaultColors();
 					
 			while (rs.next()) {
 				PGgeometry geom = (PGgeometry)rs.getObject("geom");

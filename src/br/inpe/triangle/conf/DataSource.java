@@ -66,7 +66,7 @@ public class DataSource {
 		List<Layer> layer = new ArrayList<>();
 		try {
 			Shapefile shapefile = ShapefileController.createShapefile(data.getFilepath());
-			layer = shpProperties.createLayers(data.getTitle(), shapefile, data.getAwtColors());
+			layer = shpProperties.createLayers(data.getTitle(), data.getColumn(), shapefile, data.getAwtColors());
 		} catch (Exception e) {
 			System.err.println(e);
 		}

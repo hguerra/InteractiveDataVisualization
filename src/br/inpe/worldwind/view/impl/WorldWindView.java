@@ -45,7 +45,7 @@ public class WorldWindView extends JFrame {
 			Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
 			if (shp == null)
 				return;
-			shpController.addShapefile(data.getTitle(), shp, data.getAwtColors());
+			shpController.addShapefile(data.getTitle(), data.getColumn(), shp, data.getAwtColors());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

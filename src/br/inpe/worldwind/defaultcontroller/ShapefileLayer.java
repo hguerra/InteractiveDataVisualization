@@ -49,15 +49,15 @@ public class ShapefileLayer implements ShapefileController {
 	}
 
 	@Override
-	public List<Layer> shapefile2Layers(String layerName, Shapefile shapefile, Map<Double, Color> colors) {
+	public List<Layer> shapefile2Layers(String layerName, String attributeName, Shapefile shapefile, Map<Object, Color> colors) {
 		List<Layer> layers = new ArrayList<>();
-		properties.addRenderablesForPolygon(shapefile, layerName, layers, colors);
+		properties.addRenderablesForPolygon(shapefile, layerName, attributeName, layers, colors);
 		return layers;
 	}
 
 	@Override
-	public RenderableLayer shapefile2RenderableLayer(String layerName, Shapefile shapefile, Map<Double, Color> colors) {
-		return (RenderableLayer) shapefile2Layers(layerName, shapefile, colors).get(0);
+	public RenderableLayer shapefile2RenderableLayer(String layerName, String attributeName, Shapefile shapefile, Map<Object, Color> colors) {
+		return (RenderableLayer) shapefile2Layers(layerName, attributeName, shapefile, colors).get(0);
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class ShapefileLayer implements ShapefileController {
 	}
 
 	@Override
-	public void addShapefile(String layerName, Shapefile shapefile, Map<Double, Color> colors) {
-		RenderableLayer layer = shapefile2RenderableLayer(layerName, shapefile, colors);
+	public void addShapefile(String layerName,  String attributeName, Shapefile shapefile, Map<Object, Color> colors) {
+		RenderableLayer layer = shapefile2RenderableLayer(layerName, attributeName,  shapefile, colors);
 		addShapefile(layer);
 	}
 
@@ -78,8 +78,8 @@ public class ShapefileLayer implements ShapefileController {
 			String layerName = getDisplayName(filepath);
 			Shapefile shpColors = ShapefileController.createShapefile(filepath);
 			Shapefile shapefile = ShapefileController.createShapefile(filepath);
-			Map<Double, Color> colors = properties.createPolygonColors(shpColors, columnName, c);
-			addShapefile(layerName, shapefile, colors);
+			Map<Object, Color> colors = properties.createPolygonColors(shpColors, columnName, c);
+			addShapefile(layerName, columnName, shapefile, colors);
 		} catch (Exception e) {
 			success = false;
 			System.err.println(e);

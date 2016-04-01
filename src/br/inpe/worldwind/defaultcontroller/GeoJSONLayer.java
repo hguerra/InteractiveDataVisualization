@@ -44,7 +44,7 @@ public class GeoJSONLayer implements GeoJSONController {
 	}
 
 	@Override
-	public void addGeoJSON(String layerName, GeoJSONObject json, Map<Double, Color> colors) {
+	public void addGeoJSON(String layerName, GeoJSONObject json, Map<Object, Color> colors) {
 		properties.setDefaultAttributesColor(colors);
 		Layer layer = properties.createLayerFromGeoJSON(json);
 		layer.setName(layerName);
@@ -52,7 +52,7 @@ public class GeoJSONLayer implements GeoJSONController {
 	}
 
 	@Override
-	public boolean addGeoJSON(String layerName, String filepath, Map<Double, Color> colors) {
+	public boolean addGeoJSON(String layerName, String filepath, Map<Object, Color> colors) {
 		boolean success = true;
 		try {
 			properties.setDefaultAttributesColor(colors);

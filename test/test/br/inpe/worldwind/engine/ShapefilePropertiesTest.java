@@ -32,7 +32,7 @@ public class ShapefilePropertiesTest {
 		// Empty
 		Color[] interiorMaterial = new Color[] {};
 
-		Map<Double, Color> colors = prop.createPolygonColors(shp, attributeName, interiorMaterial);
+		Map<Object, Color> colors = prop.createPolygonColors(shp, attributeName, interiorMaterial);
 		Object expected = 7;
 		Object actual = colors.size();
 
@@ -46,7 +46,7 @@ public class ShapefilePropertiesTest {
 		// One color
 		Color[] interiorMaterial = new Color[] { Color.red };
 
-		Map<Double, Color> colors = prop.createPolygonColors(shp, attributeName, interiorMaterial);
+		Map<Object, Color> colors = prop.createPolygonColors(shp, attributeName, interiorMaterial);
 		Object expected = 7;
 		Object actual = colors.size();
 
@@ -60,7 +60,7 @@ public class ShapefilePropertiesTest {
 		// default color
 		Color[] interiorMaterial = DefaultColors.getOriginalColors1();
 
-		Map<Double, Color> colors = prop.createPolygonColors(shp, attributeName, interiorMaterial);
+		Map<Object, Color> colors = prop.createPolygonColors(shp, attributeName, interiorMaterial);
 		Object expected = 7;
 		Object actual = colors.size();
 

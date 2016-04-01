@@ -123,6 +123,7 @@ public class StyleDataController<T> extends ApplicationSetupController {
 				/* get uniques attrs */
 				String key = comboColumn.getSelectionModel().getSelectedItem();
 				Set<Object> uniqueAttrs = ShapefileProperties.getShapefileUniqueAttributes(shp, key);
+				data.setColumn(key);
 				/* add list to the tableview */
 				tblViewStyle.setItems(classifyByColorBrewer(uniqueAttrs));
 			} catch (Exception e) {
@@ -131,16 +132,16 @@ public class StyleDataController<T> extends ApplicationSetupController {
 		});
 		btnApply.setOnAction(event -> {
 			// maps
-			Map<Double, java.awt.Color> awtColors = new HashMap<>();
-			Map<Double, String> description = new HashMap<>();
+			Map<Object, java.awt.Color> awtColors = new HashMap<>();
+			Map<Object, String> description = new HashMap<>();
 			// insert values
 			tblViewStyle.getItems().forEach(data -> {
 				try {
 					/**
 					 * TODO refactor in the future, remove casting
 					 */
-					awtColors.put((Double) data.getValue(), data.getColor());
-					description.put((Double) data.getValue(), data.getDescription());
+					awtColors.put(data.getValue(), data.getColor());
+					description.put(data.getValue(), data.getDescription());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

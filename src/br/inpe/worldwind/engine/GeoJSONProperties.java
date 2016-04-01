@@ -34,7 +34,7 @@ import gov.nasa.worldwindx.examples.GeoJSONLoader;
 
 public class GeoJSONProperties extends GeoJSONLoader {
 	private String attributeName;
-	private Map<Double, Color> defaultAttributesColor;
+	private Map<Object, Color> defaultAttributesColor;
 	private Color defaultPointInternalColor;
 	private Color defaultFontColor;
 	private Font defaultFont;
@@ -166,14 +166,14 @@ public class GeoJSONProperties extends GeoJSONLoader {
 	}
 
 	protected void addRenderableForLineString(GeoJSONLineString geom, RenderableLayer layer, AVList properties,
-			Map<Double, Color> colors) {
+			Map<Object, Color> colors) {
 		ShapeAttributes attrs = this.createPolylineAttributes(geom, properties, colors);
 
 		layer.addRenderable(this.createPolyline(geom, geom.getCoordinates(), attrs, properties));
 	}
 
 	protected void addRenderableForMutiLineString(GeoJSONMultiLineString geom, RenderableLayer layer, AVList properties,
-			Map<Double, Color> colors) {
+			Map<Object, Color> colors) {
 		ShapeAttributes attrs = this.createPolylineAttributes(geom, properties, colors);
 
 		for (GeoJSONPositionArray coords : geom.getCoordinates()) {
@@ -182,7 +182,7 @@ public class GeoJSONProperties extends GeoJSONLoader {
 	}
 
 	protected void addRenderableForPolygon(GeoJSONPolygon geom, RenderableLayer layer, AVList properties,
-			Map<Double, Color> colors) {
+			Map<Object, Color> colors) {
 		ShapeAttributes attrs = this.createPolylineAttributes(geom, properties, colors);
 
 		layer.addRenderable(
@@ -190,7 +190,7 @@ public class GeoJSONProperties extends GeoJSONLoader {
 	}
 
 	protected void addRenderableForMultiPolygon(GeoJSONMultiPolygon geom, RenderableLayer layer, AVList properties,
-			Map<Double, Color> colors) {
+			Map<Object, Color> colors) {
 		ShapeAttributes attrs = this.createPolylineAttributes(geom, properties, colors);
 
 		for (int i = 0; i < geom.getPolygonCount(); i++) {
@@ -213,12 +213,12 @@ public class GeoJSONProperties extends GeoJSONLoader {
 	}
 
 	protected ShapeAttributes createPolylineAttributes(GeoJSONGeometry geom, AVList properties,
-			Map<Double, Color> colors) {
+			Map<Object, Color> colors) {
 		return this.createPolygonAttributes(geom, properties, colors);
 	}
 
 	protected ShapeAttributes createPolygonAttributes(GeoJSONGeometry geom, AVList properties,
-			Map<Double, Color> colors) {
+			Map<Object, Color> colors) {
 		ShapeAttributes attrs = new BasicShapeAttributes();
 		attrs.setDrawOutline(false);
 
@@ -251,11 +251,11 @@ public class GeoJSONProperties extends GeoJSONLoader {
 		this.attributeName = attributeName;
 	}
 
-	public Map<Double, Color> getDefaultAttributesColor() {
+	public Map<Object, Color> getDefaultAttributesColor() {
 		return defaultAttributesColor;
 	}
 
-	public void setDefaultAttributesColor(Map<Double, Color> defaultAttributesColor) {
+	public void setDefaultAttributesColor(Map<Object, Color> defaultAttributesColor) {
 		this.defaultAttributesColor = defaultAttributesColor;
 	}
 

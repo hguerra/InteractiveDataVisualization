@@ -17,6 +17,7 @@ import gov.nasa.worldwind.layers.RenderableLayer;
  */
 public class LayerFactory {
 
+	private static final String COLUMN_NAME = "attr";
 	private ShapefileProperties properties;
 
 	public LayerFactory() {
@@ -36,16 +37,16 @@ public class LayerFactory {
 		Shapefile shape = createShapeFile(filePath);
 		Shapefile shapeReverse = createShapeFile(filePath);
 		Shapefile shapeColor = createShapeFile(filePath);
-		int size = ShapefileProperties.getShapefileUniqueAttributes(shapeColor, "attr").size();
-		Map<Double, Color> colors;
+		int size = ShapefileProperties.getShapefileUniqueAttributes(shapeColor,COLUMN_NAME).size();
+		Map<Object, Color> colors;
 		if (size <= 7) {
-			colors = properties.createPolygonColors(shape, "attr", interiorColor1);
+			colors = properties.createPolygonColors(shape,COLUMN_NAME, interiorColor1);
 		} else {
-			colors = properties.createPolygonColors(shape, "attr", interiorColor2);
+			colors = properties.createPolygonColors(shape, COLUMN_NAME, interiorColor2);
 		}
 		List<Layer> layers = new ArrayList<Layer>();
 
-		properties.addRenderablesForPolygon(shapeReverse, null, layers, colors);
+		properties.addRenderablesForPolygon(shapeReverse, null, COLUMN_NAME, layers, colors);
 		return (RenderableLayer) layers.get(0);
 	}
 

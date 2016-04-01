@@ -39,8 +39,8 @@ public class JSONBuilderTest {
 	@Test
 	public void testDataColorFromJSON() {
 		Data object = builder.readJSON(Data.class, MockConf.FILE_PATH + "data.json");
-		Map<Double, Color> expected = data.getAwtColors();
-		Map<Double, Color> actual = object.getAwtColors();
+		Map<Object, Color> expected = data.getAwtColors();
+		Map<Object, Color> actual = object.getAwtColors();
 		Assert.assertEquals(expected, actual);
 	}
 
