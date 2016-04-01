@@ -1,5 +1,6 @@
 package br.inpe.worldwind.view.controllers.impl;
 
+import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
@@ -55,25 +56,40 @@ public class SetupBasicController extends ApplicationSetupController {
 	@FXML
 	private Button btnTrash;
 
+	private ObservableList<String> listOfCombLayer;
+	private ObservableList<String> listOfView;
+
 	@Override
 	protected void initPaneSetup() {
-		/*Add elements in comboLayer*/
-		comboLayer.setItems(MANAGER.getTitleFromDataSourceGroup());
-		/*set selected comboLayer*/
+		listOfCombLayer = MANAGER.getTitleFromDataSourceGroup();
+		/* Add elements in comboLayer */
+		comboLayer.setItems(listOfCombLayer);
+		/* set selected comboLayer */
 		comboLayer.getSelectionModel().selectFirst();
-		/*get selected comboLayer*/
+		/* get selected comboLayer */
 		String group = comboLayer.getSelectionModel().getSelectedItem();
-		/*add elements based on comboLayer*/
-		listViewScenario.setItems(MANAGER.getTitleFromDataSourceGroup(group));
+		listOfView = MANAGER.getTitleFromDataSourceGroup(group);
+		/* add elements based on comboLayer */
+		listViewScenario.setItems(listOfView);
 	}
 
 	@Override
 	public void initPaneSetupEvents() {
+		menuItemRemove.setOnAction(event -> {
+			int index = listViewScenario.getSelectionModel().getSelectedIndex();
+
+			if (index < 0)
+				return;
+
+			listOfView.remove(index);
+			listViewScenario.setItems(listOfView);
+		});
 		btnTrash.setOnAction(event -> {
-			System.out.println("btnTrash");
+			listOfView.clear();
 		});
 
 		toggleBtnKinect.setOnAction(event -> {
+			DefaultTriangleProperties.getInstance().setKinectEnable(toggleBtnKinect.isSelected());
 			System.out.println("toggleBtnKinect:" + toggleBtnKinect.isSelected());
 		});
 
