@@ -137,9 +137,6 @@ public class StyleDataController extends ApplicationSetupController {
 			// insert values
 			tblViewStyle.getItems().forEach(data -> {
 				try {
-					/**
-					 * TODO refactor in the future, remove casting
-					 */
 					awtColors.put(data.getValue(), data.getColor());
 					description.put(data.getValue(), data.getDescription());
 				} catch (Exception e) {

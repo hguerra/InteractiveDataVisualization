@@ -12,11 +12,10 @@ import com.google.gson.Gson;
 
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
-import br.inpe.triangle.defaultproperties.DefaultDataSource;
+import br.inpe.triangle.conf.DataSourceGroup;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.util.color.ColorBrewer;
 import gov.nasa.worldwind.layers.Layer;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -33,17 +32,14 @@ public class ManagerSetupController {
 	private Map<SetupView, SetupController> controllers;
 	/* ColorBrewer */
 	private ColorBrewer colorBrewer;
-	/* Data */
-	private DataSource sessionDataSource;
-	/* Default Data */
-	private Map<String, DataSource> dataSourceGroup;
+	/* DataSource Group */
+	private DataSourceGroup dataSourceGroup;
 
 	private ManagerSetupController() {
 		this.elementsView = new HashMap<>();
 		this.controllers = new HashMap<>();
 		this.colorBrewer = createColorBrewer();
-		this.sessionDataSource = new DataSource();
-		this.dataSourceGroup = DefaultDataSource.getInstance().createDataSourceGroup();
+		this.dataSourceGroup = new DataSourceGroup();
 	}
 
 	/**
@@ -154,7 +150,7 @@ public class ManagerSetupController {
 	 * @return
 	 */
 	public Data addData(String name, Data data) {
-		return this.sessionDataSource.addData(name, data);
+		return this.dataSourceGroup.addData(name, data);
 	}
 
 	/**
@@ -164,11 +160,11 @@ public class ManagerSetupController {
 	 * @return
 	 */
 	public Data removeData(String name) {
-		return this.sessionDataSource.removeData(name);
+		return this.dataSourceGroup.removeData(name);
 	}
 
 	public Data getData(String name) {
-		return this.sessionDataSource.getDataSet().get(name);
+		return this.dataSourceGroup.getData(name);
 	}
 
 	/**
@@ -178,7 +174,7 @@ public class ManagerSetupController {
 	 * @return
 	 */
 	public List<Layer> getLayerFromDataSource(String title) {
-		return this.getLayersFromDataSource().get(title);
+		return this.dataSourceGroup.getLayersFromDataSource().get(title);
 	}
 
 	/**
@@ -187,7 +183,7 @@ public class ManagerSetupController {
 	 * @return
 	 */
 	public Map<String, List<Layer>> getLayersFromDataSource() {
-		return this.sessionDataSource.getLayers();
+		return this.dataSourceGroup.getLayersFromDataSource();
 	}
 
 	/**
@@ -196,9 +192,7 @@ public class ManagerSetupController {
 	 * @return
 	 */
 	public ObservableList<String> getTitleFromDataSource() {
-		ObservableList<String> result = FXCollections.observableArrayList();
-		this.sessionDataSource.getDataSet().forEach((k, v) -> result.add(k));
-		return result;
+		return this.dataSourceGroup.getTitleFromDataSource();
 	}
 
 	/**
@@ -207,19 +201,11 @@ public class ManagerSetupController {
 
 	/**
 	 * 
-	 * @return
-	 */
-	public Map<String, DataSource> getDataSourceGroup() {
-		return dataSourceGroup;
-	}
-
-	/**
-	 * 
 	 * @param group
 	 * @return
 	 */
 	public DataSource getDataSourceFromGroup(String group) {
-		return getDataSourceGroup().get(group);
+		return this.dataSourceGroup.getDataSourceFromGroup(group);
 	}
 
 	/**
@@ -227,13 +213,10 @@ public class ManagerSetupController {
 	 * @return
 	 */
 	public ObservableList<String> getTitleFromDataSourceGroup() {
-		ObservableList<String> result = FXCollections.observableArrayList();
-		getDataSourceGroup().forEach((k, v) -> result.add(k));
-		return result;
+		return this.dataSourceGroup.getTitleFromDataSourceGroup();
 	}
+
 	public ObservableList<String> getTitleFromDataSourceGroup(String group) {
-		ObservableList<String> result = FXCollections.observableArrayList();
-		getDataSourceFromGroup(group).getDataSet().forEach((k,v) -> result.add(k));
-		return result;
+		return this.dataSourceGroup.getTitleFromDataSourceGroup(group);
 	}
 }
