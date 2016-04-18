@@ -7,13 +7,11 @@ import javax.swing.JFrame;
 import br.inpe.triangle.conf.Data;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
-import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 
 public class WorldWindView extends JFrame {
-	private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
 	/**
 	 * World Wind basic
 	 */

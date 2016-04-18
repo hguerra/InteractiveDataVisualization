@@ -4,6 +4,8 @@ import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -92,7 +94,13 @@ public class SetupBasicController extends ApplicationSetupController {
 			DefaultTriangleProperties.getInstance().setKinectEnable(toggleBtnKinect.isSelected());
 			System.out.println("toggleBtnKinect:" + toggleBtnKinect.isSelected());
 		});
-
+		
+		comboLayer.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				MANAGER.getController(SetupView.BASIC).update(newValue);
+			}
+		});
 	}
 
 	@Override
