@@ -7,8 +7,6 @@ import java.util.ResourceBundle;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import javax.swing.JOptionPane;
-
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
@@ -18,7 +16,6 @@ import br.inpe.worldwind.view.impl.WorldWindView;
 import br.inpe.worldwind.view.resources.Resource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -46,9 +43,6 @@ public class DefaultController implements SetupController {
 
 	@FXML
 	private Button btnLayer;
-
-	@FXML
-	private Button btnClose;
 
 	@FXML
 	private Button btnStart;
@@ -87,23 +81,6 @@ public class DefaultController implements SetupController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		});
-		btnClose.setOnAction(event -> {
-
-			clearPaneSetup();
-
-			Task<Void> task = new Task<Void>() {
-				@Override
-				protected Void call() throws Exception {
-					Thread.sleep(2000);
-					return null;
-				}
-
-			};
-			task.setOnSucceeded(e -> {
-				JOptionPane.showMessageDialog(null, "Bye Bye!");
-			});
-			new Thread(task).start();
 		});
 
 		btnGlobe.setOnAction(event -> {

@@ -96,4 +96,9 @@ public class ModelFxTest extends ApplicationFX {
 		return 40;
 	}
 
+	@Override
+	protected boolean exitOnCloseRequest() {
+		return true;
+	}
+
 }

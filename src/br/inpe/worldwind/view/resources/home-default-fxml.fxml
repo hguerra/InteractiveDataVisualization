@@ -16,7 +16,6 @@
 				<Button fx:id="btnKinect" layoutX="14.0" layoutY="166.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnKinect" />
 				<Button fx:id="btnGlobe" layoutX="13.0" layoutY="8.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnGlobe" />
 				<Button fx:id="btnLayer" layoutX="13.0" layoutY="61.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnLayer" />
-				<Button fx:id="btnClose" layoutX="11.0" layoutY="377.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnClose" />
 				<Button fx:id="btnStart" layoutX="12.0" layoutY="434.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnStart" />
 				<Button fx:id="btnProfile" layoutX="12.0" layoutY="211.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnProfile" />
 				<Button fx:id="btnDataBase" layoutX="13.0" layoutY="116.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnDataBase" />

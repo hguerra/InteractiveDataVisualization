@@ -1,11 +1,13 @@
 package br.inpe.worldwind.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public abstract class ApplicationFX extends Application {
 
@@ -22,6 +24,8 @@ public abstract class ApplicationFX extends Application {
 	protected abstract void initListeners();
 
 	protected abstract void initLayout();
+
+	protected abstract boolean exitOnCloseRequest();
 
 	public boolean addStylesheet(String stylesheet) {
 		return getScene().getStylesheets().add(stylesheet);
@@ -46,28 +50,9 @@ public abstract class ApplicationFX extends Application {
 		control.setLayoutX(setLayoutX);
 		control.setLayoutY(setLayoutY);
 	}
-	
-	public void setLayout(Pane control, double setPrefWidth, double setPrefHeight, double setLayoutX,
-			double setLayoutY) {
-		control.setPrefWidth(setPrefWidth);
-		control.setPrefHeight(setPrefHeight);
-		control.setLayoutX(setLayoutX);
-		control.setLayoutY(setLayoutY);
-	}
 
 	public void setLayout(Control control, double setLayoutX, double setLayoutY) {
 		setLayout(control, getDefaultComponentSize(), getDefaultComponentSize(), setLayoutX, setLayoutY);
-	}
-
-	public void setComponentProperties(Control control, String styleClassName, double setPrefWidth,
-			double setPrefHeight, double setLayoutX, double setLayoutY) {
-		addStyleClass(control, styleClassName);
-		setLayout(control, setPrefWidth, setPrefHeight, setLayoutX, setLayoutY);
-	}
-
-	public void setComponentProperties(Control control, String styleClassName, double setLayoutX, double setLayoutY) {
-		addStyleClass(control, styleClassName);
-		setLayout(control, setLayoutX, setLayoutY);
 	}
 
 	@Override
@@ -76,9 +61,29 @@ public abstract class ApplicationFX extends Application {
 		initListeners();
 		primaryStage.setScene(getScene());
 		primaryStage.setTitle(getSceneTitle());
+		setOnCloseRequest(primaryStage);
 		primaryStage.show();
 		initLayout();
 		currentStage = primaryStage;
+	}
+
+	private void setOnCloseRequest(Stage stage) {
+		if (!exitOnCloseRequest())
+			return;
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent t) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
+	}
+
+	public static boolean closeStage() {
+		if (currentStage == null)
+			return false;
+		currentStage.close();
+		return true;
 	}
 
 	/* Getters and Setters */
@@ -88,12 +93,5 @@ public abstract class ApplicationFX extends Application {
 
 	public void setStage(Stage stage) {
 		currentStage = stage;
-	}
-	
-	public static boolean closeStage() {
-		if (currentStage == null)
-			return false;
-		currentStage.close();
-		return true;
 	}
 }

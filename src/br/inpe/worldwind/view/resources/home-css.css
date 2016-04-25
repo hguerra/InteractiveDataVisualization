@@ -4,11 +4,10 @@
 /*Pane*/
 
 .pane-options {
-	-fx-background-color: #2C3138;	
+	-fx-background-color: #00585F;
 }
 
 /* Buttons*/
-
 .btnGlobe {
 	-fx-background-image: url("globe40x40.png");
 	-fx-background-color: transparent;
@@ -39,12 +38,6 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
-.btnClose {
-	-fx-background-image:url("close40x40.png");
-	-fx-background-color: transparent;
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-}
 .btnStart {
 	-fx-background-image:url("start40x40.png");
 	-fx-background-color: transparent;
@@ -67,9 +60,6 @@
 	-fx-cursor: hand;
 }
 .btnProfile:hover {
-	-fx-cursor: hand;
-}
-.btnClose:hover {
 	-fx-cursor: hand;
 }
 .btnStart:hover {
@@ -98,21 +88,16 @@
 	-fx-background-image: url("user40x40-selected.png");
 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnClose:pressed  {
-	-fx-background-image:url("close40x40-selected.png");
-	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
-}
 .btnStart:pressed  {
 	-fx-background-image:url("start40x40-selected.png");
  	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-
 /*-----------------------------------------------------*/
 /*-------------------Pane setup------------------------*/
 /*-----------------------------------------------------*/
 
 .pane-setup {
-	-fx-background-color: #475259;	
+	-fx-background-color: #002F36;
 }
 .pane-options-title {
 	-fx-text-fill: #969697;
