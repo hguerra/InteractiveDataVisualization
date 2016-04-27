@@ -1,6 +1,9 @@
 package inpe.triangle.conf;
 
-import br.inpe.triangle.conf.*;
+import br.inpe.triangle.conf.Data;
+import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.conf.JSONBuilder;
+import br.inpe.triangle.conf.XMLBuilder;
 import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import org.junit.After;
 import org.junit.Assert;

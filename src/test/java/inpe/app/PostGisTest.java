@@ -3,6 +3,7 @@ package inpe.app;
 import org.postgis.Geometry;
 import org.postgis.PGgeometry;
 import org.postgis.Polygon;
+import org.postgresql.util.PGobject;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -42,8 +43,8 @@ public class PostGisTest {
 			 * conex�o com a conex�o espec�fica pgsql implementation before
 			 * calling the addDataType() method.
 			 */
-			((org.postgresql.PGConnection) conn).addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
-			((org.postgresql.PGConnection) conn).addDataType("box3d", Class.forName("org.postgis.PGbox3d"));
+			((org.postgresql.PGConnection) conn).addDataType("geometry", (Class<? extends PGobject>) Class.forName("org.postgis.PGgeometry"));
+			((org.postgresql.PGConnection) conn).addDataType("box3d", (Class<? extends PGobject>) Class.forName("org.postgis.PGbox3d"));
 			/*
 			 * Create a statement and execute a select query.
 			 */

@@ -1,11 +1,11 @@
 package br.inpe.worldwind.view;
 
-import java.awt.Color;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+import java.awt.*;
 
 public class DataProperty {
 	private ObjectProperty<Color> color;

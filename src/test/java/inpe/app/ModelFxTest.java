@@ -44,7 +44,7 @@ public class ModelFxTest extends ApplicationFX {
 		pane.getChildren().addAll(txLogin, txSenha, btEntrar, btSair);
 		
 		scene = new Scene(pane);
-		addStylesheet("br/inpe/worldwind/view/resources/login-css.css");
+		addStylesheet("/login-css.css");
 	}
 
 	@Override

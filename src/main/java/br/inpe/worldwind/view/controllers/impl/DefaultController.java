@@ -1,19 +1,12 @@
 package br.inpe.worldwind.view.controllers.impl;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
-
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
+import br.inpe.worldwind.view.Resource;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.impl.WorldWindView;
-import br.inpe.worldwind.view.resources.Resource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,6 +17,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class DefaultController implements SetupController {
 	private final static ManagerSetupController MANAGER = ManagerSetupController.getInstance();

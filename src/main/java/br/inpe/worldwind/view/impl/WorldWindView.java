@@ -1,15 +1,14 @@
 package br.inpe.worldwind.view.impl;
 
-import java.util.List;
-
-import javax.swing.JFrame;
-
 import br.inpe.triangle.conf.Data;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
+
+import javax.swing.*;
+import java.util.List;
 
 public class WorldWindView extends JFrame {
 	/**

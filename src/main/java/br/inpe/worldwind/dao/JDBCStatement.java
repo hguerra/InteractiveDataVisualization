@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
+import org.postgresql.util.PGobject;
 
 abstract class JDBCStatement {
 	protected final DefaultTriangleProperties properties;
@@ -15,8 +16,8 @@ abstract class JDBCStatement {
 		this.properties = DefaultTriangleProperties.getInstance();
 		this.session = properties.getSession();
 		try {
-			((org.postgresql.PGConnection) session).addDataType("geometry", Class.forName("org.postgis.PGgeometry"));
-			((org.postgresql.PGConnection) session).addDataType("box3d", Class.forName("org.postgis.PGbox3d"));
+			((org.postgresql.PGConnection) session).addDataType("geometry", (Class<? extends PGobject>) Class.forName("org.postgis.PGgeometry"));
+			((org.postgresql.PGConnection) session).addDataType("box3d", (Class<? extends PGobject>) Class.forName("org.postgis.PGbox3d"));
 		} catch (ClassNotFoundException | SQLException e) {
 			System.err.println(e);
 		}

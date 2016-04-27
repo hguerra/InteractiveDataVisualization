@@ -1,6 +1,6 @@
 package br.inpe.worldwind.view.panels;
 
-import br.inpe.worldwind.view.resources.Resource;
+import br.inpe.worldwind.view.Resource;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

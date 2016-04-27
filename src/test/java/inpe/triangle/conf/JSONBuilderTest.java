@@ -1,6 +1,7 @@
 package inpe.triangle.conf;
 
-import br.inpe.triangle.conf.*;
+import br.inpe.triangle.conf.Data;
+import br.inpe.triangle.conf.JSONBuilder;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

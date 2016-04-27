@@ -1,7 +1,5 @@
 package br.inpe.worldwind.view;
 
-import java.net.URL;
-
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.net.URL;
 
 public abstract class ApplicationFXML extends Application {
 	private static Stage currentStage;

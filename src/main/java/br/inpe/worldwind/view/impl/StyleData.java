@@ -1,10 +1,10 @@
 package br.inpe.worldwind.view.impl;
 
-import java.net.URL;
-
 import br.inpe.worldwind.view.ApplicationFXML;
+import br.inpe.worldwind.view.Resource;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
-import br.inpe.worldwind.view.resources.Resource;
+
+import java.net.URL;
 
 public class StyleData extends ApplicationFXML {
 
