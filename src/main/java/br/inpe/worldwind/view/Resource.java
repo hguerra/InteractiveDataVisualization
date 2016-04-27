@@ -39,14 +39,6 @@ public class Resource {
         return getURL("pane-setup-profile-fxml.fxml");
     }
 
-    public static URL getDataAttributesFXML() {
-        return getURL("pane-setup-dataattribute-fxml.fxml");
-    }
-
-    public static URL getDataAttributes2FXML() {
-        return getURL("pane-setup-dataattribute-fxml-2.fxml"); // pane-setup-dataattribute-fxml-2.fxml
-    }
-
     public static URL getColorPickerFXML() {
         return getURL("pane-setup-colorpicker-fxml.fxml");
     }
