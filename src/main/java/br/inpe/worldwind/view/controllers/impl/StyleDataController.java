@@ -2,7 +2,7 @@ package br.inpe.worldwind.view.controllers.impl;
 
 import br.inpe.triangle.conf.Data;
 import br.inpe.util.color.ColorBrewer;
-import br.inpe.util.color.ColorBrewerName;
+import br.inpe.util.color.ColorBrewerNatureData;
 import br.inpe.util.color.ColorMath;
 import br.inpe.util.color.SwingUtils;
 import br.inpe.worldwind.controller.ShapefileController;
@@ -26,8 +26,10 @@ import javafx.stage.Stage;
 import org.geotools.brewer.color.BrewerPalette;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class StyleDataController extends ApplicationSetupController {
     private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
@@ -57,7 +59,7 @@ public class StyleDataController extends ApplicationSetupController {
     private TableColumn<DataProperty, String> columnDescription;
 
     @FXML
-    private ComboBox<ColorBrewerName> comboColorBrewer;
+    private ComboBox<String> comboColorScheme;
 
     @FXML
     private Button btnClassify;
@@ -67,9 +69,15 @@ public class StyleDataController extends ApplicationSetupController {
 
     @FXML
     private Button btnOK;
+
+    @FXML
+    public ChoiceBox<ColorBrewerNatureData> comboNature;
+
+    @FXML
+    public ComboBox<Integer> comboClasses;
+
     /* ColorBrewer */
     private ColorBrewer colorBrewer = MANAGER.getColorBrewer();
-    private org.geotools.brewer.color.ColorBrewer geotoolsColorBrewer;
     /* actual data */
     private Data data;
 
@@ -94,25 +102,40 @@ public class StyleDataController extends ApplicationSetupController {
                 }
             }
         });
-		/* set if is editable */
+        /* set if is editable */
         columnDescription.setCellFactory(TextFieldTableCell.forTableColumn());
 
-		/* comboColorBrewer */
-        geotoolsColorBrewer = org.geotools.brewer.color.ColorBrewer.instance();
-        comboColorBrewer.setItems(FXCollections.observableArrayList(ColorBrewerName.values()));
-        comboColorBrewer.getSelectionModel().select(ColorBrewerName.YlGn);
+        /*comboNumberDataClasses*/
+        comboClasses.setItems(FXCollections.observableArrayList(Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11)));
+        comboClasses.getSelectionModel().selectFirst();
 
+        /*comboNatureData*/
+        comboNature.setItems(FXCollections.observableArrayList(ColorBrewerNatureData.values()));
+        comboNature.getSelectionModel().selectFirst();
+
+		/* comboColorBrewer */
+        comboColorScheme.setItems(getComboColorBrewer());
+        comboColorScheme.getSelectionModel().selectFirst();
+        //comboColorBrewer.setItems(FXCollections.observableArrayList(ColorBrewerPaletteName.values()));
+        //comboColorBrewer.getSelectionModel().select(ColorBrewerPaletteName.YlGn);
     }
+
+
 
     @Override
     public void initPaneSetupEvents() {
-		/* Buttons */
+        /*Combo Events*/
+        comboNature.setOnAction(event -> {
+            comboColorScheme.setItems(getComboColorBrewer());
+            comboColorScheme.getSelectionModel().selectFirst();
+        });
+        /* Buttons */
         btnClassify.setOnAction(event -> {
             try {
                 Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
                 if (shp == null)
                     return;
-				/* get uniques attrs */
+                /* get uniques attrs */
                 String key = comboColumn.getSelectionModel().getSelectedItem();
                 Set<Object> uniqueAttrs = ShapefileProperties.getShapefileUniqueAttributes(shp, key);
                 data.setColumn(key);
@@ -202,7 +225,9 @@ public class StyleDataController extends ApplicationSetupController {
     private ObservableList<DataProperty> classifyUsingGeotools(Set<Object> uniqueAttrs) {
         ObservableList<DataProperty> values = FXCollections.observableArrayList();
 
-        Color[] colors = comboColorBrewer.getSelectionModel().getSelectedItem().getPallete().getColors();
+        String colorScheme = comboColorScheme.getSelectionModel().getSelectedItem();
+
+        Color[] colors = org.geotools.brewer.color.ColorBrewer.instance().getPalette(colorScheme).getColors();
 
         int colorsIterator = 0;
         for (Object unique : uniqueAttrs) {
@@ -213,52 +238,64 @@ public class StyleDataController extends ApplicationSetupController {
         return values;
     }
 
-    private ObservableList<DataProperty> classifyByColorBrewer(Set<Object> uniqueAttrs) {
-        ObservableList<DataProperty> values = FXCollections.observableArrayList();
-        ColorBrewerName selected = comboColorBrewer.getSelectionModel().getSelectedItem();
-        Map<Integer, List<Color>> colors = colorBrewer.getAwtColors(colorBrewer.getValue(selected));
+    private ObservableList<String> getComboColorBrewer() {
+        Integer numberClasses = comboClasses.getSelectionModel().getSelectedItem();
+        ColorBrewerNatureData natureData = comboNature.getSelectionModel().getSelectedItem();
+        BrewerPalette[] brewerPalettes = natureData.getPallete(numberClasses);
 
-        int attrSize = uniqueAttrs.size();
+        ObservableList<String> comboColorScheme = FXCollections.observableArrayList();
+        for (BrewerPalette brewerPalette : brewerPalettes) {
+            comboColorScheme.add(brewerPalette.getName());
+        }
 
-        if (colors.isEmpty())
-            defaultClassify(uniqueAttrs, values);
-        else {
-            int colorsSize = colors.size();
-            int cont = 0;
-            Iterator<Object> iterator = uniqueAttrs.iterator();
-            List<Color> listColors = null;
-            /**
-             * ColorBrewer values: 3,4,5,6,7,8,9
-             */
-            if (attrSize < 3)
-            // values < 3
-            {
-                listColors = colors.get(3);
-            } else if (attrSize > colorsSize)
-            // values > 9
-            {
-                int dif = attrSize - colorsSize;
-                List<Color> newListColor = new ArrayList<>();
-                newListColor.addAll(colors.get(9));
-
-                for (int i = 0; i < dif; i++) {
-                    newListColor.add(Color.BLACK);
-                }
-
-                listColors = newListColor;
-            } else
-            // values values >= 3 && values <= 9
-            {
-                listColors = colors.get(attrSize);
-            }
-
-            while (iterator.hasNext()) {
-                values.add(new DataProperty(listColors.get(cont), iterator.next(), ""));
-                cont++;
-            }
-        } // END
-        return values;
+        return comboColorScheme;
     }
+//    private ObservableList<DataProperty> classifyByColorBrewer(Set<Object> uniqueAttrs) {
+//        ObservableList<DataProperty> values = FXCollections.observableArrayList();
+//        ColorBrewerPaletteName selected = comboColorBrewer.getSelectionModel().getSelectedItem();
+//        Map<Integer, List<Color>> colors = colorBrewer.getAwtColors(colorBrewer.getValue(selected));
+//
+//        int attrSize = uniqueAttrs.size();
+//
+//        if (colors.isEmpty())
+//            defaultClassify(uniqueAttrs, values);
+//        else {
+//            int colorsSize = colors.size();
+//            int cont = 0;
+//            Iterator<Object> iterator = uniqueAttrs.iterator();
+//            List<Color> listColors = null;
+//            /**
+//             * ColorBrewer values: 3,4,5,6,7,8,9
+//             */
+//            if (attrSize < 3)
+//            // values < 3
+//            {
+//                listColors = colors.get(3);
+//            } else if (attrSize > colorsSize)
+//            // values > 9
+//            {
+//                int dif = attrSize - colorsSize;
+//                List<Color> newListColor = new ArrayList<>();
+//                newListColor.addAll(colors.get(9));
+//
+//                for (int i = 0; i < dif; i++) {
+//                    newListColor.add(Color.BLACK);
+//                }
+//
+//                listColors = newListColor;
+//            } else
+//            // values values >= 3 && values <= 9
+//            {
+//                listColors = colors.get(attrSize);
+//            }
+//
+//            while (iterator.hasNext()) {
+//                values.add(new DataProperty(listColors.get(cont), iterator.next(), ""));
+//                cont++;
+//            }
+//        } // END
+//        return values;
+//    }
 
     private void defaultClassify(Set<Object> uniqueAttrs, ObservableList<DataProperty> values) {
         uniqueAttrs.forEach(v -> {

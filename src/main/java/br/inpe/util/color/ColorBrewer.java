@@ -346,7 +346,7 @@ public class ColorBrewer {
 		Set3 = set3;
 	}
 
-	public Map<String, List<String>> getValue(ColorBrewerName key) {
+	public Map<String, List<String>> getValue(ColorBrewerPaletteName key) {
 		switch (key) {
 		case YlGn:
 			return getYlGn();

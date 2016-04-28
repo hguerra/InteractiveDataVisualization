@@ -1,6 +1,6 @@
 package inpe.app;
 
-import br.inpe.util.color.ColorBrewerName;
+import br.inpe.util.color.ColorBrewerPaletteName;
 import org.geotools.brewer.color.BrewerPalette;
 import org.geotools.brewer.color.ColorBrewer;
 import org.geotools.brewer.color.PaletteType;
@@ -71,7 +71,9 @@ public class ColorBrewerTest {
 
         System.out.println("Teste");
 
-        BrewerPalette ob = ColorBrewerName.YlGn.getPallete();
+        BrewerPalette ob = ColorBrewerPaletteName.YlGn.getPallete();
+
+
 
         System.out.println(ob);
     }

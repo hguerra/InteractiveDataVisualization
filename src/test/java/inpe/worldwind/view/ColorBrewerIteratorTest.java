@@ -1,7 +1,7 @@
 package inpe.worldwind.view;
 
 import br.inpe.util.color.ColorBrewer;
-import br.inpe.util.color.ColorBrewerName;
+import br.inpe.util.color.ColorBrewerPaletteName;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 
 import java.awt.*;
@@ -13,7 +13,7 @@ public class ColorBrewerIteratorTest {
 
 	public static void main(String[] args) {
 		ColorBrewer colorBrewer = ManagerSetupController.getInstance().getColorBrewer();
-		Map<Integer, List<Color>> colors = colorBrewer.getAwtColors(colorBrewer.getValue(ColorBrewerName.YlGn));
+		Map<Integer, List<Color>> colors = colorBrewer.getAwtColors(colorBrewer.getValue(ColorBrewerPaletteName.YlGn));
 
 		Entry<Integer, List<Color>> firstElement7 = colors.entrySet().iterator().next();
 		

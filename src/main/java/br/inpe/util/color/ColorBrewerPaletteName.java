@@ -3,9 +3,10 @@ package br.inpe.util.color;
 import org.geotools.brewer.color.*;
 
 /**
- * Created by Heitor on 28/04/2016.
+ * @author Heitor
+ * @since 28/04/2016
  */
-public enum ColorBrewerName implements ColorBrewerPalette {
+public enum ColorBrewerPaletteName implements ColorBrewerPalette {
     YlGn {
         @Override
         public BrewerPalette getPallete() {
@@ -183,8 +184,8 @@ public enum ColorBrewerName implements ColorBrewerPalette {
         }
     };
 
-    protected static BrewerPalette getPallete(ColorBrewerName colorBrewerName) {
-        return org.geotools.brewer.color.ColorBrewer.instance().getPalette(colorBrewerName.toString());
+    protected static BrewerPalette getPallete(ColorBrewerPaletteName colorBrewerPaletteName) {
+        return org.geotools.brewer.color.ColorBrewer.instance().getPalette(colorBrewerPaletteName.toString());
     }
 
     public String toString() {
