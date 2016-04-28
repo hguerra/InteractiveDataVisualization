@@ -1,7 +1,7 @@
 package inpe.worldwind.view;
 
 import br.inpe.util.color.ColorBrewer;
-import br.inpe.util.color.ColorBrewer.ColorBrewerName;
+import br.inpe.util.color.ColorBrewerName;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 
 import java.awt.*;

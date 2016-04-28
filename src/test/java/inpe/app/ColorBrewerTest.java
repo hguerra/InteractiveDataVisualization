@@ -1,5 +1,6 @@
 package inpe.app;
 
+import br.inpe.util.color.ColorBrewerName;
 import org.geotools.brewer.color.BrewerPalette;
 import org.geotools.brewer.color.ColorBrewer;
 import org.geotools.brewer.color.PaletteType;
@@ -23,7 +24,7 @@ public class ColorBrewerTest {
         System.out.println("\nPaletteNames:\n");
         String[] paletteNames = colorBrewer.getPaletteNames();
         for(String p: paletteNames){
-            System.out.println(p.toString());
+            System.out.println(p);
         }
         /**
          * Number of data classes:
@@ -67,5 +68,11 @@ public class ColorBrewerTest {
         SampleScheme colorScheme = palette.getColorScheme();
         System.out.println("min classes:"+colorScheme.getMinCount());
         System.out.println("max classes:"+colorScheme.getMaxCount());
+
+        System.out.println("Teste");
+
+        BrewerPalette ob = ColorBrewerName.YlGn.getPallete();
+
+        System.out.println(ob);
     }
 }
