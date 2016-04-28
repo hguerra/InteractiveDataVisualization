@@ -23,7 +23,7 @@ public class ColorBrewerTest {
         System.out.println("\nPaletteNames:\n");
         String[] paletteNames = colorBrewer.getPaletteNames();
         for(String p: paletteNames){
-            System.out.println(p.toString());
+            System.out.println(p);
         }
         /**
          * Number of data classes:
