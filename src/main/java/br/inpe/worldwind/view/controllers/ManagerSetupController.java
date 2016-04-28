@@ -1,222 +1,195 @@
 package br.inpe.worldwind.view.controllers;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.google.gson.Gson;
-
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.triangle.conf.DataSourceGroup;
-import br.inpe.triangle.defaultproperties.DefaultFilePath;
-import br.inpe.util.color.ColorBrewer;
 import gov.nasa.worldwind.layers.Layer;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ManagerSetupController {
-	public enum SetupView {
-		BASIC, LAYER, LAYER_ATTRIBUTES, LAYER_COLOR, DATABASE, KINECT, PROFILE, STYLE_DATA;
-	}
+    public enum SetupView {
+        BASIC, LAYER, LAYER_ATTRIBUTES, LAYER_COLOR, DATABASE, KINECT, PROFILE, STYLE_DATA;
+    }
 
-	/* Javafx */
-	private static ManagerSetupController uniqueInstance;
-	private Map<SetupView, ObservableList<Node>> elementsView;
-	private Map<SetupView, SetupController> controllers;
-	/* ColorBrewer */
-	private ColorBrewer colorBrewer;
-	/* DataSource Group */
-	private DataSourceGroup dataSourceGroup;
+    /* Javafx */
+    private static ManagerSetupController uniqueInstance;
+    private Map<SetupView, ObservableList<Node>> elementsView;
+    private Map<SetupView, SetupController> controllers;
+    /* DataSource Group */
+    private DataSourceGroup dataSourceGroup;
 
-	private ManagerSetupController() {
-		this.elementsView = new HashMap<>();
-		this.controllers = new HashMap<>();
-		this.colorBrewer = createColorBrewer();
-		this.dataSourceGroup = new DataSourceGroup();
-	}
+    private ManagerSetupController() {
+        this.elementsView = new HashMap<>();
+        this.controllers = new HashMap<>();
+        this.dataSourceGroup = new DataSourceGroup();
+    }
 
-	/**
-	 * Singleton
-	 * 
-	 * @return
-	 */
-	public static ManagerSetupController getInstance() {
-		if (uniqueInstance == null) {
-			uniqueInstance = new ManagerSetupController();
-		}
-		return uniqueInstance;
-	}
+    /**
+     * Singleton
+     *
+     * @return
+     */
+    public static ManagerSetupController getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new ManagerSetupController();
+        }
+        return uniqueInstance;
+    }
 
-	/**
-	 * Elements of view
-	 * 
-	 * @param setup
-	 * @param parent
-	 * @return
-	 */
-	public synchronized ObservableList<Node> addElement(SetupView setup, Pane parent) {
-		return this.elementsView.put(setup, parent.getChildren());
-	}
+    /**
+     * Elements of view
+     *
+     * @param setup
+     * @param parent
+     * @return
+     */
+    public synchronized ObservableList<Node> addElement(SetupView setup, Pane parent) {
+        return this.elementsView.put(setup, parent.getChildren());
+    }
 
-	public synchronized ObservableList<Node> addElement(SetupView setup, ObservableList<Node> parent) {
-		return this.elementsView.put(setup, parent);
-	}
+    public synchronized ObservableList<Node> addElement(SetupView setup, ObservableList<Node> parent) {
+        return this.elementsView.put(setup, parent);
+    }
 
-	public synchronized ObservableList<Node> removeElement(SetupView setup) {
-		return this.elementsView.remove(setup);
-	}
+    public synchronized ObservableList<Node> removeElement(SetupView setup) {
+        return this.elementsView.remove(setup);
+    }
 
-	public synchronized ObservableList<Node> getElement(SetupView key) {
-		return this.elementsView.get(key);
-	}
+    public synchronized ObservableList<Node> getElement(SetupView key) {
+        return this.elementsView.get(key);
+    }
 
-	/**
-	 * Controllers
-	 * 
-	 * @param view
-	 * @param controller
-	 * @return
-	 */
-	public synchronized SetupController addController(SetupView view, SetupController controller) {
-		return this.controllers.put(view, controller);
-	}
+    /**
+     * Controllers
+     *
+     * @param view
+     * @param controller
+     * @return
+     */
+    public synchronized SetupController addController(SetupView view, SetupController controller) {
+        return this.controllers.put(view, controller);
+    }
 
-	public synchronized SetupController removeController(SetupView view) {
-		return this.controllers.remove(view);
-	}
+    public synchronized SetupController removeController(SetupView view) {
+        return this.controllers.remove(view);
+    }
 
-	public synchronized SetupController getController(SetupView view) {
-		return this.controllers.get(view);
-	}
+    public synchronized SetupController getController(SetupView view) {
+        return this.controllers.get(view);
+    }
 
-	/**
-	 * Color
-	 * 
-	 * TODO refactor this using datasource
-	 */
-	private Map<String, Color[]> attributesColor = new HashMap<>();
+    /**
+     * Color
+     * <p>
+     * TODO refactor this using datasource
+     */
+    private Map<String, Color[]> attributesColor = new HashMap<>();
 
-	public Color[] addAttributesColor(String attrName, Color... color) {
-		return attributesColor.put(attrName, color);
-	}
+    public Color[] addAttributesColor(String attrName, Color... color) {
+        return attributesColor.put(attrName, color);
+    }
 
-	public Color[] removeAttributesColor(String attrName) {
-		return attributesColor.remove(attrName);
-	}
+    public Color[] removeAttributesColor(String attrName) {
+        return attributesColor.remove(attrName);
+    }
 
-	public Map<String, Color[]> getAttributesColor() {
-		return attributesColor;
-	}
+    public Map<String, Color[]> getAttributesColor() {
+        return attributesColor;
+    }
 
-	public Color[] getColors(String attrName) {
-		return attributesColor.get(attrName);
-	}
+    public Color[] getColors(String attrName) {
+        return attributesColor.get(attrName);
+    }
 
-	/**
-	 * ColorBrewer
-	 * 
-	 * @return
-	 */
-	public ColorBrewer getColorBrewer() {
-		return colorBrewer;
-	}
+    /**
+     * ColorBrewer
+     *
+     * @return
+     */
 
-	private ColorBrewer createColorBrewer() {
-		File file = new File(DefaultFilePath.COLOR_BREWER_JSON);
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			return new Gson().fromJson(br, ColorBrewer.class);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return new ColorBrewer();
-	}
+    /**
+     * Data Source
+     */
+    /**
+     * add data in DataSource
+     *
+     * @param name
+     * @param data
+     * @return
+     */
+    public Data addData(String name, Data data) {
+        return this.dataSourceGroup.addData(name, data);
+    }
 
-	/**
-	 * Data Source
-	 */
-	/**
-	 * add data in DataSource
-	 * 
-	 * @param name
-	 * @param data
-	 * @return
-	 */
-	public Data addData(String name, Data data) {
-		return this.dataSourceGroup.addData(name, data);
-	}
+    /**
+     * remove Data from memory
+     *
+     * @param name
+     * @return
+     */
+    public Data removeData(String name) {
+        return this.dataSourceGroup.removeData(name);
+    }
 
-	/**
-	 * remove Data from memory
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public Data removeData(String name) {
-		return this.dataSourceGroup.removeData(name);
-	}
+    public Data getData(String name) {
+        return this.dataSourceGroup.getData(name);
+    }
 
-	public Data getData(String name) {
-		return this.dataSourceGroup.getData(name);
-	}
+    /**
+     * Get specific list of layers
+     *
+     * @param title
+     * @return
+     */
+    public List<Layer> getLayerFromDataSource(String title) {
+        return this.dataSourceGroup.getLayersFromDataSource().get(title);
+    }
 
-	/**
-	 * Get specific list of layers
-	 * 
-	 * @param title
-	 * @return
-	 */
-	public List<Layer> getLayerFromDataSource(String title) {
-		return this.dataSourceGroup.getLayersFromDataSource().get(title);
-	}
+    /**
+     * Get all layers in memory
+     *
+     * @return
+     */
+    public Map<String, List<Layer>> getLayersFromDataSource() {
+        return this.dataSourceGroup.getLayersFromDataSource();
+    }
 
-	/**
-	 * Get all layers in memory
-	 * 
-	 * @return
-	 */
-	public Map<String, List<Layer>> getLayersFromDataSource() {
-		return this.dataSourceGroup.getLayersFromDataSource();
-	}
+    /**
+     * Get Layer Title from DataSource
+     *
+     * @return
+     */
+    public ObservableList<String> getTitleFromDataSource() {
+        return this.dataSourceGroup.getTitleFromDataSource();
+    }
 
-	/**
-	 * Get Layer Title from DataSource
-	 * 
-	 * @return
-	 */
-	public ObservableList<String> getTitleFromDataSource() {
-		return this.dataSourceGroup.getTitleFromDataSource();
-	}
+    /**
+     * DefaultData
+     */
 
-	/**
-	 * DefaultData
-	 */
+    /**
+     * @param group
+     * @return
+     */
+    public DataSource getDataSourceFromGroup(String group) {
+        return this.dataSourceGroup.getDataSourceFromGroup(group);
+    }
 
-	/**
-	 * 
-	 * @param group
-	 * @return
-	 */
-	public DataSource getDataSourceFromGroup(String group) {
-		return this.dataSourceGroup.getDataSourceFromGroup(group);
-	}
+    /**
+     * @return
+     */
+    public ObservableList<String> getTitleFromDataSourceGroup() {
+        return this.dataSourceGroup.getTitleFromDataSourceGroup();
+    }
 
-	/**
-	 * 
-	 * @return
-	 */
-	public ObservableList<String> getTitleFromDataSourceGroup() {
-		return this.dataSourceGroup.getTitleFromDataSourceGroup();
-	}
-
-	public ObservableList<String> getTitleFromDataSourceGroup(String group) {
-		return this.dataSourceGroup.getTitleFromDataSourceGroup(group);
-	}
+    public ObservableList<String> getTitleFromDataSourceGroup(String group) {
+        return this.dataSourceGroup.getTitleFromDataSourceGroup(group);
+    }
 }

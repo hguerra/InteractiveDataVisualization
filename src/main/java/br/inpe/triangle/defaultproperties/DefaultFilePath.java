@@ -24,8 +24,5 @@ public class DefaultFilePath {
 	 */
 	public static final String FILE_PATH_GDAL_TRANSFORM = "data/gdal/";
 	public static final String VEGTYPE_2000_GDAL_GEOJSON = FILE_PATH_GDAL_TRANSFORM + "vegtype-gdal.geojson";
-	/*
-	 * ColorBrewer
-	 */
-	public static final String COLOR_BREWER_JSON = "data/triangle/colorbrewer.json";
+
 }
