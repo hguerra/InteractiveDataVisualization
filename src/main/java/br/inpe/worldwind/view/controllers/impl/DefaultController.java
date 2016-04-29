@@ -154,6 +154,13 @@ public class DefaultController implements SetupController {
 
 		return dataset;
 	}
+	private List<Data> getDatasetFromBasicController(DataSource dataSource) {
+		List<Data> dataset = new ArrayList<>();
+		MANAGER.getSelectedBasicScenario().forEach(key -> {
+			dataset.add(dataSource.getDataSet().get(key));
+		});
+		return dataset;
+	}
 
 	private List<Data> getDatasetFromBasicController() {
 		Supplier<Stream<Node>> streamSupplier = () -> MANAGER.getController(SetupView.BASIC).getPaneSetupChildren()
@@ -166,7 +173,8 @@ public class DefaultController implements SetupController {
 		ComboBox<String> comboBox = (ComboBox<String>) node;
 		String group = comboBox.getSelectionModel().getSelectedItem();
 
-		return getDatasetFromBasicController(streamSupplier, MANAGER.getDataSourceFromGroup(group));
+		//return getDatasetFromBasicController(streamSupplier, MANAGER.getDataSourceFromGroup(group));
+        return getDatasetFromBasicController(MANAGER.getDataSourceFromGroup(group));
 	}
 
 }

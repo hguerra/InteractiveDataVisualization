@@ -9,9 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ManagerSetupController {
     public enum SetupView {
@@ -22,12 +20,14 @@ public class ManagerSetupController {
     private static ManagerSetupController uniqueInstance;
     private Map<SetupView, ObservableList<Node>> elementsView;
     private Map<SetupView, SetupController> controllers;
+    private List<String> selectedBasicScenario;
     /* DataSource Group */
     private DataSourceGroup dataSourceGroup;
 
     private ManagerSetupController() {
         this.elementsView = new HashMap<>();
         this.controllers = new HashMap<>();
+        this.selectedBasicScenario = new ArrayList<>();
         this.dataSourceGroup = new DataSourceGroup();
     }
 
@@ -191,5 +191,31 @@ public class ManagerSetupController {
 
     public ObservableList<String> getTitleFromDataSourceGroup(String group) {
         return this.dataSourceGroup.getTitleFromDataSourceGroup(group);
+    }
+
+    /**
+     *
+     * @param scenario
+     * @return
+     */
+    public boolean addBasicScenario(String scenario){
+        return this.selectedBasicScenario.add(scenario);
+    }
+
+    /**
+     *
+     * @param scenario
+     * @return
+     */
+    public boolean removeBasicScenario(String scenario){
+        return this.selectedBasicScenario.remove(scenario);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<String> getSelectedBasicScenario() {
+        return Collections.unmodifiableList(selectedBasicScenario);
     }
 }

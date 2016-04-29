@@ -212,7 +212,7 @@ public class StyleDataController extends ApplicationSetupController {
     }
 
     private ObservableList<DataProperty> classifyUsingGeotools(Set<Object> uniqueAttrs) {
-        ObservableList<DataProperty> values = FXCollections.observableArrayList();
+    ObservableList<DataProperty> values = FXCollections.observableArrayList();
 
         String colorScheme = comboColorScheme.getSelectionModel().getSelectedItem();
 
