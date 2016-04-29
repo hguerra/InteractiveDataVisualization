@@ -1,17 +1,15 @@
 package br.inpe.worldwind.view.controllers.impl;
 
-import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.worldwind.view.ScenarioProperty;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -29,34 +27,10 @@ public class SetupBasicController extends ApplicationSetupController {
     private Pane paneSetup;
 
     @FXML
-    private Label lblLayerName;
-
-    @FXML
-    private Label lblData;
-
-    @FXML
     private ComboBox<String> comboLayer;
 
     @FXML
-    private Label lblScenario;
-
-    @FXML
     private ListView<ScenarioProperty> listViewScenario;
-
-    @FXML
-    private ContextMenu contextMenu;
-
-    @FXML
-    private MenuItem menuItemRemove;
-
-    @FXML
-    private Label lblKinect;
-
-    @FXML
-    private ToggleButton toggleBtnKinect;
-
-    @FXML
-    private Button btnTrash;
 
     private ObservableList<String> listOfView;
 
@@ -70,7 +44,14 @@ public class SetupBasicController extends ApplicationSetupController {
 		/* get selected comboLayer */
         String group = comboLayer.getSelectionModel().getSelectedItem();
         listOfView = MANAGER.getTitleFromDataSourceGroup(group);
-		/* add elements based on comboLayer */
+    }
+
+    @Override
+    public void initPaneSetupEvents() {
+        comboLayer.valueProperty().addListener((observable, oldValue, newValue) -> {
+            MANAGER.getController(SetupView.BASIC).update(newValue);
+        });
+        /* add elements based on comboLayer */
         ObservableList<ScenarioProperty> scenarioProperties = FXCollections.observableArrayList(
                 listOfView.stream().map(ScenarioProperty::new).collect(Collectors.toList())
         );
@@ -92,33 +73,6 @@ public class SetupBasicController extends ApplicationSetupController {
                 return new ScenarioProperty(string);
             }
         }));
-        //end
-
-    }
-
-    @Override
-    public void initPaneSetupEvents() {
-        menuItemRemove.setOnAction(event -> {
-            int index = listViewScenario.getSelectionModel().getSelectedIndex();
-
-            if (index < 0)
-                return;
-
-            listOfView.remove(index);
-           // listViewScenario.setItems(listOfView);
-        });
-        btnTrash.setOnAction(event -> {
-            //listOfView.clear();
-        });
-
-        toggleBtnKinect.setOnAction(event -> {
-            DefaultTriangleProperties.getInstance().setKinectEnable(toggleBtnKinect.isSelected());
-            System.out.println("toggleBtnKinect:" + toggleBtnKinect.isSelected());
-        });
-
-        comboLayer.valueProperty().addListener((observable, oldValue, newValue) -> {
-            MANAGER.getController(SetupView.BASIC).update(newValue);
-        });
     }
 
     @Override
@@ -138,7 +92,6 @@ public class SetupBasicController extends ApplicationSetupController {
 
     @Override
     public void update(Object object) {
-        // TODO Auto-generated method stub
 
     }
 }
