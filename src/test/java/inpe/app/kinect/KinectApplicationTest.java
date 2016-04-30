@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.kinect;
 
 import br.com.kinect4j.device.DeviceConfig;
 import com.primesense.nite.UserTracker;

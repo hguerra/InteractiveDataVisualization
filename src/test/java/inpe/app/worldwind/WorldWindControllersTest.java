@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.worldwind;
 
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.JSONBuilder;

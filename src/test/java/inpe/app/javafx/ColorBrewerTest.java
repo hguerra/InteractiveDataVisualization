@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.javafx;
 
 import org.geotools.brewer.color.BrewerPalette;
 import org.geotools.brewer.color.ColorBrewer;

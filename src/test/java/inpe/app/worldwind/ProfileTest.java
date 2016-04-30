@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.worldwind;
 
 import br.inpe.triangle.defaultproperties.DefaultTriangleProperties;
 import br.inpe.triangle.model.Profile;

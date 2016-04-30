@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.javafx;
 
 import br.inpe.worldwind.view.ApplicationFX;
 import javafx.event.ActionEvent;

@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.database;
 
 import org.postgis.Geometry;
 import org.postgis.PGgeometry;

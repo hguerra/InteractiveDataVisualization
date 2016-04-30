@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.javafx;
 
 /**
  * @author Heitor

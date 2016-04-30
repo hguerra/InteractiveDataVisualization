@@ -1,19 +1,17 @@
 package br.inpe.triangle.conf;
 
+import br.inpe.worldwind.controller.ShapefileController;
+import br.inpe.worldwind.engine.ShapefileProperties;
+import com.google.gson.annotations.Expose;
+import gov.nasa.worldwind.formats.shapefile.Shapefile;
+import gov.nasa.worldwind.layers.Layer;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import com.google.gson.annotations.Expose;
-
-import br.inpe.worldwind.controller.ShapefileController;
-import br.inpe.worldwind.engine.ShapefileProperties;
-import gov.nasa.worldwind.formats.shapefile.Shapefile;
-import gov.nasa.worldwind.layers.Layer;
 
 @XmlRootElement
 public class DataSource {
@@ -32,10 +30,6 @@ public class DataSource {
 		return dataSet.put(name, data);
 	}
 
-	public Data removeData(String name) {
-		return dataSet.remove(name);
-	}
-
 	public Map<String, List<Layer>> refreshLayers() {
 		dataSet.forEach((k, v) -> {
 			List<Layer> value = createLayers(v);
@@ -49,17 +43,6 @@ public class DataSource {
 		if (!layers.isEmpty())
 			return this.layers;
 		return refreshLayers();
-	}
-
-	public List<Layer> addLayers(String name, Data data) {
-		List<Layer> value = createLayers(data);
-		if (!value.isEmpty())
-			return this.layers.put(name, value);
-		return null;
-	}
-
-	public List<Layer> removeLayers(List<Layer> l) {
-		return this.layers.remove(l);
 	}
 
 	public List<Layer> createLayers(Data data) {

@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.java;
 
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.util.status.ShapefileInfo;

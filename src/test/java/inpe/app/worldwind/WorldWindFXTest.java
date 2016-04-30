@@ -1,4 +1,4 @@
-package inpe.app;
+package inpe.app.worldwind;
 
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.avlist.AVKey;
