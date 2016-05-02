@@ -36,29 +36,49 @@ public class SetupBasicController extends ApplicationSetupController {
 
     @Override
     protected void initPaneSetup() {
+        loadComboLayer();
+        loadListView();
+    }
+    @Override
+    public void initPaneSetupEvents() {
+        comboLayer.valueProperty().addListener((observable, oldValue, newValue) -> {
+            /**
+             * FIXME Heitor
+             * Quando retirado da null pointer
+             */
+            MANAGER.getController(SetupView.BASIC).update(newValue);//
+            loadListView();
+            /**
+             * TODO Heitor
+             * se executar sem selecionar um padrao de cor, nao fazer nada!!
+             */
+
+        });
+
+    }
+    /**
+     * Elements of view
+     */
+    private void loadComboLayer() {
         ObservableList<String> listOfCombLayer = MANAGER.getTitleFromDataSourceGroup();
         /* Add elements in comboLayer */
         comboLayer.setItems(listOfCombLayer);
         /* set selected comboLayer */
         comboLayer.getSelectionModel().selectFirst();
-		/* get selected comboLayer */
-        String group = comboLayer.getSelectionModel().getSelectedItem();
-        listOfView = MANAGER.getTitleFromDataSourceGroup(group);
     }
 
-    @Override
-    public void initPaneSetupEvents() {
-        comboLayer.valueProperty().addListener((observable, oldValue, newValue) -> {
-            MANAGER.getController(SetupView.BASIC).update(newValue);
-        });
+    private void loadListView() {
+        /* get selected comboLayer */
+        String group = comboLayer.getSelectionModel().getSelectedItem();
+        listOfView = MANAGER.getTitleFromDataSourceGroup(group);
         /* add elements based on comboLayer */
         ObservableList<ScenarioProperty> scenarioProperties = FXCollections.observableArrayList(
                 listOfView.stream().map(ScenarioProperty::new).collect(Collectors.toList())
         );
         scenarioProperties.forEach(scenarioProperty -> scenarioProperty.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
-            if(isSelected){
+            if (isSelected) {
                 MANAGER.addBasicScenario(scenarioProperty.getName());
-            }else{
+            } else {
                 MANAGER.removeBasicScenario(scenarioProperty.getName());
             }
         }));
@@ -68,6 +88,7 @@ public class SetupBasicController extends ApplicationSetupController {
             public String toString(ScenarioProperty object) {
                 return object.getName();
             }
+
             @Override
             public ScenarioProperty fromString(String string) {
                 return new ScenarioProperty(string);
@@ -92,6 +113,8 @@ public class SetupBasicController extends ApplicationSetupController {
 
     @Override
     public void update(Object object) {
-
+        if (object == null) {
+            initPaneSetup();
+        }
     }
 }

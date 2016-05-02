@@ -3,11 +3,9 @@ package br.inpe.worldwind.view.controllers;
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.triangle.conf.DataSourceGroup;
-import gov.nasa.worldwind.layers.Layer;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 import java.util.*;
 
@@ -89,10 +87,13 @@ public class ManagerSetupController {
     public Data getData(String name) {
         return this.dataSourceGroup.getData(name);
     }
-    /**
-     * DefaultData
-     */
+    public Data removeData(Data data){
+        return this.dataSourceGroup.removeData(data);
+    }
 
+    public DataSource addDataSource(String group, DataSource dataSource){
+        return this.dataSourceGroup.addDataSource(group, dataSource);
+    }
     /**
      * @param group
      * @return

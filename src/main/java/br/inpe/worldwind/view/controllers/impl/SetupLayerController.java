@@ -3,13 +3,13 @@ package br.inpe.worldwind.view.controllers.impl;
 import br.inpe.gdal.transform.GeoFormat;
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
-import br.inpe.triangle.conf.DataSourceGroup;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.impl.StyleData;
 import com.google.common.base.Splitter;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -129,7 +129,7 @@ public class SetupLayerController implements SetupController {
 
         btnColor.setOnAction(event -> {
             try {
-				/* data */
+                /* data */
                 if (!listOfView.isEmpty()) {
                     String item = listViewScenario.getSelectionModel().getSelectedItem();
                     if (item == null) {
@@ -152,32 +152,30 @@ public class SetupLayerController implements SetupController {
         });
 
         btnAddData.setOnAction(event -> {
-            List<Data> dataset = listOfView.stream().map(MANAGER::getData).collect(Collectors.toList());
-
-            Map<String, List<String>> datasetGroup = new HashMap<>();
-
             listOfView.forEach(titleData -> {
                 List<String> datasetGroupIterator = Splitter.on("_")
                         .trimResults()
                         .omitEmptyStrings()
                         .splitToList(titleData);
 
-                if (datasetGroupIterator.size()!= 2)
+                if (datasetGroupIterator.size() < 2)
                     return;
 
-                String name = datasetGroupIterator.get(0);
-                String year = datasetGroupIterator.get(1);
+                String nameOfDataSourceGroup = datasetGroupIterator.get(0); // title
+                String nameOfDataSource = datasetGroupIterator.get(1); // year
 
-                if(datasetGroup.containsKey(name))
-                    datasetGroup.get(name).add(year);
-                else{
-                    List<String> years = new ArrayList<>();
-                    years.add(year);
-                    datasetGroup.put(name,years);
-                }
+                // Get data from session
+                Data data = MANAGER.getData(titleData);
+                //create a new datasource
+                DataSource dataSource = new DataSource();
+                dataSource.addData(nameOfDataSource, data);
+                //add in dataSourceGroup
+                MANAGER.addDataSource(nameOfDataSourceGroup, dataSource);
+                //Remove data from session
+                MANAGER.removeData(data);
             });
+            MANAGER.getController(SetupView.BASIC).update(null);
 
-            System.out.println(datasetGroup);
         });
     }
 

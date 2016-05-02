@@ -7,6 +7,7 @@
     <groupId>br.inpe</groupId>
     <artifactId>triangle</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -104,9 +105,40 @@
             <artifactId>gt-brewer</artifactId>
             <version>${geotools.version}</version>
         </dependency>
+
+        <!-- Triangle -->
+        <dependency>
+            <groupId>br.inpe.triangle</groupId>
+            <artifactId>gluegen-rt</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.inpe.triangle</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.inpe.triangle</groupId>
+            <artifactId>worldwind</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.inpe.triangle</groupId>
+            <artifactId>worldwindx</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
+        <repository>
+            <id>Triangle Java Repository</id>
+            <name>mvn-triangle-repository</name>
+            <url>https://github.com/hguerra/mvn-triangle-repository/raw/master/</url>
+        </repository>
         <repository>
             <id>maven2-repository.dev.java.net</id>
             <name>Java.net repository</name>
@@ -128,6 +160,7 @@
     </repositories>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
