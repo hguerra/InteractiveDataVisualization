@@ -27,7 +27,7 @@ public abstract class ApplicationFX extends Application {
 
 	protected abstract boolean exitOnCloseRequest();
 
-	public boolean addStylesheet(String stylesheet) {
+	protected boolean addStylesheet(String stylesheet) {
 		return getScene().getStylesheets().add(stylesheet);
 	}
 
@@ -43,8 +43,8 @@ public abstract class ApplicationFX extends Application {
 		return root.getStyleClass().remove(className);
 	}
 
-	public void setLayout(Control control, double setPrefWidth, double setPrefHeight, double setLayoutX,
-			double setLayoutY) {
+	protected void setLayout(Control control, double setPrefWidth, double setPrefHeight, double setLayoutX,
+						   double setLayoutY) {
 		control.setPrefWidth(setPrefWidth);
 		control.setPrefHeight(setPrefHeight);
 		control.setLayoutX(setLayoutX);
@@ -70,13 +70,10 @@ public abstract class ApplicationFX extends Application {
 	private void setOnCloseRequest(Stage stage) {
 		if (!exitOnCloseRequest())
 			return;
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent t) {
-				Platform.exit();
-				System.exit(0);
-			}
-		});
+		stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
 	}
 
 	public static boolean closeStage() {

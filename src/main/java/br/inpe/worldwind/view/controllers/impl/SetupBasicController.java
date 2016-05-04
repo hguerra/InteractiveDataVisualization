@@ -1,5 +1,6 @@
 package br.inpe.worldwind.view.controllers.impl;
 
+import br.inpe.worldwind.view.ApplicationFXAction;
 import br.inpe.worldwind.view.ScenarioProperty;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
@@ -37,25 +38,19 @@ public class SetupBasicController extends ApplicationSetupController {
     @Override
     protected void initPaneSetup() {
         loadComboLayer();
-        loadListView();
+        loadListView(comboLayer.getSelectionModel().getSelectedItem());
     }
+
     @Override
     public void initPaneSetupEvents() {
         comboLayer.valueProperty().addListener((observable, oldValue, newValue) -> {
-            /**
-             * FIXME Heitor
-             * Quando retirado da null pointer
-             */
-            MANAGER.getController(SetupView.BASIC).update(newValue);//
-            loadListView();
-            /**
-             * TODO Heitor
-             * se executar sem selecionar um padrao de cor, nao fazer nada!!
-             */
-
+            if (newValue == null)
+                return;
+            loadListView(newValue);
         });
 
     }
+
     /**
      * Elements of view
      */
@@ -67,11 +62,8 @@ public class SetupBasicController extends ApplicationSetupController {
         comboLayer.getSelectionModel().selectFirst();
     }
 
-    private void loadListView() {
-        /* get selected comboLayer */
-        String group = comboLayer.getSelectionModel().getSelectedItem();
+    private void loadListView(String group) {
         listOfView = MANAGER.getTitleFromDataSourceGroup(group);
-        /* add elements based on comboLayer */
         ObservableList<ScenarioProperty> scenarioProperties = FXCollections.observableArrayList(
                 listOfView.stream().map(ScenarioProperty::new).collect(Collectors.toList())
         );
@@ -113,8 +105,15 @@ public class SetupBasicController extends ApplicationSetupController {
 
     @Override
     public void update(Object object) {
-        if (object == null) {
-            initPaneSetup();
+        if (object instanceof ApplicationFXAction) {
+            ApplicationFXAction action = (ApplicationFXAction) object;
+            switch (action) {
+                case LOAD_COMPONENTS:
+                    initPaneSetup();
+                    break;
+                case LOAD_LISTENERS:
+                    break;
+            }
         }
     }
 }

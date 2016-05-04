@@ -39,13 +39,10 @@ public abstract class ApplicationFXML extends Application {
 
 	private void setOnCloseRequest(Stage stage) {
 		if(!exitOnCloseRequest()) return;
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent t) {
-				Platform.exit();
-				System.exit(0);
-			}
-		});
+		stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
 	}
 
 	public static boolean closeStage() {

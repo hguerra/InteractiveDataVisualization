@@ -4,12 +4,12 @@ import br.inpe.gdal.transform.GeoFormat;
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.worldwind.controller.ShapefileController;
+import br.inpe.worldwind.view.ApplicationFXAction;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.impl.StyleData;
 import com.google.common.base.Splitter;
-import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,8 +23,8 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class SetupLayerController implements SetupController {
     private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
@@ -76,15 +76,11 @@ public class SetupLayerController implements SetupController {
 
         btnLoad.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
-            // default
             FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Shapefiles (*.shp)", "*.shp");
             /**
-             * TODO
+             * TODO add extension filter .geojson
+             * "Shapefiles (*.shp), GeoJson (*.geojson)", "*.shp", "*.geojson"
              */
-            // FileChooser.ExtensionFilter extFilter = new
-            // FileChooser.ExtensionFilter(
-            // "Shapefiles (*.shp), GeoJson (*.geojson)", "*.shp", "*.geojson");
-            // add extension filter
             fileChooser.getExtensionFilters().add(extFilter);
             File file = fileChooser.showOpenDialog(null);
             if (file != null) {
@@ -174,7 +170,7 @@ public class SetupLayerController implements SetupController {
                 //Remove data from session
                 MANAGER.removeData(data);
             });
-            MANAGER.getController(SetupView.BASIC).update(null);
+            MANAGER.getController(SetupView.BASIC).update(ApplicationFXAction.LOAD_COMPONENTS);
 
         });
     }
