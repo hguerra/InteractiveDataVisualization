@@ -11,70 +11,68 @@ import javax.swing.*;
 import java.util.List;
 
 public class WorldWindView extends JFrame {
-	/**
-	 * World Wind basic
-	 */
-	private static final long serialVersionUID = 1L;
-	private WorldWindowGLCanvas wwd;
-	private ShapefileController shpController;
-	private List<Data> dataset;
+    /**
+     * World Wind basic
+     */
+    private static final long serialVersionUID = 1L;
+    private WorldWindowGLCanvas wwd;
+    private ShapefileController shpController;
+    private List<Data> dataset;
 
-	public WorldWindView(List<Data> dataset) {
-		this.dataset = dataset;
-		worldWindConfig();
-		controllersConfig();
-	}
+    public WorldWindView(List<Data> dataset) {
+        this.dataset = dataset;
+        worldWindConfig();
+        controllersConfig();
+    }
 
-	private final void controllersConfig() {
-		this.shpController = new ShapefileLayer(wwd);
-		drawViewDataset();
-	}
+    private final void controllersConfig() {
+        this.shpController = new ShapefileLayer(wwd);
+        drawViewDataset();
+    }
 
-	private void drawViewDataset() {
-		dataset.forEach(data -> {
-			draw(data);
-		});
-		shpController.asyncDraw();
-	}
+    private void drawViewDataset() {
+        dataset.forEach(this::draw);
+        shpController.asyncDraw();
+    }
 
-	private void draw(Data data) {
-		try {
-			Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
-			if (shp == null)
-				return;
-			shpController.addShapefile(data.getTitle(), data.getColumn(), shp, data.getAwtColors());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    private void draw(Data data) {
+        try {
+            Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
+            if (shp == null)
+                return;
+            shpController.addShapefile(data.getTitle(), data.getColumn(), shp, data.getAwtColors());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	/**
-	 * WorldWind config
-	 */
-	private final void worldWindConfig() {
-		wwd = new WorldWindowGLCanvas();
-		wwd.setPreferredSize(new java.awt.Dimension(1200, 800));
-		this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
-		wwd.setModel(new BasicModel());
-	}
+    /**
+     * WorldWind config
+     */
+    private final void worldWindConfig() {
+        wwd = new WorldWindowGLCanvas();
+        wwd.setPreferredSize(new java.awt.Dimension(1200, 800));
+        this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
+        wwd.setModel(new BasicModel());
+    }
 
-	public static void run(List<Data> dataset) {
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				JFrame frame = new WorldWindView(dataset);
-				frame.pack();
-				frame.setVisible(true);
-			}
-		});
-	}
+    public static void run(List<Data> dataset) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                JFrame frame = new WorldWindView(dataset);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+    }
 
-	/**
-	 * Setters
-	 * 
-	 * @param dataset
-	 */
-	public void setDataset(List<Data> dataset) {
-		// TODO Auto-generated method stub
+    /**
+     * Setters
+     *
+     * @param dataset
+     */
+    public void setDataset(List<Data> dataset) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 }

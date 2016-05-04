@@ -4,6 +4,7 @@ import br.inpe.gdal.transform.GeoFormat;
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.worldwind.controller.ShapefileController;
+import br.inpe.worldwind.engine.ShapefileProperties;
 import br.inpe.worldwind.view.ApplicationFXAction;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
@@ -12,6 +13,7 @@ import br.inpe.worldwind.view.impl.StyleData;
 import com.google.common.base.Splitter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -23,8 +25,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class SetupLayerController implements SetupController {
     private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
@@ -148,32 +149,49 @@ public class SetupLayerController implements SetupController {
         });
 
         btnAddData.setOnAction(event -> {
-            listOfView.forEach(titleData -> {
-                List<String> datasetGroupIterator = Splitter.on("_")
-                        .trimResults()
-                        .omitEmptyStrings()
-                        .splitToList(titleData);
+            final StringBuilder infoMessage = new StringBuilder();
+            Task<Void> task = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    listOfView.forEach(titleData -> {
+                        // Get data from session
+                        Data data = MANAGER.getData(titleData);
+                        if (data.getAwtColors().isEmpty()) {
+                            infoMessage.append(data.getTitle()).append("\n");
+                            return;
+                        }
+                        List<String> datasetGroupIterator = Splitter.on("_")
+                                .trimResults()
+                                .omitEmptyStrings()
+                                .splitToList(titleData);
 
-                if (datasetGroupIterator.size() < 2)
-                    return;
-
-                String nameOfDataSourceGroup = datasetGroupIterator.get(0); // title
-                String nameOfDataSource = datasetGroupIterator.get(1); // year
-
-                // Get data from session
-                Data data = MANAGER.getData(titleData);
-                //create a new datasource
-                DataSource dataSource = new DataSource();
-                dataSource.addData(nameOfDataSource, data);
-                //add in dataSourceGroup
-                MANAGER.addDataSource(nameOfDataSourceGroup, dataSource);
-                //Remove data from session
-                MANAGER.removeData(data);
+                        if (datasetGroupIterator.size() < 2)
+                            return;
+                        String nameOfDataSourceGroup = datasetGroupIterator.get(0); // title
+                        String nameOfDataSource = datasetGroupIterator.get(1); // year
+                        //create a new datasource
+                        DataSource dataSource = new DataSource();
+                        dataSource.addData(nameOfDataSource, data);
+                        //add in dataSourceGroup
+                        MANAGER.addDataSource(nameOfDataSourceGroup, dataSource);
+                        //Remove data from session
+                        MANAGER.removeData(data);
+                    });
+                    MANAGER.getController(SetupView.BASIC).update(ApplicationFXAction.LOAD_COMPONENTS);
+                    return null;
+                }
+            };
+            task.setOnSucceeded(onSucceeded -> {
+                if (!infoMessage.toString().isEmpty())
+                    JOptionPane.showMessageDialog(null, infoMessage.toString(), "Color not defined", JOptionPane.WARNING_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(null, "Data add with succeeded");
             });
-            MANAGER.getController(SetupView.BASIC).update(ApplicationFXAction.LOAD_COMPONENTS);
 
+            new Thread(task).start();
         });
     }
+
 
     @Override
     public ObservableList<Node> getPaneSetupChildren() {
