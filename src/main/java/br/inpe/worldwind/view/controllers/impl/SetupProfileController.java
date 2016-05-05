@@ -80,7 +80,7 @@ public class SetupProfileController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addView(SetupView.PROFILE, anchorPane);
+		addSetupView(SetupView.PROFILE, anchorPane);
 
 	}
 

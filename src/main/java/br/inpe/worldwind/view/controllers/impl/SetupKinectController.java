@@ -42,7 +42,7 @@ public class SetupKinectController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addView(SetupView.KINECT, anchorPane);
+		addSetupView(SetupView.KINECT, anchorPane);
 
 	}
 

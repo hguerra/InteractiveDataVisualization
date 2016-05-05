@@ -68,7 +68,7 @@ public class SetupLayerController implements SetupController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initPaneSetupEvents();
-        addView(SetupView.LAYER, anchorPane);
+        addSetupView(SetupView.LAYER, anchorPane);
     }
 
     @Override

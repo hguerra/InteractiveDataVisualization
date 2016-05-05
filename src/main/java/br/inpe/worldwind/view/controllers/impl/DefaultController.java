@@ -52,14 +52,13 @@ public class DefaultController implements SetupController {
     @FXML
     private Button btnDataBase;
 
+    /* Pane View */
     @FXML
     private Pane paneView;
     /* Pane Setup */
     @FXML
     private Pane paneSetup;
-    /* Pane View */
-    @FXML
-    private ImageView imgMock;
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -105,7 +104,7 @@ public class DefaultController implements SetupController {
         ObservableList<Node> elementsSetupPanelDatabase = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelKinect = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelProfile = FXCollections.observableArrayList();
-		/* add elements */
+        /* add elements */
         loadPaneSetup(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
         loadPaneSetup(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
         loadPaneSetup(elementsSetupPanelDatabase, Resource.getPaneSetupDatabaseFXML());

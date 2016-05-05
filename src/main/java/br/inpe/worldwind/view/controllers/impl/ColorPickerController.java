@@ -36,7 +36,7 @@ public class ColorPickerController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addView(SetupView.LAYER_COLOR, anchorPane);
+		addSetupView(SetupView.LAYER_COLOR, anchorPane);
 
 	}
 

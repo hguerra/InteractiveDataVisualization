@@ -26,9 +26,9 @@ public abstract class ApplicationSetupController implements SetupController {
 		/* add events */
 		initPaneSetupEvents();
 		/* set screen */
-		addView(getSetupView(), getPaneView());
+		addSetupView(getSetupView(), getPaneView());
 		/* set controller */
-		addController(getSetupView(), this);
+		addSetupController(getSetupView(), this);
 	}
 
 }
