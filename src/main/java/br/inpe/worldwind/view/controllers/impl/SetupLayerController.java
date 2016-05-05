@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import java.io.File;
@@ -149,6 +150,10 @@ public class SetupLayerController implements SetupController {
         });
 
         btnAddData.setOnAction(event -> {
+            if (listOfView.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No data in scene", "Add data", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             final StringBuilder infoMessage = new StringBuilder();
             Task<Void> task = new Task<Void>() {
                 @Override
