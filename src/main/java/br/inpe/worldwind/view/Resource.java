@@ -3,16 +3,13 @@ package br.inpe.worldwind.view;
 import java.net.URL;
 
 /**
- * Created by Heitor on 27/04/2016.
+ * @author Heitor
+ * @since 27/04/2016
  */
 public class Resource {
 
-    public static URL getURL(String filename) {
+    private static URL getURL(String filename) {
         return Resource.class.getResource("/".concat(filename));
-    }
-
-    public static URL getLoginFXML() {
-        return getURL("login-fxml.fxml");
     }
 
     public static URL getHomeDefaultFXML() {
@@ -47,7 +44,8 @@ public class Resource {
         return getURL("pane-style-data.fxml");
     }
 
-    public static String getStylesheet(String stylesheet) {
-        return getURL(stylesheet).toExternalForm();
+    public static URL getPaneViewDatabaseFXML() {
+        return getURL("database-view-fxml.fxml");
     }
+
 }

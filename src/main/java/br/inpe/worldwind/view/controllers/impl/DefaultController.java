@@ -3,17 +3,15 @@ package br.inpe.worldwind.view.controllers.impl;
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.worldwind.view.Resource;
-import br.inpe.worldwind.view.controllers.ManagerSetupController;
-import br.inpe.worldwind.view.controllers.SetupView;
-import br.inpe.worldwind.view.controllers.SetupController;
+import br.inpe.worldwind.view.controllers.*;
 import br.inpe.worldwind.view.impl.WorldWindView;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -25,7 +23,8 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class DefaultController implements SetupController {
-    private final static ManagerSetupController MANAGER = ManagerSetupController.getInstance();
+    private final static ManagerSetupController SETUP_CONTROLLER = ManagerSetupController.getInstance();
+    private final static ManagerSceneController SCENE_CONTROLLER = ManagerSceneController.getInstance();
 
     /* Pane Options */
     @FXML
@@ -62,12 +61,15 @@ public class DefaultController implements SetupController {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        /* Load all panes before */
-        initPaneSetup();
-        /* add events */
-        initPaneSetupEvents();
-        /* set default screen */
-        setPaneSetupComponents(SetupView.BASIC);
+        Platform.runLater(() -> {
+            /* Load all panes before */
+            loadSetupViewFromFXML();
+            loadSceneViewFromFXML();
+            /* add events */
+            initPaneSetupEvents();
+            /* set default screen */
+            setPaneSetupComponents(SetupView.BASIC);
+        });
     }
 
     @Override
@@ -85,50 +87,33 @@ public class DefaultController implements SetupController {
 
         btnLayer.setOnAction(event -> setPaneSetupComponents(SetupView.LAYER));
 
-        btnDataBase.setOnAction(event -> setPaneSetupComponents(SetupView.DATABASE));
+        btnDataBase.setOnAction(event -> {
+            setPaneSetupComponents(SetupView.DATABASE);
+            setPaneSceneComponents(SceneView.DATABASE_VIEW);
+        });
 
         btnKinect.setOnAction(event -> setPaneSetupComponents(SetupView.KINECT));
 
         btnProfile.setOnAction(event -> setPaneSetupComponents(SetupView.PROFILE));
     }
 
+
     @Override
-    public ObservableList<Node> getPaneSetupChildren() {
+    public ObservableList<Node> getPaneSceneChildren() {
         return this.paneSetup.getChildren();
     }
 
-    private void initPaneSetup() {
-        /* create list */
-        ObservableList<Node> elementsSetupPanelBasic = FXCollections.observableArrayList();
-        ObservableList<Node> elementsSetupPanelLayer = FXCollections.observableArrayList();
-        ObservableList<Node> elementsSetupPanelDatabase = FXCollections.observableArrayList();
-        ObservableList<Node> elementsSetupPanelKinect = FXCollections.observableArrayList();
-        ObservableList<Node> elementsSetupPanelProfile = FXCollections.observableArrayList();
-        /* add elements */
-        loadPaneSetup(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
-        loadPaneSetup(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
-        loadPaneSetup(elementsSetupPanelDatabase, Resource.getPaneSetupDatabaseFXML());
-        loadPaneSetup(elementsSetupPanelKinect, Resource.getPaneSetupKinectFXML());
-        loadPaneSetup(elementsSetupPanelProfile, Resource.getPaneSetupProfileFXML());
-		/* add elements in ManagerSetupController */
-        MANAGER.addElement(SetupView.BASIC, elementsSetupPanelBasic);
-        MANAGER.addElement(SetupView.LAYER, elementsSetupPanelLayer);
-        MANAGER.addElement(SetupView.DATABASE, elementsSetupPanelDatabase);
-        MANAGER.addElement(SetupView.KINECT, elementsSetupPanelKinect);
-        MANAGER.addElement(SetupView.PROFILE, elementsSetupPanelProfile);
-        /*Add buttons in SetupView*/
-        SetupView.BASIC.setButton(btnGlobe);
-        SetupView.LAYER.setButton(btnLayer);
-        SetupView.DATABASE.setButton(btnDataBase);
-        SetupView.KINECT.setButton(btnKinect);
-        SetupView.PROFILE.setButton(btnProfile);
-    }
 
     private void setPaneSetupComponents(SetupView key) {
         key.clearButtonStyle();
         clearPaneSetup();
-        this.paneSetup.getChildren().addAll(MANAGER.getElement(key));
+        this.paneSetup.getChildren().addAll(SETUP_CONTROLLER.getElement(key));
         key.addButtonStyle();
+    }
+
+    private void setPaneSceneComponents(SceneView sceneView) {
+        paneView.getChildren().clear();
+        this.paneView.getChildren().addAll(SCENE_CONTROLLER.getElement(sceneView));
     }
 
     @Override
@@ -137,14 +122,14 @@ public class DefaultController implements SetupController {
 
     private List<Data> getDatasetFromBasicController(DataSource dataSource) {
         List<Data> dataset = new ArrayList<>();
-        MANAGER.getSelectedBasicScenario().forEach(key -> {
+        SETUP_CONTROLLER.getSelectedBasicScenario().forEach(key -> {
             dataset.add(dataSource.getDataSet().get(key));
         });
         return dataset;
     }
 
     private List<Data> getDatasetFromBasicController() {
-        Supplier<Stream<Node>> streamSupplier = () -> MANAGER.getController(SetupView.BASIC).getPaneSetupChildren()
+        Supplier<Stream<Node>> streamSupplier = () -> SETUP_CONTROLLER.getController(SetupView.BASIC).getPaneSceneChildren()
                 .parallelStream();
 
         Node node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst().get();
@@ -154,7 +139,45 @@ public class DefaultController implements SetupController {
         ComboBox<String> comboBox = (ComboBox<String>) node;
         String group = comboBox.getSelectionModel().getSelectedItem();
 
-        return getDatasetFromBasicController(MANAGER.getDataSourceFromGroup(group));
+        return getDatasetFromBasicController(SETUP_CONTROLLER.getDataSourceFromGroup(group));
     }
 
+    private void loadSetupViewFromFXML() {
+        /* create list */
+        ObservableList<Node> elementsSetupPanelBasic = FXCollections.observableArrayList();
+        ObservableList<Node> elementsSetupPanelLayer = FXCollections.observableArrayList();
+        ObservableList<Node> elementsSetupPanelDatabase = FXCollections.observableArrayList();
+        ObservableList<Node> elementsSetupPanelKinect = FXCollections.observableArrayList();
+        ObservableList<Node> elementsSetupPanelProfile = FXCollections.observableArrayList();
+        /* add elements */
+        loadPane(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
+        loadPane(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
+        loadPane(elementsSetupPanelDatabase, Resource.getPaneSetupDatabaseFXML());
+        loadPane(elementsSetupPanelKinect, Resource.getPaneSetupKinectFXML());
+        loadPane(elementsSetupPanelProfile, Resource.getPaneSetupProfileFXML());
+        /* add elements in ManagerSetupController */
+        SETUP_CONTROLLER.addElement(SetupView.BASIC, elementsSetupPanelBasic);
+        SETUP_CONTROLLER.addElement(SetupView.LAYER, elementsSetupPanelLayer);
+        SETUP_CONTROLLER.addElement(SetupView.DATABASE, elementsSetupPanelDatabase);
+        SETUP_CONTROLLER.addElement(SetupView.KINECT, elementsSetupPanelKinect);
+        SETUP_CONTROLLER.addElement(SetupView.PROFILE, elementsSetupPanelProfile);
+        /*Add buttons in SetupView*/
+        SetupView.BASIC.setButton(btnGlobe);
+        SetupView.LAYER.setButton(btnLayer);
+        SetupView.DATABASE.setButton(btnDataBase);
+        SetupView.KINECT.setButton(btnKinect);
+        SetupView.PROFILE.setButton(btnProfile);
+    }
+
+    private void loadSceneViewFromFXML() {
+        /* add elements in ManagerSceneController */
+        ObservableList<Node> elementsScenePanelBasic = FXCollections.observableArrayList();
+        ObservableList<Node> elementsScenePanelLayer = FXCollections.observableArrayList();
+        ObservableList<Node> elementsScenePanelDatabase = FXCollections.observableArrayList();
+        ObservableList<Node> elementsScenePanelKinect = FXCollections.observableArrayList();
+        ObservableList<Node> elementsScenePanelProfile = FXCollections.observableArrayList();
+        /* add elements */
+        loadPane(elementsScenePanelDatabase, Resource.getPaneViewDatabaseFXML());
+        SCENE_CONTROLLER.addElement(SceneView.DATABASE_VIEW, elementsScenePanelDatabase);
+    }
 }

@@ -12,29 +12,25 @@ import java.net.URL;
 public interface SetupController extends Initializable {
     void initPaneSetupEvents();
 
-    ObservableList<Node> getPaneSetupChildren();
+    ObservableList<Node> getPaneSceneChildren();
 
     void update(Object object);
 
-    default boolean addElementsPaneSetup(Node... elements) {
-        return getPaneSetupChildren().addAll(elements);
-    }
-
     default void clearPaneSetup() {
-        getPaneSetupChildren().clear();
+        getPaneSceneChildren().clear();
     }
 
-    default boolean loadPaneSetup(URL location) {
+    default boolean loadPane(URL location) {
         try {
             Parent parent = FXMLLoader.load(location);
-            return getPaneSetupChildren().addAll(parent.getChildrenUnmodifiable());
+            return getPaneSceneChildren().addAll(parent.getChildrenUnmodifiable());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    default boolean loadPaneSetup(ObservableList<Node> elements, URL location) {
+    default boolean loadPane(ObservableList<Node> elements, URL location) {
         try {
             Parent parent = FXMLLoader.load(location);
             ObservableList<Node> parentList = parent.getChildrenUnmodifiable();

@@ -15,7 +15,7 @@ public abstract class ApplicationSetupController implements SetupController {
 	protected abstract Pane getPaneView();
 	
 	@Override
-	public ObservableList<Node> getPaneSetupChildren() {
+	public ObservableList<Node> getPaneSceneChildren() {
 		return getPaneView().getChildren();
 	}
 	

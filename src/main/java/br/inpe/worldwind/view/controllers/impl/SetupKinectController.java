@@ -55,7 +55,7 @@ public class SetupKinectController implements SetupController {
 	}
 
 	@Override
-	public ObservableList<Node> getPaneSetupChildren() {
+	public ObservableList<Node> getPaneSceneChildren() {
 		return this.paneSetup.getChildren();
 	}
 	

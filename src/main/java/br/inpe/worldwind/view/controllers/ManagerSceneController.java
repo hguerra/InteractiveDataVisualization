@@ -29,7 +29,11 @@ public class ManagerSceneController {
     public synchronized ObservableList<Node> addElement(SceneView sceneView, Pane parent) {
         return this.elementsView.put(sceneView, parent.getChildren());
     }
-    
+
+    public synchronized ObservableList<Node> addElement(SceneView sceneView, ObservableList<Node> parent) {
+        return this.elementsView.put(sceneView, parent);
+    }
+
     public synchronized ObservableList<Node> getElement(SceneView sceneView) {
         return this.elementsView.get(sceneView);
     }
