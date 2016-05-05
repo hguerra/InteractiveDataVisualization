@@ -9,7 +9,7 @@ import br.inpe.worldwind.engine.ShapefileProperties;
 import br.inpe.worldwind.view.DataProperty;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 import br.inpe.worldwind.view.impl.ColorPickerGUI;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import javafx.collections.FXCollections;

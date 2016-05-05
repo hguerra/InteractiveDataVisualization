@@ -6,5 +6,5 @@ package br.inpe.worldwind.view;
  */
 public enum ApplicationFXAction {
     LOAD_COMPONENTS,
-    LOAD_LISTENERS;
+    LOAD_LISTENERS
 }

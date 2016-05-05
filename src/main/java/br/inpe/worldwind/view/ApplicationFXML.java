@@ -1,14 +1,12 @@
 package br.inpe.worldwind.view;
 
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.net.URL;
 

@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.SetupController;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 import br.inpe.worldwind.view.impl.ColorPickerGUI;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

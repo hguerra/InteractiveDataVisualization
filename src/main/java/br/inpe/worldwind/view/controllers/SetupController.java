@@ -2,7 +2,6 @@ package br.inpe.worldwind.view.controllers;
 
 import java.net.URL;
 
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +29,7 @@ public interface SetupController extends Initializable {
 			Parent parent = FXMLLoader.load(location);
 			return getPaneSetupChildren().addAll(parent.getChildrenUnmodifiable());
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -42,7 +41,7 @@ public interface SetupController extends Initializable {
 			elements.addAll(parentList);
 			return true;
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 			return false;
 		}
 	}

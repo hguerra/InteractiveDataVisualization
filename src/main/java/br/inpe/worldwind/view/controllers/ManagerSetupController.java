@@ -10,10 +10,6 @@ import javafx.scene.layout.Pane;
 import java.util.*;
 
 public class ManagerSetupController {
-    public enum SetupView {
-        BASIC, LAYER, LAYER_COLOR, DATABASE, KINECT, PROFILE, STYLE_DATA;
-    }
-
     private static ManagerSetupController uniqueInstance;
     private Map<SetupView, ObservableList<Node>> elementsView;
     private Map<SetupView, SetupController> controllers;
@@ -68,6 +64,7 @@ public class ManagerSetupController {
     public synchronized SetupController addController(SetupView view, SetupController controller) {
         return this.controllers.put(view, controller);
     }
+
     public synchronized SetupController getController(SetupView view) {
         return this.controllers.get(view);
     }
@@ -84,16 +81,19 @@ public class ManagerSetupController {
     public Data addData(String name, Data data) {
         return this.dataSourceGroup.addData(name, data);
     }
+
     public Data getData(String name) {
         return this.dataSourceGroup.getData(name);
     }
-    public Data removeData(Data data){
+
+    public Data removeData(Data data) {
         return this.dataSourceGroup.removeData(data);
     }
 
-    public DataSource addDataSource(String group, DataSource dataSource){
+    public DataSource addDataSource(String group, DataSource dataSource) {
         return this.dataSourceGroup.addDataSource(group, dataSource);
     }
+
     /**
      * @param group
      * @return
@@ -114,25 +114,22 @@ public class ManagerSetupController {
     }
 
     /**
-     *
      * @param scenario
      * @return
      */
-    public boolean addBasicScenario(String scenario){
+    public boolean addBasicScenario(String scenario) {
         return this.selectedBasicScenario.add(scenario);
     }
 
     /**
-     *
      * @param scenario
      * @return
      */
-    public boolean removeBasicScenario(String scenario){
+    public boolean removeBasicScenario(String scenario) {
         return this.selectedBasicScenario.remove(scenario);
     }
 
     /**
-     *
      * @return
      */
     public List<String> getSelectedBasicScenario() {

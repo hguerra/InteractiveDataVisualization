@@ -3,7 +3,6 @@ package br.inpe.worldwind.view.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;

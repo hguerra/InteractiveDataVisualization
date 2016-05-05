@@ -4,7 +4,7 @@ import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.worldwind.view.Resource;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 import br.inpe.worldwind.view.controllers.SetupController;
 import br.inpe.worldwind.view.impl.WorldWindView;
 import javafx.collections.FXCollections;
@@ -67,7 +67,7 @@ public class DefaultController implements SetupController {
         initPaneSetup();
         /* add events */
         initPaneSetupEvents();
-		/* set default screen */
+        /* set default screen */
         setPaneSetupComponents(SetupView.BASIC);
     }
 
@@ -82,25 +82,15 @@ public class DefaultController implements SetupController {
             }
         });
 
-        btnGlobe.setOnAction(event -> {
-            setPaneSetupComponents(SetupView.BASIC);
-        });
+        btnGlobe.setOnAction(event -> setPaneSetupComponents(SetupView.BASIC));
 
-        btnLayer.setOnAction(event -> {
-            setPaneSetupComponents(SetupView.LAYER);
-        });
+        btnLayer.setOnAction(event -> setPaneSetupComponents(SetupView.LAYER));
 
-        btnDataBase.setOnAction(event -> {
-            setPaneSetupComponents(SetupView.DATABASE);
-        });
+        btnDataBase.setOnAction(event -> setPaneSetupComponents(SetupView.DATABASE));
 
-        btnKinect.setOnAction(event -> {
-            setPaneSetupComponents(SetupView.KINECT);
-        });
+        btnKinect.setOnAction(event -> setPaneSetupComponents(SetupView.KINECT));
 
-        btnProfile.setOnAction(event -> {
-            setPaneSetupComponents(SetupView.PROFILE);
-        });
+        btnProfile.setOnAction(event -> setPaneSetupComponents(SetupView.PROFILE));
     }
 
     @Override
@@ -109,7 +99,7 @@ public class DefaultController implements SetupController {
     }
 
     private void initPaneSetup() {
-		/* create list */
+        /* create list */
         ObservableList<Node> elementsSetupPanelBasic = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelLayer = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelDatabase = FXCollections.observableArrayList();
@@ -127,11 +117,19 @@ public class DefaultController implements SetupController {
         MANAGER.addElement(SetupView.DATABASE, elementsSetupPanelDatabase);
         MANAGER.addElement(SetupView.KINECT, elementsSetupPanelKinect);
         MANAGER.addElement(SetupView.PROFILE, elementsSetupPanelProfile);
+        /*Add buttons in SetupView*/
+        SetupView.BASIC.setButton(btnGlobe);
+        SetupView.LAYER.setButton(btnLayer);
+        SetupView.DATABASE.setButton(btnDataBase);
+        SetupView.KINECT.setButton(btnKinect);
+        SetupView.PROFILE.setButton(btnProfile);
     }
 
     private void setPaneSetupComponents(SetupView key) {
+        key.clearButtonStyle();
         clearPaneSetup();
         this.paneSetup.getChildren().addAll(MANAGER.getElement(key));
+        key.addButtonStyle();
     }
 
     @Override

@@ -66,29 +66,29 @@
 	-fx-cursor: hand;
 }
 
-/* Button pressed*/
+/* Button selected*/
 
-.btnGlobe:pressed {
+.btnGlobe_selected {
 	-fx-background-image: url("globe40x40-selected.png");
 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnLayer:pressed  {
+.btnLayer_selected  {
 	-fx-background-image: url("layers40x40-selected.png");
 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnDataBase:pressed  {
+.btnDataBase_selected  {
 	-fx-background-image: url("database30x40-selected.png");
 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnKinect:pressed  {
+.btnKinect_selected  {
 	-fx-background-image: url("kinect40x40-selected.png");
 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnProfile:pressed  {
+.btnProfile_selected  {
 	-fx-background-image: url("user40x40-selected.png");
 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }
-.btnStart:pressed  {
+.btnStart:pressed {
 	-fx-background-image:url("start40x40-selected.png");
  	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
 }

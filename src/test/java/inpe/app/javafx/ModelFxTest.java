@@ -1,6 +1,8 @@
 package inpe.app.javafx;
 
 import br.inpe.worldwind.view.ApplicationFX;
+import br.inpe.worldwind.view.controllers.SetupView;
+import com.google.common.collect.Sets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

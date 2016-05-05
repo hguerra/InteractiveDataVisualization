@@ -31,9 +31,9 @@ public class JavaTest {
 		// }
 		
 		 GeoJSONProperties geo = new GeoJSONProperties("attr");
-		
+
 		 List<Layer> layers = new ArrayList<>();
-		
+
 		 // transform all GeoJSONObject in layers
 		 List<GeoJSONObject> geos =
 		 geo.createGeoJSONObjectFromSource(DefaultFilePath.VEGTYPE_2000_GDAL_GEOJSON);
@@ -42,7 +42,7 @@ public class JavaTest {
 		 geo.addGeoJSONGeometryToLayer(g, layer);
 		 layers.add(layer);
 		 });
-		
+
 		 // layers
 		 layers.forEach(l -> {
 		 ShapefileInfo.printEntries(l.getEntries());
