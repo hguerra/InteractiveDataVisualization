@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="373.0" prefHeight="480.0" prefWidth="373.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.controllers.impl.DefaultController">
+<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0"
+            minWidth="373.0" prefHeight="480.0" prefWidth="373.0" stylesheets="@home-css.css"
+            xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.inpe.worldwind.view.controllers.impl.DefaultController">
     <children>
-        <Pane fx:id="paneView" prefHeight="480.0" prefWidth="373.0" styleClass="pane-setup" />
+        <Pane fx:id="paneView" prefHeight="480.0" prefWidth="373.0" styleClass="pane-setup">
+            <children>
+                <Label layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title"
+                       text="Profile:"/>
+                <Label layoutX="9.0" layoutY="162.0" styleClass="pane-options-subtitle" text="Dabase:"/>
+                <Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0"/>
+                <TextField fx:id="txtDatabase" layoutX="77.0" layoutY="160.0" prefHeight="25.0" prefWidth="122.0"/>
+                <Label layoutX="9.0" layoutY="197.0" styleClass="pane-options-subtitle" text="Password:"/>
+                <Button fx:id="btnConnect" layoutX="28.0" layoutY="230.0" mnemonicParsing="false" text="Connect"/>
+                <PasswordField fx:id="pwdDatabase" layoutX="77.0" layoutY="195.0" prefHeight="25.0" prefWidth="122.0"/>
+                <ComboBox fx:id="comboDatabase" layoutX="23.0" layoutY="116.0" prefWidth="150.0" promptText="Database"/>
+                <Label layoutX="8.0" layoutY="38.0" styleClass="pane-options-subtitle" text="Name:"/>
+                <TextField fx:id="txtName" layoutX="53.0" layoutY="36.0" prefHeight="25.0" prefWidth="150.0"/>
+                <PasswordField fx:id="password" layoutX="74.0" layoutY="74.0" prefHeight="25.0" prefWidth="129.0"/>
+                <Label layoutX="9.0" layoutY="78.0" styleClass="pane-options-subtitle" text="Password:"/>
+                <Button fx:id="btnSave" layoutX="27.0" layoutY="427.0" mnemonicParsing="false" text="Save"/>
+                <Button fx:id="btnLoad" layoutX="14.0" layoutY="279.0" mnemonicParsing="false" text="External file"/>
+                <ListView fx:id="listViewScenario" layoutX="14.0" layoutY="344.0" prefHeight="65.0" prefWidth="185.0">
+                    <contextMenu>
+                        <ContextMenu fx:id="contextMenu">
+                            <items>
+                                <MenuItem fx:id="menuItemRemove" mnemonicParsing="false" text="Remove"/>
+                            </items>
+                        </ContextMenu>
+                    </contextMenu>
+                </ListView>
+                <Button fx:id="btnTrash" layoutX="182.0" layoutY="321.0" maxHeight="16.0" maxWidth="16.0"
+                        minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0"
+                        styleClass="btnClearTrash"/>
+            </children>
+        </Pane>
     </children>
 </AnchorPane>

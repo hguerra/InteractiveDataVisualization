@@ -69,6 +69,7 @@ public class DefaultController implements SetupController {
             initPaneSetupEvents();
             /* set default screen */
             setPaneSetupComponents(SetupView.BASIC);
+            setPaneSceneComponents(SceneView.BASIC_VIEW);
         });
     }
 
@@ -83,18 +84,29 @@ public class DefaultController implements SetupController {
             }
         });
 
-        btnGlobe.setOnAction(event -> setPaneSetupComponents(SetupView.BASIC));
+        btnGlobe.setOnAction(event -> {
+            setPaneSetupComponents(SetupView.BASIC);
+            setPaneSceneComponents(SceneView.BASIC_VIEW);
+        });
 
-        btnLayer.setOnAction(event -> setPaneSetupComponents(SetupView.LAYER));
+        btnLayer.setOnAction(event -> {
+            setPaneSetupComponents(SetupView.LAYER);
+            setPaneSceneComponents(SceneView.LAYER_VIEW);
+        });
 
         btnDataBase.setOnAction(event -> {
             setPaneSetupComponents(SetupView.DATABASE);
             setPaneSceneComponents(SceneView.DATABASE_VIEW);
         });
 
-        btnKinect.setOnAction(event -> setPaneSetupComponents(SetupView.KINECT));
+        btnKinect.setOnAction(event -> {
+            setPaneSetupComponents(SetupView.KINECT);
+            setPaneSceneComponents(SceneView.KINECT_VIEW);
+        });
 
-        btnProfile.setOnAction(event -> setPaneSetupComponents(SetupView.PROFILE));
+        btnProfile.setOnAction(event -> {
+            setPaneSetupComponents(SetupView.PROFILE);
+        });
     }
 
 
@@ -170,14 +182,20 @@ public class DefaultController implements SetupController {
     }
 
     private void loadSceneViewFromFXML() {
-        /* add elements in ManagerSceneController */
+        /* create list */
         ObservableList<Node> elementsScenePanelBasic = FXCollections.observableArrayList();
         ObservableList<Node> elementsScenePanelLayer = FXCollections.observableArrayList();
         ObservableList<Node> elementsScenePanelDatabase = FXCollections.observableArrayList();
         ObservableList<Node> elementsScenePanelKinect = FXCollections.observableArrayList();
-        ObservableList<Node> elementsScenePanelProfile = FXCollections.observableArrayList();
         /* add elements */
+        loadPane(elementsScenePanelBasic, Resource.getPaneViewBasicFXML());
+        loadPane(elementsScenePanelLayer, Resource.getPaneViewLayerFXML());
         loadPane(elementsScenePanelDatabase, Resource.getPaneViewDatabaseFXML());
+        loadPane(elementsScenePanelKinect, Resource.getPaneViewKinectFXML());
+        /* add elements in ManagerSceneController */
+        SCENE_CONTROLLER.addElement(SceneView.BASIC_VIEW, elementsScenePanelBasic);
+        SCENE_CONTROLLER.addElement(SceneView.LAYER_VIEW, elementsScenePanelLayer);
         SCENE_CONTROLLER.addElement(SceneView.DATABASE_VIEW, elementsScenePanelDatabase);
+        SCENE_CONTROLLER.addElement(SceneView.KINECT_VIEW, elementsScenePanelKinect);
     }
 }

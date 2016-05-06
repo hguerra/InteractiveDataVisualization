@@ -16,10 +16,10 @@
 		<Pane fx:id="paneSetup" prefHeight="480.0" prefWidth="213.0" styleClass="pane-setup">
 			<children>
 				<Label layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title" text="Layer:" />
-				<Label layoutX="9.0" layoutY="37.0" styleClass="pane-options-subtitle" text="Title:" />
+				<Label layoutX="9.0" layoutY="36.0" styleClass="pane-options-subtitle" text="Title:" />
 				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
-				<Label layoutX="9.0" layoutY="176.0" styleClass="pane-options-subtitle" text="Scenario" />
-				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="208.0" prefHeight="180.0" prefWidth="185.0">
+				<Label layoutX="9.0" layoutY="205.0" styleClass="pane-options-subtitle" text="Scenario" />
+				<ListView fx:id="listViewScenario" layoutX="10.0" layoutY="236.0" prefHeight="199.0" prefWidth="192.0">
 					<contextMenu>
 						<ContextMenu fx:id="contextMenu">
 							<items>
@@ -28,13 +28,13 @@
 						</ContextMenu>
 					</contextMenu>
 				</ListView>
-				<Button fx:id="btnTrash" layoutX="180.0" layoutY="180.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
-				<TextField fx:id="txtTitle" layoutX="41.0" layoutY="35.0" prefHeight="25.0" prefWidth="158.0" />
-				<Label layoutX="9.0" layoutY="66.0" styleClass="pane-options-subtitle" text="Reference:" />
-				<TextArea fx:id="txtReference" layoutX="15.0" layoutY="89.0" prefHeight="40.0" prefWidth="185.0" />
-				<Button fx:id="btnLoad" layoutX="28.0" layoutY="137.0" mnemonicParsing="false" text="Load" />
-            <Button fx:id="btnColor" layoutX="142.0" layoutY="396.0" mnemonicParsing="false" text="Color" />
-            <Button fx:id="btnAddData" layoutX="132.0" layoutY="441.0" mnemonicParsing="false" text="Add Data" />
+				<Button fx:id="btnTrash" layoutX="186.0" layoutY="209.0" maxHeight="16.0" maxWidth="16.0" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="btnClearTrash" />
+				<TextField fx:id="txtTitle" layoutX="10.0" layoutY="61.0" prefHeight="25.0" prefWidth="192.0" />
+				<Label layoutX="9.0" layoutY="96.0" styleClass="pane-options-subtitle" text="Reference:" />
+				<TextArea fx:id="txtReference" layoutX="10.0" layoutY="121.0" prefHeight="37.0" prefWidth="192.0" />
+				<Button fx:id="btnLoad" layoutX="160.0" layoutY="168.0" mnemonicParsing="false" text="Load" />
+            <Button fx:id="btnColor" layoutX="73.0" layoutY="445.0" mnemonicParsing="false" text="Color" />
+            <Button fx:id="btnAddData" layoutX="135.0" layoutY="445.0" mnemonicParsing="false" text="Add Data" />
 			</children>
 		</Pane>
 	</children>

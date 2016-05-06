@@ -48,4 +48,15 @@ public class Resource {
         return getURL("database-view-fxml.fxml");
     }
 
+    public static URL getPaneViewLayerFXML() {
+        return getURL("layer-view-fxml.fxml");
+    }
+
+    public static URL getPaneViewBasicFXML() {
+        return getURL("basic-view-fxml.fxml");
+    }
+
+    public static URL getPaneViewKinectFXML() {
+        return getURL("kinect-view-fxml.fxml");
+    }
 }

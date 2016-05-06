@@ -70,7 +70,7 @@ public class StyleDataController extends ApplicationSetupController {
     public ChoiceBox<ColorBrewerNatureData> comboNature;
 
     @FXML
-    public ComboBox<Integer> comboClasses;
+    private ComboBox<Integer> comboClasses;
     /* actual data */
     private Data data;
 

@@ -10,34 +10,34 @@ import javafx.scene.layout.Pane;
 
 public class SetupDatabaseController extends ApplicationSetupController {
     @FXML
-    public AnchorPane anchorPane;
+    private AnchorPane anchorPane;
 
     @FXML
-    public Pane paneSetup;
+    private Pane paneSetup;
 
     @FXML
-    public Label lblLayerName;
+    private Label lblLayerName;
 
     @FXML
-    public Label lblDatabase;
+    private Label lblDatabase;
 
     @FXML
-    public TextField txtDatabase;
+    private TextField txtDatabase;
 
     @FXML
-    public Label lblPassword;
+    private Label lblPassword;
 
     @FXML
-    public Button btnConnect;
+    private Button btnConnect;
 
     @FXML
-    public PasswordField pwdDatabase;
+    private PasswordField pwdDatabase;
 
     @FXML
-    public ComboBox comboDatabase;
+    private ComboBox comboDatabase;
 
     @FXML
-    public ImageView imgDatabaseStatus;
+    private ImageView imgDatabaseStatus;
 
     @Override
     protected void initPaneSetup() {
