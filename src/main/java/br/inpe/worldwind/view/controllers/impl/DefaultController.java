@@ -46,9 +46,6 @@ public class DefaultController implements SetupController {
     private Button btnStart;
 
     @FXML
-    private Button btnProfile;
-
-    @FXML
     private Button btnDataBase;
 
     /* Pane View */
@@ -103,10 +100,6 @@ public class DefaultController implements SetupController {
             setPaneSetupComponents(SetupView.KINECT);
             setPaneSceneComponents(SceneView.KINECT_VIEW);
         });
-
-        btnProfile.setOnAction(event -> {
-            setPaneSetupComponents(SetupView.PROFILE);
-        });
     }
 
 
@@ -160,25 +153,21 @@ public class DefaultController implements SetupController {
         ObservableList<Node> elementsSetupPanelLayer = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelDatabase = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelKinect = FXCollections.observableArrayList();
-        ObservableList<Node> elementsSetupPanelProfile = FXCollections.observableArrayList();
         /* add elements */
         loadPane(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
         loadPane(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
         loadPane(elementsSetupPanelDatabase, Resource.getPaneSetupDatabaseFXML());
         loadPane(elementsSetupPanelKinect, Resource.getPaneSetupKinectFXML());
-        loadPane(elementsSetupPanelProfile, Resource.getPaneSetupProfileFXML());
         /* add elements in ManagerSetupController */
         SETUP_CONTROLLER.addElement(SetupView.BASIC, elementsSetupPanelBasic);
         SETUP_CONTROLLER.addElement(SetupView.LAYER, elementsSetupPanelLayer);
         SETUP_CONTROLLER.addElement(SetupView.DATABASE, elementsSetupPanelDatabase);
         SETUP_CONTROLLER.addElement(SetupView.KINECT, elementsSetupPanelKinect);
-        SETUP_CONTROLLER.addElement(SetupView.PROFILE, elementsSetupPanelProfile);
         /*Add buttons in SetupView*/
         SetupView.BASIC.setButton(btnGlobe);
         SetupView.LAYER.setButton(btnLayer);
         SetupView.DATABASE.setButton(btnDataBase);
         SetupView.KINECT.setButton(btnKinect);
-        SetupView.PROFILE.setButton(btnProfile);
     }
 
     private void loadSceneViewFromFXML() {

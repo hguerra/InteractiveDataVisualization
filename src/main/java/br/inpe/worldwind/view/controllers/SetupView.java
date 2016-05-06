@@ -90,25 +90,6 @@ public enum SetupView implements PaneStyle {
         }
 
 
-    }, PROFILE {
-        private Button button;
-        private String style = "btnProfile_selected";
-
-        @Override
-        public void setButton(Button btn) {
-            this.button = btn;
-        }
-
-        @Override
-        public void addButtonStyle() {
-            button.getStyleClass().add(style);
-        }
-
-        @Override
-        public void removeButtonStyle() {
-            if (button.getStyleClass().contains(style))
-                button.getStyleClass().remove(style);
-        }
     }, LAYER_COLOR {
         private Button button;
         private String style = "btnLayerColor_selected";
@@ -120,7 +101,7 @@ public enum SetupView implements PaneStyle {
 
         @Override
         public void addButtonStyle() {
-            if(button == null) return;
+            if (button == null) return;
             button.getStyleClass().add(style);
         }
 
@@ -142,7 +123,7 @@ public enum SetupView implements PaneStyle {
 
         @Override
         public void addButtonStyle() {
-            if(button == null) return;
+            if (button == null) return;
             button.getStyleClass().add(style);
         }
 
@@ -153,8 +134,9 @@ public enum SetupView implements PaneStyle {
         }
 
     };
-    public void clearButtonStyle(){
-        for(SetupView view: SetupView.values()){
+
+    public void clearButtonStyle() {
+        for (SetupView view : SetupView.values()) {
             view.removeButtonStyle();
         }
     }

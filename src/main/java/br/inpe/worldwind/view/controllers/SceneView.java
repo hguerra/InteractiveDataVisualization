@@ -5,5 +5,5 @@ package br.inpe.worldwind.view.controllers;
  * @since 05/05/2016
  */
 public enum SceneView {
-    BASIC_VIEW, LAYER_VIEW, DATABASE_VIEW, KINECT_VIEW, PROFILE_VIEW
+    BASIC_VIEW, LAYER_VIEW, DATABASE_VIEW, KINECT_VIEW
 }

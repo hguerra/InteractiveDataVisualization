@@ -32,10 +32,6 @@ public class Resource {
         return getURL("pane-setup-kinect-fxml.fxml");
     }
 
-    public static URL getPaneSetupProfileFXML() {
-        return getURL("pane-setup-profile-fxml.fxml");
-    }
-
     public static URL getColorPickerFXML() {
         return getURL("pane-setup-colorpicker-fxml.fxml");
     }
