@@ -58,16 +58,18 @@ public class DefaultController implements SetupController {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        Platform.runLater(() -> {
+        new Thread(() -> {
+            Platform.runLater(() -> {
             /* Load all panes before */
-            loadSetupViewFromFXML();
-            loadSceneViewFromFXML();
+                loadSetupViewFromFXML();
+                loadSceneViewFromFXML();
             /* add events */
-            initPaneSetupEvents();
+                initPaneSetupEvents();
             /* set default screen */
-            setPaneSetupComponents(SetupView.BASIC);
-            setPaneSceneComponents(SceneView.BASIC_VIEW);
-        });
+                setPaneSetupComponents(SetupView.BASIC);
+                setPaneSceneComponents(SceneView.BASIC_VIEW);
+            });
+        }).start();
     }
 
     @Override

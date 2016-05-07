@@ -55,4 +55,8 @@ public class Resource {
     public static URL getPaneViewKinectFXML() {
         return getURL("kinect-view-fxml.fxml");
     }
+
+    public static String getImageDatabaseStatusConnected() {
+        return "/database-status128x128-connected.png";
+    }
 }

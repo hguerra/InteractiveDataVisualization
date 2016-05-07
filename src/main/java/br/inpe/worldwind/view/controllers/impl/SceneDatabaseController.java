@@ -15,22 +15,25 @@ import javafx.scene.layout.Pane;
  */
 public class SceneDatabaseController extends ApplicationSceneController {
     @FXML
-    public AnchorPane anchorPane;
+    private AnchorPane anchorPane;
 
     @FXML
-    public Pane paneView;
+    private Pane paneView;
 
     @FXML
-    public TextArea txtSQL;
+    private TextArea txtSQL;
 
     @FXML
-    public Button btnExecute;
+    private Button btnExecute;
 
     @FXML
-    public Button btnTrash;
+    private Button btnTrash;
 
     @FXML
-    public TableView tableResult;
+    private TableView tableResult;
+
+    @FXML
+    private Button btnExport;
 
     @Override
     protected void initPaneSetup() {

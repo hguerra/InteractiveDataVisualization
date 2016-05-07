@@ -58,8 +58,6 @@ public class ColorPickerController implements SetupController {
 
 	@Override
 	public void update(Object object) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
