@@ -155,7 +155,7 @@ public class DataAnalysisTest {
         List<Double> values = new ArrayList<>();
         dataFrequency.entrySetIterator().forEachRemaining(e -> values.add(dataFrequency.getPct(e.getKey())));
         Double sum = values.parallelStream().mapToDouble(value -> value).sum();
-        
+
         assertEquals(sum, 1, 0.000000001);
     }
 

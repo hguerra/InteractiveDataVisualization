@@ -24,7 +24,7 @@ public class SceneLayerController extends ApplicationSceneController {
 
     @FXML
     private ComboBox comboOutputFormat;
-
+    
     @Override
     protected void initPaneSetup() {
 
@@ -49,4 +49,5 @@ public class SceneLayerController extends ApplicationSceneController {
     public void update(Object object) {
 
     }
+
 }

@@ -48,7 +48,6 @@ public class SetupBasicController extends ApplicationSetupController {
                 return;
             loadListView(newValue);
         });
-
     }
 
     /**

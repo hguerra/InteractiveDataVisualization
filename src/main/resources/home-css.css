@@ -135,5 +135,23 @@
 .btnClearTrash:pressed {
 	-fx-background-image:url("trash16x16-selected.png");
 	-fx-effect: dropshadow( three-pass-box , rgba(60.0,163.0,128.0) , 5.0, 0.0 , 0.0 , 1.0 );
-	
+}
+/*-----------------------------------------------------*/
+/*-------------------CHART-----------------------------*/
+/*-----------------------------------------------------*/
+/*Setting Colors of a Pie Chart*/
+.chart-title {
+  -fx-text-fill: #ffffff;
+}
+.chart-pie-label-line {
+    -fx-stroke: #ffffff;
+    -fx-fill: #ffffff;
+}
+.chart-pie-label {
+    -fx-fill: #ffffff;
+    -fx-font-size: 1em;
+}
+.chart-legend {
+   -fx-background-color:  #ffffff;
+   -fx-stroke: #ffffff;
 }

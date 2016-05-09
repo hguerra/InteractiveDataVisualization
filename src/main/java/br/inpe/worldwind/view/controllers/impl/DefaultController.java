@@ -1,7 +1,6 @@
 package br.inpe.worldwind.view.controllers.impl;
 
 import br.inpe.triangle.conf.Data;
-import br.inpe.triangle.conf.DataSource;
 import br.inpe.worldwind.view.Resource;
 import br.inpe.worldwind.view.controllers.*;
 import br.inpe.worldwind.view.impl.WorldWindView;
@@ -11,16 +10,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class DefaultController implements SetupController {
     private final static ManagerSetupController SETUP_CONTROLLER = ManagerSetupController.getInstance();
@@ -75,7 +70,7 @@ public class DefaultController implements SetupController {
     @Override
     public void initPaneSetupEvents() {
         btnStart.setOnAction(event -> {
-            List<Data> dataset = getDatasetFromBasicController();
+            List<Data> dataset = SETUP_CONTROLLER.getDatasetFromBasicController();
             try {
                 WorldWindView.run(dataset);
             } catch (Exception e) {
@@ -125,28 +120,6 @@ public class DefaultController implements SetupController {
 
     @Override
     public void update(Object object) {
-    }
-
-    private List<Data> getDatasetFromBasicController(DataSource dataSource) {
-        List<Data> dataset = new ArrayList<>();
-        SETUP_CONTROLLER.getSelectedBasicScenario().forEach(key -> {
-            dataset.add(dataSource.getDataSet().get(key));
-        });
-        return dataset;
-    }
-
-    private List<Data> getDatasetFromBasicController() {
-        Supplier<Stream<Node>> streamSupplier = () -> SETUP_CONTROLLER.getController(SetupView.BASIC).getPaneSceneChildren()
-                .parallelStream();
-
-        Node node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst().get();
-        if (node == null)
-            return null;
-        @SuppressWarnings("unchecked")
-        ComboBox<String> comboBox = (ComboBox<String>) node;
-        String group = comboBox.getSelectionModel().getSelectedItem();
-
-        return getDatasetFromBasicController(SETUP_CONTROLLER.getDataSourceFromGroup(group));
     }
 
     private void loadSetupViewFromFXML() {

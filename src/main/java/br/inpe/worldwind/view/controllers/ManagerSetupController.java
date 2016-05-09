@@ -5,9 +5,12 @@ import br.inpe.triangle.conf.DataSource;
 import br.inpe.triangle.conf.DataSourceGroup;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 
 import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ManagerSetupController {
     private static ManagerSetupController uniqueInstance;
@@ -130,9 +133,33 @@ public class ManagerSetupController {
     }
 
     /**
-     * @return
+     * @return items from basic scenario
      */
     public List<String> getSelectedBasicScenario() {
         return Collections.unmodifiableList(selectedBasicScenario);
+    }
+
+    public List<Data> getDatasetFromBasicController(DataSource dataSource) {
+        List<Data> dataset = new ArrayList<>();
+            getSelectedBasicScenario().forEach(key -> {
+            dataset.add(dataSource.getDataSet().get(key));
+        });
+        return dataset;
+    }
+
+    public List<Data> getDatasetFromBasicController() {
+        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.BASIC).getPaneSceneChildren()
+                .parallelStream();
+
+        Optional<Node> node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst();
+
+        if(!node.isPresent())
+            return null;
+
+        @SuppressWarnings("unchecked")
+        ComboBox<String> comboBox = (ComboBox<String>) node.get();
+        String group = comboBox.getSelectionModel().getSelectedItem();
+
+        return getDatasetFromBasicController(getDataSourceFromGroup(group));
     }
 }
