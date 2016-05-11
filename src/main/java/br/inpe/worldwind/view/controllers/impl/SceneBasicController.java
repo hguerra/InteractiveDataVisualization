@@ -22,7 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.apache.commons.math3.stat.Frequency;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +36,10 @@ import java.util.stream.Stream;
  */
 public class SceneBasicController extends ApplicationSceneController {
     private final static ManagerSetupController SETUP_CONTROLLER = ManagerSetupController.getInstance();
+    private static final double PIE_CHART_SIZE_WIDTH = 350;
+    private static final double PIE_CHART_SIZE_HEIGHT = 350;
+    private static final double BAR_CHART_SIZE_WIDTH = 340;
+    private static final double BAR_CHART__SIZE_HEIGHT = 340;
     @FXML
     private AnchorPane anchorPane;
 
@@ -156,7 +160,7 @@ public class SceneBasicController extends ApplicationSceneController {
                 barChartBuilder.withTitle("Temporal Analysis");
                 barChartBuilder.withLabel("Attribute", "Percentage");
                 barChartBuilder.withLayout(0, 120);
-                barChartBuilder.withPrefSize(340, 340);
+                barChartBuilder.withPrefSize(BAR_CHART_SIZE_WIDTH, BAR_CHART__SIZE_HEIGHT);
                 return barChartBuilder;
             }
         };
@@ -180,7 +184,7 @@ public class SceneBasicController extends ApplicationSceneController {
 
                 pieChartBuilder.withTitle(data.getTitle());
 
-                pieChartBuilder.withPrefSize(350, 350);
+                pieChartBuilder.withPrefSize(PIE_CHART_SIZE_WIDTH, PIE_CHART_SIZE_HEIGHT);
 
                 return pieChartBuilder;
             }
