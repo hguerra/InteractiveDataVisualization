@@ -10,13 +10,13 @@ import javafx.scene.chart.PieChart;
  * @since 09/05/2016
  */
 public class PieChartBuilder implements ChartBuilder {
-    private ObservableList<PieChart.Data> pieChartData;
-    private String[] colorSequence;
     private String title;
     private double prefWidth = 400;
     private double prefHeight = 400;
     private double layoutX = 10;
     private double layoutY = 100;
+    private String[] colorSequence;
+    private ObservableList<PieChart.Data> pieChartData;
 
     public PieChartBuilder() {
         this.pieChartData = FXCollections.observableArrayList();

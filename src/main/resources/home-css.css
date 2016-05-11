@@ -139,10 +139,23 @@
 /*-----------------------------------------------------*/
 /*-------------------CHART-----------------------------*/
 /*-----------------------------------------------------*/
-/*Setting Colors of a Pie Chart*/
 .chart-title {
   -fx-text-fill: #ffffff;
 }
+.chart-legend {
+   -fx-background-color:  #ffffff;
+   -fx-stroke: #ffffff;
+}
+.axis-label {
+  -fx-text-fill: #ffffff;
+}
+.axis {
+    -fx-font-size: 1.4em;
+    -fx-tick-label-fill: #ffffff;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 10;
+}
+/*Setting Colors of a Pie Chart*/
 .chart-pie-label-line {
     -fx-stroke: #ffffff;
     -fx-fill: #ffffff;
@@ -150,8 +163,4 @@
 .chart-pie-label {
     -fx-fill: #ffffff;
     -fx-font-size: 1em;
-}
-.chart-legend {
-   -fx-background-color:  #ffffff;
-   -fx-stroke: #ffffff;
 }

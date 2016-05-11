@@ -3,25 +3,30 @@ package br.inpe.worldwind.view.controllers.impl;
 import br.inpe.triangle.conf.Data;
 import br.inpe.worldwind.engine.DataAnalysis;
 import br.inpe.worldwind.engine.SimpleDataAnalysis;
+import br.inpe.worldwind.view.BarChartBuilder;
 import br.inpe.worldwind.view.DataFrequencyTask;
 import br.inpe.worldwind.view.PieChartBuilder;
 import br.inpe.worldwind.view.controllers.ApplicationSceneController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.SceneView;
+import com.google.common.base.Splitter;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.chart.Chart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.math3.stat.Frequency;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
@@ -85,10 +90,13 @@ public class SceneBasicController extends ApplicationSceneController {
         progress.progressProperty().bind(task.progressProperty());
         task.setOnScheduled(scheduled -> paneView.getChildren().add(progress));
         task.setOnSucceeded(succeeded -> {
+            if (paneView.getChildren().contains(chart)) {
+                paneView.getChildren().remove(chart);
+            }
             this.chart = createChart();
-            if (chart != null)
+            if (chart != null) {
                 this.paneView.getChildren().add(chart);
-            else
+            } else
                 JOptionPane.showMessageDialog(null, "Error to create chart", "ERROR IN CHART", JOptionPane.ERROR_MESSAGE);
             this.paneView.getChildren().remove(progress);
         });
@@ -109,8 +117,9 @@ public class SceneBasicController extends ApplicationSceneController {
     }
 
     private Chart createChart() {
+        Stream<Map.Entry<Data, Frequency>> dataFrequencyStream = dataFrequencyMap.entrySet().parallelStream();
         if (dataFrequencyMap.size() == 1) {
-            Optional<Map.Entry<Data, Frequency>> firstFrequency = dataFrequencyMap.entrySet().parallelStream().findAny();
+            Optional<Map.Entry<Data, Frequency>> firstFrequency = dataFrequencyStream.findAny();
 
             if (!firstFrequency.isPresent())
                 return null;
@@ -123,7 +132,40 @@ public class SceneBasicController extends ApplicationSceneController {
     }
 
     private Chart createBarChart() {
-        return null;
+        Task<BarChartBuilder> barChartBuilderTask = new Task<BarChartBuilder>() {
+            @Override
+            protected BarChartBuilder call() throws Exception {
+                BarChartBuilder barChartBuilder = new BarChartBuilder();
+
+                dataFrequencyMap.forEach((data, frequency) -> {
+                    List<String> datasetGroupIterator = Splitter.on("_")
+                            .trimResults()
+                            .omitEmptyStrings()
+                            .splitToList(data.getTitle());
+
+                    Frequency dataFrequency = dataFrequencyMap.get(data);
+
+                    dataFrequency.entrySetIterator().forEachRemaining(entry -> {
+                        String title = datasetGroupIterator.size() >= 2 ? datasetGroupIterator.get(1) : data.getTitle();
+                        barChartBuilder.withData(title,
+                                new XYChart.Data<>(entry.getKey().toString(),
+                                        dataFrequency.getPct(entry.getKey()) * 100));
+                    });
+
+                });
+                barChartBuilder.withTitle("Temporal Analysis");
+                barChartBuilder.withLabel("Attribute", "Percentage");
+                barChartBuilder.withLayout(0, 120);
+                barChartBuilder.withPrefSize(340, 340);
+                return barChartBuilder;
+            }
+        };
+        new Thread(barChartBuilderTask).start();
+        try {
+            return barChartBuilderTask.get().getChart();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private Chart createPieChart(Data data) {
