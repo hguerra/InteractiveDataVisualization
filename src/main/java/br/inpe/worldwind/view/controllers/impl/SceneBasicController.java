@@ -157,7 +157,7 @@ public class SceneBasicController extends ApplicationSceneController {
                     });
 
                 });
-                barChartBuilder.withTitle("Temporal Analysis");
+                barChartBuilder.withTitle("Temporal Chart");
                 barChartBuilder.withLabel("Attribute", "Percentage");
                 barChartBuilder.withLayout(0, 120);
                 barChartBuilder.withPrefSize(BAR_CHART_SIZE_WIDTH, BAR_CHART__SIZE_HEIGHT);

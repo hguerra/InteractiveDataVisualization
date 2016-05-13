@@ -27,4 +27,9 @@ public class StyleData extends ApplicationFXML {
 	protected boolean exitOnCloseRequest() {
 		return false;
 	}
+
+	@Override
+	protected boolean getResizable() {
+		return false;
+	}
 }

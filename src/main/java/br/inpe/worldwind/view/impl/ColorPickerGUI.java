@@ -27,4 +27,9 @@ public class ColorPickerGUI extends ApplicationFXML {
 		return false;
 	}
 
+	@Override
+	protected boolean getResizable() {
+		return false;
+	}
+
 }
