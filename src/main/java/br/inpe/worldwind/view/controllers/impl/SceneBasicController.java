@@ -12,6 +12,7 @@ import br.inpe.worldwind.view.controllers.SceneView;
 import com.google.common.base.Splitter;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.Chart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -105,7 +106,11 @@ public class SceneBasicController extends ApplicationSceneController {
                 return;
             }
 
-            Chart saveChart = new PieChartBuilder().clone((PieChart) chart);
+            Chart saveChart;
+            if (dataFrequencyMap.size() == 1)
+                saveChart = new PieChartBuilder().clone((PieChart) chart);
+            else
+                saveChart = new BarChartBuilder().clone((BarChart<String, Number>) chart);
             SETUP_CONTROLLER.saveNodeAsImage(saveChart, file);
         });
 

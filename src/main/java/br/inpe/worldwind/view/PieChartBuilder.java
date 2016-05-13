@@ -66,19 +66,14 @@ public class PieChartBuilder implements ChartBuilder {
     }
 
     public Chart clone(PieChart chart) {
-        ObservableList<PieChart.Data> clonePieData = chart.getData()
-                .parallelStream()
-                .map(data -> new PieChart.Data(data.getName(), data.getPieValue()))
-                .collect(Collectors.collectingAndThen(Collectors.toList(), FXCollections::observableArrayList));
+        withTitle(chart.getTitle());
+        withPrefSize(chart.getPrefWidth(), chart.getPrefHeight());
+        withLayout(chart.getLayoutX(), chart.getLayoutY());
 
-        PieChart cloneChart = new PieChart(clonePieData);
-        cloneChart.setTitle(chart.getTitle());
-        cloneChart.setPrefSize(chart.getPrefWidth(), chart.getPrefHeight());
-        cloneChart.setLayoutX(chart.getLayoutX());
-        cloneChart.setLayoutY(chart.getLayoutY());
-        if (colorSequence != null)
-            applyCustomColorSequence(clonePieData, colorSequence);
-        return cloneChart;
+        chart.getData().forEach(data -> {
+            withData(new PieChart.Data(data.getName(), data.getPieValue()));
+        });
+        return getChart();
     }
 
 }

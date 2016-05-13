@@ -7,6 +7,7 @@ import javafx.scene.chart.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * @author Heitor
  * @since 09/05/2016
@@ -73,5 +74,19 @@ public class BarChartBuilder implements ChartBuilder {
             barChart.getData().add(serie);
         });
         return barChart;
+    }
+
+    public Chart clone(BarChart<String, Number> barChart) {
+        withLabel(barChart.getXAxis().getLabel(), barChart.getYAxis().getLabel());
+        withTitle(barChart.getTitle());
+        withLayout(barChart.getLayoutX(), barChart.getLayoutY());
+        withPrefSize(barChart.getPrefWidth(), barChart.getPrefHeight());
+
+        barChart.getData().forEach(series -> {
+            series.getData().forEach(xyChart -> {
+                withData(series.getName(), new XYChart.Data<>(xyChart.getXValue(), (double) xyChart.getYValue() * 100));
+            });
+        });
+        return getChart();
     }
 }
