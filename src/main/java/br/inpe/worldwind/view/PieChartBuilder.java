@@ -5,6 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.Chart;
 import javafx.scene.chart.PieChart;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 /**
  * @author Heitor
  * @since 09/05/2016
@@ -60,4 +64,21 @@ public class PieChartBuilder implements ChartBuilder {
             applyCustomColorSequence(pieChartData, colorSequence);
         return chart;
     }
+
+    public Chart clone(PieChart chart) {
+        ObservableList<PieChart.Data> clonePieData = chart.getData()
+                .parallelStream()
+                .map(data -> new PieChart.Data(data.getName(), data.getPieValue()))
+                .collect(Collectors.collectingAndThen(Collectors.toList(), FXCollections::observableArrayList));
+
+        PieChart cloneChart = new PieChart(clonePieData);
+        cloneChart.setTitle(chart.getTitle());
+        cloneChart.setPrefSize(chart.getPrefWidth(), chart.getPrefHeight());
+        cloneChart.setLayoutX(chart.getLayoutX());
+        cloneChart.setLayoutY(chart.getLayoutY());
+        if (colorSequence != null)
+            applyCustomColorSequence(clonePieData, colorSequence);
+        return cloneChart;
+    }
+
 }

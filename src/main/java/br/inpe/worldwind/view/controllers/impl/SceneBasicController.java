@@ -20,14 +20,14 @@ import javafx.scene.control.Control;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import org.apache.commons.math3.stat.Frequency;
 
-import javax.swing.JOptionPane;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.swing.*;
+import java.io.File;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -40,6 +40,7 @@ public class SceneBasicController extends ApplicationSceneController {
     private static final double PIE_CHART_SIZE_HEIGHT = 350;
     private static final double BAR_CHART_SIZE_WIDTH = 340;
     private static final double BAR_CHART__SIZE_HEIGHT = 340;
+
     @FXML
     private AnchorPane anchorPane;
 
@@ -48,6 +49,9 @@ public class SceneBasicController extends ApplicationSceneController {
 
     @FXML
     private Button btnAnalyse;
+
+    @FXML
+    private Button btnSaveAsImage;
 
     private Chart chart;
 
@@ -83,6 +87,26 @@ public class SceneBasicController extends ApplicationSceneController {
             new Thread(task).start();
 
             this.dataFrequencyMap = task.getDataFrequencyMap();
+        });
+
+        btnSaveAsImage.setOnAction(event -> {
+            if (chart == null) {
+                JOptionPane.showMessageDialog(null, "Create a chart first", "Chart warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PNG (*.png)", "*.png");
+            fileChooser.getExtensionFilters().add(extFilter);
+            File file = fileChooser.showSaveDialog(null);
+
+            if (file == null) {
+                JOptionPane.showMessageDialog(null, "Select the file path", "Chart warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Chart saveChart = new PieChartBuilder().clone((PieChart) chart);
+            SETUP_CONTROLLER.saveNodeAsImage(saveChart, file);
         });
 
     }
@@ -181,9 +205,8 @@ public class SceneBasicController extends ApplicationSceneController {
 
                 dataFrequency.entrySetIterator().forEachRemaining(data -> pieChartBuilder
                         .withData(new PieChart.Data(data.getKey().toString(), dataFrequency.getPct(data.getKey()) * 100)));
-
                 pieChartBuilder.withTitle(data.getTitle());
-
+                pieChartBuilder.withLayout(10, 110);
                 pieChartBuilder.withPrefSize(PIE_CHART_SIZE_WIDTH, PIE_CHART_SIZE_HEIGHT);
 
                 return pieChartBuilder;

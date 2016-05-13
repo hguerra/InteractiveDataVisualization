@@ -4,10 +4,18 @@ import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.triangle.conf.DataSourceGroup;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -161,5 +169,17 @@ public class ManagerSetupController {
         String group = comboBox.getSelectionModel().getSelectedItem();
 
         return getDatasetFromBasicController(getDataSourceFromGroup(group));
+    }
+
+    public void saveNodeAsImage(Node node, File file){
+        AnchorPane pane = new AnchorPane();
+        pane.getChildren().add(node);
+        Scene scene = new Scene(pane);
+        WritableImage image = scene.snapshot(null);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error to export chart", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
