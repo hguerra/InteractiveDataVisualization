@@ -4,7 +4,6 @@ import br.inpe.triangle.conf.Data;
 import br.inpe.worldwind.view.Resource;
 import br.inpe.worldwind.view.controllers.*;
 import br.inpe.worldwind.view.impl.WorldWindView;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,9 +38,6 @@ public class DefaultController implements SetupController {
 
     @FXML
     private Button btnStart;
-
-    @FXML
-    private Button btnDataBase;
 
     /* Pane View */
     @FXML
@@ -84,11 +80,6 @@ public class DefaultController implements SetupController {
             setPaneSceneComponents(SceneView.LAYER_VIEW);
         });
 
-        btnDataBase.setOnAction(event -> {
-            setPaneSetupComponents(SetupView.DATABASE);
-            setPaneSceneComponents(SceneView.DATABASE_VIEW);
-        });
-
         btnKinect.setOnAction(event -> {
             setPaneSetupComponents(SetupView.KINECT);
             setPaneSceneComponents(SceneView.KINECT_VIEW);
@@ -122,22 +113,18 @@ public class DefaultController implements SetupController {
         /* create list */
         ObservableList<Node> elementsSetupPanelBasic = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelLayer = FXCollections.observableArrayList();
-        ObservableList<Node> elementsSetupPanelDatabase = FXCollections.observableArrayList();
         ObservableList<Node> elementsSetupPanelKinect = FXCollections.observableArrayList();
         /* add elements */
         loadPane(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
         loadPane(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
-        loadPane(elementsSetupPanelDatabase, Resource.getPaneSetupDatabaseFXML());
         loadPane(elementsSetupPanelKinect, Resource.getPaneSetupKinectFXML());
         /* add elements in ManagerSetupController */
         SETUP_CONTROLLER.addElement(SetupView.BASIC, elementsSetupPanelBasic);
         SETUP_CONTROLLER.addElement(SetupView.LAYER, elementsSetupPanelLayer);
-        SETUP_CONTROLLER.addElement(SetupView.DATABASE, elementsSetupPanelDatabase);
         SETUP_CONTROLLER.addElement(SetupView.KINECT, elementsSetupPanelKinect);
         /*Add buttons in SetupView*/
         SetupView.BASIC.setButton(btnGlobe);
         SetupView.LAYER.setButton(btnLayer);
-        SetupView.DATABASE.setButton(btnDataBase);
         SetupView.KINECT.setButton(btnKinect);
     }
 
@@ -145,17 +132,14 @@ public class DefaultController implements SetupController {
         /* create list */
         ObservableList<Node> elementsScenePanelBasic = FXCollections.observableArrayList();
         ObservableList<Node> elementsScenePanelLayer = FXCollections.observableArrayList();
-        ObservableList<Node> elementsScenePanelDatabase = FXCollections.observableArrayList();
         ObservableList<Node> elementsScenePanelKinect = FXCollections.observableArrayList();
         /* add elements */
         loadPane(elementsScenePanelBasic, Resource.getPaneViewBasicFXML());
         loadPane(elementsScenePanelLayer, Resource.getPaneViewLayerFXML());
-        loadPane(elementsScenePanelDatabase, Resource.getPaneViewDatabaseFXML());
         loadPane(elementsScenePanelKinect, Resource.getPaneViewKinectFXML());
         /* add elements in ManagerSceneController */
         SCENE_CONTROLLER.addElement(SceneView.BASIC_VIEW, elementsScenePanelBasic);
         SCENE_CONTROLLER.addElement(SceneView.LAYER_VIEW, elementsScenePanelLayer);
-        SCENE_CONTROLLER.addElement(SceneView.DATABASE_VIEW, elementsScenePanelDatabase);
         SCENE_CONTROLLER.addElement(SceneView.KINECT_VIEW, elementsScenePanelKinect);
     }
 }

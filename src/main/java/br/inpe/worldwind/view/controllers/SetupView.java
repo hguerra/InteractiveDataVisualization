@@ -59,12 +59,13 @@ public enum SetupView implements PaneStyle {
 
         @Override
         public void addButtonStyle() {
+            if (button == null) return;
             button.getStyleClass().add(style);
         }
 
         @Override
         public void removeButtonStyle() {
-            if (button.getStyleClass().contains(style))
+            if (button != null && button.getStyleClass().contains(style))
                 button.getStyleClass().remove(style);
         }
 

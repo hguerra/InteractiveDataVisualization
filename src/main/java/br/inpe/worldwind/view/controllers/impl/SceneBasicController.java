@@ -28,7 +28,6 @@ import javax.swing.*;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -40,7 +39,9 @@ public class SceneBasicController extends ApplicationSceneController {
     private static final double PIE_CHART_SIZE_WIDTH = 350;
     private static final double PIE_CHART_SIZE_HEIGHT = 350;
     private static final double BAR_CHART_SIZE_WIDTH = 340;
-    private static final double BAR_CHART__SIZE_HEIGHT = 340;
+    private static final double BAR_CHART_SIZE_HEIGHT = 340;
+    private static final double IMAGE_SIZE_WIDTH = 600;
+    private static final double IMAGE_SIZE_HEIGHT = 600;
 
     @FXML
     private AnchorPane anchorPane;
@@ -107,10 +108,17 @@ public class SceneBasicController extends ApplicationSceneController {
             }
 
             Chart saveChart;
-            if (dataFrequencyMap.size() == 1)
-                saveChart = new PieChartBuilder().clone((PieChart) chart);
-            else
-                saveChart = new BarChartBuilder().clone((BarChart<String, Number>) chart);
+            if (dataFrequencyMap.size() == 1) {
+                PieChartBuilder pieChartBuilder = new PieChartBuilder();
+                pieChartBuilder.clone((PieChart) chart);
+                pieChartBuilder.withPrefSize(IMAGE_SIZE_WIDTH, IMAGE_SIZE_HEIGHT);
+                saveChart = pieChartBuilder.getChart();
+            } else {
+                BarChartBuilder barChartBuilder = new BarChartBuilder();
+                barChartBuilder.clone((BarChart<String, Number>) chart);
+                barChartBuilder.withPrefSize(IMAGE_SIZE_WIDTH, IMAGE_SIZE_HEIGHT);
+                saveChart = barChartBuilder.getChart();
+            }
             SETUP_CONTROLLER.saveNodeAsImage(saveChart, file);
         });
 
@@ -189,7 +197,7 @@ public class SceneBasicController extends ApplicationSceneController {
                 barChartBuilder.withTitle("Temporal Chart");
                 barChartBuilder.withLabel("Attribute", "Percentage");
                 barChartBuilder.withLayout(0, 120);
-                barChartBuilder.withPrefSize(BAR_CHART_SIZE_WIDTH, BAR_CHART__SIZE_HEIGHT);
+                barChartBuilder.withPrefSize(BAR_CHART_SIZE_WIDTH, BAR_CHART_SIZE_HEIGHT);
                 return barChartBuilder;
             }
         };
