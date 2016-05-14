@@ -5,17 +5,22 @@ import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.view.ApplicationFXAction;
+import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
-import br.inpe.worldwind.view.controllers.SetupView;
 import br.inpe.worldwind.view.controllers.SetupController;
+import br.inpe.worldwind.view.controllers.SetupView;
 import br.inpe.worldwind.view.impl.StyleData;
 import com.google.common.base.Splitter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -23,10 +28,9 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.File;
-import java.net.URL;
-import java.util.*;
+import java.util.List;
 
-public class SetupLayerController implements SetupController {
+public class SetupLayerController extends ApplicationSetupController {
     private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
 
     @FXML
@@ -64,12 +68,11 @@ public class SetupLayerController implements SetupController {
 
     private ObservableList<String> listOfView = FXCollections.observableArrayList();
 
-
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        initPaneSetupEvents();
-        addSetupView(SetupView.LAYER, anchorPane);
+    protected void initPaneSetup() {
+
     }
+
 
     @Override
     public void initPaneSetupEvents() {
@@ -197,12 +200,23 @@ public class SetupLayerController implements SetupController {
 
 
     @Override
-    public ObservableList<Node> getPaneSceneChildren() {
-        return this.paneSetup.getChildren();
+    protected SetupView getSetupView() {
+        return SetupView.LAYER;
+    }
+
+    @Override
+    protected Pane getPaneView() {
+        return paneSetup;
+    }
+
+    ListView<String> getListViewScenario() {
+        return listViewScenario;
     }
 
     @Override
     public void update(Object object) {
 
     }
+
+
 }

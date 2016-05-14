@@ -8,6 +8,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -155,9 +156,9 @@ public class ManagerSetupController {
         return dataset;
     }
 
+
     public List<Data> getDatasetFromBasicController() {
-        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.BASIC).getPaneSceneChildren()
-                .parallelStream();
+        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.BASIC).getPaneSceneChildren().parallelStream();
 
         Optional<Node> node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst();
 
@@ -169,6 +170,22 @@ public class ManagerSetupController {
         String group = comboBox.getSelectionModel().getSelectedItem();
 
         return getDatasetFromBasicController(getDataSourceFromGroup(group));
+    }
+
+
+
+    public Data getSelectedDataFromLayerController(){
+        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.LAYER).getPaneSceneChildren().parallelStream();
+
+
+        System.out.println(streamSupplier.get());
+
+//        if(!node.isPresent())
+//            return null;
+//
+//        System.out.println(node.get());
+
+        return null;
     }
 
     public void saveNodeAsImage(Node node, File file){
