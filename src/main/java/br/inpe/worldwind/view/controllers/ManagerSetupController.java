@@ -3,25 +3,29 @@ package br.inpe.worldwind.view.controllers;
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
 import br.inpe.triangle.conf.DataSourceGroup;
-import gov.nasa.worldwind.layers.Layer;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ManagerSetupController {
-    public enum SetupView {
-        BASIC, LAYER, LAYER_ATTRIBUTES, LAYER_COLOR, DATABASE, KINECT, PROFILE, STYLE_DATA;
-    }
-
-    /* Javafx */
     private static ManagerSetupController uniqueInstance;
     private Map<SetupView, ObservableList<Node>> elementsView;
     private Map<SetupView, SetupController> controllers;
     private List<String> selectedBasicScenario;
-    /* DataSource Group */
     private DataSourceGroup dataSourceGroup;
 
     private ManagerSetupController() {
@@ -58,10 +62,6 @@ public class ManagerSetupController {
         return this.elementsView.put(setup, parent);
     }
 
-    public synchronized ObservableList<Node> removeElement(SetupView setup) {
-        return this.elementsView.remove(setup);
-    }
-
     public synchronized ObservableList<Node> getElement(SetupView key) {
         return this.elementsView.get(key);
     }
@@ -77,43 +77,9 @@ public class ManagerSetupController {
         return this.controllers.put(view, controller);
     }
 
-    public synchronized SetupController removeController(SetupView view) {
-        return this.controllers.remove(view);
-    }
-
     public synchronized SetupController getController(SetupView view) {
         return this.controllers.get(view);
     }
-
-    /**
-     * Color
-     * <p>
-     * TODO refactor this using datasource
-     */
-    private Map<String, Color[]> attributesColor = new HashMap<>();
-
-    public Color[] addAttributesColor(String attrName, Color... color) {
-        return attributesColor.put(attrName, color);
-    }
-
-    public Color[] removeAttributesColor(String attrName) {
-        return attributesColor.remove(attrName);
-    }
-
-    public Map<String, Color[]> getAttributesColor() {
-        return attributesColor;
-    }
-
-    public Color[] getColors(String attrName) {
-        return attributesColor.get(attrName);
-    }
-
-    /**
-     * ColorBrewer
-     *
-     * @return
-     */
-
     /**
      * Data Source
      */
@@ -128,51 +94,17 @@ public class ManagerSetupController {
         return this.dataSourceGroup.addData(name, data);
     }
 
-    /**
-     * remove Data from memory
-     *
-     * @param name
-     * @return
-     */
-    public Data removeData(String name) {
-        return this.dataSourceGroup.removeData(name);
-    }
-
     public Data getData(String name) {
         return this.dataSourceGroup.getData(name);
     }
 
-    /**
-     * Get specific list of layers
-     *
-     * @param title
-     * @return
-     */
-    public List<Layer> getLayerFromDataSource(String title) {
-        return this.dataSourceGroup.getLayersFromDataSource().get(title);
+    public Data removeData(Data data) {
+        return this.dataSourceGroup.removeData(data);
     }
 
-    /**
-     * Get all layers in memory
-     *
-     * @return
-     */
-    public Map<String, List<Layer>> getLayersFromDataSource() {
-        return this.dataSourceGroup.getLayersFromDataSource();
+    public DataSource addDataSource(String group, DataSource dataSource) {
+        return this.dataSourceGroup.addDataSource(group, dataSource);
     }
-
-    /**
-     * Get Layer Title from DataSource
-     *
-     * @return
-     */
-    public ObservableList<String> getTitleFromDataSource() {
-        return this.dataSourceGroup.getTitleFromDataSource();
-    }
-
-    /**
-     * DefaultData
-     */
 
     /**
      * @param group
@@ -194,28 +126,77 @@ public class ManagerSetupController {
     }
 
     /**
-     *
      * @param scenario
      * @return
      */
-    public boolean addBasicScenario(String scenario){
+    public boolean addBasicScenario(String scenario) {
         return this.selectedBasicScenario.add(scenario);
     }
 
     /**
-     *
      * @param scenario
      * @return
      */
-    public boolean removeBasicScenario(String scenario){
+    public boolean removeBasicScenario(String scenario) {
         return this.selectedBasicScenario.remove(scenario);
     }
 
     /**
-     *
-     * @return
+     * @return items from basic scenario
      */
     public List<String> getSelectedBasicScenario() {
         return Collections.unmodifiableList(selectedBasicScenario);
+    }
+
+    public List<Data> getDatasetFromBasicController(DataSource dataSource) {
+        List<Data> dataset = new ArrayList<>();
+            getSelectedBasicScenario().forEach(key -> {
+            dataset.add(dataSource.getDataSet().get(key));
+        });
+        return dataset;
+    }
+
+
+    public List<Data> getDatasetFromBasicController() {
+        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.BASIC).getPaneSceneChildren().parallelStream();
+
+        Optional<Node> node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst();
+
+        if(!node.isPresent())
+            return null;
+
+        @SuppressWarnings("unchecked")
+        ComboBox<String> comboBox = (ComboBox<String>) node.get();
+        String group = comboBox.getSelectionModel().getSelectedItem();
+
+        return getDatasetFromBasicController(getDataSourceFromGroup(group));
+    }
+
+
+
+    public Data getSelectedDataFromLayerController(){
+        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.LAYER).getPaneSceneChildren().parallelStream();
+
+
+        System.out.println(streamSupplier.get());
+
+//        if(!node.isPresent())
+//            return null;
+//
+//        System.out.println(node.get());
+
+        return null;
+    }
+
+    public void saveNodeAsImage(Node node, File file){
+        AnchorPane pane = new AnchorPane();
+        pane.getChildren().add(node);
+        Scene scene = new Scene(pane);
+        WritableImage image = scene.snapshot(null);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, ex, "Error to export chart", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

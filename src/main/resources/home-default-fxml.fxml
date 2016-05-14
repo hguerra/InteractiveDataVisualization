@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.controllers.impl.DefaultController">
+
+<AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="480.0" maxWidth="640.0" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.controllers.impl.DefaultController">
 	<children>
-		<Separator layoutX="266.0" orientation="VERTICAL" prefHeight="480.0" prefWidth="0.0" />
-		<Pane fx:id="paneSetup" layoutX="55.0" prefHeight="480.0" prefWidth="213.0" styleClass="pane-setup" />
-		<Pane id="css-pane-options" fx:id="paneOptions" layoutX="-5.0" prefHeight="480.0" prefWidth="60.0" styleClass="pane-options">
+		<Separator layoutX="267.0" orientation="VERTICAL" prefHeight="495.0" prefWidth="6.0" />
+		<Pane fx:id="paneSetup" layoutX="55.0" prefHeight="495.0" prefWidth="213.0" styleClass="pane-setup" />
+		<Pane id="css-pane-options" fx:id="paneOptions" layoutX="-8.0" prefHeight="495.0" prefWidth="63.0" styleClass="pane-options">
 			<children>
-				<Button fx:id="btnKinect" layoutX="14.0" layoutY="166.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnKinect" />
-				<Button fx:id="btnGlobe" layoutX="13.0" layoutY="8.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnGlobe" />
-				<Button fx:id="btnLayer" layoutX="13.0" layoutY="61.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnLayer" />
-				<Button fx:id="btnStart" layoutX="12.0" layoutY="434.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnStart" />
-				<Button fx:id="btnProfile" layoutX="12.0" layoutY="211.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnProfile" />
-				<Button fx:id="btnDataBase" layoutX="13.0" layoutY="116.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnDataBase" />
+				<Button fx:id="btnKinect" layoutX="16.0" layoutY="166.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnKinect" />
+				<Button fx:id="btnGlobe" layoutX="15.0" layoutY="8.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnGlobe" />
+				<Button fx:id="btnLayer" layoutX="15.0" layoutY="61.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnLayer" />
+				<Button fx:id="btnStart" layoutX="15.0" layoutY="434.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnStart" />
+				<Button fx:id="btnDataBase" layoutX="15.0" layoutY="116.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="btnDataBase" />
 			</children>
 		</Pane>
-		<Pane fx:id="paneView" layoutX="269.0" prefHeight="480.0" prefWidth="373.0">
-			<children>
-				<ImageView fx:id="imgMock" fitHeight="480.0" fitWidth="373.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@worldwind-flat-mock.png" />
-					</image>
-				</ImageView>
-			</children>
-		</Pane>
+		<Pane fx:id="paneView" layoutX="269.0" prefHeight="495.0" prefWidth="382.0" styleClass="pane-setup" />
 	</children>
 </AnchorPane>

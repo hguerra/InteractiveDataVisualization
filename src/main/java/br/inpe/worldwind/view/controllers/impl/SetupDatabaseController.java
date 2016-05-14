@@ -1,111 +1,79 @@
 package br.inpe.worldwind.view.controllers.impl;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import br.inpe.worldwind.view.controllers.SetupController;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
+import br.inpe.worldwind.view.Resource;
+import br.inpe.worldwind.view.controllers.ApplicationSetupController;
+import br.inpe.worldwind.view.controllers.SetupView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-public class SetupDatabaseController implements SetupController {
-	@FXML
-	private AnchorPane anchorPane;
+public class SetupDatabaseController extends ApplicationSetupController {
+    @FXML
+    private AnchorPane anchorPane;
 
-	@FXML
-	private Pane paneSetup;
+    @FXML
+    private Pane paneSetup;
 
-	@FXML
-	private Label lblLayerName;
+    @FXML
+    private TextField txtIp;
 
-	@FXML
-	private Label lblDatabase;
+    @FXML
+    private TextField txtDatabase;
 
-	@FXML
-	private Label lblScenario;
+    @FXML
+    private Button btnConnect;
 
-	@FXML
-	private ListView<?> listViewScenario;
+    @FXML
+    private PasswordField pwdDatabase;
 
-	@FXML
-	private ContextMenu contextMenu;
+    @FXML
+    private ComboBox comboDatabase;
 
-	@FXML
-	private MenuItem menuItemRemove;
+    @FXML
+    private ImageView imgDatabaseStatus;
 
-	@FXML
-	private Label lblKinect;
+    private Image imgDisconnected;
 
-	@FXML
-	private ToggleButton toggleBtnKinect;
+    private Image imgConnected;
 
-	@FXML
-	private Button btnTrash;
+    private boolean isConnected = false;
 
-	@FXML
-	private TextField txtDatabase;
 
-	@FXML
-	private Label lblPassword;
+    @Override
+    protected void initPaneSetup() {
+        this.imgDisconnected = imgDatabaseStatus.getImage();
+        this.imgConnected = new Image(Resource.getImageDatabaseStatusConnected());
 
-	@FXML
-	private Button btnConnect;
+    }
 
-	@FXML
-	private PasswordField pwdDatabase;
+    @Override
+    protected SetupView getSetupView() {
+        return SetupView.DATABASE;
+    }
 
-	@FXML
-	private ComboBox<?> comboDatabase;
+    @Override
+    protected Pane getPaneView() {
+        return paneSetup;
+    }
 
-	@FXML
-	private Label lblSQL;
+    @Override
+    public void initPaneSetupEvents() {
+        btnConnect.setOnAction(event -> {
+            isConnected = !isConnected;
+            if (isConnected) imgDatabaseStatus.setImage(imgConnected);
+            else imgDatabaseStatus.setImage(imgDisconnected);
+        });
 
-	@FXML
-	private TextArea txtSQL;
+    }
 
-	@FXML
-	private Button btnRun;
+    @Override
+    public void update(Object object) {
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		initPaneSetupEvents();
-		addView(SetupView.DATABASE, anchorPane);
-
-	}
-
-	@Override
-	public void initPaneSetupEvents() {
-		btnTrash.setOnAction(event -> {
-			System.out.println("btnTrash");
-		});
-
-		toggleBtnKinect.setOnAction(event -> {
-			System.out.println("toggleBtnKinect:" + toggleBtnKinect.isSelected());
-		});
-
-	}
-
-	@Override
-	public ObservableList<Node> getPaneSetupChildren() {
-		return this.paneSetup.getChildren();
-	}
-	
-	@Override
-	public void update(Object object) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 }

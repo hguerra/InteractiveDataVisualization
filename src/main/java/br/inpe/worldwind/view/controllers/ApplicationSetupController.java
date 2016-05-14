@@ -3,7 +3,6 @@ package br.inpe.worldwind.view.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -16,7 +15,7 @@ public abstract class ApplicationSetupController implements SetupController {
 	protected abstract Pane getPaneView();
 	
 	@Override
-	public ObservableList<Node> getPaneSetupChildren() {
+	public ObservableList<Node> getPaneSceneChildren() {
 		return getPaneView().getChildren();
 	}
 	
@@ -27,9 +26,9 @@ public abstract class ApplicationSetupController implements SetupController {
 		/* add events */
 		initPaneSetupEvents();
 		/* set screen */
-		addView(getSetupView(), getPaneView());
+		addSetupView(getSetupView(), getPaneView());
 		/* set controller */
-		addController(getSetupView(), this);
+		addSetupController(getSetupView(), this);
 	}
 
 }

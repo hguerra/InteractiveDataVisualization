@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.inpe.worldwind.view.controllers.SetupController;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -42,7 +42,7 @@ public class SetupKinectController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addView(SetupView.KINECT, anchorPane);
+		addSetupView(SetupView.KINECT, anchorPane);
 
 	}
 
@@ -55,7 +55,7 @@ public class SetupKinectController implements SetupController {
 	}
 
 	@Override
-	public ObservableList<Node> getPaneSetupChildren() {
+	public ObservableList<Node> getPaneSceneChildren() {
 		return this.paneSetup.getChildren();
 	}
 	

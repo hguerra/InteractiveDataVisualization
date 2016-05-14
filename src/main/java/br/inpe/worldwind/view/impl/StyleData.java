@@ -2,7 +2,7 @@ package br.inpe.worldwind.view.impl;
 
 import br.inpe.worldwind.view.ApplicationFXML;
 import br.inpe.worldwind.view.Resource;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 
 import java.net.URL;
 
@@ -25,6 +25,11 @@ public class StyleData extends ApplicationFXML {
 
 	@Override
 	protected boolean exitOnCloseRequest() {
+		return false;
+	}
+
+	@Override
+	protected boolean getResizable() {
 		return false;
 	}
 }

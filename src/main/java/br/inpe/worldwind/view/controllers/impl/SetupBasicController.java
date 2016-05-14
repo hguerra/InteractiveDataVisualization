@@ -1,9 +1,10 @@
 package br.inpe.worldwind.view.controllers.impl;
 
+import br.inpe.worldwind.view.ApplicationFXAction;
 import br.inpe.worldwind.view.ScenarioProperty;
 import br.inpe.worldwind.view.controllers.ApplicationSetupController;
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,29 +37,39 @@ public class SetupBasicController extends ApplicationSetupController {
 
     @Override
     protected void initPaneSetup() {
-        ObservableList<String> listOfCombLayer = MANAGER.getTitleFromDataSourceGroup();
-        /* Add elements in comboLayer */
-        comboLayer.setItems(listOfCombLayer);
-        /* set selected comboLayer */
-        comboLayer.getSelectionModel().selectFirst();
-		/* get selected comboLayer */
-        String group = comboLayer.getSelectionModel().getSelectedItem();
-        listOfView = MANAGER.getTitleFromDataSourceGroup(group);
+        loadComboLayer();
+        loadListView(comboLayer.getSelectionModel().getSelectedItem());
     }
 
     @Override
     public void initPaneSetupEvents() {
         comboLayer.valueProperty().addListener((observable, oldValue, newValue) -> {
-            MANAGER.getController(SetupView.BASIC).update(newValue);
+            if (newValue == null)
+                return;
+            loadListView(newValue);
         });
-        /* add elements based on comboLayer */
+    }
+
+    /**
+     * Elements of view
+     */
+    private void loadComboLayer() {
+        ObservableList<String> listOfCombLayer = MANAGER.getTitleFromDataSourceGroup();
+        /* Add elements in comboLayer */
+        comboLayer.setItems(listOfCombLayer);
+        /* set selected comboLayer */
+        comboLayer.getSelectionModel().selectFirst();
+    }
+
+    private void loadListView(String group) {
+        listOfView = MANAGER.getTitleFromDataSourceGroup(group);
         ObservableList<ScenarioProperty> scenarioProperties = FXCollections.observableArrayList(
                 listOfView.stream().map(ScenarioProperty::new).collect(Collectors.toList())
         );
         scenarioProperties.forEach(scenarioProperty -> scenarioProperty.selectedProperty().addListener((observable, wasSelected, isSelected) -> {
-            if(isSelected){
+            if (isSelected) {
                 MANAGER.addBasicScenario(scenarioProperty.getName());
-            }else{
+            } else {
                 MANAGER.removeBasicScenario(scenarioProperty.getName());
             }
         }));
@@ -68,6 +79,7 @@ public class SetupBasicController extends ApplicationSetupController {
             public String toString(ScenarioProperty object) {
                 return object.getName();
             }
+
             @Override
             public ScenarioProperty fromString(String string) {
                 return new ScenarioProperty(string);
@@ -76,7 +88,7 @@ public class SetupBasicController extends ApplicationSetupController {
     }
 
     @Override
-    public ObservableList<Node> getPaneSetupChildren() {
+    public ObservableList<Node> getPaneSceneChildren() {
         return this.paneSetup.getChildren();
     }
 
@@ -92,6 +104,15 @@ public class SetupBasicController extends ApplicationSetupController {
 
     @Override
     public void update(Object object) {
-
+        if (object instanceof ApplicationFXAction) {
+            ApplicationFXAction action = (ApplicationFXAction) object;
+            switch (action) {
+                case LOAD_COMPONENTS:
+                    initPaneSetup();
+                    break;
+                case LOAD_LISTENERS:
+                    break;
+            }
+        }
     }
 }

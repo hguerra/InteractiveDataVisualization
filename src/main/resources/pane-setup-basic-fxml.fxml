@@ -16,7 +16,7 @@
 				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
 				<ComboBox fx:id="comboLayer" layoutX="28.0" layoutY="67.0" prefHeight="25.0" prefWidth="150.0" />
 				<Label layoutX="9.0" layoutY="111.0" styleClass="pane-options-subtitle" text="Scenario" />
-				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="143.0" prefHeight="300.0" prefWidth="185.0" />
+				<ListView fx:id="listViewScenario" layoutX="13.0" layoutY="143.0" prefHeight="310.0" prefWidth="185.0" />
 			</children>
 		</Pane>
 	</children>

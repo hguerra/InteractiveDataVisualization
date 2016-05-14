@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import br.inpe.worldwind.view.controllers.SetupController;
-import br.inpe.worldwind.view.controllers.ManagerSetupController.SetupView;
+import br.inpe.worldwind.view.controllers.SetupView;
 import br.inpe.worldwind.view.impl.ColorPickerGUI;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -36,7 +36,7 @@ public class ColorPickerController implements SetupController {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initPaneSetupEvents();
-		addView(SetupView.LAYER_COLOR, anchorPane);
+		addSetupView(SetupView.LAYER_COLOR, anchorPane);
 
 	}
 
@@ -52,14 +52,12 @@ public class ColorPickerController implements SetupController {
 	}
 
 	@Override
-	public ObservableList<Node> getPaneSetupChildren() {
+	public ObservableList<Node> getPaneSceneChildren() {
 		return this.paneSetup.getChildren();
 	}
 
 	@Override
 	public void update(Object object) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

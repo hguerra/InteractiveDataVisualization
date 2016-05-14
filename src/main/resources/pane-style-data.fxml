@@ -12,7 +12,7 @@
 
 <AnchorPane id="css-anchor-pane" fx:id="anchorPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="650.0" prefHeight="600.0" prefWidth="650.0" stylesheets="@home-css.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.inpe.worldwind.view.controllers.impl.StyleDataController">
 	<children>
-		<Pane fx:id="paneSetup" prefHeight="600.0" prefWidth="650.0" styleClass="pane-setup">
+		<Pane fx:id="paneSetup" prefHeight="615.0" prefWidth="663.0" styleClass="pane-setup">
 			<children>
 				<Label fx:id="lblLayerName" layoutX="7.0" prefHeight="25.0" prefWidth="143.0" styleClass="pane-options-title" text="Style" />
 				<Separator layoutX="5.0" layoutY="24.0" opacity="0.3" prefHeight="0.0" prefWidth="200.0" />
