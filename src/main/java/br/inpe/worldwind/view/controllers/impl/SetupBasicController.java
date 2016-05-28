@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class SetupBasicController extends ApplicationSetupController {
@@ -73,6 +74,7 @@ public class SetupBasicController extends ApplicationSetupController {
                 MANAGER.removeBasicScenario(scenarioProperty.getName());
             }
         }));
+        FXCollections.sort(scenarioProperties);
         listViewScenario.setItems(scenarioProperties);
         listViewScenario.setCellFactory(CheckBoxListCell.forListView(ScenarioProperty::selectedProperty, new StringConverter<ScenarioProperty>() {
             @Override

@@ -8,7 +8,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -25,13 +24,13 @@ public class ManagerSetupController {
     private static ManagerSetupController uniqueInstance;
     private Map<SetupView, ObservableList<Node>> elementsView;
     private Map<SetupView, SetupController> controllers;
-    private List<String> selectedBasicScenario;
+    private Set<String> selectedBasicScenario;
     private DataSourceGroup dataSourceGroup;
 
     private ManagerSetupController() {
         this.elementsView = new HashMap<>();
         this.controllers = new HashMap<>();
-        this.selectedBasicScenario = new ArrayList<>();
+        this.selectedBasicScenario = new TreeSet<>();
         this.dataSourceGroup = new DataSourceGroup();
     }
 
@@ -144,13 +143,13 @@ public class ManagerSetupController {
     /**
      * @return items from basic scenario
      */
-    public List<String> getSelectedBasicScenario() {
-        return Collections.unmodifiableList(selectedBasicScenario);
+    public Set<String> getSelectedBasicScenario() {
+        return Collections.unmodifiableSet(selectedBasicScenario);
     }
 
     public List<Data> getDatasetFromBasicController(DataSource dataSource) {
         List<Data> dataset = new ArrayList<>();
-            getSelectedBasicScenario().forEach(key -> {
+        getSelectedBasicScenario().forEach(key -> {
             dataset.add(dataSource.getDataSet().get(key));
         });
         return dataset;
@@ -162,7 +161,7 @@ public class ManagerSetupController {
 
         Optional<Node> node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst();
 
-        if(!node.isPresent())
+        if (!node.isPresent())
             return null;
 
         @SuppressWarnings("unchecked")
@@ -172,23 +171,7 @@ public class ManagerSetupController {
         return getDatasetFromBasicController(getDataSourceFromGroup(group));
     }
 
-
-
-    public Data getSelectedDataFromLayerController(){
-        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.LAYER).getPaneSceneChildren().parallelStream();
-
-
-        System.out.println(streamSupplier.get());
-
-//        if(!node.isPresent())
-//            return null;
-//
-//        System.out.println(node.get());
-
-        return null;
-    }
-
-    public void saveNodeAsImage(Node node, File file){
+    public void saveNodeAsImage(Node node, File file) {
         AnchorPane pane = new AnchorPane();
         pane.getChildren().add(node);
         Scene scene = new Scene(pane);

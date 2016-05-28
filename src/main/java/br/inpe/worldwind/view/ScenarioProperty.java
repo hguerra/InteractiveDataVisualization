@@ -9,7 +9,7 @@ import javafx.beans.property.StringProperty;
  * @author Heitor
  * @since 29/04/2016
  */
-public class ScenarioProperty {
+public class ScenarioProperty implements Comparable<ScenarioProperty> {
     private StringProperty name = new SimpleStringProperty();
     private BooleanProperty selected = new SimpleBooleanProperty();
 
@@ -40,5 +40,10 @@ public class ScenarioProperty {
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public int compareTo(ScenarioProperty o) {
+        return getName().compareTo(o.getName());
     }
 }
