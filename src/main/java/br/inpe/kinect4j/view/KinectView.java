@@ -26,7 +26,7 @@ import br.inpe.kinect4j.controller.ZoomOutController;
 import br.inpe.kinect4j.engine.Pan;
 import br.inpe.util.status.SkeletonInfoPrinter;
 import br.inpe.worldwind.controller.ScenarioController;
-import br.inpe.worldwind.layer.triangle.VegetationScenarioLayer.VegetationScenarioApp;
+import br.inpe.app.VegetationScenarioLayer.VegetationScenarioApp;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
 public class KinectView extends Kinect4jView {
@@ -53,9 +53,9 @@ public class KinectView extends Kinect4jView {
 	 */
 
 	private boolean gestureToggleButton = false;
-	/**
-	 * NASA World Wind
-	 */
+/**
+ * NASA World Wind
+ */
 	private Pan pan;
 	private WorldWindowGLCanvas canvas;
 	private VegetationScenarioApp virtualGlobe;
@@ -63,9 +63,8 @@ public class KinectView extends Kinect4jView {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param UserTracke
-	 *            tracker
+	 *
+	 * @param tracker: UserTracker
 	 */
 	public KinectView(UserTracker tracker, VegetationScenarioApp vegetationScenarioApp) {
 		super(tracker);
@@ -122,14 +121,15 @@ public class KinectView extends Kinect4jView {
 
 	@Override
 	public <T extends Enum<T>> void updateGestureName(T name) {
-		gestureControllers.get(name).kinectActionPerformed();
+		//gestureControllers.get(name).kinectActionPerformed();
+		System.err.println(name);
 
 	}
 
 	@Override
 	public <T extends Enum<T>> void updatePoseName(T name) {
-		poseControllers.get(name).kinectActionPerformed();
-
+		//poseControllers.get(name).kinectActionPerformed();
+		System.err.println(name);
 	}
 
 	public void switchGestureTraking() {

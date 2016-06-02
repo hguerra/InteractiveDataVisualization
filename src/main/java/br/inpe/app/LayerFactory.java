@@ -1,4 +1,4 @@
-package br.inpe.worldwind.layer.triangle;
+package br.inpe.app;
 
 import java.awt.Color;
 import java.io.File;

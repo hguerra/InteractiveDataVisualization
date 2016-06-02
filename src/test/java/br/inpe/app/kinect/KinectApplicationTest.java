@@ -26,7 +26,7 @@ public class KinectApplicationTest {
 		frame.setVisible(true);
 	}
 
-	void run() {
+	public void run() {
 		while (isRunning) {
 			try {
 				Thread.sleep(200);
