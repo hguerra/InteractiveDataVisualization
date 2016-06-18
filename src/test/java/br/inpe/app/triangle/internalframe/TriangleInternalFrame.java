@@ -29,7 +29,7 @@ public class TriangleInternalFrame extends JFrame {
         nasa.setBounds(0, 0, 1300, 760);
         nasa.setVisible(true);
 
-        this.canvas = nasa.getCanvas();
+        canvas = nasa.getCanvas();
 
         kinect = new KinectInternalFrame(canvas);
         BasicInternalFrameUI kinectTitlePane = (BasicInternalFrameUI) kinect
@@ -41,21 +41,26 @@ public class TriangleInternalFrame extends JFrame {
 
         new Thread(kinect).start();
 
-        DPane = new JDesktopPane();
-        DPane.add(kinect);
-        DPane.add(nasa);
-        DPane.setLayer(kinect, JLayeredPane.DEFAULT_LAYER);
-        DPane.setLayer(kinect, JLayeredPane.DRAG_LAYER);
-        framePane.add(BorderLayout.CENTER, DPane);
+        SwingUtilities.invokeLater(()->{
+            DPane = new JDesktopPane();
+            DPane.add(kinect);
+            DPane.add(nasa);
+            DPane.setLayer(kinect, JLayeredPane.DEFAULT_LAYER);
+            DPane.setLayer(kinect, JLayeredPane.DRAG_LAYER);
+            framePane.add(BorderLayout.CENTER, DPane);
+        });
+
     }
 
 
     public static void main(String[] args) {
-        TriangleInternalFrame app = new TriangleInternalFrame();
-        app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        app.setSize(1300, 760);
-        app.setResizable(false);
-        app.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            TriangleInternalFrame app = new TriangleInternalFrame();
+            app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            app.setSize(1300, 760);
+            app.setResizable(false);
+            app.setVisible(true);
+        });
     }
 
 }

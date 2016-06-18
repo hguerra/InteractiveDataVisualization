@@ -19,7 +19,6 @@ import br.com.kinect4j.device.DeviceConfig;
 import br.inpe.kinect4j.view.KinectView;
 import br.inpe.triangle.defaultproperties.DefaultColors;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
-import br.inpe.worldwind.annotation.VegetationScenearioAnnotation;
 import br.inpe.worldwind.controller.ScenarioController;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.WorldWindow;

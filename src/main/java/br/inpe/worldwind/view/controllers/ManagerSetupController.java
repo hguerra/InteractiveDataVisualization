@@ -144,7 +144,7 @@ public class ManagerSetupController {
      * @return items from basic scenario
      */
     public Set<String> getSelectedBasicScenario() {
-        return Collections.unmodifiableSet(selectedBasicScenario);
+        return selectedBasicScenario;
     }
 
     public List<Data> getDatasetFromBasicController(DataSource dataSource) {

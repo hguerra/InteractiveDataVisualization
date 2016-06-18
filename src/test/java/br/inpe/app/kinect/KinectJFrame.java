@@ -1,27 +1,23 @@
-package br.inpe.app.triangle.internalframe;
+package br.inpe.app.kinect;
 
 import br.com.kinect4j.device.DeviceConfig;
-import br.inpe.app.kinect.KinectApplicationViewTest;
 import com.primesense.nite.UserTracker;
-import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
 import javax.swing.*;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * @author Heitor
- * @since 01/06/2016
+ * @since 02/06/2016
  */
-public class KinectInternalFrame extends JInternalFrame implements Runnable {
+public class KinectJFrame extends JFrame implements Runnable {
     private KinectApplicationViewTest kinectHandler;
     private boolean isRunning = true;
 
-    public KinectInternalFrame(WorldWindowGLCanvas canvas) {
+    public KinectJFrame() {
         UserTracker userTracker = createUserTracker();
-        kinectHandler = new KinectApplicationViewTest(userTracker);
-        kinectHandler.setCanvas(canvas);
-        getContentPane().add(kinectHandler);
+        this.kinectHandler = new KinectApplicationViewTest(userTracker);
         frameEvents();
     }
 
@@ -34,14 +30,16 @@ public class KinectInternalFrame extends JInternalFrame implements Runnable {
         return UserTracker.create();
     }
 
-    private void frameEvents(){
-        addInternalFrameListener(new InternalFrameAdapter() {
-            @Override
-            public void internalFrameClosing(InternalFrameEvent e) {
+    private void frameEvents() {
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
                 isRunning = false;
             }
         });
+        this.getContentPane().add(kinectHandler);
     }
+
+
     @Override
     public void run() {
         while (isRunning) {
@@ -52,5 +50,15 @@ public class KinectInternalFrame extends JInternalFrame implements Runnable {
             }
         }
         this.dispose();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            KinectJFrame frame = new KinectJFrame();
+            frame.setSize(800, 600);
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            new Thread(frame).start();
+            frame.setVisible(true);
+        });
     }
 }

@@ -1,4 +1,4 @@
-package br.inpe.worldwind.annotation;
+package br.inpe.app;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.layers.AnnotationLayer;

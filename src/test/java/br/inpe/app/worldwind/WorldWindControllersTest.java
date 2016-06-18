@@ -1,8 +1,10 @@
 package br.inpe.app.worldwind;
 
 import br.inpe.triangle.conf.Data;
+import br.inpe.triangle.conf.DataSource;
 import br.inpe.triangle.conf.JSONBuilder;
 import br.inpe.triangle.defaultproperties.DefaultColors;
+import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.worldwind.controller.GeoJSONController;
 import br.inpe.worldwind.controller.LayerController;
@@ -11,6 +13,7 @@ import br.inpe.worldwind.dao.GeometryRecord;
 import br.inpe.worldwind.dao.JDBCDao;
 import br.inpe.worldwind.dao.model.vegtype_2000;
 import br.inpe.worldwind.defaultcontroller.*;
+import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
@@ -40,6 +43,7 @@ public class WorldWindControllersTest extends JFrame {
     private LayerController polygon3d;
     private LayerController points;
     private GeoJSONController jsonController;
+    private AnnotationLayer annotationController;
 
     /**
      * User config
@@ -56,11 +60,14 @@ public class WorldWindControllersTest extends JFrame {
         // ScreenAnnotationLayer
         screenAnnotationController();
 
+        // AnnotationLayer
+        annotationController();
+
         // Polygon2D
         //polygon2DController();
 
         // ShapefileController
-        shapefileController();
+        //shapefileController();
 
         // CommentLayer
         // commentController();
@@ -89,6 +96,7 @@ public class WorldWindControllersTest extends JFrame {
         Data data = jsonBuilder.readJSON(Data.class, MockConf.FILE_PATH + "data.json");
         if (data == null)
             return;
+        data.setColumn("attr");
         shapefileController(data);
     }
 
@@ -173,7 +181,7 @@ public class WorldWindControllersTest extends JFrame {
     private void geoJSONController() {
         jsonController = new GeoJSONLayer(wwd, "attr");
         /*
-		 * boolean addGeoJSON(String filepath, String layerName, Map<Double,
+         * boolean addGeoJSON(String filepath, String layerName, Map<Double,
 		 * Color> colors)
 		 */
         jsonController.addGeoJSON("Veg2000", DefaultFilePath.VEGTYPE_2000_GDAL_GEOJSON,
@@ -181,6 +189,14 @@ public class WorldWindControllersTest extends JFrame {
 
         // end test
         jsonController.asyncDraw();
+    }
+
+    private void annotationController() {
+        DataSource datasource = DefaultDataSource.getInstance().createDefaultDataSource();
+        Data data = datasource.getDataSet().get("vegtype_2015.shp");
+        annotationController = new AnnotationLayer(wwd, data, "2015");
+        shapefileController(data);
+        annotationController.asyncDraw();
     }
 
     /**
@@ -197,7 +213,7 @@ public class WorldWindControllersTest extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new WorldWindControllersTest();
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
             }

@@ -1,8 +1,11 @@
 package br.inpe.app.triangle;
 
+import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Angle;
+import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 import java.util.ConcurrentModificationException;
@@ -86,5 +89,67 @@ public class WWJSceneController {
         lon = lon % 360;
         return Position.fromDegrees(lat > 90 ? 90 : (lat < -90 ? -90 : lat),
                 lon > 180 ? lon - 360 : (lon < -180 ? 360 + lon : lon), elev);
+    }
+
+    public void zoom(double ratio) {
+        if (this.view == null)
+            return;
+
+        final double zoomFactor = this.view.getZoom();
+
+        int newzoom = (int) (zoomFactor * ratio);
+        if (newzoom >= 1071941 && newzoom <= 18437542) {
+            this.view.setZoom(newzoom);
+            this.view.firePropertyChange(AVKey.VIEW, null, this.view);
+        }
+    }
+
+    public void rotate(Angle angle) {
+        if (this.view == null) {
+            return;
+        }
+
+        Angle heading = view.getHeading();
+        Angle newHeading = heading.add(angle);
+        this.view.setHeading(newHeading);
+        this.view.firePropertyChange(AVKey.VIEW, null, this.view);
+    }
+
+    public void tilt(Angle tilt) {
+        if (this.view == null) {
+            return;
+        }
+
+        Angle pitch = view.getPitch();
+        Angle newPitch = pitch.add(tilt);
+
+        if (newPitch.degrees < 0 || newPitch.degrees > 90) {
+            return;
+        }
+
+        this.view.setPitch(newPitch);
+        this.view.firePropertyChange(AVKey.VIEW, null, this.view);
+    }
+
+    public void flyToLatLon(LatLon latlon, double zoom) {
+        Globe globe = canvas.getModel().getGlobe();
+        Position position = new Position(latlon, globe.getElevation(
+                latlon.getLatitude(), latlon.getLongitude()));
+
+        flyToPosition(position, zoom);
+    }
+
+    public void flyToPosition(Position position, double zoom) {
+        this.view.setEyePosition(position);
+        view.setPitch(Angle.fromDegrees(35));
+    }
+
+    public void rotateToNorth(WorldWindowGLCanvas canvas) {
+        this.view.setHeading(Angle.fromDegrees(0));
+    }
+
+    public void unTilt(WorldWindowGLCanvas canvas) {
+        Angle pitch = Angle.fromDegrees(0);
+        this.view.setPitch(pitch);
     }
 }

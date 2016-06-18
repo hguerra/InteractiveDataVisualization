@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
  * @author Heitor
  * @since 31/05/2016
  */
-public class TriangleJFrameAppTest extends JFrame implements TriangleObservable {
+public class TriangleJFrameAppTest extends JFrame {
     private final int SCREEN_HEIGHT = 768; // 768
     private final int SCREEN_WIDTH = 1366; //1024
 
@@ -26,22 +26,26 @@ public class TriangleJFrameAppTest extends JFrame implements TriangleObservable 
     private KinectApplicationViewTest kinectHandler;
 
     public TriangleJFrameAppTest() {
-        new Thread(this::initKinectHandler).start();
-        initWorldWind();
         initLayeredPane();
-        frameEvent();
+        initWorldWind();
+        initKinectHandler();
+        SwingUtilities.invokeLater(()->{
+            addComponentsInLayeredPane();
+            frameEvent();
+        });
     }
 
-    private void initLayeredPane() {
-        layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+    private void addComponentsInLayeredPane(){
         layeredPane.add(canvas, java.awt.BorderLayout.CENTER);
-        layeredPane.setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         if (kinectHandler != null) {
-            addKinectControllers();
             layeredPane.add(kinectHandler, new Integer(JLayeredPane.DEFAULT_LAYER + 1));
         }
         layeredPane.doLayout();
+    }
+    private void initLayeredPane() {
+        layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+        layeredPane.setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     private void initWorldWind() {
@@ -49,11 +53,6 @@ public class TriangleJFrameAppTest extends JFrame implements TriangleObservable 
         canvas.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         canvas.setModel(new BasicModel());
         canvas.setBounds(0, 0, SCREEN_WIDTH + 1, SCREEN_HEIGHT + 1); // +1 because without it
-    }
-
-    private void addKinectControllers() {
-        Controller controller = new WWJController(canvas);
-        kinectHandler.addController(DefaultGestureName.ROTATE_CLOCK, controller);
     }
 
     private void initKinectHandler() {
@@ -65,6 +64,7 @@ public class TriangleJFrameAppTest extends JFrame implements TriangleObservable 
         kinect.startFirstDevice();
         UserTracker userTracker = UserTracker.create();
         kinectHandler = new KinectApplicationViewTest(userTracker);
+        kinectHandler.setCanvas(canvas);
         kinectHandler.setBounds(15, 585, 224, 168);
     }
 
@@ -77,19 +77,17 @@ public class TriangleJFrameAppTest extends JFrame implements TriangleObservable 
                 System.exit(0);
             }
         });
-        this.setUndecorated(false);//default true
         this.getContentPane().add(layeredPane, BorderLayout.CENTER);
         this.pack();
         this.setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     public static void main(String[] args) {
-        TriangleJFrameAppTest app = new TriangleJFrameAppTest();
-        app.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            TriangleJFrameAppTest app = new TriangleJFrameAppTest();
+            app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            app.setVisible(true);
+        });
     }
 
-    @Override
-    public void pan(double moveY, double moveX) {
-        System.out.println("PAN!!");
-    }
 }

@@ -6,6 +6,9 @@ import br.com.kinect4j.engine.core.GestureController;
 import br.com.kinect4j.engine.core.PoseController;
 import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
+import br.inpe.app.triangle.WWJSceneController;
+import br.inpe.app.triangle.controllers.ZoomIn;
+import br.inpe.app.triangle.controllers.ZoomOut;
 import br.inpe.kinect4j.engine.Pan;
 import br.inpe.kinect4j.movements.PoseT;
 import br.inpe.util.status.SkeletonInfoPrinter;
@@ -45,7 +48,13 @@ public class KinectApplicationViewTest extends Kinect4jView {
 
     public void setCanvas(WorldWindowGLCanvas canvas) {
         this.canvas = canvas;
-        this.pan = new PanController(skeleton, canvas);
+        WWJSceneController canvasController = new WWJSceneController(canvas);
+        this.pan = new PanController(skeleton, canvasController);
+
+        Controller zoomInController = new ZoomIn(canvasController);
+        Controller zoomOutController = new ZoomOut(canvasController);
+        gestureControllers.put(DefaultGestureName.ZOOM_IN, zoomInController);
+        gestureControllers.put(DefaultGestureName.ZOOM_OUT, zoomOutController);
     }
 
     /**
@@ -94,18 +103,19 @@ public class KinectApplicationViewTest extends Kinect4jView {
         //gestureDetector.updateAllGestures(user);
         //}
         gestureDetector.updateAllGestures(user);
-        
-        if(canvas != null){
-            pan.moveMap(user);
-            canvas.redraw();
-        }
+
+//        if (canvas != null) {
+//            pan.moveMap(user);
+//            canvas.redraw();
+//        }
     }
 
     @Override
     public <T extends Enum<T>> void updateGestureName(T name) {
-        if (gestureControllers.containsKey(name))
+        if (gestureControllers.containsKey(name) && canvas != null) {
             gestureControllers.get(name).kinectActionPerformed();
-        else
+            canvas.redraw();
+        } else
             System.err.println(name);
     }
 

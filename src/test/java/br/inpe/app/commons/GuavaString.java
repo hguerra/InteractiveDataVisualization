@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 
 /**
@@ -71,5 +72,21 @@ public class GuavaString {
         });
 
         System.out.println(datasetGroup);
+
+
+        System.out.println("\n\n\nTEST 2");
+
+        dataName.forEach(data -> {
+            String regex = "[_./]";
+            Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+
+            List<String> datasetGroupIterator = Splitter.on(pattern)
+                    .trimResults()
+                    .omitEmptyStrings()
+                    .splitToList(data);
+
+            System.out.println(datasetGroupIterator);
+        });
+
     }
 }

@@ -39,16 +39,12 @@ public class KinectApplicationTest {
 
 	public static void main(String[] args) {
 		DeviceConfig kinect = DeviceConfig.getInstance();
-
 		if (!kinect.isDeviceConnected()) {
 			JOptionPane.showMessageDialog(null, "No device is connected", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-
 		kinect.startFirstDevice();
-
 		UserTracker userTracker = UserTracker.create();
-
 		KinectApplicationTest app = new KinectApplicationTest(userTracker);
 		app.run();
 	}

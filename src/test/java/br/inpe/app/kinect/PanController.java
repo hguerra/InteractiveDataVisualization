@@ -1,14 +1,11 @@
 package br.inpe.app.kinect;
 
-import br.com.kinect4j.controller.DefaultGestureName;
 import br.com.kinect4j.engine.core.Skeleton;
 import br.com.kinect4j.engine.core.SkeletonCoordinates;
 import br.com.kinect4j.engine.defaultcore.DefaultSkeletonCoordinates;
-import br.com.kinect4j.view.Kinect4jObserver;
 import br.inpe.app.triangle.WWJSceneController;
 import com.primesense.nite.JointType;
 import com.primesense.nite.UserData;
-import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
 import static br.com.kinect4j.engine.core.Skeleton.Operator.GREATER_THAN;
 import static br.com.kinect4j.engine.core.Skeleton.Operator.LESS_THAN;
@@ -28,10 +25,10 @@ public class PanController {
      */
     private WWJSceneController controller;
 
-    public PanController(Skeleton skeleton, WorldWindowGLCanvas canvas) {
+    public PanController(Skeleton skeleton, WWJSceneController controller) {
         this.skeleton = skeleton;
         this.coords = new DefaultSkeletonCoordinates(skeleton);
-        this.controller = new WWJSceneController(canvas);
+        this.controller = controller;
     }
 
     public void moveMap(UserData user) {

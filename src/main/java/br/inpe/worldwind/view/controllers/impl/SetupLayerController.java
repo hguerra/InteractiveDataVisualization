@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.io.File;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SetupLayerController extends ApplicationSetupController {
     private static final ManagerSetupController MANAGER = ManagerSetupController.getInstance();
@@ -67,6 +68,8 @@ public class SetupLayerController extends ApplicationSetupController {
     private Button btnAddData;
 
     private ObservableList<String> listOfView = FXCollections.observableArrayList();
+
+    private Pattern pattern = Pattern.compile("[_./]", Pattern.CASE_INSENSITIVE);
 
     @Override
     protected void initPaneSetup() {
@@ -166,13 +169,15 @@ public class SetupLayerController extends ApplicationSetupController {
                             infoMessage.append(data.getTitle()).append("\n");
                             return;
                         }
-                        List<String> datasetGroupIterator = Splitter.on("_")
+
+                        List<String> datasetGroupIterator = Splitter.on(pattern)
                                 .trimResults()
                                 .omitEmptyStrings()
                                 .splitToList(titleData);
 
                         if (datasetGroupIterator.size() < 2)
                             return;
+
                         String nameOfDataSourceGroup = datasetGroupIterator.get(0); // title
                         String nameOfDataSource = datasetGroupIterator.get(1); // year
                         //create a new datasource
