@@ -1,7 +1,11 @@
 package br.inpe.app.triangle;
 
+import br.inpe.triangle.conf.Data;
+import br.inpe.worldwind.controller.ShapefileController;
+import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
+import gov.nasa.worldwind.formats.shapefile.Shapefile;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Position;
@@ -9,18 +13,93 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 import java.util.ConcurrentModificationException;
+import java.util.TreeMap;
 
 /**
  * @author Heitor
  * @since 01/06/2016
  */
 public class WWJSceneController {
+    private static final int WIDTH_SCREEN_ANNOTATION = 780;
+    private static final int HEIGHT_SCREEN_ANNOTATION = 530;
+    private static final String IMAGES_CCST = "images/ccst-novo2.png";
     private WorldWindowGLCanvas canvas;
     private OrbitView view;
+
+    private String actualGroup = "";
+
+    private TreeMap<String, CircularArrayList<Data>> dataset;
+    private ShapefileController shpController;
 
     public WWJSceneController(WorldWindowGLCanvas canvas) {
         this.canvas = canvas;
         this.view = (OrbitView) canvas.getView();
+        this.shpController = new ShapefileLayer(canvas);
+        this.dataset = new TreeMap<>();
+    }
+
+    public synchronized void draw() {
+        Data actualData = dataset.get(actualGroup).getActual();
+        shpController.asyncRemove();
+        if (createVectorData(actualData)) {
+            shpController.asyncDraw();
+            canvas.redraw();
+        }
+    }
+
+    public void addData(Data... data) {
+        for (Data d : data) {
+            if (dataset.containsKey(d.getTitle())) {
+                dataset.get(d.getTitle()).add(d);
+            } else {
+                CircularArrayList<Data> elements = new CircularArrayList<>();
+                elements.add(d);
+                dataset.put(d.getTitle(), elements);
+            }
+        }
+        actualGroup = dataset.firstKey();
+    }
+
+    public void nextData() {
+        if (!dataset.containsKey(actualGroup))
+            return;
+        actualGroup = dataset.higherKey(actualGroup);
+        if (actualGroup == null)
+            actualGroup = dataset.firstKey();
+        draw();
+    }
+
+    public void previousData() {
+        if (!dataset.containsKey(actualGroup))
+            return;
+        actualGroup = dataset.lowerKey(actualGroup);
+        if (actualGroup == null)
+            actualGroup = dataset.lastKey();
+        draw();
+    }
+
+    public void yearForward() {
+        if (!dataset.containsKey(actualGroup))
+            return;
+        dataset.get(actualGroup).next();
+        draw();
+    }
+
+    public void yearBackward() {
+        if (!dataset.containsKey(actualGroup))
+            return;
+        dataset.get(actualGroup).previous();
+        draw();
+    }
+
+    private boolean createVectorData(Data data) {
+        try {
+            Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
+            shpController.addShapefile(data.getTitle(), data.getColumn(), shp, data.getAwtColors());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void pan(double moveY, double moveX) {
@@ -152,4 +231,6 @@ public class WWJSceneController {
         Angle pitch = Angle.fromDegrees(0);
         this.view.setPitch(pitch);
     }
+
+
 }

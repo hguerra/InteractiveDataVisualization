@@ -36,7 +36,7 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
     }
 
     private void doJLayeredPane() {
-        SwingWorker<Void,Void> worker = new SwingWorker<Void, Void>() {
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
                 canvas.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -45,6 +45,7 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
                 add(canvas, java.awt.BorderLayout.CENTER);
                 return null;
             }
+
             @Override
             protected void done() {
                 kinectHandler.setBounds(15, 585, 224, 168);
@@ -66,7 +67,7 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(()->{
+        SwingUtilities.invokeLater(() -> {
             TriangleLayeredPane pane = new TriangleLayeredPane();
             new Thread(pane).start();
 

@@ -193,7 +193,7 @@ public class WorldWindControllersTest extends JFrame {
 
     private void annotationController() {
         DataSource datasource = DefaultDataSource.getInstance().createDefaultDataSource();
-        Data data = datasource.getDataSet().get("vegtype_2015.shp");
+        Data data = datasource.getDataSet().get("2015");
         annotationController = new AnnotationLayer(wwd, data, "2015");
         shapefileController(data);
         annotationController.asyncDraw();

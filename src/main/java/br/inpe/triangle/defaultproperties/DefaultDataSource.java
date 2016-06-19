@@ -58,6 +58,7 @@ public class DefaultDataSource {
 
                 if (datasetGroupIterator.size() < 2)
                     return;
+
                 String year = datasetGroupIterator.get(1); // year
 
                 Data data = new Data();
@@ -67,6 +68,7 @@ public class DefaultDataSource {
                 data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS + veg);
                 data.setColors(colors);
                 data.setColumn(VEG_COLUMN_NAME);
+                data.setDate(year);
                 dataSet.put(year, data);
             } catch (Exception e) {
                 System.err.println(e);

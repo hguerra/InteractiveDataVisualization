@@ -7,17 +7,22 @@ import br.com.kinect4j.engine.core.PoseController;
 import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
 import br.inpe.app.triangle.WWJSceneController;
-import br.inpe.app.triangle.controllers.ZoomIn;
-import br.inpe.app.triangle.controllers.ZoomOut;
+import br.inpe.app.triangle.controllers.*;
 import br.inpe.kinect4j.engine.Pan;
 import br.inpe.kinect4j.movements.PoseT;
+import br.inpe.triangle.conf.Data;
+import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import br.inpe.util.status.SkeletonInfoPrinter;
 import com.primesense.nite.UserData;
 import com.primesense.nite.UserTracker;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class KinectApplicationViewTest extends Kinect4jView {
     private static final long serialVersionUID = 1L;
@@ -49,12 +54,29 @@ public class KinectApplicationViewTest extends Kinect4jView {
     public void setCanvas(WorldWindowGLCanvas canvas) {
         this.canvas = canvas;
         WWJSceneController canvasController = new WWJSceneController(canvas);
-        this.pan = new PanController(skeleton, canvasController);
 
+        DataSource datasource = DefaultDataSource.getInstance().createDefaultDataSource();
+        List<Data> dataset = datasource.getDataSet().entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
+        Collections.sort(dataset);
+
+        for (Data d : dataset) {
+            canvasController.addData(d);
+        }
+        canvasController.draw();
+
+        pan = new PanController(skeleton, canvasController);
         Controller zoomInController = new ZoomIn(canvasController);
         Controller zoomOutController = new ZoomOut(canvasController);
+        Controller forwarTimeController = new ForwardTimeController(canvasController);
+        Controller rewingTimeController = new RewingTimeController(canvasController);
+        Controller nextDataController = new NextDataController(canvasController);
+        Controller previousDataController = new PreviousDataController(canvasController);
         gestureControllers.put(DefaultGestureName.ZOOM_IN, zoomInController);
         gestureControllers.put(DefaultGestureName.ZOOM_OUT, zoomOutController);
+        gestureControllers.put(DefaultGestureName.SWIPE_LEFT_TO_RIGHT, forwarTimeController);
+        gestureControllers.put(DefaultGestureName.SWIPE_RIGHT_TO_LEFT, rewingTimeController);
+        gestureControllers.put(DefaultGestureName.SWIPE_UP, nextDataController);
+        gestureControllers.put(DefaultGestureName.SWIPE_DOWN, previousDataController);
     }
 
     /**

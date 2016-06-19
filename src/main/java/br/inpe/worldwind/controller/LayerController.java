@@ -13,11 +13,11 @@ public interface LayerController {
 	void remove();
 	
 	default void asyncDraw() {
-		new Thread(() -> draw()).start();
+		new Thread(this::draw).start();
 	}
 	
 	default void asyncRemove() {
-		new Thread(() -> remove()).start();
+		new Thread(this::remove).start();
 	}
 	
 	

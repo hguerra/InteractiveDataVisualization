@@ -180,6 +180,8 @@ public class SetupLayerController extends ApplicationSetupController {
 
                         String nameOfDataSourceGroup = datasetGroupIterator.get(0); // title
                         String nameOfDataSource = datasetGroupIterator.get(1); // year
+                        data.setTitle(nameOfDataSourceGroup);
+                        data.setDate(nameOfDataSource);
                         //create a new datasource
                         DataSource dataSource = new DataSource();
                         dataSource.addData(nameOfDataSource, data);

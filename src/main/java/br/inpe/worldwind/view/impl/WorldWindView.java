@@ -6,14 +6,12 @@ import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.defaultcontroller.AnnotationLayer;
 import br.inpe.worldwind.defaultcontroller.ScreenAnnotationLayer;
 import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
-import br.inpe.worldwind.view.controllers.ManagerSetupController;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorldWindView extends JFrame {
@@ -23,39 +21,36 @@ public class WorldWindView extends JFrame {
     private static final long serialVersionUID = 1L;
     private WorldWindowGLCanvas wwd;
     private ShapefileController shpController;
-    private LayerController screenAnnotation;
     private List<Data> dataset;
-    private List<String> years;
+
 
     public WorldWindView(List<Data> dataset) {
         this.dataset = dataset;
-        this.years = new ArrayList<>(ManagerSetupController.getInstance().getSelectedBasicScenario());
         worldWindConfig();
         screenAnnotationController();
         shpControllersConfig();
     }
 
     private void screenAnnotationController() {
-        screenAnnotation = new ScreenAnnotationLayer(wwd, 780, 530, "images/ccst-novo2.png", new Insets(0, 40, 0, 0),
+        LayerController screenAnnotation = new ScreenAnnotationLayer(wwd, 780, 530, "images/ccst-novo2.png", new Insets(0, 40, 0, 0),
                 new Dimension(265, 200));
         screenAnnotation.asyncDraw();
     }
 
-    private final void shpControllersConfig() {
+    private void shpControllersConfig() {
         this.shpController = new ShapefileLayer(wwd);
         drawViewDataset();
     }
 
-    private final AnnotationLayer createAnnotationControllerFromData(String year, Data data){
+    private AnnotationLayer createAnnotationControllerFromData(String year, Data data) {
         return new AnnotationLayer(wwd, data, year);
     }
 
     private void drawViewDataset() {
         dataset.forEach(this::draw);
-        for(int i = 0; i < dataset.size(); i++){
-            Data data = dataset.get(i);
+        for (Data data : dataset) {
             draw(data);
-            AnnotationLayer annotationLayer = createAnnotationControllerFromData(years.get(i), data);
+            AnnotationLayer annotationLayer = createAnnotationControllerFromData(data.getDate(), data);
             annotationLayer.asyncDraw();
         }
         shpController.asyncDraw();
@@ -64,8 +59,6 @@ public class WorldWindView extends JFrame {
     private void draw(Data data) {
         try {
             Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
-            if (shp == null)
-                return;
             shpController.addShapefile(data.getTitle(), data.getColumn(), shp, data.getAwtColors());
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +68,7 @@ public class WorldWindView extends JFrame {
     /**
      * WorldWind config
      */
-    private final void worldWindConfig() {
+    private void worldWindConfig() {
         wwd = new WorldWindowGLCanvas();
         wwd.setPreferredSize(new java.awt.Dimension(1200, 750));
         this.getContentPane().add(wwd, java.awt.BorderLayout.CENTER);
