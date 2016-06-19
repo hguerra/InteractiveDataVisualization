@@ -5,11 +5,14 @@ import br.inpe.app.kinect.KinectApplicationViewTest;
 import com.primesense.nite.UserTracker;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
+import gov.nasa.worldwind.layers.Layer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
+import java.util.TreeMap;
 
 /**
  * @author Heitor
@@ -20,6 +23,8 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
     public static final int SCREEN_WIDTH = 1366; //1024
     private WorldWindowGLCanvas canvas;
     private KinectApplicationViewTest kinectHandler;
+
+    private TreeMap<String, CircularArrayList<List<Layer>>> renderMap = new TreeMap<>();
 
     public TriangleLayeredPane() {
         this.canvas = new WorldWindowGLCanvas();
@@ -43,6 +48,7 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
                 canvas.setModel(new BasicModel());
                 canvas.setBounds(0, 0, SCREEN_WIDTH + 1, SCREEN_HEIGHT + 1);
                 add(canvas, java.awt.BorderLayout.CENTER);
+                canvas.redraw();
                 return null;
             }
 
@@ -51,10 +57,8 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
                 kinectHandler.setBounds(15, 585, 224, 168);
                 kinectHandler.setCanvas(canvas);
                 add(kinectHandler, new Integer(JLayeredPane.DEFAULT_LAYER + 1));
-
                 setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
                 setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-
                 canvas.redraw();
             }
         };

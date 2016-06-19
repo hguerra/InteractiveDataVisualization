@@ -1,8 +1,10 @@
 package br.inpe.app.triangle;
 
 import br.inpe.triangle.conf.Data;
+import br.inpe.worldwind.controller.LayerController;
 import br.inpe.worldwind.controller.ShapefileController;
 import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
+import br.inpe.worldwind.engine.ShapefileProperties;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
@@ -10,9 +12,12 @@ import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.globes.Globe;
+import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
+import java.util.List;
 import java.util.TreeMap;
 
 /**
@@ -27,34 +32,44 @@ public class WWJSceneController {
     private OrbitView view;
 
     private String actualGroup = "";
+    private List<Layer> oldData;
 
-    private TreeMap<String, CircularArrayList<Data>> dataset;
+    private TreeMap<String, CircularArrayList<List<Layer>>> dataset;
     private ShapefileController shpController;
+    private ShapefileProperties shapefileProperties;
 
     public WWJSceneController(WorldWindowGLCanvas canvas) {
         this.canvas = canvas;
         this.view = (OrbitView) canvas.getView();
         this.shpController = new ShapefileLayer(canvas);
         this.dataset = new TreeMap<>();
+        this.shapefileProperties = new ShapefileProperties();
     }
 
-    public synchronized void draw() {
-        Data actualData = dataset.get(actualGroup).getActual();
-        shpController.asyncRemove();
-        if (createVectorData(actualData)) {
-            shpController.asyncDraw();
-            canvas.redraw();
+    public void draw() {
+        List<Layer> actualData = dataset.get(actualGroup).getActual();
+        if (oldData != null) {
+            LayerController.removeBeforeCompass(canvas, oldData);
         }
+        oldData = actualData;
+        LayerController.insertBeforeCompass(canvas, actualData);
     }
 
-    public void addData(Data... data) {
-        for (Data d : data) {
-            if (dataset.containsKey(d.getTitle())) {
-                dataset.get(d.getTitle()).add(d);
-            } else {
-                CircularArrayList<Data> elements = new CircularArrayList<>();
-                elements.add(d);
-                dataset.put(d.getTitle(), elements);
+    public void addData(Data... datas) {
+        for (Data data : datas) {
+            try {
+                List<Layer> populateLayers = new ArrayList<Layer>();
+                Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
+                shapefileProperties.addRenderablesForPolygon(shp, data.getTitle(), data.getColumn(), populateLayers, data.getAwtColors());
+                if (dataset.containsKey(data.getTitle())) {
+                    dataset.get(data.getTitle()).add(populateLayers);
+                } else {
+                    CircularArrayList<List<Layer>> newElements = new CircularArrayList<List<Layer>>();
+                    newElements.add(populateLayers);
+                    dataset.put(data.getTitle(), newElements);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
         actualGroup = dataset.firstKey();
@@ -90,16 +105,6 @@ public class WWJSceneController {
             return;
         dataset.get(actualGroup).previous();
         draw();
-    }
-
-    private boolean createVectorData(Data data) {
-        try {
-            Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
-            shpController.addShapefile(data.getTitle(), data.getColumn(), shp, data.getAwtColors());
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     public void pan(double moveY, double moveX) {
