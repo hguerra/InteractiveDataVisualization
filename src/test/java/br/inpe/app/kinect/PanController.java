@@ -38,10 +38,12 @@ public class PanController {
 
         // do the magic now!
         // right hand below shoulder height but above hip height
-        boolean handBetweenHipShoulder = (skeleton.comparePositionY(user, JointType.RIGHT_HAND, LESS_THAN, JointType.HEAD))
+        boolean rightHandBetweenHipShoulder = (skeleton.comparePositionY(user, JointType.RIGHT_HAND, LESS_THAN, JointType.HEAD))
                 && skeleton.comparePositionY(user, JointType.RIGHT_HAND, GREATER_THAN, JointType.TORSO);
 
-        if (!handBetweenHipShoulder)
+        boolean leftHandBelow = skeleton.comparePositionY(user, JointType.LEFT_HAND, LESS_THAN, JointType.TORSO);
+
+        if (!leftHandBelow && !rightHandBetweenHipShoulder)
             return;
 
         double dist = coords.getDistanceRightHandtoShoulder(user);

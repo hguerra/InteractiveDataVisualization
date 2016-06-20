@@ -3,7 +3,7 @@ package br.inpe.app.triangle;
 import br.inpe.triangle.conf.Data;
 import br.inpe.worldwind.controller.LayerController;
 import br.inpe.worldwind.controller.ShapefileController;
-import br.inpe.worldwind.defaultcontroller.ShapefileLayer;
+import br.inpe.worldwind.defaultcontroller.AnnotationLayer;
 import br.inpe.worldwind.engine.ShapefileProperties;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
@@ -25,24 +25,21 @@ import java.util.TreeMap;
  * @since 01/06/2016
  */
 public class WWJSceneController {
-    private static final int WIDTH_SCREEN_ANNOTATION = 780;
-    private static final int HEIGHT_SCREEN_ANNOTATION = 530;
-    private static final String IMAGES_CCST = "images/ccst-novo2.png";
     private WorldWindowGLCanvas canvas;
     private OrbitView view;
 
     private String actualGroup = "";
     private List<Layer> oldData;
-
+    private AnnotationLayer annotationData;
     private TreeMap<String, CircularArrayList<List<Layer>>> dataset;
-    private ShapefileController shpController;
+    private TreeMap<String, CircularArrayList<Data>> annotations;
     private ShapefileProperties shapefileProperties;
 
     public WWJSceneController(WorldWindowGLCanvas canvas) {
         this.canvas = canvas;
         this.view = (OrbitView) canvas.getView();
-        this.shpController = new ShapefileLayer(canvas);
         this.dataset = new TreeMap<>();
+        this.annotations = new TreeMap<>();
         this.shapefileProperties = new ShapefileProperties();
     }
 
@@ -50,9 +47,17 @@ public class WWJSceneController {
         List<Layer> actualData = dataset.get(actualGroup).getActual();
         if (oldData != null) {
             LayerController.removeBeforeCompass(canvas, oldData);
+            annotationData.asyncRemove();
         }
         oldData = actualData;
         LayerController.insertBeforeCompass(canvas, actualData);
+
+        annotationData = createAnnotationControllerFromData(annotations.get(actualGroup).getActual());
+        annotationData.asyncDraw();
+    }
+
+    private AnnotationLayer createAnnotationControllerFromData(Data data) {
+        return new AnnotationLayer(canvas, data, data.getDate());
     }
 
     public void addData(Data... datas) {
@@ -61,12 +66,19 @@ public class WWJSceneController {
                 List<Layer> populateLayers = new ArrayList<Layer>();
                 Shapefile shp = ShapefileController.createShapefile(data.getFilepath());
                 shapefileProperties.addRenderablesForPolygon(shp, data.getTitle(), data.getColumn(), populateLayers, data.getAwtColors());
+
                 if (dataset.containsKey(data.getTitle())) {
                     dataset.get(data.getTitle()).add(populateLayers);
+
+                    annotations.get(data.getTitle()).add(data);
                 } else {
                     CircularArrayList<List<Layer>> newElements = new CircularArrayList<List<Layer>>();
                     newElements.add(populateLayers);
                     dataset.put(data.getTitle(), newElements);
+
+                    CircularArrayList<Data> newAnnotations = new CircularArrayList<>();
+                    newAnnotations.add(data);
+                    annotations.put(data.getTitle(), newAnnotations);
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -97,6 +109,7 @@ public class WWJSceneController {
         if (!dataset.containsKey(actualGroup))
             return;
         dataset.get(actualGroup).next();
+        annotations.get(actualGroup).next();
         draw();
     }
 
@@ -104,6 +117,7 @@ public class WWJSceneController {
         if (!dataset.containsKey(actualGroup))
             return;
         dataset.get(actualGroup).previous();
+        annotations.get(actualGroup).previous();
         draw();
     }
 

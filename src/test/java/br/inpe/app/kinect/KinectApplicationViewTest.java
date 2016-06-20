@@ -8,11 +8,14 @@ import br.com.kinect4j.view.Kinect4jView;
 import br.com.kinect4j.view.UserTrackingConfig;
 import br.inpe.app.triangle.WWJSceneController;
 import br.inpe.app.triangle.controllers.*;
+import br.inpe.gdal.transform.GeoFormat;
 import br.inpe.kinect4j.engine.Pan;
 import br.inpe.kinect4j.movements.PoseT;
 import br.inpe.triangle.conf.Data;
 import br.inpe.triangle.conf.DataSource;
+import br.inpe.triangle.defaultproperties.DefaultDataReferences;
 import br.inpe.triangle.defaultproperties.DefaultDataSource;
+import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.util.status.SkeletonInfoPrinter;
 import com.primesense.nite.UserData;
 import com.primesense.nite.UserTracker;
@@ -62,6 +65,23 @@ public class KinectApplicationViewTest extends Kinect4jView {
         for (Data d : dataset) {
             canvasController.addData(d);
         }
+
+        Data data = new Data();
+        data.setTitle("regioes");
+        data.setReference("IBGE, 2010");
+        data.setFormat(GeoFormat.SHAPEFILE);
+        data.setFilepath("data/regioes_2010/regioes_2010.shp");
+        Map<Object, String> colors = new HashMap<>();
+        colors.put("SE", "#7fc97f");
+        colors.put("S", "#beaed4");
+        colors.put("NE", "#fdc086");
+        colors.put("CO", "#ffff99");
+        colors.put("N", "#386cb0");
+        data.setColors(colors);
+        data.setColumn("sigla");
+        data.setDate("2010");
+        canvasController.addData(data);
+
         canvasController.draw();
 
         pan = new PanController(skeleton, canvasController);
@@ -124,12 +144,11 @@ public class KinectApplicationViewTest extends Kinect4jView {
         //if (gestureToggleButton) {
         //gestureDetector.updateAllGestures(user);
         //}
+        if (canvas != null) {
+            pan.moveMap(user);
+            canvas.redraw();
+        }
         gestureDetector.updateAllGestures(user);
-
-//        if (canvas != null) {
-//            pan.moveMap(user);
-//            canvas.redraw();
-//        }
     }
 
     @Override

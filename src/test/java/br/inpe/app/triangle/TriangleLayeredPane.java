@@ -2,30 +2,27 @@ package br.inpe.app.triangle;
 
 import br.com.kinect4j.device.DeviceConfig;
 import br.inpe.app.kinect.KinectApplicationViewTest;
+import br.inpe.worldwind.controller.LayerController;
+import br.inpe.worldwind.defaultcontroller.ScreenAnnotationLayer;
 import com.primesense.nite.UserTracker;
 import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
-import gov.nasa.worldwind.layers.Layer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.List;
-import java.util.TreeMap;
 
 /**
  * @author Heitor
  * @since 02/06/2016
  */
 public class TriangleLayeredPane extends JLayeredPane implements Runnable {
-    public static final int SCREEN_HEIGHT = 768; // 768
-    public static final int SCREEN_WIDTH = 1366; //1024
+    public static final int SCREEN_HEIGHT = 768; // 768 /768
+    public static final int SCREEN_WIDTH = 1366; //1024 /1366
     private WorldWindowGLCanvas canvas;
     private KinectApplicationViewTest kinectHandler;
-
-    private TreeMap<String, CircularArrayList<List<Layer>>> renderMap = new TreeMap<>();
-
+    
     public TriangleLayeredPane() {
         this.canvas = new WorldWindowGLCanvas();
         this.kinectHandler = new KinectApplicationViewTest(createUserTracker());
@@ -47,6 +44,11 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
                 canvas.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
                 canvas.setModel(new BasicModel());
                 canvas.setBounds(0, 0, SCREEN_WIDTH + 1, SCREEN_HEIGHT + 1);
+
+                LayerController screenAnnotation = new ScreenAnnotationLayer(canvas, 780, 530, "images/ccst-novo2.png", new Insets(0, 40, 0, 0),
+                        new Dimension(265, 200));
+                screenAnnotation.asyncDraw();
+
                 add(canvas, java.awt.BorderLayout.CENTER);
                 canvas.redraw();
                 return null;

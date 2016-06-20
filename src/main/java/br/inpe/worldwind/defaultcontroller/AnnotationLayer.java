@@ -76,6 +76,10 @@ public class AnnotationLayer implements LayerController {
         }
     }
 
+    public gov.nasa.worldwind.layers.AnnotationLayer getAnnotationLayer() {
+        return annotationLayer;
+    }
+
     private AnnotationAttributes getDefaultAttributsTitle() {
         AnnotationAttributes defaultAttributes = new AnnotationAttributes();
         defaultAttributes.setCornerRadius(10);
