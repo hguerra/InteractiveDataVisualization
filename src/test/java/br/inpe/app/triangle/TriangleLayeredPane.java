@@ -22,7 +22,7 @@ public class TriangleLayeredPane extends JLayeredPane implements Runnable {
     public static final int SCREEN_WIDTH = 1366; //1024 /1366
     private WorldWindowGLCanvas canvas;
     private KinectApplicationViewTest kinectHandler;
-    
+
     public TriangleLayeredPane() {
         this.canvas = new WorldWindowGLCanvas();
         this.kinectHandler = new KinectApplicationViewTest(createUserTracker());
