@@ -1,9 +1,9 @@
-package br.inpe.triangle.app2;
+package br.inpe.triangle.app;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import br.inpe.triangle.app2.ScenarioLayer.ScenarioLayerFrame;
+import br.inpe.triangle.app.ScenarioLayer.ScenarioLayerFrame;
 
 public class TriangleKeyListener implements KeyListener {
 	private DatasetController data = DatasetController.getInstance();

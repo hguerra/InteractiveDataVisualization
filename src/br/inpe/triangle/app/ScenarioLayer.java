@@ -1,4 +1,4 @@
-package br.inpe.triangle.app2;
+package br.inpe.triangle.app;
 
 import java.awt.Dimension;
 import java.awt.Insets;
@@ -11,13 +11,11 @@ import java.util.Map.Entry;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
-import com.primesense.nite.UserTracker;
-
-import br.com.kinect4j.device.DeviceConfig;
 import br.inpe.triangle.data.Data;
 import br.inpe.triangle.data.DataSource;
 import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import br.inpe.triangle.fx.view.impl.ManagerSetupController;
+import br.inpe.triangle.kinect.SkeletonKinectHandler;
 import br.inpe.triangle.wwj.layer.LayerController;
 import br.inpe.triangle.wwj.layer.WorldWindController;
 import br.inpe.triangle.wwj.layer.impl.ScreenAnnotationLayer;
@@ -27,7 +25,7 @@ import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.Layer;
 
 public class ScenarioLayer {
-	public static class ScenarioLayerFrame extends JFrame implements Runnable {
+	public static class ScenarioLayerFrame extends JFrame {
 		private static final long serialVersionUID = 1L;
 		public static final double INITIAL_ZOOM = 2.3e7;
 		public static final Position PARA_POS = Position.fromDegrees(-4.72826, -52.302247, 7000000);
@@ -41,7 +39,7 @@ public class ScenarioLayer {
 		private DatasetController datasetController = DatasetController.getInstance();
 		private HashSet<Layer> activeLayers = new HashSet<Layer>();
 
-		private KinectLayer kinectHandler;
+		private SkeletonKinectHandler kinectHandler;
 
 		public ScenarioLayerFrame() {
 			// create canvas
@@ -92,7 +90,7 @@ public class ScenarioLayer {
 			LayerController.removeAllLayersCompass(getWwd());
 
 			// init kinect
-			initKinect();
+			initKinectHandler();
 		}
 
 		private void addLogo() {
@@ -154,39 +152,13 @@ public class ScenarioLayer {
 		}
 
 		// Kinect
-		private UserTracker createUserTracker() {
-			DeviceConfig kinect = DeviceConfig.getInstance();
-			if (!kinect.isDeviceConnected()) {
-				throw new RuntimeException("No device is connected");
-			}
-			kinect.startFirstDevice();
-			return UserTracker.create();
-		}
-
-		private void initKinect() {
+		private void initKinectHandler() {
 			try {
-				this.kinectHandler = new KinectLayer(createUserTracker());
-				kinectHandler.get().setBounds(15, 585, 224, 168);
-				kinectHandler.get().setWorldWindController(controller);
-				layeredPane.add(kinectHandler.get(), new Integer(JLayeredPane.DEFAULT_LAYER + 1));
-
-				new Thread(kinectHandler).start();
-				getWwd().redraw();
+				this.kinectHandler = new SkeletonKinectHandler(controller);
+				kinectHandler.setBounds(15, 585, 224, 168);
+				layeredPane.add(kinectHandler, new Integer(JLayeredPane.DEFAULT_LAYER.intValue() + 1));
 			} catch (Exception e) {
 				System.err.println("Cannot initialize Kinect");
-			}
-		}
-
-		@Override
-		public void run() {
-			while (true) {
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				getWwd().redraw();
-				repaint();
 			}
 		}
 
@@ -195,6 +167,5 @@ public class ScenarioLayer {
 	public static void main(String[] args) {
 		ScenarioLayerFrame frame = new ScenarioLayerFrame();
 		frame.setVisible(true);
-		new Thread(frame).start();
 	}
 }

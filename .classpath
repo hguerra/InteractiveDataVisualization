@@ -12,14 +12,11 @@
 	<classpathentry kind="lib" path="lib/jogl/gluegen-rt.jar"/>
 	<classpathentry kind="lib" path="lib/jogl/jogl-all-natives-windows-amd64.jar"/>
 	<classpathentry kind="lib" path="lib/jogl/jogl-all.jar"/>
-	<classpathentry kind="lib" path="lib/NITE2/com.primesense.nite.jar"/>
-	<classpathentry kind="lib" path="lib/OpenNI2/org.openni.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-math3-3.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/gdal-util.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/jaxb-api-2.2.12.jar"/>
-	<classpathentry kind="lib" path="lib/kinect4j.jar"/>
 	<classpathentry kind="lib" path="lib/postgis-jdbc-2.2.0dev.jar"/>
 	<classpathentry kind="lib" path="lib/geotools/commons-codec-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/geotools/commons-collections-3.2.2.jar"/>
@@ -98,5 +95,7 @@
 	<classpathentry kind="lib" path="lib/geotools/postgresql-9.4-1201-jdbc41.jar"/>
 	<classpathentry kind="lib" path="lib/geotools/xml-commons-resolver-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/gdal.jar"/>
+	<classpathentry kind="lib" path="lib/OpenNI1/com.primesense.NITE.jar"/>
+	<classpathentry kind="lib" path="lib/OpenNI1/org.OpenNI.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

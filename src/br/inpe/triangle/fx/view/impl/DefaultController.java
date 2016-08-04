@@ -1,11 +1,9 @@
 package br.inpe.triangle.fx.view.impl;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import br.inpe.triangle.app.WorldWindView;
-import br.inpe.triangle.data.Data;
+import br.inpe.triangle.app.ScenarioLayer.ScenarioLayerFrame;
 import br.inpe.triangle.fx.view.SceneView;
 import br.inpe.triangle.fx.view.SetupController;
 import br.inpe.triangle.fx.view.SetupView;
@@ -63,9 +61,9 @@ public class DefaultController implements SetupController {
 	@Override
 	public void initPaneSetupEvents() {
 		btnStart.setOnAction(event -> {
-			List<Data> dataset = SETUP_CONTROLLER.getDatasetFromBasicController();
 			try {
-				WorldWindView.run(dataset);
+				ScenarioLayerFrame frame = new ScenarioLayerFrame();
+				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

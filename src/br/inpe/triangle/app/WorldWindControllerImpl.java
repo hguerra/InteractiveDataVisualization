@@ -1,4 +1,4 @@
-package br.inpe.triangle.app2;
+package br.inpe.triangle.app;
 
 import java.util.ConcurrentModificationException;
 
