@@ -136,7 +136,7 @@ public class DataAnalysisTest {
 
 	@Test
 	public void getPercentageOfEachAttributeInShapefile() throws Exception {
-		DataSource dataSource = DefaultDataSource.getInstance().createDefaultDataSource();
+		DataSource dataSource = DefaultDataSource.getInstance().createVegetationDataSource();
 		Data data = dataSource.getDataSet().get("vegtype_2000.shp");
 
 		if (data == null)

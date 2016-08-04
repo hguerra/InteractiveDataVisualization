@@ -65,6 +65,7 @@ public interface LayerController {
 		wwd.getModel().getLayers().remove(layer);
 		wwd.redraw();
 	}
+	
 	public static void removeBeforeCompass(WorldWindow wwd, String layerName){
 		List<Layer> allLayers =  wwd.getModel().getLayers();
 		for (Layer layer : allLayers) {
@@ -81,5 +82,4 @@ public interface LayerController {
 		}
 		wwd.redraw();
 	}
-
 }

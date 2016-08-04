@@ -20,7 +20,7 @@ public class DataSourceTest {
 
 	@Before
 	public void init() {
-		triangle = DefaultDataSource.getInstance().createDefaultDataSource();
+		triangle = DefaultDataSource.getInstance().createVegetationDataSource();
 		jsonBuilder = JSONBuilder.getInstance();
 		xmlBuilder = XMLBuilder.getInstance();
 	}

@@ -1,121 +1,139 @@
 package br.inpe.triangle.defaultproperties;
 
+import java.awt.Color;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import com.google.common.base.Splitter;
+
 import br.inpe.triangle.data.Data;
 import br.inpe.triangle.data.DataSource;
 import br.inpe.triangle.gdal.GeoFormat;
+import br.inpe.triangle.utils.ColorMath;
 import br.inpe.triangle.wwj.dataaccess.ShapefileProperties;
 import br.inpe.triangle.wwj.layer.ShapefileController;
-
-import com.google.common.base.Splitter;
 import gov.nasa.worldwind.formats.shapefile.Shapefile;
-import gov.nasa.worldwind.layers.Layer;
-
-import java.awt.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 
 public class DefaultDataSource {
-    private static final String VEG_COLUMN_NAME = "attr";
-    private static DefaultDataSource uniqueInstance;
-    private List<String> filepath;
-    private Map<Object, String> colors;
-    private ShapefileProperties prop;
-    private Pattern pattern = Pattern.compile("[_./]", Pattern.CASE_INSENSITIVE);
+	private static final String VEG_COLUMN_NAME = "attr";
+	private static DefaultDataSource uniqueInstance;
+	private List<String> filepath;
+	private Map<Object, String> vegetationColors;
+	private Pattern pattern = Pattern.compile("[_./]", Pattern.CASE_INSENSITIVE);
 
-    private DefaultDataSource() {
-        filepath = Arrays.asList("vegtype_2000.shp", "vegtype_2005.shp", "vegtype_2010.shp", "vegtype_2015.shp",
-                "vegtype_2020.shp", "vegtype_2025.shp", "vegtype_2030.shp", "vegtype_2035.shp", "vegtype_2040.shp",
-                "vegtype_2045.shp", "vegtype_2050.shp");
-        this.colors = new HashMap<>();
-        colors.put(1.0, "#006401");
-        colors.put(2.0, "#388237");
-        colors.put(9.0, "#F07A00");
-        colors.put(10.0, "#D15400");
-        colors.put(11.0, "#B23000");
-        colors.put(12.0, "#930900");
-        colors.put(3.0, "#719F71");
-        colors.put(-127.0, "#000000");
-        this.prop = new ShapefileProperties();
-    }
+	private DefaultDataSource() {
+		filepath = Arrays.asList("vegtype_2000.shp", "vegtype_2005.shp", "vegtype_2010.shp", "vegtype_2015.shp",
+				"vegtype_2020.shp", "vegtype_2025.shp", "vegtype_2030.shp", "vegtype_2035.shp", "vegtype_2040.shp",
+				"vegtype_2045.shp", "vegtype_2050.shp");
+		this.vegetationColors = new HashMap<>();
+		vegetationColors.put(1.0, "#006401");
+		vegetationColors.put(2.0, "#388237");
+		vegetationColors.put(9.0, "#F07A00");
+		vegetationColors.put(10.0, "#D15400");
+		vegetationColors.put(11.0, "#B23000");
+		vegetationColors.put(12.0, "#930900");
+		vegetationColors.put(3.0, "#719F71");
+		vegetationColors.put(-127.0, "#000000");
+	}
 
-    public static DefaultDataSource getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new DefaultDataSource();
-        }
-        return uniqueInstance;
-    }
+	public static DefaultDataSource getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new DefaultDataSource();
+		}
+		return uniqueInstance;
+	}
 
-    public DataSource createDefaultDataSource() {
-        Map<String, Data> dataSet = new HashMap<>();
-        filepath.forEach(veg -> {
-            try {
-                List<String> datasetGroupIterator = Splitter.on(pattern)
-                        .trimResults()
-                        .omitEmptyStrings()
-                        .splitToList(veg);
+	public DataSource createVegetationDataSource() {
+		Map<String, Data> dataSet = new HashMap<>();
+		filepath.forEach(veg -> {
+			try {
+				List<String> datasetGroupIterator = Splitter.on(pattern).trimResults().omitEmptyStrings()
+						.splitToList(veg);
 
-                if (datasetGroupIterator.size() < 2)
-                    return;
+				if (datasetGroupIterator.size() < 2)
+					return;
 
-                String year = datasetGroupIterator.get(1); // year
+				String year = datasetGroupIterator.get(1); // year
 
-                Data data = new Data();
-                data.setTitle(DefaultDataReferences.vegetationScenarioTitle);
-                data.setReference(DefaultDataReferences.vegetationScenarioReference);
-                data.setFormat(GeoFormat.SHAPEFILE);
-                data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS + veg);
-                data.setColors(colors);
-                data.setColumn(VEG_COLUMN_NAME);
-                data.setDate(year);
-                dataSet.put(year, data);
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-        });
-        DataSource dataSource = new DataSource();
-        dataSource.setDataSet(dataSet);
-        return dataSource;
-    }
+				Data data = new Data();
+				data.setTitle(DefaultDataReferences.vegetationScenarioTitle);
+				data.setReference(DefaultDataReferences.vegetationScenarioReference);
+				data.setFormat(GeoFormat.SHAPEFILE);
+				data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS + veg);
+				data.setColors(vegetationColors);
+				data.setColumn(VEG_COLUMN_NAME);
+				data.setDate(year);
+				dataSet.put(year, data);
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+		});
+		DataSource dataSource = new DataSource();
+		dataSource.setDataSet(dataSet);
+		return dataSource;
+	}
 
-    public Map<String, DataSource> createDataSourceGroup() {
-        Map<String, DataSource> dataSourceGroup = new HashMap<>();
-        dataSourceGroup.put(DefaultDataReferences.vegetationScenarioTitle, createDefaultDataSource());
-        return dataSourceGroup;
-    }
+	public DataSource createBrasilDataSource() throws Exception {
+		Map<String, Data> dataSet = new HashMap<>();
+		String column = "nome";
+		String reference = "IBGE, 2010";
 
-    public Map<String, List<Layer>> layerFactory(List<String> filePath, String attributeName, Color... color) {
-        Map<String, List<Layer>> result = new HashMap<>();
-        filePath.forEach(veg -> {
-            try {
-                String displayName = ShapefileController.getDisplayName(veg);
-                Shapefile shpColors = ShapefileController.createShapefile(veg);
-                Shapefile shapefile = ShapefileController.createShapefile(veg);
-                Map<Object, Color> mapColors = prop.createPolygonColors(shpColors, attributeName, color);
-                List<Layer> l = prop.createLayers(displayName, attributeName, shapefile, mapColors);
-                result.put(displayName, l);
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-        });
-        return result;
-    }
+		Data regioes = new Data();
+		regioes.setTitle(DefaultDataReferences.vegetationScenarioTitle);
+		regioes.setReference(reference);
+		regioes.setFormat(GeoFormat.SHAPEFILE);
+		regioes.setFilepath(DefaultFilePath.REGIOES);
 
-    public Map<String, List<Layer>> layerFactory(List<String> filePath, String attributeName,
-                                                 Map<Object, Color> colors) {
-        Map<String, List<Layer>> result = new HashMap<>();
-        filePath.forEach(veg -> {
-            try {
-                String displayName = ShapefileController.getDisplayName(veg);
-                Shapefile shp = ShapefileController.createShapefile(veg);
-                List<Layer> l = prop.createLayers(displayName, attributeName, shp, colors);
-                result.put(displayName, l);
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-        });
-        return result;
-    }
+		Set<Object> regioesAttrs = ShapefileProperties
+				.getShapefileUniqueAttributes(ShapefileController.createShapefile(regioes.getFilepath()), column);
+
+		regioes.setColors(classifyUsingGeotools(regioesAttrs));
+		regioes.setColumn(column);
+		regioes.setDate("2010");
+		dataSet.put("regioes_2010", regioes);
+
+		Data estados = new Data();
+		estados.setTitle(DefaultDataReferences.vegetationScenarioTitle);
+		estados.setReference(reference);
+		estados.setFormat(GeoFormat.SHAPEFILE);
+		estados.setFilepath(DefaultFilePath.ESTADOS);
+
+		Set<Object> estadosAttrs = ShapefileProperties
+				.getShapefileUniqueAttributes(ShapefileController.createShapefile(estados.getFilepath()), column);
+
+		estados.setColors(classifyUsingGeotools(estadosAttrs));
+		estados.setColumn(column);
+		estados.setDate("2010");
+		dataSet.put("estados_2010", estados);
+
+		DataSource dataSource = new DataSource();
+		dataSource.setDataSet(dataSet);
+		return dataSource;
+	}
+
+	private Map<Object, String> classifyUsingGeotools(Set<Object> uniqueAttrs) {
+		Map<Object, String> result = new HashMap<>();
+		Color[] colors = org.geotools.brewer.color.ColorBrewer.instance().getPalette("Spectral").getColors();
+
+		Iterator<Object> attrsIterator = uniqueAttrs.iterator();
+		for (Color color : colors) {
+			if (attrsIterator.hasNext()) {
+				Object unique = attrsIterator.next();
+				result.put(unique, ColorMath.toHex(color));
+			}
+		}
+		return result;
+	}
+
+	public Map<String, DataSource> createDataSourceGroup() throws Exception {
+		Map<String, DataSource> dataSourceGroup = new HashMap<>();
+		dataSourceGroup.put(DefaultDataReferences.vegetationScenarioTitle, createVegetationDataSource());
+		dataSourceGroup.put("Brasil", createBrasilDataSource());
+		return dataSourceGroup;
+	}
 }

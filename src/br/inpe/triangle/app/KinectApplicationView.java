@@ -23,11 +23,11 @@ import br.inpe.triangle.data.Data;
 import br.inpe.triangle.data.DataSource;
 import br.inpe.triangle.defaultproperties.DefaultDataSource;
 import br.inpe.triangle.gdal.GeoFormat;
-import br.inpe.triangle.kinect.controller.ForwardTimeController;
-import br.inpe.triangle.kinect.controller.NextDataController;
+import br.inpe.triangle.kinect.controller.YearForwardController;
+import br.inpe.triangle.kinect.controller.DataForwardController;
 import br.inpe.triangle.kinect.controller.PanController;
-import br.inpe.triangle.kinect.controller.PreviousDataController;
-import br.inpe.triangle.kinect.controller.RewingTimeController;
+import br.inpe.triangle.kinect.controller.DataBackwardController;
+import br.inpe.triangle.kinect.controller.YearBackwardController;
 import br.inpe.triangle.kinect.controller.ZoomIn;
 import br.inpe.triangle.kinect.controller.ZoomOut;
 import br.inpe.triangle.utils.SkeletonInfoPrinter;
@@ -62,9 +62,9 @@ public class KinectApplicationView extends Kinect4jView {
 
 	public void setCanvas(WorldWindowGLCanvas canvas) {
 		this.canvas = canvas;
-		SimpleScenarioControllerImpl canvasController = new SimpleScenarioControllerImpl(canvas);
+		TriangleScenarioControllerImpl canvasController = new TriangleScenarioControllerImpl(canvas);
 
-		DataSource datasource = DefaultDataSource.getInstance().createDefaultDataSource();
+		DataSource datasource = DefaultDataSource.getInstance().createVegetationDataSource();
 		List<Data> dataset = datasource.getDataSet().entrySet().stream().map(Map.Entry::getValue)
 				.collect(Collectors.toList());
 		Collections.sort(dataset);
@@ -91,19 +91,19 @@ public class KinectApplicationView extends Kinect4jView {
 
 		canvasController.draw();
 
-		pan = new PanController(skeleton, canvasController);
-		Controller zoomInController = new ZoomIn(canvasController);
-		Controller zoomOutController = new ZoomOut(canvasController);
-		Controller forwarTimeController = new ForwardTimeController(canvasController);
-		Controller rewingTimeController = new RewingTimeController(canvasController);
-		Controller nextDataController = new NextDataController(canvasController);
-		Controller previousDataController = new PreviousDataController(canvasController);
-		gestureControllers.put(DefaultGestureName.ZOOM_IN, zoomInController);
-		gestureControllers.put(DefaultGestureName.ZOOM_OUT, zoomOutController);
-		gestureControllers.put(DefaultGestureName.SWIPE_LEFT_TO_RIGHT, forwarTimeController);
-		gestureControllers.put(DefaultGestureName.SWIPE_RIGHT_TO_LEFT, rewingTimeController);
-		gestureControllers.put(DefaultGestureName.SWIPE_UP, nextDataController);
-		gestureControllers.put(DefaultGestureName.SWIPE_DOWN, previousDataController);
+//		pan = new PanController(skeleton, canvasController);
+//		Controller zoomInController = new ZoomIn(canvasController);
+//		Controller zoomOutController = new ZoomOut(canvasController);
+//		Controller forwarTimeController = new YearForwardController(canvasController);
+//		Controller rewingTimeController = new YearBackwardController(canvasController);
+//		Controller nextDataController = new DataForwardController(canvasController);
+//		Controller previousDataController = new DataBackwardController(canvasController);
+//		gestureControllers.put(DefaultGestureName.ZOOM_IN, zoomInController);
+//		gestureControllers.put(DefaultGestureName.ZOOM_OUT, zoomOutController);
+//		gestureControllers.put(DefaultGestureName.SWIPE_LEFT_TO_RIGHT, forwarTimeController);
+//		gestureControllers.put(DefaultGestureName.SWIPE_RIGHT_TO_LEFT, rewingTimeController);
+//		gestureControllers.put(DefaultGestureName.SWIPE_UP, nextDataController);
+//		gestureControllers.put(DefaultGestureName.SWIPE_DOWN, previousDataController);
 	}
 
 	/**
