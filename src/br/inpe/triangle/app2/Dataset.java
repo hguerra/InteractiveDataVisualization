@@ -47,9 +47,14 @@ public class Dataset {
 		}
 
 		public Builder data(DataSource dataSource) {
-			int key = 0;
 			Map<String, Data> sortedDatasource = new TreeMap<String, Data>(dataSource.getDataSet());
-			for (Entry<String, Data> entry : sortedDatasource.entrySet()) {
+			data(sortedDatasource);
+			return this;
+		}
+
+		public Builder data(Map<String, Data> dataSource) {
+			int key = 0;
+			for (Entry<String, Data> entry : dataSource.entrySet()) {
 				try {
 					Data data = entry.getValue();
 

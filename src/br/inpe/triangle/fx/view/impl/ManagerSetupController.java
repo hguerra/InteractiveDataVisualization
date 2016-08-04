@@ -25,165 +25,180 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class ManagerSetupController {
-    private static ManagerSetupController uniqueInstance;
-    private Map<SetupView, ObservableList<Node>> elementsView;
-    private Map<SetupView, SetupController> controllers;
-    private Set<String> selectedBasicScenario;
-    private DataSourceGroup dataSourceGroup;
+	private static ManagerSetupController uniqueInstance;
+	private Map<SetupView, ObservableList<Node>> elementsView;
+	private Map<SetupView, SetupController> controllers;
+	private Set<String> selectedBasicScenario;
+	private DataSourceGroup dataSourceGroup;
 
-    private ManagerSetupController() {
-        this.elementsView = new HashMap<>();
-        this.controllers = new HashMap<>();
-        this.selectedBasicScenario = new TreeSet<>();
-        this.dataSourceGroup = new DataSourceGroup();
-    }
+	private ManagerSetupController() {
+		this.elementsView = new HashMap<>();
+		this.controllers = new HashMap<>();
+		this.selectedBasicScenario = new TreeSet<>();
+		this.dataSourceGroup = new DataSourceGroup();
+	}
 
-    /**
-     * Singleton
-     *
-     * @return
-     */
-    public static ManagerSetupController getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new ManagerSetupController();
-        }
-        return uniqueInstance;
-    }
+	/**
+	 * Singleton
+	 *
+	 * @return
+	 */
+	public static ManagerSetupController getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new ManagerSetupController();
+		}
+		return uniqueInstance;
+	}
 
-    /**
-     * Elements of view
-     *
-     * @param setup
-     * @param parent
-     * @return
-     */
-    public synchronized ObservableList<Node> addElement(SetupView setup, Pane parent) {
-        return this.elementsView.put(setup, parent.getChildren());
-    }
+	/**
+	 * Elements of view
+	 *
+	 * @param setup
+	 * @param parent
+	 * @return
+	 */
+	public synchronized ObservableList<Node> addElement(SetupView setup, Pane parent) {
+		return this.elementsView.put(setup, parent.getChildren());
+	}
 
-    public synchronized ObservableList<Node> addElement(SetupView setup, ObservableList<Node> parent) {
-        return this.elementsView.put(setup, parent);
-    }
+	public synchronized ObservableList<Node> addElement(SetupView setup, ObservableList<Node> parent) {
+		return this.elementsView.put(setup, parent);
+	}
 
-    public synchronized ObservableList<Node> getElement(SetupView key) {
-        return this.elementsView.get(key);
-    }
+	public synchronized ObservableList<Node> getElement(SetupView key) {
+		return this.elementsView.get(key);
+	}
 
-    /**
-     * Controllers
-     *
-     * @param view
-     * @param controller
-     * @return
-     */
-    public synchronized SetupController addController(SetupView view, SetupController controller) {
-        return this.controllers.put(view, controller);
-    }
+	/**
+	 * Controllers
+	 *
+	 * @param view
+	 * @param controller
+	 * @return
+	 */
+	public synchronized SetupController addController(SetupView view, SetupController controller) {
+		return this.controllers.put(view, controller);
+	}
 
-    public synchronized SetupController getController(SetupView view) {
-        return this.controllers.get(view);
-    }
-    /**
-     * Data Source
-     */
-    /**
-     * add data in DataSource
-     *
-     * @param name
-     * @param data
-     * @return
-     */
-    public Data addData(String name, Data data) {
-        return this.dataSourceGroup.addData(name, data);
-    }
+	public synchronized SetupController getController(SetupView view) {
+		return this.controllers.get(view);
+	}
 
-    public Data getData(String name) {
-        return this.dataSourceGroup.getData(name);
-    }
+	/**
+	 * Data Source
+	 */
+	/**
+	 * add data in DataSource
+	 *
+	 * @param name
+	 * @param data
+	 * @return
+	 */
+	public Data addData(String name, Data data) {
+		return this.dataSourceGroup.addData(name, data);
+	}
 
-    public Data removeData(Data data) {
-        return this.dataSourceGroup.removeData(data);
-    }
+	public Data getData(String name) {
+		return this.dataSourceGroup.getData(name);
+	}
 
-    public DataSource addDataSource(String group, DataSource dataSource) {
-        return this.dataSourceGroup.addDataSource(group, dataSource);
-    }
+	public Data removeData(Data data) {
+		return this.dataSourceGroup.removeData(data);
+	}
 
-    /**
-     * @param group
-     * @return
-     */
-    public DataSource getDataSourceFromGroup(String group) {
-        return this.dataSourceGroup.getDataSourceFromGroup(group);
-    }
+	public DataSource addDataSource(String group, DataSource dataSource) {
+		return this.dataSourceGroup.addDataSource(group, dataSource);
+	}
 
-    /**
-     * @return
-     */
-    public ObservableList<String> getTitleFromDataSourceGroup() {
-        return this.dataSourceGroup.getTitleFromDataSourceGroup();
-    }
+	/**
+	 * @param group
+	 * @return
+	 */
+	public DataSource getDataSourceFromGroup(String group) {
+		return this.dataSourceGroup.getDataSourceFromGroup(group);
+	}
 
-    public ObservableList<String> getTitleFromDataSourceGroup(String group) {
-        return this.dataSourceGroup.getTitleFromDataSourceGroup(group);
-    }
+	/**
+	 * @return
+	 */
+	public ObservableList<String> getTitleFromDataSourceGroup() {
+		return this.dataSourceGroup.getTitleFromDataSourceGroup();
+	}
 
-    /**
-     * @param scenario
-     * @return
-     */
-    public boolean addBasicScenario(String scenario) {
-        return this.selectedBasicScenario.add(scenario);
-    }
+	public ObservableList<String> getTitleFromDataSourceGroup(String group) {
+		return this.dataSourceGroup.getTitleFromDataSourceGroup(group);
+	}
 
-    /**
-     * @param scenario
-     * @return
-     */
-    public boolean removeBasicScenario(String scenario) {
-        return this.selectedBasicScenario.remove(scenario);
-    }
+	/**
+	 * @param scenario
+	 * @return
+	 */
+	public boolean addBasicScenario(String scenario) {
+		return this.selectedBasicScenario.add(scenario);
+	}
 
-    /**
-     * @return items from basic scenario
-     */
-    public Set<String> getSelectedBasicScenario() {
-        return selectedBasicScenario;
-    }
+	/**
+	 * @param scenario
+	 * @return
+	 */
+	public boolean removeBasicScenario(String scenario) {
+		return this.selectedBasicScenario.remove(scenario);
+	}
 
-    public List<Data> getDatasetFromBasicController(DataSource dataSource) {
-        List<Data> dataset = new ArrayList<>();
-        getSelectedBasicScenario().forEach(key -> {
-            dataset.add(dataSource.getDataSet().get(key));
-        });
-        return dataset;
-    }
+	/**
+	 * @return items from basic scenario
+	 */
+	public Set<String> getSelectedBasicScenario() {
+		return selectedBasicScenario;
+	}
 
+	public List<Data> getDatasetFromBasicController(DataSource dataSource) {
+		List<Data> dataset = new ArrayList<>();
+		getSelectedBasicScenario().forEach(key -> {
+			dataset.add(dataSource.getDataSet().get(key));
+		});
+		return dataset;
+	}
 
-    public List<Data> getDatasetFromBasicController() {
-        Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.BASIC).getPaneSceneChildren().parallelStream();
+	public Map<String, Data> getSortedDataset(String group) {
+		DataSource datasource = getDataSourceFromGroup(group);
+		Map<String, Data> sortedDataset = new TreeMap<String, Data>();
 
-        Optional<Node> node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst();
+		getSelectedBasicScenario().forEach(key -> {
+			sortedDataset.put(key, datasource.getDataSet().get(key));
+		});
 
-        if (!node.isPresent())
-            return null;
+		return sortedDataset;
+	}
 
-        @SuppressWarnings("unchecked")
-        ComboBox<String> comboBox = (ComboBox<String>) node.get();
-        String group = comboBox.getSelectionModel().getSelectedItem();
+	public List<Data> getDatasetFromBasicController() {
+		String group = getSelectedDataSourceGroup();
+		return getDatasetFromBasicController(getDataSourceFromGroup(group));
+	}
 
-        return getDatasetFromBasicController(getDataSourceFromGroup(group));
-    }
+	public String getSelectedDataSourceGroup() {
+		Supplier<Stream<Node>> streamSupplier = () -> getController(SetupView.BASIC).getPaneSceneChildren()
+				.parallelStream();
+		Optional<Node> node = streamSupplier.get().filter(component -> component instanceof ComboBox).findFirst();
 
-    public void saveNodeAsImage(Node node, File file) {
-        AnchorPane pane = new AnchorPane();
-        pane.getChildren().add(node);
-        Scene scene = new Scene(pane);
-        WritableImage image = scene.snapshot(null);
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error to export chart", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+		if (!node.isPresent())
+			return null;
+
+		@SuppressWarnings("unchecked")
+		ComboBox<String> comboBox = (ComboBox<String>) node.get();
+		String group = comboBox.getSelectionModel().getSelectedItem();
+		return group;
+	}
+
+	public void saveNodeAsImage(Node node, File file) {
+		AnchorPane pane = new AnchorPane();
+		pane.getChildren().add(node);
+		Scene scene = new Scene(pane);
+		WritableImage image = scene.snapshot(null);
+		try {
+			ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+		} catch (IOException ex) {
+			JOptionPane.showMessageDialog(null, ex, "Error to export chart", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }

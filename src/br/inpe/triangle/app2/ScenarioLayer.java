@@ -14,8 +14,10 @@ import javax.swing.JLayeredPane;
 import com.primesense.nite.UserTracker;
 
 import br.com.kinect4j.device.DeviceConfig;
+import br.inpe.triangle.data.Data;
 import br.inpe.triangle.data.DataSource;
 import br.inpe.triangle.defaultproperties.DefaultDataSource;
+import br.inpe.triangle.fx.view.impl.ManagerSetupController;
 import br.inpe.triangle.wwj.layer.LayerController;
 import br.inpe.triangle.wwj.layer.WorldWindController;
 import br.inpe.triangle.wwj.layer.impl.ScreenAnnotationLayer;
@@ -101,10 +103,19 @@ public class ScenarioLayer {
 
 		private void loadDataset() throws Exception {
 			// Create RenderableLayer instance
-			Map<String, DataSource> datasourceGroup = DefaultDataSource.getInstance().createDataSourceGroup();
-			for (Entry<String, DataSource> entry : datasourceGroup.entrySet()) {
-				Dataset data = new Dataset.Builder().group(entry.getKey()).data(entry.getValue()).get();
+			try {
+				ManagerSetupController SETUP_CONTROLLER = ManagerSetupController.getInstance();
+				String group = SETUP_CONTROLLER.getSelectedDataSourceGroup();
+				Map<String, Data> dataset = SETUP_CONTROLLER.getSortedDataset(group);
+
+				Dataset data = new Dataset.Builder().group(group).data(dataset).get();
 				datasetController.addDataset(data);
+			} catch (Exception e) {
+				Map<String, DataSource> datasourceGroup = DefaultDataSource.getInstance().createDataSourceGroup();
+				for (Entry<String, DataSource> entry : datasourceGroup.entrySet()) {
+					Dataset data = new Dataset.Builder().group(entry.getKey()).data(entry.getValue()).get();
+					datasetController.addDataset(data);
+				}
 			}
 
 			// load annotation

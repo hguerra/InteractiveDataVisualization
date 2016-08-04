@@ -17,7 +17,6 @@ import br.inpe.triangle.gdal.GeoFormat;
 import br.inpe.triangle.utils.ColorMath;
 import br.inpe.triangle.wwj.dataaccess.ShapefileProperties;
 import br.inpe.triangle.wwj.layer.ShapefileController;
-import gov.nasa.worldwind.formats.shapefile.Shapefile;
 
 public class DefaultDataSource {
 	private static final String VEG_COLUMN_NAME = "attr";
