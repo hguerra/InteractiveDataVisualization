@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 import br.inpe.triangle.app.ScenarioLayer.ScenarioLayerFrame;
 
 public class TriangleKeyListener implements KeyListener {
-	private DatasetController data = DatasetController.getInstance();
+	private DatasetController datasetController = DatasetController.getInstance();
 	private ScenarioLayerFrame scenario;
 
 	public TriangleKeyListener(ScenarioLayerFrame scenario) {
@@ -20,22 +20,22 @@ public class TriangleKeyListener implements KeyListener {
 		switch (key) {
 		case KeyEvent.VK_1:
 			scenario.removeActiveLayers();
-			data.dataBackward();
+			datasetController.dataBackward();
 			scenario.refreshActiveLayers();
 			break;
 		case KeyEvent.VK_2:
 			scenario.removeActiveLayers();
-			data.dataForward();
+			datasetController.dataForward();
 			scenario.refreshActiveLayers();
 			break;
 		case KeyEvent.VK_3:
 			scenario.removeActiveLayers();
-			data.yearBackward();
+			datasetController.yearBackward();
 			scenario.refreshActiveLayers();
 			break;
 		case KeyEvent.VK_4:
 			scenario.removeActiveLayers();
-			data.yearForward();
+			datasetController.yearForward();
 			scenario.refreshActiveLayers();
 			break;
 		case KeyEvent.VK_ESCAPE:

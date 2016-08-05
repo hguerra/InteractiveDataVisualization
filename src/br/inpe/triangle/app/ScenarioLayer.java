@@ -77,7 +77,7 @@ public class ScenarioLayer {
 			this.setBounds(0, 0, WIDTH, HEIGHT);
 
 			// add WorldWindController
-			controller = new WorldWindControllerImpl(getWwd());
+			controller = new WorldWindControllerImpl(this);
 
 			// load dataset
 			try {
@@ -109,6 +109,7 @@ public class ScenarioLayer {
 				Dataset data = new Dataset.Builder().group(group).data(dataset).get();
 				datasetController.addDataset(data);
 			} catch (Exception e) {
+				System.err.println("Unable to load dataset from GUI");
 				Map<String, DataSource> datasourceGroup = DefaultDataSource.getInstance().createDataSourceGroup();
 				for (Entry<String, DataSource> entry : datasourceGroup.entrySet()) {
 					Dataset data = new Dataset.Builder().group(entry.getKey()).data(entry.getValue()).get();

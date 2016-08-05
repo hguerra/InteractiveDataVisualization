@@ -23,7 +23,6 @@ import org.OpenNI.Point3D;
 import org.OpenNI.StatusException;
 import org.OpenNI.UserGenerator;
 
-import br.inpe.triangle.app.DatasetController;
 import br.inpe.triangle.wwj.layer.WorldWindController;
 
 @SuppressWarnings("serial")
@@ -38,7 +37,6 @@ public class SkeletonKinectHandler extends JPanel implements Runnable, GesturesW
 	private int imWidth, imHeight;
 
 	private WorldWindController worldWindController;
-	private DatasetController datasetController = DatasetController.getInstance();
 
 	private Point3D swipeStart;
 	private Point3D swipeEnd;
@@ -261,15 +259,17 @@ public class SkeletonKinectHandler extends JPanel implements Runnable, GesturesW
 
 			// time swipe detection
 			if (handupPreLeft && !swipeConsumed && !swiping && swipeStart != null && swipeEnd != null) {
-				System.out.println("HALLO LEFT");
+				// System.out.println("HALLO LEFT");
 				if (dist(swipeStart, swipeEnd) > 100) {
-					System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					if (swipeStart.getX() > swipeEnd.getX()) {
-						System.out.println("right to left");
-						datasetController.yearBackward();
+						// System.out.println("right to left");
+						worldWindController.yearBackward();
+						System.err.println("YEAR BACKWARD");
 					} else if (swipeStart.getX() < swipeEnd.getX()) {
-						System.out.println("left to right");
-						datasetController.yearForward();
+						// System.out.println("left to right");
+						worldWindController.yearForward();
+						System.err.println("YEAR FORWARD");
 					}
 				}
 				swipeConsumed = true;
@@ -278,17 +278,15 @@ public class SkeletonKinectHandler extends JPanel implements Runnable, GesturesW
 
 			} else if (handupPreRight && !swipeConsumed && !swiping && swipeStart != null && swipeEnd != null) {
 				if (dist(swipeStart, swipeEnd) > 100) {
-					System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					if (swipeStart.getX() > swipeEnd.getX()) {
-						System.out.println("right to left");
-						// controller.yearBackward();
-						datasetController.dataBackward();
-						System.out.println("CHANGE LAYER BACKWARD HERE");
+						// System.out.println("right to left");
+						worldWindController.dataBackward();
+						System.err.println("LAYER BACKWARD");
 					} else if (swipeStart.getX() < swipeEnd.getX()) {
-						System.out.println("left to right");
-						// controller.yearForward();
-						datasetController.dataForward();
-						System.out.println("CHANGE LAYER FORWARD HERE");
+						// System.out.println("left to right");
+						worldWindController.dataForward();
+						System.err.println("LAYER FORWARD");
 					}
 				}
 				swipeConsumed = true;

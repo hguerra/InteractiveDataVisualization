@@ -28,4 +28,13 @@ public interface WorldWindController {
 	void rotateToNorth(WorldWindowGLCanvas canvas);
 
 	void unTilt(WorldWindowGLCanvas canvas);
+
+	public void dataBackward();
+
+	public void dataForward();
+
+	public void yearBackward();
+
+	public void yearForward();
+
 }

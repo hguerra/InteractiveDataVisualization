@@ -2,6 +2,7 @@ package br.inpe.triangle.app;
 
 import java.util.ConcurrentModificationException;
 
+import br.inpe.triangle.app.ScenarioLayer.ScenarioLayerFrame;
 import br.inpe.triangle.wwj.layer.WorldWindController;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
@@ -12,11 +13,14 @@ import gov.nasa.worldwind.globes.Globe;
 import gov.nasa.worldwind.view.orbit.OrbitView;
 
 public class WorldWindControllerImpl implements WorldWindController {
+	private DatasetController datasetController = DatasetController.getInstance();
+	private ScenarioLayerFrame scenario;
 	private WorldWindowGLCanvas canvas;
 	private OrbitView view;
 
-	public WorldWindControllerImpl(WorldWindowGLCanvas canvas) {
-		this.canvas = canvas;
+	public WorldWindControllerImpl(ScenarioLayerFrame scenarioLayerFrame) {
+		this.scenario = scenarioLayerFrame;
+		this.canvas = scenario.getWwd();
 		this.view = (OrbitView) canvas.getView();
 	}
 
@@ -205,6 +209,37 @@ public class WorldWindControllerImpl implements WorldWindController {
 		lon = lon % 360;
 		return Position.fromDegrees(lat > 90 ? 90 : (lat < -90 ? -90 : lat),
 				lon > 180 ? lon - 360 : (lon < -180 ? 360 + lon : lon), elev);
+	}
+
+	@Override
+	public void dataBackward() {
+		scenario.removeActiveLayers();
+		datasetController.dataBackward();
+		scenario.refreshActiveLayers();
+
+	}
+
+	@Override
+	public void dataForward() {
+		scenario.removeActiveLayers();
+		datasetController.dataForward();
+		scenario.refreshActiveLayers();
+
+	}
+
+	@Override
+	public void yearBackward() {
+		scenario.removeActiveLayers();
+		datasetController.yearBackward();
+		scenario.refreshActiveLayers();
+
+	}
+
+	@Override
+	public void yearForward() {
+		scenario.removeActiveLayers();
+		datasetController.yearForward();
+		scenario.refreshActiveLayers();
 	}
 
 }

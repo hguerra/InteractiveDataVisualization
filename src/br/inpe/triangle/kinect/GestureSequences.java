@@ -26,12 +26,12 @@ public class GestureSequences {
 	 * complex gesture sub-sequences that are looked for in the user's full
 	 * gesture sequence. Only right hand waving is searched for at the moment.
 	 */
-	private final static GestureName[] HORIZ_WAVE = { GestureName.RH_OUT,
-			GestureName.RH_IN, GestureName.RH_OUT, GestureName.RH_IN };
+	private final static GestureName[] HORIZ_WAVE = { GestureName.RH_OUT, GestureName.RH_IN, GestureName.RH_OUT,
+			GestureName.RH_IN };
 	// a horizontal wave is two out-in moves of the right hand
 
-	private final static GestureName[] VERT_WAVE = { GestureName.RH_UP,
-			GestureName.RH_DOWN, GestureName.RH_UP, GestureName.RH_DOWN };
+	private final static GestureName[] VERT_WAVE = { GestureName.RH_UP, GestureName.RH_DOWN, GestureName.RH_UP,
+			GestureName.RH_DOWN };
 	// a vertical wave is two up-down moves of the right hand
 
 	private GesturesWatcher watcher;
@@ -137,17 +137,4 @@ public class GestureSequences {
 			gestsSeq.remove(0);
 		}
 	} // end of purgeSeq()
-
-	private void printSeq(ArrayList<GestureName> gestsSeq) {
-		if (gestsSeq.isEmpty())
-			System.out.println("Sequence is empty");
-		else {
-			System.out.print("Sequence: ");
-			for (GestureName gest : gestsSeq)
-				System.out.print(gest + " ");
-			System.out.println();
-		}
-	} // end of printSeq()
-
 } // end of GestureSequences class
-
