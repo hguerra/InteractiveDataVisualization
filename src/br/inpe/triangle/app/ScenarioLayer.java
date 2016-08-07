@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 import br.inpe.triangle.data.Data;
 import br.inpe.triangle.data.DataSource;
@@ -23,6 +24,7 @@ import gov.nasa.worldwind.BasicModel;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.Layer;
+import resources.Resource;
 
 public class ScenarioLayer {
 	public static class ScenarioLayerFrame extends JFrame {
@@ -80,11 +82,7 @@ public class ScenarioLayer {
 			controller = new WorldWindControllerImpl(this);
 
 			// load dataset
-			try {
-				loadDataset();
-			} catch (Exception e) {
-				System.err.println("Cannot load dataset");
-			}
+			loadDataset();
 
 			// refresh compass
 			LayerController.removeAllLayersCompass(getWwd());
@@ -94,43 +92,50 @@ public class ScenarioLayer {
 		}
 
 		private void addLogo() {
-			LayerController screenAnnotation = new ScreenAnnotationLayer(wwd, 780, 530, "images/ccst-novo2.png",
-					new Insets(0, 40, 0, 0), new Dimension(265, 200));
-			screenAnnotation.asyncDraw();
+			try {
+				LayerController screenAnnotation = new ScreenAnnotationLayer(wwd, 780, 530, Resource.getLogo(),
+						new Insets(0, 40, 0, 0), new Dimension(265, 200));
+				screenAnnotation.asyncDraw();
+			} catch (Exception e) {
+				System.err.println("Unable to load application logo");
+			}
+			
 		}
 
-		private void loadDataset() throws Exception {
+		private void loadDataset() {
 			// Create RenderableLayer instance
 			try {
-				ManagerSetupController SETUP_CONTROLLER = ManagerSetupController.getInstance();
-				String group = SETUP_CONTROLLER.getSelectedDataSourceGroup();
-				Map<String, Data> dataset = SETUP_CONTROLLER.getSortedDataset(group);
-
-				Dataset data = new Dataset.Builder().group(group).data(dataset).get();
-				datasetController.addDataset(data);
-			} catch (Exception e) {
-				System.err.println("Unable to load dataset from GUI");
-				Map<String, DataSource> datasourceGroup = DefaultDataSource.getInstance().createDataSourceGroup();
-				for (Entry<String, DataSource> entry : datasourceGroup.entrySet()) {
-					Dataset data = new Dataset.Builder().group(entry.getKey()).data(entry.getValue()).get();
+				try {
+					ManagerSetupController SETUP_CONTROLLER = ManagerSetupController.getInstance();
+					String group = SETUP_CONTROLLER.getSelectedDataSourceGroup();
+					Map<String, Data> dataset = SETUP_CONTROLLER.getSortedDataset(group);
+					Dataset data = new Dataset.Builder().group(group).data(dataset).get();
 					datasetController.addDataset(data);
+				} catch (Exception e) {
+					System.err.println("Unable to load dataset from GUI");
+					Map<String, DataSource> datasourceGroup = DefaultDataSource.getInstance().createDataSourceGroup();
+					for (Entry<String, DataSource> entry : datasourceGroup.entrySet()) {
+						Dataset data = new Dataset.Builder().group(entry.getKey()).data(entry.getValue()).get();
+						datasetController.addDataset(data);
+					}
 				}
+				// load annotation
+				LayerController.insertBeforeBeforeCompass(this.getWwd(), datasetController.getAnnotation());
+				activeLayers.add(datasetController.getAnnotation());
+
+				// insert first layer into wwj
+				LayerController.insertBeforeBeforeCompass(this.getWwd(), datasetController.getLayer());
+				activeLayers.add(datasetController.getLayer());
+
+				// add boudaries layer
+				// LayerController.insertBeforeBeforeCompass(this.getWwd(), new
+				// CountryBoundariesLayer());
+
+				// set wwj start position
+				controller.flyToPosition(PARA_POS, INITIAL_ZOOM);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Can't load dataset!", "Data Error", JOptionPane.ERROR_MESSAGE);
 			}
-
-			// load annotation
-			LayerController.insertBeforeBeforeCompass(this.getWwd(), datasetController.getAnnotation());
-			activeLayers.add(datasetController.getAnnotation());
-
-			// insert first layer into wwj
-			LayerController.insertBeforeBeforeCompass(this.getWwd(), datasetController.getLayer());
-			activeLayers.add(datasetController.getLayer());
-
-			// add boudaries layer
-			// LayerController.insertBeforeBeforeCompass(this.getWwd(), new
-			// CountryBoundariesLayer());
-
-			// set wwj start position
-			controller.flyToPosition(PARA_POS, INITIAL_ZOOM);
 		}
 
 		public void removeActiveLayers() {
@@ -159,7 +164,8 @@ public class ScenarioLayer {
 				kinectHandler.setBounds(15, 585, 224, 168);
 				layeredPane.add(kinectHandler, new Integer(JLayeredPane.DEFAULT_LAYER.intValue() + 1));
 			} catch (Exception e) {
-				System.err.println("Cannot initialize Kinect");
+				JOptionPane.showMessageDialog(null, "Can't init Triangle, maybe the camera is not connected!",
+						"Kinect Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 

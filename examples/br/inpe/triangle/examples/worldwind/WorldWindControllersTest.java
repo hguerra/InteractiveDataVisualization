@@ -18,9 +18,9 @@ import br.inpe.triangle.conf.MockConf;
 import br.inpe.triangle.data.Data;
 import br.inpe.triangle.data.DataSource;
 import br.inpe.triangle.data.JSONBuilder;
+import br.inpe.triangle.defaultproperties.DataFilePath;
 import br.inpe.triangle.defaultproperties.DefaultColors;
 import br.inpe.triangle.defaultproperties.DefaultDataSource;
-import br.inpe.triangle.defaultproperties.DefaultFilePath;
 import br.inpe.triangle.postgis.GeometryRecord;
 import br.inpe.triangle.postgis.JDBCDao;
 import br.inpe.triangle.postgis.vegtype_2000;
@@ -152,7 +152,8 @@ public class WorldWindControllersTest extends JFrame {
 
 	private void shapefileController() {
 		shpController = new ShapefileLayer(wwd);
-		shpController.addShapefile(DefaultFilePath.VEGTYPE_2000, "attr", DefaultColors.getOriginalColors1());
+		shpController.addShapefile(DataFilePath.getFilePath(DataFilePath.VEGTYPE_2000), "attr",
+				DefaultColors.getOriginalColors1());
 		shpController.asyncDraw();
 	}
 
@@ -200,8 +201,7 @@ public class WorldWindControllersTest extends JFrame {
 		 * boolean addGeoJSON(String filepath, String layerName, Map<Double,
 		 * Color> colors)
 		 */
-		jsonController.addGeoJSON("Veg2000", DefaultFilePath.VEGTYPE_2000_GDAL_GEOJSON,
-				DefaultColors.getDefaultColors());
+		jsonController.addGeoJSON("Veg2000", "data/gdal/vegtype-gdal.geojson", DefaultColors.getDefaultColors());
 
 		// end test
 		jsonController.asyncDraw();

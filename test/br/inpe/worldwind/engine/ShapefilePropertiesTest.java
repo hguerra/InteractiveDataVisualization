@@ -1,18 +1,19 @@
 package br.inpe.worldwind.engine;
 
-import br.inpe.triangle.defaultproperties.DefaultColors;
-import br.inpe.triangle.defaultproperties.DefaultFilePath;
-import br.inpe.triangle.wwj.dataaccess.ShapefileProperties;
-import br.inpe.triangle.wwj.layer.ShapefileController;
-import gov.nasa.worldwind.formats.shapefile.Shapefile;
+import java.awt.Color;
+import java.util.Map;
+import java.util.Set;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
-import java.util.Map;
-import java.util.Set;
+import br.inpe.triangle.defaultproperties.DataFilePath;
+import br.inpe.triangle.defaultproperties.DefaultColors;
+import br.inpe.triangle.wwj.dataaccess.ShapefileProperties;
+import br.inpe.triangle.wwj.layer.ShapefileController;
+import gov.nasa.worldwind.formats.shapefile.Shapefile;
 
 public class ShapefilePropertiesTest {
 	private ShapefileProperties prop;
@@ -22,7 +23,7 @@ public class ShapefilePropertiesTest {
 	@Before
 	public void init() throws Exception {
 		prop = new ShapefileProperties();
-		shp = ShapefileController.createShapefile(DefaultFilePath.VEGTYPE_2000);
+		shp = ShapefileController.createShapefile(DataFilePath.getFilePath(DataFilePath.VEGTYPE_2000));
 		attributeName = "attr";
 	}
 

@@ -56,9 +56,11 @@ import org.OpenNI.StatusException;
 import org.OpenNI.UserEventArgs;
 import org.OpenNI.UserGenerator;
 
+import resources.Resource;
+
 public class Skeletons {
 
-	private static final String HEAD_FNM = "images/gorilla.png";
+	private static final String HEAD_FNM = Resource.getGorillaHead();
 
 	private BufferedImage headImage;
 

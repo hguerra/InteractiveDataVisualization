@@ -47,4 +47,12 @@ public class Resource {
 	public static URL getPaneViewKinectFXML() {
 		return getURL("kinect-view-fxml.fxml");
 	}
+	
+	public static String getLogo() {
+		return getURL("ccst.png").getPath();
+	}
+	
+	public static String getGorillaHead() {
+		return getURL("gorilla.png").getPath();
+	}
 }

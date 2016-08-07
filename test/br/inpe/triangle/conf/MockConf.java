@@ -1,7 +1,7 @@
 package br.inpe.triangle.conf;
 
 import br.inpe.triangle.data.Data;
-import br.inpe.triangle.defaultproperties.DefaultFilePath;
+import br.inpe.triangle.defaultproperties.DataFilePath;
 import br.inpe.triangle.gdal.GeoFormat;
 
 import java.util.HashMap;
@@ -14,7 +14,7 @@ public class MockConf {
 	public static Data createDefaultData() {
 		Data data = new Data();
 		data.setFormat(GeoFormat.SHAPEFILE);
-		data.setFilepath(DefaultFilePath.VEGTYPE_2000);
+		data.setFilepath(DataFilePath.getFilePath(DataFilePath.VEGTYPE_2000));
 		Map<Object, String> colors = new HashMap<>();
 		colors.put(1.0, "#006401");
 		colors.put(2.0, "#388237");

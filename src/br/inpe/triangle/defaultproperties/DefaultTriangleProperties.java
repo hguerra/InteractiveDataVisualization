@@ -149,6 +149,6 @@ public class DefaultTriangleProperties {
 		profile = new Profile();
 		profile.setName("DefaultProfile");
 		profile.setDao(new ConnectionFactory(JDBC_DRIVER, IP, DATA_BASE, USER, PASSWORD));
-		addLayers(DefaultFilePath.vegtypesSequence, "attr", DefaultColors.getDefaultColors());
+		addLayers(DataFilePath.vegtypesSequence, "attr", DefaultColors.getDefaultColors());
 	}
 }

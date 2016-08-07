@@ -3,6 +3,9 @@
 .metadata
 bin/
 tmp/
+build/*.jar
+build/*.exe
+build/drivers/
 library/
 *.tmp
 *.bak

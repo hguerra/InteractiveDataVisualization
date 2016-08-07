@@ -3,6 +3,8 @@ package br.inpe.triangle.fx.view.impl;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import br.inpe.triangle.app.ScenarioLayer.ScenarioLayerFrame;
 import br.inpe.triangle.fx.view.SceneView;
 import br.inpe.triangle.fx.view.SetupController;
@@ -26,9 +28,6 @@ public class DefaultController implements SetupController {
 
 	@FXML
 	private Pane paneOptions;
-
-	@FXML
-	private Button btnKinect;
 
 	@FXML
 	private Button btnGlobe;
@@ -65,7 +64,8 @@ public class DefaultController implements SetupController {
 				ScenarioLayerFrame frame = new ScenarioLayerFrame();
 				frame.setVisible(true);
 			} catch (Exception e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Can't load World Wind", "World Wind Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 		});
 
@@ -77,11 +77,6 @@ public class DefaultController implements SetupController {
 		btnLayer.setOnAction(event -> {
 			setPaneSetupComponents(SetupView.LAYER);
 			setPaneSceneComponents(SceneView.LAYER_VIEW);
-		});
-
-		btnKinect.setOnAction(event -> {
-			setPaneSetupComponents(SetupView.KINECT);
-			setPaneSceneComponents(SceneView.KINECT_VIEW);
 		});
 	}
 
@@ -110,33 +105,26 @@ public class DefaultController implements SetupController {
 		/* create list */
 		ObservableList<Node> elementsSetupPanelBasic = FXCollections.observableArrayList();
 		ObservableList<Node> elementsSetupPanelLayer = FXCollections.observableArrayList();
-		ObservableList<Node> elementsSetupPanelKinect = FXCollections.observableArrayList();
 		/* add elements */
 		loadPane(elementsSetupPanelBasic, Resource.getPaneSetupBasicFXML());
 		loadPane(elementsSetupPanelLayer, Resource.getPaneSetupLayerFXML());
-		loadPane(elementsSetupPanelKinect, Resource.getPaneSetupKinectFXML());
 		/* add elements in ManagerSetupController */
 		SETUP_CONTROLLER.addElement(SetupView.BASIC, elementsSetupPanelBasic);
 		SETUP_CONTROLLER.addElement(SetupView.LAYER, elementsSetupPanelLayer);
-		SETUP_CONTROLLER.addElement(SetupView.KINECT, elementsSetupPanelKinect);
 		/* Add buttons in SetupView */
 		SetupView.BASIC.setButton(btnGlobe);
 		SetupView.LAYER.setButton(btnLayer);
-		SetupView.KINECT.setButton(btnKinect);
 	}
 
 	private void loadSceneViewFromFXML() {
 		/* create list */
 		ObservableList<Node> elementsScenePanelBasic = FXCollections.observableArrayList();
 		ObservableList<Node> elementsScenePanelLayer = FXCollections.observableArrayList();
-		ObservableList<Node> elementsScenePanelKinect = FXCollections.observableArrayList();
 		/* add elements */
 		loadPane(elementsScenePanelBasic, Resource.getPaneViewBasicFXML());
 		loadPane(elementsScenePanelLayer, Resource.getPaneViewLayerFXML());
-		loadPane(elementsScenePanelKinect, Resource.getPaneViewKinectFXML());
 		/* add elements in ManagerSceneController */
 		SCENE_CONTROLLER.addElement(SceneView.BASIC_VIEW, elementsScenePanelBasic);
 		SCENE_CONTROLLER.addElement(SceneView.LAYER_VIEW, elementsScenePanelLayer);
-		SCENE_CONTROLLER.addElement(SceneView.KINECT_VIEW, elementsScenePanelKinect);
 	}
 }

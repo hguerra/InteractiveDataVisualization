@@ -1,7 +1,6 @@
 package br.inpe.triangle.defaultproperties;
 
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,14 +20,10 @@ import br.inpe.triangle.wwj.layer.ShapefileController;
 public class DefaultDataSource {
 	private static final String VEG_COLUMN_NAME = "attr";
 	private static DefaultDataSource uniqueInstance;
-	private List<String> filepath;
 	private Map<Object, String> vegetationColors;
 	private Pattern pattern = Pattern.compile("[_./]", Pattern.CASE_INSENSITIVE);
 
 	private DefaultDataSource() {
-		filepath = Arrays.asList("vegtype_2000.shp", "vegtype_2005.shp", "vegtype_2010.shp", "vegtype_2015.shp",
-				"vegtype_2020.shp", "vegtype_2025.shp", "vegtype_2030.shp", "vegtype_2035.shp", "vegtype_2040.shp",
-				"vegtype_2045.shp", "vegtype_2050.shp");
 		this.vegetationColors = new HashMap<>();
 		vegetationColors.put(1.0, "#006401");
 		vegetationColors.put(2.0, "#388237");
@@ -49,7 +44,7 @@ public class DefaultDataSource {
 
 	public DataSource createVegetationDataSource() {
 		Map<String, Data> dataSet = new HashMap<>();
-		filepath.forEach(veg -> {
+		DataFilePath.vegtypesSequence.forEach(veg -> {
 			try {
 				List<String> datasetGroupIterator = Splitter.on(pattern).trimResults().omitEmptyStrings()
 						.splitToList(veg);
@@ -63,7 +58,7 @@ public class DefaultDataSource {
 				data.setTitle(DefaultDataReferences.vegetationScenarioTitle);
 				data.setReference(DefaultDataReferences.vegetationScenarioReference);
 				data.setFormat(GeoFormat.SHAPEFILE);
-				data.setFilepath(DefaultFilePath.FILE_PATH_MODELOS + veg);
+				data.setFilepath(DataFilePath.getFilePath(veg));
 				data.setColors(vegetationColors);
 				data.setColumn(VEG_COLUMN_NAME);
 				data.setDate(year);
@@ -86,7 +81,7 @@ public class DefaultDataSource {
 		regioes.setTitle(DefaultDataReferences.vegetationScenarioTitle);
 		regioes.setReference(reference);
 		regioes.setFormat(GeoFormat.SHAPEFILE);
-		regioes.setFilepath(DefaultFilePath.REGIOES);
+		regioes.setFilepath(DataFilePath.REGIOES);
 
 		Set<Object> regioesAttrs = ShapefileProperties
 				.getShapefileUniqueAttributes(ShapefileController.createShapefile(regioes.getFilepath()), column);
@@ -100,7 +95,7 @@ public class DefaultDataSource {
 		estados.setTitle(DefaultDataReferences.vegetationScenarioTitle);
 		estados.setReference(reference);
 		estados.setFormat(GeoFormat.SHAPEFILE);
-		estados.setFilepath(DefaultFilePath.ESTADOS);
+		estados.setFilepath(DataFilePath.ESTADOS);
 
 		Set<Object> estadosAttrs = ShapefileProperties
 				.getShapefileUniqueAttributes(ShapefileController.createShapefile(estados.getFilepath()), column);

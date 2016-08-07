@@ -165,7 +165,9 @@ public class ManagerSetupController {
 		Map<String, Data> sortedDataset = new TreeMap<String, Data>();
 
 		getSelectedBasicScenario().forEach(key -> {
-			sortedDataset.put(key, datasource.getDataSet().get(key));
+			Data data = datasource.getDataSet().get(key);
+			if (data != null)
+				sortedDataset.put(key, data);
 		});
 
 		return sortedDataset;
